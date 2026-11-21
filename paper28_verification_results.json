@@ -1,5 +1,5 @@
 {
-  "paper": "Tau Core Paper 28 (v1.0.0) \u2014 Four-Terminal Cosmological Closure",
+  "paper": "Tau Core Paper 28 (v2.0.0) \u2014 Tightened Four-Terminal Cosmological Closure",
   "part1_inflation_bbn": {
     "presc_I_baseline": {
       "N_star": 51.41246069702876,
@@ -7,36 +7,178 @@
       "A_s": 2.1011475963648704e-09,
       "r": 0.004262618193157813,
       "T_rh": 5132271399.481489,
-      "H_star": 15759136293978.621,
       "eta_B": 6.106e-10
     },
-    "four_terminal_fixed_point": {
-      "kappa_J": 0.013796560254589925,
-      "w_rh": 0.9014919375030659,
-      "N_star": 59.71828383310877,
-      "n_s": 0.9739999999999986,
+    "zero_param_1loop_kination": {
+      "kappa_lam": 0.016276,
+      "beta_xi_over_xi": 0.001362,
+      "kappa_J_1loop": 0.014914,
+      "w_rh": 1.0,
+      "N_star": 60.175,
+      "n_s": 0.97464,
+      "z_ns_ACT": 0.21,
+      "A_s": 2.0894811699234413e-09,
+      "z_As_Planck": -0.35,
+      "r": 0.00511,
+      "Delta_Neff_GW_w1": 4.8800782335662304e-05,
+      "two_fluid_sqrt_rho_ratio": 4.469930541636973e-12
+    },
+    "v1_2d_fixed_point": {
+      "kappa_J": 0.013797,
+      "w_rh": 0.9015,
+      "N_star": 59.718,
+      "n_s": 0.974,
       "A_s": 2.10000000000001e-09,
-      "r": 0.005023644464530274,
-      "T_rh": 5132271399.481489,
-      "H_star": 17252900616549.41,
-      "eta_B": 6.106e-10
+      "r": 0.00502,
+      "Delta_Neff_GW": 8.410089653041781e-06
     },
-    "bbn_gw_Delta_Neff": 8.410089653041781e-06,
     "bbn_Sub1_Delta_Yp": 2.7554868944376105e-11
   },
-  "part2_six_sectors": {
-    "hubble_four_terminal": {
-      "H0_CMB": 68.22,
-      "dH0_OT_geom": 0.42,
-      "dH0_OT_loc": 0.375,
-      "dH0_OG_50": 3.104,
-      "dH0_OMQ": 1.1,
-      "H0_loc_no_dMB": 72.12,
-      "H0_loc_full": 73.22,
-      "v_out_150Mpc_kms": 465.6
+  "part2_exact_sub1_and_six_sectors": {
+    "linear_P_k_v_rms_kms": 525.9,
+    "cepheid_grav_null_dG_over_G": 9.150309985827567e-20,
+    "local_void_catalogs_dMB0_zdip": {
+      "CF4_shallow": {
+        "delta_v": -0.1,
+        "R_Mpc": 150.0,
+        "dH0_OT_loc": 0.25,
+        "totEFE": {
+          "mu_Sub1_z0": 2.103,
+          "f_eff": 0.6965,
+          "dH0_OG": 1.58,
+          "H0_loc_dMB0": 70.47,
+          "v_out_kms": 237.6
+        },
+        "barEFE": {
+          "mu_Sub1_z0": 2.739,
+          "f_eff": 0.7995,
+          "dH0_OG": 1.82,
+          "H0_loc_dMB0": 70.71,
+          "v_out_kms": 272.7
+        }
+      },
+      "Paper28_baseline": {
+        "delta_v": -0.15,
+        "R_Mpc": 150.0,
+        "dH0_OT_loc": 0.375,
+        "totEFE": {
+          "mu_Sub1_z0": 2.102,
+          "f_eff": 0.6964,
+          "dH0_OG": 2.38,
+          "H0_loc_dMB0": 71.39,
+          "v_out_kms": 356.3
+        },
+        "barEFE": {
+          "mu_Sub1_z0": 2.694,
+          "f_eff": 0.7923,
+          "dH0_OG": 2.7,
+          "H0_loc_dMB0": 71.72,
+          "v_out_kms": 405.4
+        }
+      },
+      "Whitbourn_Shanks_2016": {
+        "delta_v": -0.15,
+        "R_Mpc": 200.0,
+        "dH0_OT_loc": 0.375,
+        "totEFE": {
+          "mu_Sub1_z0": 2.16,
+          "f_eff": 0.7058,
+          "dH0_OG": 2.41,
+          "H0_loc_dMB0": 71.42,
+          "v_out_kms": 481.5
+        },
+        "barEFE": {
+          "mu_Sub1_z0": 2.649,
+          "f_eff": 0.7851,
+          "dH0_OG": 2.68,
+          "H0_loc_dMB0": 71.69,
+          "v_out_kms": 535.6
+        }
+      },
+      "CLASSIX_Xray_2020": {
+        "delta_v": -0.2,
+        "R_Mpc": 140.0,
+        "dH0_OT_loc": 0.5,
+        "totEFE": {
+          "mu_Sub1_z0": 2.089,
+          "f_eff": 0.6942,
+          "dH0_OG": 3.16,
+          "H0_loc_dMB0": 72.3,
+          "v_out_kms": 442.0
+        },
+        "barEFE": {
+          "mu_Sub1_z0": 2.642,
+          "f_eff": 0.7839,
+          "dH0_OG": 3.57,
+          "H0_loc_dMB0": 72.71,
+          "v_out_kms": 499.1
+        }
+      },
+      "KBC_conservative_2013": {
+        "delta_v": -0.2,
+        "R_Mpc": 200.0,
+        "dH0_OT_loc": 0.5,
+        "totEFE": {
+          "mu_Sub1_z0": 2.157,
+          "f_eff": 0.7054,
+          "dH0_OG": 3.21,
+          "H0_loc_dMB0": 72.35,
+          "v_out_kms": 641.6
+        },
+        "barEFE": {
+          "mu_Sub1_z0": 2.559,
+          "f_eff": 0.7706,
+          "dH0_OG": 3.5,
+          "H0_loc_dMB0": 72.64,
+          "v_out_kms": 700.9
+        }
+      }
+    },
+    "sigma8_screening_theorem": {
+      "sigma8_unscreened_z1000": 13.075,
+      "sigma8_z_on_10": 1.458,
+      "sigma8_z_on_zdip_totEFE": 0.8493,
+      "sigma8_z_on_zdip_barEFE": 0.8795
+    },
+    "isw_supervoid_exact_Sub1": {
+      "dT_LCDM_uK": -2.38,
+      "sign_flip_bound_lin": 0.246,
+      "sign_flip_bound_nlvoid": 0.2963,
+      "Sub1_barEFE": {
+        "mu_z05": 2.2708,
+        "dlnmu_dlna": 0.1992,
+        "passes_sign_flip": true,
+        "A_ISW_dyn_lin": 0.5,
+        "A_ISW_dyn_nlvoid": 0.86,
+        "A_ISW_EFE_sat": 2.61,
+        "dT_EFE_sat_uK": -6.22
+      },
+      "Sub1_totEFE": {
+        "mu_z05": 1.9111,
+        "dlnmu_dlna": 0.2034,
+        "passes_sign_flip": true,
+        "A_ISW_dyn_lin": 0.38,
+        "A_ISW_dyn_nlvoid": 0.69,
+        "A_ISW_EFE_sat": 2.2,
+        "dT_EFE_sat_uK": -5.23
+      },
+      "pure_MOND": {
+        "mu_z05": 5.5455,
+        "dlnmu_dlna": 0.3974,
+        "passes_sign_flip": false,
+        "A_ISW_dyn_lin": -3.93,
+        "A_ISW_dyn_nlvoid": -2.18,
+        "A_ISW_EFE_sat": 6.38,
+        "dT_EFE_sat_uK": -15.18
+      }
     },
     "cluster_f_b_tau": 0.15703,
-    "jwst_a0_z10_ratio": 6.586,
+    "jwst_z10_exact_Sub1": {
+      "a0_z10_ratio": 6.586,
+      "mu_Sub1_vir_totEFE": 1.612,
+      "mu_Sub1_ta_totEFE": 1.629,
+      "mu_Sub1_ta_barEFE": 2.153
+    },
     "bh_eht_vs_gw_frac": 8.610896545117533e-11,
     "clock_ppn_modulation": 6.7974549726309615e-18,
     "cmb_ee_peaks": [
@@ -44,13 +186,8 @@
       398.6,
       688.4,
       990.4
-    ],
-    "isw_supervoid": {
-      "dT_LCDM_uK": -2.38,
-      "dT_Tau_50_uK": -6.84,
-      "A_ISW_50": 2.875,
-      "sign_flip_dlnmu_dlna_bound_z05": 0.246
-    }
+    ]
   },
+  "gates_passed": "12/12",
   "all_gates_passed": true
 }
