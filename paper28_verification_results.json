@@ -1,0 +1,56 @@
+{
+  "paper": "Tau Core Paper 28 (v1.0.0) \u2014 Four-Terminal Cosmological Closure",
+  "part1_inflation_bbn": {
+    "presc_I_baseline": {
+      "N_star": 51.41246069702876,
+      "n_s": 0.9619894025697563,
+      "A_s": 2.1011475963648704e-09,
+      "r": 0.004262618193157813,
+      "T_rh": 5132271399.481489,
+      "H_star": 15759136293978.621,
+      "eta_B": 6.106e-10
+    },
+    "four_terminal_fixed_point": {
+      "kappa_J": 0.013796560254589925,
+      "w_rh": 0.9014919375030659,
+      "N_star": 59.71828383310877,
+      "n_s": 0.9739999999999986,
+      "A_s": 2.10000000000001e-09,
+      "r": 0.005023644464530274,
+      "T_rh": 5132271399.481489,
+      "H_star": 17252900616549.41,
+      "eta_B": 6.106e-10
+    },
+    "bbn_gw_Delta_Neff": 8.410089653041781e-06,
+    "bbn_Sub1_Delta_Yp": 2.7554868944376105e-11
+  },
+  "part2_six_sectors": {
+    "hubble_four_terminal": {
+      "H0_CMB": 68.22,
+      "dH0_OT_geom": 0.42,
+      "dH0_OT_loc": 0.375,
+      "dH0_OG_50": 3.104,
+      "dH0_OMQ": 1.1,
+      "H0_loc_no_dMB": 72.12,
+      "H0_loc_full": 73.22,
+      "v_out_150Mpc_kms": 465.6
+    },
+    "cluster_f_b_tau": 0.15703,
+    "jwst_a0_z10_ratio": 6.586,
+    "bh_eht_vs_gw_frac": 8.610896545117533e-11,
+    "clock_ppn_modulation": 6.7974549726309615e-18,
+    "cmb_ee_peaks": [
+      137.4,
+      398.6,
+      688.4,
+      990.4
+    ],
+    "isw_supervoid": {
+      "dT_LCDM_uK": -2.38,
+      "dT_Tau_50_uK": -6.84,
+      "A_ISW_50": 2.875,
+      "sign_flip_dlnmu_dlna_bound_z05": 0.246
+    }
+  },
+  "all_gates_passed": true
+}

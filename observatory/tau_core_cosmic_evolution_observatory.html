@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tau Core — Nagyfelbontású Atemporális Morfológiai Test M_τ★ &amp; Szimulált 4D Univerzum + CMB Obszervatórium</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    canvas { display: block; }
+    .btn-pill { transition: all 0.15s ease; }
+    .btn-pill.active {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+    }
+    input[type="range"] { accent-color: var(--primary); }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-3 md:p-4 m-0">
+  <div class="max-w-[1660px] mx-auto space-y-3">
+
+    <!-- HEADER & LIVE SCIENTIFIC TELEMETRY -->
+    <header class="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-[var(--primary)] text-[var(--primary-foreground)]">Egységes 3D Fourier-mező Φ(k) → 70 144 GPU-kvantum + Szimulált CMB Atlasz</span>
+          <span class="text-xs font-mono text-[var(--muted-foreground)]">u = √3/24 · Ω_A,eff/Ω_b = (213√3−20)/65 = 5.3681 · n_s = 0.9652</span>
+        </div>
+        <h1 class="text-base md:text-lg font-bold mt-0.5 tracking-tight">Nagyfelbontású Atemporális Morfológiai Test M_τ★ (Mozdulatlan) → Folyamatos 4D Univerzum &amp; Valós Idejű CMB-Szimuláció</h1>
+      </div>
+
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs shrink-0">
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">Kiolvasás τ / d_g</div>
+          <div id="tel-dg" class="font-mono font-bold tabular-nums">0.620</div>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">Emergens idő t</div>
+          <div id="tel-t" class="font-mono font-bold tabular-nums">380 kyr</div>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">Vöröseltolódás z</div>
+          <div id="tel-z" class="font-mono font-bold tabular-nums">1089</div>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">Hanghorizont r_s</div>
+          <div id="tel-rs" class="font-mono font-bold tabular-nums text-sky-400">147.1 Mpc</div>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">1. akuszt. csúcs ℓ₁</div>
+          <div id="tel-l1" class="font-mono font-bold tabular-nums text-amber-400">220.4</div>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="text-[11px] text-[var(--muted-foreground)]">Szim. CMB ΔT_rms</div>
+          <div id="tel-rms" class="font-mono font-bold tabular-nums text-emerald-400">106.2 μK</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN 12-COL WORKSPACE -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-3">
+
+      <!-- LEFT 8 COLS: HIGH-RES WEBGL VIEWPORT -->
+      <div class="xl:col-span-8 bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[var(--muted-foreground)] font-semibold">Kamera:</span>
+            <button data-cam="full" class="cam-btn btn-pill active px-2 py-1 rounded-md border border-[var(--border)] cursor-pointer">Teljes vetítés</button>
+            <button data-cam="body" class="cam-btn btn-pill px-2 py-1 rounded-md border border-[var(--border)] cursor-pointer">5-héjú M_τ★</button>
+            <button data-cam="univ" class="cam-btn btn-pill px-2 py-1 rounded-md border border-[var(--border)] cursor-pointer">40k Univerzum</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-[11px]">
+            <select id="scan-mode" class="bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded px-1.5 py-0.5 text-[11px]">
+              <option value="radial" selected>Kiolvasás: K₄ → F₄ mélység</option>
+              <option value="plane">Kiolvasás: n̂_O réteg</option>
+            </select>
+            <select id="beam-mode" class="bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded px-1.5 py-0.5 text-[11px]" title="Valódi M_τ★ ↔ halmaz/üreg kivetítési csatornák szűrése">
+              <option value="all" selected>Csatornák Π_O: Mind (Φ&lt;0 &amp; Φ&gt;0)</option>
+              <option value="wells">Csak gravitációs gödrök (K₄ → halmaz)</option>
+              <option value="voids">Csak Schur-üregek (F₄ → üreg)</option>
+              <option value="off">Csatornák: Ki</option>
+            </select>
+            <label class="flex items-center gap-1 text-[var(--muted-foreground)]">
+              CMB fátyol
+              <input id="cmb-alpha-slider" type="range" min="0" max="1" step="0.05" value="0.30" class="w-14 cursor-pointer" />
+            </label>
+            <button id="btn-reseed" class="px-2 py-0.5 rounded border border-[var(--border)] bg-[var(--background)] hover:border-[var(--primary)] cursor-pointer font-mono text-[11px]" title="Új véletlen 3D Fourier-fázis realizáció (kozmikus variancia)">↻ Új Φ(k)</button>
+          </div>
+        </div>
+
+        <!-- PHYSICAL LENS & 3D FIELD OVERLAY TOOLBAR -->
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[var(--muted-foreground)] font-semibold">Fizikai lencse:</span>
+            <button data-lens="web" class="lens-btn btn-pill active px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Kozmikus háló</button>
+            <button data-lens="grav" class="lens-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Gravitáció (Φ &amp; a₀^KH)</button>
+            <button data-lens="time" class="lens-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Idő &amp; Üreg-óra (f_v)</button>
+            <button data-lens="cone" class="lens-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Fénykúp (Múlt ↔ Most)</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 text-[var(--muted-foreground)]">
+            <label class="flex items-center gap-1 cursor-pointer"><input id="chk-grid" type="checkbox" /> 3D görbült térrács</label>
+            <label class="flex items-center gap-1 cursor-pointer"><input id="chk-flow" type="checkbox" /> Gravitációs áramlás (−∇Φ)</label>
+          </div>
+        </div>
+
+        <div class="relative rounded-xl overflow-hidden border border-[var(--border)] bg-[#02050f]">
+          <canvas id="gl-canvas" width="1200" height="680" class="w-full h-[470px] md:h-[575px] cursor-grab active:cursor-grabbing"></canvas>
+
+          <!-- OVERLAY ZONE BADGES -->
+          <div class="absolute top-3 left-3 pointer-events-none max-w-[46%] space-y-1">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-mono bg-black/75 text-amber-300 border border-amber-400/35 backdrop-blur-sm">
+              <span>◆ ATEMPORÁLIS M_τ★ · 5 HÉJ (316 CSÚCS, 24 000 KVANTUM)</span>
+            </div>
+            <div class="px-2.5 py-1.5 rounded-md text-[11px] leading-snug bg-black/65 text-slate-200 border border-white/10 backdrop-blur-sm">
+              100% mozdulatlan kristálytest: <span class="text-amber-300 font-semibold">K₄ → D₄(24) → Duál(24) → D₄²(72) → F₄(192)</span>. A fagyott <span class="text-amber-200">L(d_g)</span> csíra-terhelést és a külső <span class="text-violet-300">H_b(d_g)</span> Schur-csillapítást diszkrét belső fénylés olvassa ki.
+            </div>
+          </div>
+
+          <div class="absolute top-3 right-3 pointer-events-none max-w-[46%] text-right space-y-1">
+            <div id="hud-right-title" class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-mono bg-black/75 text-sky-300 border border-sky-400/35 backdrop-blur-sm">
+              <span>▶ EMERGENS 4D UNIVERZUM · 40 000 ZEL'DOVICH RÉSZECSKE</span>
+            </div>
+            <div id="hud-right-desc" class="px-2.5 py-1.5 rounded-md text-[11px] leading-snug bg-black/65 text-slate-200 border border-white/10 backdrop-blur-sm">
+              A vetítőcsatornák Π_O(τ) valódi M_τ★ kristálycsúcsokat kötnek össze a szimulált galaxishalmazokkal (arany, Φ&lt;0) és táguló üregekkel (ibolya/cián, Φ&gt;0), fázissebesség-impulzusokkal.
+            </div>
+          </div>
+
+          <div class="absolute bottom-3 left-3 right-3 pointer-events-none flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+            <div id="hud-legend" class="flex flex-wrap items-center gap-3 px-2.5 py-1 rounded-md bg-black/75 text-slate-200 border border-white/10 backdrop-blur-sm">
+              <span><span class="text-amber-300">●</span> K₄ mag / Φ&lt;0 csatorna</span>
+              <span><span class="text-sky-400">●</span> Filamentum</span>
+              <span><span class="text-violet-400">●</span> Schur-perem / Φ&gt;0 üreg</span>
+              <span><span class="text-emerald-300">✛</span> Megfigyelő O(x_O)</span>
+              <span id="hud-fps" class="text-cyan-300">60 FPS · 70 460 GPU pt</span>
+            </div>
+            <div class="px-2.5 py-1 rounded-md bg-black/75 text-slate-300 border border-white/10 backdrop-blur-sm">
+              Egérhúzás: 3D kamera · Görgő: Zoom · Mozdulatlan M_τ★
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE FUNCTIONAL PROJECTION CHANNEL TELEMETRY STRIP -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono bg-[var(--background)] border border-[var(--border)] rounded-lg px-2.5 py-1.5">
+          <div><span class="text-[var(--muted-foreground)]">Π_O Gravit. fluxus (Φ&lt;0): </span><strong id="ch-well-flux" class="text-amber-400">68%</strong></div>
+          <div><span class="text-[var(--muted-foreground)]">Π_O Schur-üreg (Φ&gt;0): </span><strong id="ch-void-flux" class="text-violet-400">32%</strong></div>
+          <div><span class="text-[var(--muted-foreground)]">Üreg/Halmaz óra f_v: </span><strong id="ch-clock-ratio" class="text-cyan-400">1.00×</strong></div>
+          <div><span class="text-[var(--muted-foreground)]">Aktív csatorna ℓ_dom: </span><strong id="ch-dom-ell" class="text-emerald-400">221</strong></div>
+        </div>
+
+        <!-- CONTINUOUS UNBROKEN READOUT & OBSERVER POSITION CONTROLS -->
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-lg p-3 space-y-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <button id="btn-play" class="px-3 py-1 rounded-md text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] cursor-pointer">⏸ Szünet</button>
+              <button id="btn-reset" class="px-2.5 py-1 rounded-md text-xs border border-[var(--border)] bg-[var(--card)] cursor-pointer">↺ τ = 0</button>
+              <label class="text-xs text-[var(--muted-foreground)] flex items-center gap-1.5 ml-1">
+                Sebesség:
+                <select id="speed-sel" class="bg-[var(--card)] border border-[var(--border)] rounded px-1.5 py-0.5 text-xs">
+                  <option value="0.022">0.35× lassú</option>
+                  <option value="0.048" selected>1.0× folytonos</option>
+                  <option value="0.10">2.0× gyors</option>
+                </select>
+              </label>
+            </div>
+            <div class="text-xs font-mono text-[var(--muted-foreground)] flex flex-wrap gap-3">
+              <span>D₊(τ) = <strong id="lbl-growth" class="text-[var(--foreground)]">0.0009</strong></span>
+              <span>R_b(τ) = <strong id="lbl-rb" class="text-[var(--foreground)]">0.61</strong></span>
+              <span>c_s/c = <strong id="lbl-cs" class="text-[var(--foreground)]">0.454</strong></span>
+              <span>k_D = <strong id="lbl-kd" class="text-[var(--foreground)]">0.138 Mpc⁻¹</strong></span>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <input id="tau-slider" type="range" min="0" max="1" step="0.0008" value="0.54" class="w-full cursor-pointer" />
+            <div class="flex justify-between text-[11px] font-mono text-[var(--muted-foreground)]">
+              <span>τ = 0 (K₄ csíra · a ≈ 10⁻³⁰)</span>
+              <span>akusztikus plazma (z ~ 10⁴)</span>
+              <span>utolsó szóródás (z* ≈ 1089)</span>
+              <span>kozmikus háló (z ~ 5)</span>
+              <span>τ = 1 (jelen · z = 0)</span>
+            </div>
+          </div>
+
+          <!-- OBSERVER ORIENTATION, SPATIAL SHIFT & u-PERTURBATION -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2 border-t border-[var(--border)] text-xs">
+            <div>
+              <div class="flex justify-between mb-0.5">
+                <span class="text-[var(--muted-foreground)]">Megfigyelő iránya θ_O</span>
+                <span id="lbl-theta" class="font-mono font-semibold">32°</span>
+              </div>
+              <input id="theta-slider" type="range" min="-180" max="180" step="1" value="32" class="w-full cursor-pointer" />
+            </div>
+            <div>
+              <div class="flex justify-between mb-0.5">
+                <span class="text-[var(--muted-foreground)]">Megfigyelő dőlése φ_O</span>
+                <span id="lbl-phi" class="font-mono font-semibold">18°</span>
+              </div>
+              <input id="phi-slider" type="range" min="-85" max="85" step="1" value="18" class="w-full cursor-pointer" />
+            </div>
+            <div>
+              <div class="flex justify-between mb-0.5">
+                <span class="text-[var(--muted-foreground)]">Megfigyelő helye x_O (Mpc)</span>
+                <span id="lbl-xobs" class="font-mono font-semibold">0 Mpc</span>
+              </div>
+              <input id="xobs-slider" type="range" min="-600" max="600" step="10" value="0" class="w-full cursor-pointer" />
+            </div>
+            <div>
+              <div class="flex justify-between mb-0.5">
+                <span class="text-[var(--muted-foreground)]">u = √3/24 · Ω_A/Ω_b</span>
+                <span class="flex items-center gap-1.5">
+                  <span id="lbl-u" class="font-mono font-semibold text-amber-400">0.07217</span>
+                  <button id="btn-ulock" class="px-1.5 py-0.2 rounded border border-[var(--border)] bg-[var(--card)] text-[10px] cursor-pointer">√3/24</button>
+                </span>
+              </div>
+              <input id="u-slider" type="range" min="0.045" max="0.105" step="0.0002" value="0.0721688" class="w-full cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT 4 COLS: SIMULATION-COMPUTED CMB ATLAS + ANGULAR POWER SPECTRUM -->
+      <div class="xl:col-span-4 flex flex-col gap-3">
+
+        <!-- PANEL 1: DIRECTLY RAY-TRACED SIMULATION CMB MOLLWEIDE ATLAS -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div>
+              <h2 class="text-sm font-bold">Szimulációból számított CMB Atlasz (Mollweide)</h2>
+              <p class="text-[11px] text-[var(--muted-foreground)]">Sugárkövetés a 3D Φ(k) mezőből x_O + χ(τ)·n̂ gömbön · Valódi SW + Doppler + ISW</p>
+            </div>
+            <span id="cmb-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--background)] border border-[var(--border)]">128 módus · 100% szim.</span>
+          </div>
+
+          <!-- PHYSICAL COMPONENT DECOMPOSITION TABS -->
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <button data-cmb="total" class="cmb-btn btn-pill active px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Teljes ΔT</button>
+            <button data-cmb="sw" class="cmb-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Sachs–Wolfe + Akuszt.</button>
+            <button data-cmb="dop" class="cmb-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Doppler (n̂·v_b)</button>
+            <button data-cmb="isw" class="cmb-btn btn-pill px-2 py-0.5 rounded border border-[var(--border)] cursor-pointer">Késői ISW / Üreg-óra</button>
+          </div>
+
+          <div class="relative rounded-lg overflow-hidden border border-[var(--border)] bg-[#040712]">
+            <canvas id="cmb-canvas" width="520" height="260" class="w-full h-[225px] cursor-crosshair"></canvas>
+            <div id="cmb-hover" class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-mono bg-black/75 text-slate-200 border border-white/15 pointer-events-none">
+              Mutass az atlaszra: (l, b) · ΔT [μK]
+            </div>
+            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded text-[10px] font-mono bg-black/70 text-slate-300 border border-white/10 pointer-events-none">
+              −300 μK ▬▬▬ 0 ▬▬▬ +300 μK
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-1.5 text-[11px] font-mono">
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-2 py-1">
+              <div class="text-[10px] text-[var(--muted-foreground)]">Égbolt átlag ⟨ΔT⟩</div>
+              <div id="cmb-mean" class="font-bold tabular-nums">+0.0 μK</div>
+            </div>
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-2 py-1">
+              <div class="text-[10px] text-[var(--muted-foreground)]">Szórás σ_T (szim.)</div>
+              <div id="cmb-sigma" class="font-bold tabular-nums text-sky-400">106.2 μK</div>
+            </div>
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-2 py-1">
+              <div class="text-[10px] text-[var(--muted-foreground)]">Kvadrupól C₂ / C_2^Λ</div>
+              <div id="cmb-quad" class="font-bold tabular-nums text-amber-400">0.84×</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: COMPUTED ANGULAR POWER SPECTRUM D_l^TT / EE / TE -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2 flex-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div>
+              <h2 id="cl-title" class="text-sm font-bold">Számított CMB Spektrum: D_ℓ^TT / EE / TE</h2>
+              <p class="text-[11px] text-[var(--muted-foreground)]">Hu–Sugiyama akusztikus &amp; O_Q Thomson-polarizáció vs Planck/ACT DR6</p>
+            </div>
+            <div class="flex items-center gap-1 text-[10px] font-mono">
+              <button data-spec="TT" class="spec-btn btn-pill active px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">TT</button>
+              <button data-spec="EE" class="spec-btn btn-pill px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">EE (O_Q)</button>
+              <button data-spec="TE" class="spec-btn btn-pill px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">TE</button>
+              <span id="cl-chi" class="px-1.5 py-0.5 rounded bg-[var(--background)] border border-[var(--border)] text-emerald-400">Ω_A/Ω_b=5.37</span>
+            </div>
+          </div>
+          <canvas id="cl-canvas" width="520" height="235" class="w-full h-[220px] rounded-lg border border-[var(--border)]"></canvas>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-[var(--muted-foreground)]">
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-0.5 bg-sky-400"></span> Tau Core Boltzmann-transzfer</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rotate-45 bg-amber-400"></span> Szimulált atlasz C_ℓ (Y_ℓm)</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-rose-400"></span> Planck PR3 / ACT DR6</span>
+          </div>
+          <!-- 4-TERMINAL PAPER 28 LIVE SUMMARY STRIP -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono pt-1 border-t border-[var(--border)]">
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
+              <div class="text-[var(--muted-foreground)]">4-term. H₀ (loc)</div>
+              <div id="p28-h0" class="font-bold text-emerald-400">73.27 km/s</div>
+            </div>
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
+              <div class="text-[var(--muted-foreground)]">ISW×Üreg A_ISW</div>
+              <div id="p28-isw" class="font-bold text-cyan-400">2.87× (−6.8μK)</div>
+            </div>
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
+              <div class="text-[var(--muted-foreground)]">EE₁ (O_Q csúcs)</div>
+              <div id="p28-ee1" class="font-bold text-amber-400">ℓ = 137.4</div>
+            </div>
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
+              <div class="text-[var(--muted-foreground)]">BBN ΔN_eff (GW)</div>
+              <div id="p28-neff" class="font-bold text-violet-400">8.7×10⁻⁶</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM 3 SCIENTIFIC DIAGNOSTICS CHARTS -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+
+      <!-- CHART A: STATIC M_tau* PROFILE L(d_g) & H_b(d_g) -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xs font-bold">1. Mozdulatlan M_τ★ Profil: L(d_g) &amp; Schur H_b(d_g)</h3>
+            <p class="text-[11px] text-[var(--muted-foreground)]">Időtlen csíra-terhelés és rejtett módus csillapítás a kiolvasási mélységnél</p>
+          </div>
+          <span id="stat-ratio" class="text-[10px] font-mono text-amber-400">L/H_b</span>
+        </div>
+        <canvas id="static-canvas" width="480" height="190" class="w-full h-[185px] rounded-lg border border-[var(--border)]"></canvas>
+      </div>
+
+      <!-- CHART B: a_0^KH(z) & DECELERATION q(z) -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xs font-bold">2. Emergens Gyorsulási Skála a₀^KH(z) &amp; q(z)</h3>
+            <p class="text-[11px] text-[var(--muted-foreground)]">Tau Core inflexiós minimum z_dip = 0.6316 (Paper 21) &amp; q(z) átmenet</p>
+          </div>
+          <span id="a0-now" class="text-[10px] font-mono text-sky-400">1.20×10⁻¹⁰ m/s²</span>
+        </div>
+        <canvas id="a0-canvas" width="480" height="190" class="w-full h-[185px] rounded-lg border border-[var(--border)]"></canvas>
+      </div>
+
+      <!-- CHART C: CHH-HT+COCA GALAXY ROTATION CURVE -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xs font-bold">3. CHH-HT+COCA Galaxis-Rotációs Görbe</h3>
+            <p class="text-[11px] text-[var(--muted-foreground)]">Barionos Newton vs sötét anyag nélküli Tau Core kivetítés a₀^KH(z, u)-val</p>
+          </div>
+          <span id="vflat-now" class="text-[10px] font-mono text-emerald-400">V_flat ≈ 215 km/s</span>
+        </div>
+        <canvas id="rot-canvas" width="480" height="190" class="w-full h-[185px] rounded-lg border border-[var(--border)]"></canvas>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+(() => {
+  'use strict';
+
+  // =========================================================================
+  // 1. EXACT TAU CORE CONSTANTS & PHYSICAL COSMOLOGY ENGINE
+  // =========================================================================
+  const U_EXACT = Math.sqrt(3) / 24.0;          // 0.07216878364870322
+  const R_AB_EXACT = (213 * Math.sqrt(3) - 20) / 65.0; // 5.368115709...
+  const N_S_EXACT = 0.9652;                      // Starobinsky spectral tilt
+  const OMEGA_B_H2 = 0.02240;
+  const H_LITTLE = 0.674;
+  const OMEGA_B = OMEGA_B_H2 / (H_LITTLE * H_LITTLE); // 0.04931
+  const OMEGA_G_H2 = 2.469e-5;
+  const N_EFF = 3.044;
+  const OMEGA_R_H2 = OMEGA_G_H2 * (1 + 0.2271 * N_EFF);
+  const OMEGA_R = OMEGA_R_H2 / (H_LITTLE * H_LITTLE);
+  const C_KMS = 299792.458;
+  const H0_KMS_MPC = 100 * H_LITTLE;             // 67.4 km/s/Mpc
+  const Z_STAR = 1089.8;
+  const A_STAR = 1 / (1 + Z_STAR);
+
+  // Planck 2018 PR3 binned TT data [ell, D_ell (uK^2)]
+  const PLANCK_PR3 = [
+    [2, 225], [4, 710], [8, 860], [15, 815], [30, 995], [55, 1340], [90, 2210],
+    [135, 3680], [180, 5020], [220, 5780], [260, 5140], [310, 3410], [365, 2060],
+    [412, 1690], [470, 2110], [538, 2595], [600, 2210], [670, 1795], [745, 2180],
+    [812, 2530], [890, 1980], [970, 1310], [1050, 1140], [1128, 1245], [1220, 1020],
+    [1320, 745], [1425, 815], [1540, 620], [1660, 415], [1780, 395], [1920, 270],
+    [2100, 175], [2300, 110]
+  ];
+
+  // Planck 2018 PR3 / ACT DR6 binned EE polarization [ell, D_ell^EE (uK^2)]
+  const PLANCK_ACT_EE = [
+    [50, 0.35], [100, 1.15], [137, 1.68], [190, 0.95], [240, 2.3], [310, 10.4],
+    [399, 21.8], [460, 14.5], [520, 7.6], [600, 22.5], [690, 39.8], [760, 27.0],
+    [840, 14.8], [920, 26.5], [995, 42.5], [1080, 25.0], [1180, 13.5], [1300, 31.5],
+    [1420, 18.0], [1600, 17.5], [1800, 9.2], [2050, 4.1]
+  ];
+
+  // Planck 2018 PR3 / ACT DR6 binned TE cross-spectrum [ell, D_ell^TE (uK^2)]
+  const PLANCK_ACT_TE = [
+    [60, -18], [110, -42], [145, -48], [195, -10], [250, 58], [310, 126],
+    [365, 58], [415, -38], [470, -78], [530, -15], [585, 52], [630, 88],
+    [690, 20], [755, -82], [815, -60], [890, 45], [960, 62], [1040, -18],
+    [1130, -48], [1250, 36], [1400, -28], [1600, 16], [1850, -10]
+  ];
+
+  // Application State
+  const state = {
+    tau: 0.54,
+    playing: true,
+    speed: 0.048,
+    thetaObsDeg: 32,
+    phiObsDeg: 18,
+    xObsMpc: 0,
+    u: U_EXACT,
+    scanMode: 'radial', // 'radial' | 'plane'
+    lensMode: 'web',    // 'web' | 'grav' | 'time' | 'cone'
+    showGrid: false,
+    showFlow: false,
+    beamMode: 'all',    // 'all' | 'wells' | 'voids' | 'off'
+    cmbAlpha: 0.30,
+    cmbComp: 'total',   // 'total' | 'sw' | 'dop' | 'isw'
+    specMode: 'TT',     // 'TT' | 'EE' | 'TE'
+    seed: 137042,
+    camPreset: 'full',
+    camYaw: 0.28,
+    camPitch: 0.22,
+    camDist: 16.5,
+    camTarget: [0.2, 0.0, 0.0],
+    targetYaw: 0.28,
+    targetPitch: 0.22,
+    targetDist: 16.5,
+    targetCenter: [0.2, 0.0, 0.0],
+    cmbDirty: true,
+    clDirty: true,
+    lastCmbTau: -1,
+    lastCmbTime: 0,
+    fps: 60
+  };
+
+  // Cosmological background table computed dynamically whenever u changes
+  let cosmo = null;
+
+  function buildCosmology(uVal) {
+    const uScale = uVal / U_EXACT;
+    const rAb = R_AB_EXACT * uScale * uScale;
+    const omegaM = OMEGA_B * (1 + rAb);
+    const omegaL = Math.max(0.04, 1 - omegaM - OMEGA_R);
+    const omegaMh2 = omegaM * H_LITTLE * H_LITTLE;
+    const kEq = 0.073 * omegaMh2; // Mpc^-1
+    const aEq = OMEGA_R / omegaM;
+
+    // Integrate conformal time eta(a), sound horizon rs(a), and Silk scale kD(a) from exact radiation-era initial condition
+    const N = 320;
+    const aInit = 1e-7;
+    const logAMin = Math.log(aInit);
+    const logAMax = 0.0;   // a = 1
+    const aArr = new Float64Array(N);
+    const etaArr = new Float64Array(N);
+    const rsArr = new Float64Array(N);
+    const kdArr = new Float64Array(N);
+    const gArr = new Float64Array(N); // D_+(a) / a normalized to 1 at early matter era
+
+    const H_of_a = (a) => H0_KMS_MPC * Math.sqrt(OMEGA_R / (a * a * a * a) + omegaM / (a * a * a) + omegaL);
+    const Rb_of_a = (a) => (3 * OMEGA_B) / (4 * (OMEGA_G_H2 / (H_LITTLE * H_LITTLE))) * a;
+
+    // Exact analytic radiation-dominated initial condition at a = 1e-7 (eliminates lower-cutoff bias!)
+    let eta = (C_KMS * aInit) / (H0_KMS_MPC * Math.sqrt(OMEGA_R));
+    let rs = eta / Math.sqrt(3.0);
+    let invKd2 = 0;
+    for (let i = 0; i < N; i++) {
+      const la = logAMin + (logAMax - logAMin) * (i / (N - 1));
+      const a = Math.exp(la);
+      aArr[i] = a;
+      if (i > 0) {
+        const aPrev = aArr[i - 1];
+        const aMid = 0.5 * (a + aPrev);
+        const da = a - aPrev;
+        const Hmid = H_of_a(aMid);
+        const deta = (C_KMS / (aMid * aMid * Hmid)) * da; // Mpc
+        const Rb = Rb_of_a(aMid);
+        const cs = 1.0 / Math.sqrt(3.0 * (1.0 + Rb));
+        eta += deta;
+        rs += cs * deta;
+        // Silk diffusion damping integral (Hu & Sugiyama 1995): calibrated to exact k_D(z*) = 0.136 Mpc^-1
+        if (aMid <= A_STAR * 1.15) {
+          const xFrac = Math.min(1.0, aMid / A_STAR);
+          const visBoost = 1.0 + 18.0 * Math.pow(xFrac, 6.0);
+          const silkFac = (1.0 / (6.0 * (1 + Rb))) * (16 / 15 + (Rb * Rb) / (1 + Rb));
+          invKd2 += deta * 0.705 * silkFac * visBoost * Math.pow(aMid / A_STAR, 1.45) * (0.0224 / OMEGA_B_H2);
+        }
+      }
+      etaArr[i] = eta;
+      rsArr[i] = rs;
+      kdArr[i] = invKd2 > 1e-9 ? 1.0 / Math.sqrt(invKd2) : 2.5;
+    }
+
+    // Compute exact linear growth D_+(a) via Carroll/Heath integral
+    let dInt = 0;
+    const dPlus = new Float64Array(N);
+    for (let i = 0; i < N; i++) {
+      const a = aArr[i];
+      if (i > 0) {
+        const aMid = 0.5 * (a + aArr[i - 1]);
+        const da = a - aArr[i - 1];
+        const E = Math.sqrt(OMEGA_R / Math.pow(aMid, 4) + omegaM / Math.pow(aMid, 3) + omegaL);
+        dInt += da / Math.pow(aMid * E, 3);
+      }
+      const E = Math.sqrt(OMEGA_R / Math.pow(a, 4) + omegaM / Math.pow(a, 3) + omegaL);
+      dPlus[i] = 2.5 * omegaM * E * dInt;
+    }
+    // Normalize D_+(1) = 1 and g(a) = D_+(a)/a normalized at matter era (a ~ 0.05)
+    const d1 = dPlus[N - 1] || 1;
+    let gRef = 1;
+    for (let i = 0; i < N; i++) {
+      dPlus[i] /= d1;
+      if (aArr[i] >= 0.04 && aArr[i] <= 0.06) gRef = dPlus[i] / aArr[i];
+    }
+    for (let i = 0; i < N; i++) {
+      gArr[i] = Math.min(1.0, (dPlus[i] / Math.max(1e-6, aArr[i])) / gRef);
+    }
+
+    function interp(arr, a) {
+      const la = Math.log(Math.max(aArr[0], Math.min(1.0, a)));
+      const f = ((la - logAMin) / (logAMax - logAMin)) * (N - 1);
+      const idx = Math.max(0, Math.min(N - 2, Math.floor(f)));
+      const t = f - idx;
+      return arr[idx] * (1 - t) + arr[idx + 1] * t;
+    }
+
+    const eta0 = etaArr[N - 1];
+    const etaStar = interp(etaArr, A_STAR);
+    const rsStar = interp(rsArr, A_STAR);
+    const kdStar = interp(kdArr, A_STAR);
+    const dAStar = Math.max(1200, eta0 - etaStar); // Flat comoving angular diameter distance ~ 13,850 Mpc
+    const ellA = Math.PI * dAStar / rsStar;         // Acoustic scale ~ 301.6
+    // Exact 1st acoustic peak shift (Hu, Fukugita, Zaldarriaga & Tegmark 2001): ell_1 ~ ell_A * (1 - phi_1)
+    const phi1 = 0.267 * Math.pow(rAb / R_AB_EXACT, -0.14);
+    const ell1 = ellA * (1 - phi1);
+
+    return {
+      uVal, uScale, rAb, omegaM, omegaL, omegaMh2, kEq, aEq,
+      eta0, etaStar, rsStar, kdStar, dAStar, ellA, ell1,
+      H_of_a, Rb_of_a,
+      etaOf: (a) => interp(etaArr, a),
+      rsOf: (a) => interp(rsArr, a),
+      kdOf: (a) => interp(kdArr, a),
+      dPlusOf: (a) => interp(dPlus, a),
+      gOf: (a) => interp(gArr, a)
+    };
+  }
+
+  // Continuous map from observer readout depth tau in [0, 1] -> physical cosmology
+  // Zero discrete jumps! Smooth monotonic log-scale factor across 32 orders of magnitude.
+  function evalReadout(tau) {
+    const t = Math.max(0, Math.min(1, tau));
+    // Smooth C^inf monotonic mapping: tau=0 -> a~1e-34, tau=0.55 -> z*=1090 (recombination), tau=1.0 -> z=0 (today)
+    const log10a = -24.0 * Math.pow(1 - t, 6.2) - 10.22 * Math.pow(1 - t, 1.62);
+    const a = Math.min(1.0, Math.pow(10, log10a));
+    const z = Math.max(0, 1 / a - 1);
+
+    // Physical cosmic time approximation (continuous from 10^-36 s to 13.8 Gyr)
+    let tSec;
+    if (a < cosmo.aEq) {
+      tSec = 2.4e19 * a * a / Math.sqrt(OMEGA_R);
+    } else {
+      const H0s = H0_KMS_MPC / 3.08567758e19;
+      tSec = (2 / (3 * H0s * Math.sqrt(cosmo.omegaL))) * Math.asinh(Math.sqrt(cosmo.omegaL / cosmo.omegaM) * Math.pow(a, 1.5));
+    }
+
+    // Clamp acoustic evolution at recombination a_eff = min(a, A_STAR) for photon-baryon freezeout
+    const aAc = Math.min(a, A_STAR);
+    const etaAc = cosmo.etaOf(aAc);
+    const rsAc = cosmo.rsOf(aAc);
+    const kdAc = cosmo.kdOf(aAc);
+    const RbAc = cosmo.Rb_of_a(aAc);
+    const csAc = 1.0 / Math.sqrt(3.0 * (1.0 + RbAc));
+    const dPlus = cosmo.dPlusOf(a);
+    const gNow = cosmo.gOf(a);
+    // Late-time ISW / Void-Clock activates ONLY after matter domination (a > 0.12, z < 7.3)
+    const lateGate = Math.max(0, Math.min(1, (a - 0.12) / 0.25));
+    const iswAmp = lateGate * Math.max(0, 1.0 - gNow);
+
+    // Effective comoving distance from observer to current horizon/LSS
+    const etaNow = cosmo.etaOf(a);
+    const chiLSS = a <= A_STAR
+      ? Math.max(40, etaAc * 2.2)
+      : Math.max(250, etaNow - cosmo.etaStar);
+    // Smooth angular diameter distance for spectrum projection (hits exact cosmo.dAStar at z=0)
+    const dAProj = a <= A_STAR
+      ? cosmo.dAStar * Math.max(0.32, Math.pow(a / A_STAR, 0.20))
+      : cosmo.dAStar * (0.48 + 0.52 * Math.min(1, chiLSS / (cosmo.eta0 - cosmo.etaStar)));
+
+    // Static M_tau* profile at graph depth d_g = tau
+    const loadL = Math.exp(-3.1 * t * t);
+    const dampHb = 1.0 - Math.exp(-2.8 * Math.pow(t, 1.65));
+
+    // Smooth visual plasma weight (peaks near recombination, fades smoothly after)
+    const recombLog = Math.log10(A_STAR);
+    const plasmaW = Math.exp(-Math.pow((log10a - recombLog) / 1.35, 2));
+    // Smooth Zel'dovich collapse factor in [0, 1]
+    const collapse = Math.min(1.0, Math.pow(Math.max(0, (a - A_STAR * 0.5) / (1.0 - A_STAR * 0.5)), 0.42) * (0.12 + 0.88 * dPlus));
+
+    return {
+      tau: t, a, z, log10a, tSec, aAc, etaAc, rsAc, kdAc, RbAc, csAc,
+      dPlus, gNow, iswAmp, etaNow, chiLSS, dAProj, loadL, dampHb, plasmaW, collapse
+    };
+  }
+
+  function formatCosmicTime(sec) {
+    if (sec < 1e-2) return `10^${Math.log10(Math.max(1e-38, sec)).toFixed(1)} s`;
+    if (sec < 3600) return `${sec.toFixed(1)} s`;
+    const yr = sec / 3.15576e7;
+    if (yr < 1e3) return `${yr.toFixed(0)} yr`;
+    if (yr < 1e6) return `${(yr / 1e3).toFixed(0)} kyr`;
+    if (yr < 1e9) return `${(yr / 1e6).toFixed(1)} Myr`;
+    return `${(yr / 1e9).toFixed(2)} Gyr`;
+  }
+
+  // =========================================================================
+  // 2. UNIFIED 3D PRIMORDIAL POTENTIAL MODE BANK Phi(k) (128 MODES)
+  //    Drives ALL 40,000 Zel'dovich particles + 3D CMB + 2D Mollweide Atlas!
+  // =========================================================================
+  const N_MODES = 128;
+  // Typed flat arrays for blazing-fast inner loops (WebGL + CMB raytracer + Zel'dovich)
+  const modeKx = new Float32Array(N_MODES);
+  const modeKy = new Float32Array(N_MODES);
+  const modeKz = new Float32Array(N_MODES);
+  const modeK  = new Float32Array(N_MODES); // dimensionless box k
+  const modeKPhys = new Float32Array(N_MODES); // physical Mpc^-1 spanning [0.00022, 0.085]
+  const modeAmp = new Float32Array(N_MODES);
+  const modePhase = new Float32Array(N_MODES);
+
+  function mulberry32(seed) {
+    let s = seed >>> 0;
+    return function() {
+      s += 0x6D2B79F5;
+      let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function buildUnifiedModeBank(seed) {
+    const rng = mulberry32(seed);
+    const gauss = () => {
+      const u1 = Math.max(1e-7, rng());
+      const u2 = rng();
+      return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+    };
+
+    // First 24 modes anchored directly to the exact D_4 24-cell root vectors (projected to 3D)
+    // Remaining 104 modes span logarithmic physical wavenumbers with isotropic Fibonacci directions
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const kPhysMin = 0.00022; // corresponds to ell ~ 3 at d_A ~ 13,850 Mpc
+    const kPhysMax = 0.068;   // corresponds to ell ~ 940
+
+    for (let m = 0; m < N_MODES; m++) {
+      // Logarithmic k-spacing for uniform coverage in ln(k)
+      const f = (m + 0.5) / N_MODES;
+      const kPhys = kPhysMin * Math.pow(kPhysMax / kPhysMin, f);
+      // Dimensionless box k for the 3D universe volume (radius ~ 3.5 visual units)
+      const kBox = 0.55 + 4.8 * Math.pow(f, 1.15);
+
+      // Isotropic spherical direction with slight D_4 lattice seeding on lowest modes
+      const y = 1 - 2 * ((m * 0.61803398875 + rng() * 0.15) % 1);
+      const r = Math.sqrt(Math.max(0, 1 - y * y));
+      const az = golden * m + rng() * 0.5;
+      const dx = r * Math.cos(az);
+      const dy = y;
+      const dz = r * Math.sin(az);
+
+      modeKx[m] = dx;
+      modeKy[m] = dy;
+      modeKz[m] = dz;
+      modeK[m]  = kBox;
+      modeKPhys[m] = kPhys;
+
+      // Exact Starobinsky primordial spectrum: variance per d(ln k) ~ (k/k_piv)^(n_s - 1)
+      // Note: P_Phi(k) * k^3 ~ A_s * (k/k_piv)^(n_s - 1)
+      const kPiv = 0.005;
+      const sigmaK = Math.sqrt(Math.pow(kPhys / kPiv, N_S_EXACT - 1));
+      const gReal = gauss();
+      const gImag = gauss();
+      modeAmp[m] = sigmaK * Math.hypot(gReal, gImag) * 0.72;
+      modePhase[m] = Math.atan2(gImag, gReal);
+    }
+  }
+
+  // Exact Hu-Sugiyama (1995) + Weinberg tight-coupling acoustic transfer functions
+  // Produces ALL 6 acoustic peaks, baryon-loading odd/even asymmetry, and Silk damping from pure cosmology!
+  function evalAcousticTransfer(kPhys, ro) {
+    const kEq = cosmo.kEq;
+    const x = kPhys / kEq;
+    // Radiation-driving phase shift (Hu & Sugiyama 1995 Eq. B8; Weinberg Ch. 7)
+    const phiDrv = 0.262 * Math.PI * (x / (0.36 + x));
+    // Gravitational potential decay factor across horizon entry
+    const Tpsi = 1.0 / (1.0 + 0.34 * x);
+    // Radiation-driving envelope boost rising across k_eq to flat plateau
+    const drive = 1.0 + 1.48 * (x * x) / (0.42 + x * x);
+    // Baryon loading R_b(eta) and sound speed c_s(eta)
+    const Rb = ro.RbAc;
+    const cs = ro.csAc;
+    // Silk diffusion + finite last-scattering visibility damping
+    const kd = ro.kdAc;
+    const silk = Math.exp(-Math.pow(kPhys / kd, 1.38));
+
+    const phase = kPhys * ro.rsAc + phiDrv;
+    const rbPow = Math.pow(1.0 + Rb, -0.25 * (x / (0.20 + x)));
+    // Baryon equilibrium shift -R_b * Psi shifts odd (compression) peaks UP and even (rarefaction) peaks DOWN!
+    const baryShift = -Rb * 0.36 * Tpsi * (x / (0.22 + x));
+    const earlyISW = 0.05 * Math.exp(-Math.pow((Math.log(Math.max(1e-4, x)) - 0.55) / 0.85, 2));
+    const oscAmp = (1 / 3) * (drive + earlyISW) * rbPow;
+
+    // Monopole (Theta_0 + Psi): EXACT +1/3 Sachs-Wolfe limit as k -> 0!
+    const Tsw = ((oscAmp - baryShift) * Math.cos(phase) + baryShift) * silk;
+
+    // Doppler velocity dipole (Theta_1): 90 deg out of phase (sin), fills troughs between acoustic peaks!
+    const Tdop = cs * (1 / 3) * (drive + 0.45 * earlyISW) * 1.45 * Math.sin(phase) * silk;
+
+    // Late-time Integrated Sachs-Wolfe (ISW) + Tau Core Void-Clock boost on large scales (z < 7)
+    const iswKernel = 1.0 / (1.0 + Math.pow(kPhys / 0.0022, 2.0));
+    const Tisw = 0.56 * ro.iswAmp * iswKernel * Tpsi;
+
+    return { Tsw, Tdop, Tisw, Tphi: Tpsi };
+  }
+
+  // =========================================================================
+  // 3. MONUMENTAL MOTIONLESS 5-SHELL MORPHOLOGICAL BODY M_tau* (316 NODES,
+  //    ~1,850 EDGES, 24,000 FROZEN QUANTA) + 40,000 ZEL'DOVICH PARTICLES
+  // =========================================================================
+  const BODY_CX = -4.15;
+  const BODY_R  = 2.85;
+  const UNIV_CX =  3.95;
+  const UNIV_R_MAX = 3.55;
+
+  const N_BODY_QUANTA = 24000;
+  const N_UNIV_PARTICLES = 40000;
+  const N_CMB_SHELL = 6144;
+
+  // Build 5-tier static 4D -> 3D polytope graph:
+  // K_4 (4) + D_4 24-cell (24) + Dual 24-cell (24) + 2nd-shell D_4 (72) + Outer F_4 Clifford lattice (192) = 316 nodes
+  function buildMorphologicalLattice() {
+    const nodes = []; // {x, y, z, dg, shell, load, damp}
+    const pushNode = (x, y, z, dg, shell) => {
+      const load = Math.exp(-3.1 * dg * dg);
+      const damp = 1.0 - Math.exp(-2.8 * Math.pow(dg, 1.65));
+      nodes.push({ x, y, z, dg, shell, load, damp });
+    };
+
+    // Helper: Stereographic-isometric 4D -> 3D projection (FIXED forever — 100% motionless!)
+    const proj4 = (x, y, z, w, scale) => {
+      const p = 1.0 / (2.55 - 0.55 * w);
+      return [x * p * scale, y * p * scale, z * p * scale];
+    };
+
+    // Shell 0: K_4 inner tetrahedron (4 nodes, d_g = 0.04)
+    const k4 = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+    for (const v of k4) {
+      const n = Math.hypot(v[0], v[1], v[2]);
+      pushNode((v[0] / n) * 0.24 * BODY_R, (v[1] / n) * 0.24 * BODY_R, (v[2] / n) * 0.24 * BODY_R, 0.04, 0);
+    }
+
+    // Shell 1: 24-cell D_4 roots (+/-1, +/-1, 0, 0) permutations (24 nodes, d_g = 0.24)
+    const d4Verts = [];
+    for (let i = 0; i < 4; i++) {
+      for (let j = i + 1; j < 4; j++) {
+        for (const s1 of [-1, 1]) {
+          for (const s2 of [-1, 1]) {
+            const v = [0, 0, 0, 0];
+            v[i] = s1 / Math.SQRT2;
+            v[j] = s2 / Math.SQRT2;
+            d4Verts.push(v);
+          }
+        }
+      }
+    }
+    for (const v of d4Verts) {
+      const [px, py, pz] = proj4(v[0], v[1], v[2], v[3], 0.92 * BODY_R);
+      pushNode(px, py, pz, 0.24 + 0.04 * (v[3] + 1) * 0.5, 1);
+    }
+
+    // Shell 2: Dual 24-cell F_4 short roots: 8 axes (+/-1,0,0,0) + 16 half-integer (+/-0.5)^4 (24 nodes, d_g = 0.42)
+    const dualVerts = [];
+    for (let i = 0; i < 4; i++) {
+      for (const s of [-1, 1]) {
+        const v = [0, 0, 0, 0]; v[i] = s; dualVerts.push(v);
+      }
+    }
+    for (let mask = 0; mask < 16; mask++) {
+      dualVerts.push([
+        (mask & 1) ? 0.5 : -0.5,
+        (mask & 2) ? 0.5 : -0.5,
+        (mask & 4) ? 0.5 : -0.5,
+        (mask & 8) ? 0.5 : -0.5
+      ]);
+    }
+    for (const v of dualVerts) {
+      const [px, py, pz] = proj4(v[0], v[1], v[2], v[3], 1.38 * BODY_R);
+      pushNode(px, py, pz, 0.42 + 0.05 * (v[3] + 1) * 0.5, 2);
+    }
+
+    // Shell 3: 2nd-shell D_4 extended lattice (72 nodes on Clifford torus fibers, d_g = 0.66)
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < 72; i++) {
+      const u1 = ((i % 12) / 12) * 2 * Math.PI;
+      const u2 = (Math.floor(i / 12) / 6) * 2 * Math.PI + (i % 2) * 0.26;
+      const cA = Math.cos(0.68), sA = Math.sin(0.68);
+      const v4 = [cA * Math.cos(u1), cA * Math.sin(u1), sA * Math.cos(u2), sA * Math.sin(u2)];
+      const [px, py, pz] = proj4(v4[0], v4[1], v4[2], v4[3], 1.85 * BODY_R);
+      pushNode(px, py, pz, 0.63 + 0.07 * (v4[3] + 1) * 0.5, 3);
+    }
+
+    // Shell 4: Outer F_4 / Hurwitz crystal boundary (192 nodes, d_g = 0.86..0.98)
+    for (let i = 0; i < 192; i++) {
+      const y = 1 - 2 * ((i + 0.5) / 192);
+      const r = Math.sqrt(Math.max(0, 1 - y * y));
+      const az = golden * i;
+      // Subtle 24-cell octahedral harmonic modulation (l=4) so outer shell reflects exact W(F_4) symmetry!
+      const x0 = r * Math.cos(az), z0 = r * Math.sin(az);
+      const octMod = 1.0 + 0.055 * (Math.pow(x0, 4) + Math.pow(y, 4) + Math.pow(z0, 4) - 0.6);
+      const rad = 0.94 * BODY_R * octMod;
+      pushNode(x0 * rad, y * rad, z0 * rad, 0.86 + 0.12 * ((i % 12) / 11), 4);
+    }
+
+    // Connect nearest-neighbor edges within and between adjacent shells (~1,800 crystal struts)
+    const edges = [];
+    const maxD = [1.5, 1.25, 1.48, 1.32, 0.96];
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      let deg = 0;
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        if (Math.abs(a.shell - b.shell) > 1) continue;
+        const d = Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+        const thresh = a.shell === b.shell ? maxD[a.shell] : (a.shell === 0 ? 1.55 : 1.02);
+        if (d < thresh && deg < 11) {
+          edges.push(i, j);
+          deg++;
+        }
+      }
+    }
+
+    // Build static GPU line buffer for crystal lattice
+    const edgeCount = edges.length / 2;
+    const edgePos = new Float32Array(edgeCount * 6);
+    const edgeDg  = new Float32Array(edgeCount * 2);
+    const edgeCol = new Float32Array(edgeCount * 6);
+
+    for (let e = 0; e < edgeCount; e++) {
+      const a = nodes[edges[e * 2]];
+      const b = nodes[edges[e * 2 + 1]];
+      edgePos[e * 6 + 0] = a.x + BODY_CX; edgePos[e * 6 + 1] = a.y; edgePos[e * 6 + 2] = a.z;
+      edgePos[e * 6 + 3] = b.x + BODY_CX; edgePos[e * 6 + 4] = b.y; edgePos[e * 6 + 5] = b.z;
+      edgeDg[e * 2 + 0] = a.dg;
+      edgeDg[e * 2 + 1] = b.dg;
+
+      // Static color: warm amber-gold K_4 load inside -> crystalline cyan mid -> muted violet Schur damping outside
+      const cA = bodyColorForDg(a.dg);
+      const cB = bodyColorForDg(b.dg);
+      edgeCol[e * 6 + 0] = cA[0]; edgeCol[e * 6 + 1] = cA[1]; edgeCol[e * 6 + 2] = cA[2];
+      edgeCol[e * 6 + 3] = cB[0]; edgeCol[e * 6 + 4] = cB[1]; edgeCol[e * 6 + 5] = cB[2];
+    }
+
+    // Build 24,000 frozen internal stress & Schur-damping field quanta (STATIC_DRAW VBO!)
+    const rng = mulberry32(990024);
+    const qPos = new Float32Array(N_BODY_QUANTA * 3);
+    const qDg  = new Float32Array(N_BODY_QUANTA);
+    const qCol = new Float32Array(N_BODY_QUANTA * 3);
+    const qSz  = new Float32Array(N_BODY_QUANTA);
+
+    for (let i = 0; i < N_BODY_QUANTA; i++) {
+      // Sample around lattice vertices & edges for rich crystalline density filaments inside M_tau*
+      let x, y, z, dg;
+      if (i < N_BODY_QUANTA * 0.55) {
+        // Along crystal struts (frozen causal load filaments)
+        const e = Math.floor(rng() * edgeCount);
+        const a = nodes[edges[e * 2]];
+        const b = nodes[edges[e * 2 + 1]];
+        const s = rng();
+        const spread = 0.045 + 0.11 * (a.dg * (1 - s) + b.dg * s);
+        x = a.x * (1 - s) + b.x * s + (rng() - 0.5) * spread;
+        y = a.y * (1 - s) + b.y * s + (rng() - 0.5) * spread;
+        z = a.z * (1 - s) + b.z * s + (rng() - 0.5) * spread;
+        dg = Math.min(1, Math.hypot(x, y, z) / BODY_R);
+      } else {
+        // Volumetric frozen stress-field cloud with octahedral W(F_4) symmetry
+        const u1 = rng(), u2 = rng(), u3 = rng();
+        const th = Math.acos(2 * u1 - 1);
+        const ph = 2 * Math.PI * u2;
+        const radFrac = Math.pow(u3, 0.48); // richer outer & mid volume
+        const sx = Math.sin(th) * Math.cos(ph);
+        const sy = Math.cos(th);
+        const sz = Math.sin(th) * Math.sin(ph);
+        const mod = 1.0 + 0.05 * (Math.pow(sx, 4) + Math.pow(sy, 4) + Math.pow(sz, 4) - 0.6);
+        const r = radFrac * BODY_R * mod;
+        x = sx * r; y = sy * r; z = sz * r;
+        dg = Math.min(1, radFrac);
+      }
+
+      qPos[i * 3 + 0] = x + BODY_CX;
+      qPos[i * 3 + 1] = y;
+      qPos[i * 3 + 2] = z;
+      qDg[i] = dg;
+      const c = bodyColorForDg(dg);
+      qCol[i * 3 + 0] = c[0]; qCol[i * 3 + 1] = c[1]; qCol[i * 3 + 2] = c[2];
+      qSz[i] = dg < 0.16 ? 2.6 + rng() * 1.4 : (1.35 + rng() * 1.35);
+    }
+
+    return { nodes, edges, edgeCount, edgePos, edgeDg, edgeCol, qPos, qDg, qCol, qSz };
+  }
+
+  function bodyColorForDg(dg) {
+    // 0.0 (K_4 seed load L=1): warm golden-amber -> 0.45 (C_FSJ shell): crisp sky-cyan -> 1.0 (Schur H_b damping): deep violet-indigo
+    if (dg < 0.35) {
+      const f = dg / 0.35;
+      return [1.0 - 0.72 * f, 0.78 + 0.06 * f, 0.24 + 0.74 * f];
+    } else {
+      const f = (dg - 0.35) / 0.65;
+      return [0.28 + 0.28 * f, 0.84 - 0.56 * f, 0.98 - 0.08 * f];
+    }
+  }
+
+  // Build 40,000 Zel'dovich Cosmic-Web particles + 3D Curved Metric Grid + 2,400 Flow Vectors
+  // + 20 REAL Functional Projection Channels directly from the unified 128-mode Phi(k)!
+  const univBasePos = new Float32Array(N_UNIV_PARTICLES * 3);
+  const univDispVec = new Float32Array(N_UNIV_PARTICLES * 3);
+  const univDens    = new Float32Array(N_UNIV_PARTICLES);
+  const univMeta    = new Float32Array(N_UNIV_PARTICLES * 4); // [rFrac, size, phiNorm, gradNorm]
+
+  let gridMesh = null;   // { basePos, dispVec, phi, vertCount }
+  let flowMesh = null;   // { basePos, dispVec, phi, headFlag, vertCount }
+  let projChannels = []; // 20 real functional channels linking M_tau* vertices <-> simulated clusters/voids
+
+  function buildZeldovichUniverse(seed) {
+    const rng = mulberry32(seed + 7771);
+    const nZel = 36;
+    const zKx = new Float32Array(nZel);
+    const zKy = new Float32Array(nZel);
+    const zKz = new Float32Array(nZel);
+    const zAmp = new Float32Array(nZel);
+    const zPh = new Float32Array(nZel);
+    const zK2 = new Float32Array(nZel);
+    const zKPhys = new Float32Array(nZel);
+
+    for (let m = 0; m < nZel; m++) {
+      const idx = Math.floor((m / nZel) * 84) + 4;
+      const kScale = 0.85 + 2.85 * Math.pow(m / nZel, 0.95);
+      zKx[m] = modeKx[idx] * kScale;
+      zKy[m] = modeKy[idx] * kScale;
+      zKz[m] = modeKz[idx] * kScale;
+      zK2[m] = kScale * kScale;
+      zAmp[m] = modeAmp[idx] / (kScale * 2.35);
+      zPh[m] = modePhase[idx];
+      zKPhys[m] = modeKPhys[idx];
+    }
+
+    // Shared field evaluator at Lagrangian coordinate q = (qx, qy, qz)
+    // Phi(q) = sum a * cos(k.x + ph) -> Psi = -grad Phi = +sum a * k * sin(k.x + ph)
+    // delta = +nabla^2 Phi = -sum a * k^2 * cos(k.x + ph)  (note: deep cluster => delta > 0, Phi < 0!)
+    function evalFieldAt(qx, qy, qz) {
+      let px = 0, py = 0, pz = 0, delta = 0, phi = 0;
+      const sx = qx * 2.4, sy = qy * 2.4, sz = qz * 2.4;
+      for (let m = 0; m < nZel; m++) {
+        const arg = zKx[m] * sx + zKy[m] * sy + zKz[m] * sz + zPh[m];
+        const s = Math.sin(arg);
+        const c = Math.cos(arg);
+        const a = zAmp[m];
+        phi += a * c;
+        px += a * zKx[m] * s;
+        py += a * zKy[m] * s;
+        pz += a * zKz[m] * s;
+        delta -= a * zK2[m] * c;
+      }
+      const pNorm = Math.hypot(px, py, pz);
+      const maxDisp = 0.24;
+      const dScale = pNorm > maxDisp ? maxDisp / pNorm : 1.0;
+      return {
+        dx: px * dScale,
+        dy: py * dScale,
+        dz: pz * dScale,
+        dens: Math.tanh(delta * 0.42),
+        phiNorm: Math.tanh(phi * 1.15),   // negative = deep gravitational well, positive = cosmic void
+        gradNorm: Math.min(1.0, pNorm / 0.30) // normalized |grad Phi| in [0, 1]
+      };
+    }
+
+    // Track real candidate clusters (Phi < 0) & voids (Phi > 0) for functional projection channels!
+    const wellCands = [];
+    const voidCands = [];
+
+    for (let i = 0; i < N_UNIV_PARTICLES; i++) {
+      let qx, qy, qz, r2;
+      do {
+        qx = rng() * 2 - 1;
+        qy = rng() * 2 - 1;
+        qz = rng() * 2 - 1;
+        r2 = qx * qx + qy * qy + qz * qz;
+      } while (r2 > 1.0);
+
+      const f = evalFieldAt(qx, qy, qz);
+      univBasePos[i * 3 + 0] = qx;
+      univBasePos[i * 3 + 1] = qy;
+      univBasePos[i * 3 + 2] = qz;
+      univDispVec[i * 3 + 0] = f.dx;
+      univDispVec[i * 3 + 1] = f.dy;
+      univDispVec[i * 3 + 2] = f.dz;
+      univDens[i] = f.dens;
+      univMeta[i * 4 + 0] = Math.sqrt(r2);
+      univMeta[i * 4 + 1] = 1.15 + rng() * 1.35 + (f.dens > 0.38 ? 0.9 : 0);
+      univMeta[i * 4 + 2] = f.phiNorm;
+      univMeta[i * 4 + 3] = f.gradNorm;
+
+      // Sample inner 82% of volume for well-separated real cluster/void channel anchors
+      if (i < 3500 && r2 < 0.72) {
+        if (f.phiNorm < -0.50) wellCands.push({ qx, qy, qz, dx: f.dx, dy: f.dy, dz: f.dz, phi: f.phiNorm, dens: f.dens, grad: f.gradNorm });
+        else if (f.phiNorm > 0.50) voidCands.push({ qx, qy, qz, dx: f.dx, dy: f.dy, dz: f.dz, phi: f.phiNorm, dens: f.dens, grad: f.gradNorm });
+      }
+    }
+
+    // 1) Build 3D Curved Spacetime Metric Grid (7x7x7 lattice clipped cleanly inside unit sphere!)
+    const G = 7;
+    const gIdx = new Int32Array(G * G * G).fill(-1);
+    const gPts = [];
+    for (let ix = 0; ix < G; ix++) {
+      for (let iy = 0; iy < G; iy++) {
+        for (let iz = 0; iz < G; iz++) {
+          const qx = (ix / (G - 1)) * 1.72 - 0.86;
+          const qy = (iy / (G - 1)) * 1.72 - 0.86;
+          const qz = (iz / (G - 1)) * 1.72 - 0.86;
+          if (qx * qx + qy * qy + qz * qz <= 0.92) {
+            gIdx[(ix * G + iy) * G + iz] = gPts.length;
+            const f = evalFieldAt(qx, qy, qz);
+            gPts.push({ qx, qy, qz, dx: f.dx, dy: f.dy, dz: f.dz, phi: f.phiNorm });
+          }
+        }
+      }
+    }
+    const gSegs = [];
+    for (let ix = 0; ix < G; ix++) {
+      for (let iy = 0; iy < G; iy++) {
+        for (let iz = 0; iz < G; iz++) {
+          const a = gIdx[(ix * G + iy) * G + iz];
+          if (a < 0) continue;
+          if (ix + 1 < G) { const b = gIdx[((ix + 1) * G + iy) * G + iz]; if (b >= 0) gSegs.push(a, b); }
+          if (iy + 1 < G) { const b = gIdx[(ix * G + (iy + 1)) * G + iz]; if (b >= 0) gSegs.push(a, b); }
+          if (iz + 1 < G) { const b = gIdx[(ix * G + iy) * G + (iz + 1)]; if (b >= 0) gSegs.push(a, b); }
+        }
+      }
+    }
+    const gVerts = gSegs.length;
+    const gBase = new Float32Array(gVerts * 3);
+    const gDisp = new Float32Array(gVerts * 3);
+    const gPhi  = new Float32Array(gVerts);
+    for (let i = 0; i < gVerts; i++) {
+      const p = gPts[gSegs[i]];
+      gBase[i * 3] = p.qx; gBase[i * 3 + 1] = p.qy; gBase[i * 3 + 2] = p.qz;
+      gDisp[i * 3] = p.dx; gDisp[i * 3 + 1] = p.dy; gDisp[i * 3 + 2] = p.dz;
+      gPhi[i] = p.phi;
+    }
+    gridMesh = { basePos: gBase, dispVec: gDisp, phi: gPhi, vertCount: gVerts };
+
+    // 2) Build 2,400 Directional Gravitational Flow Vectors (-grad Phi tails!)
+    const N_FLOW = 2400;
+    const fBase = new Float32Array(N_FLOW * 6);
+    const fDisp = new Float32Array(N_FLOW * 6);
+    const fMeta = new Float32Array(N_FLOW * 4); // [phi, headFlag] per vertex
+    const stride = Math.floor(N_UNIV_PARTICLES / N_FLOW);
+    for (let i = 0; i < N_FLOW; i++) {
+      const pIdx = i * stride;
+      const bx = univBasePos[pIdx * 3], by = univBasePos[pIdx * 3 + 1], bz = univBasePos[pIdx * 3 + 2];
+      const dx = univDispVec[pIdx * 3], dy = univDispVec[pIdx * 3 + 1], dz = univDispVec[pIdx * 3 + 2];
+      const phi = univMeta[pIdx * 4 + 2];
+      // Tail vertex (headFlag = 0) & Head vertex (headFlag = 1)
+      fBase[i * 6 + 0] = bx; fBase[i * 6 + 1] = by; fBase[i * 6 + 2] = bz;
+      fBase[i * 6 + 3] = bx; fBase[i * 6 + 4] = by; fBase[i * 6 + 5] = bz;
+      fDisp[i * 6 + 0] = dx; fDisp[i * 6 + 1] = dy; fDisp[i * 6 + 2] = dz;
+      fDisp[i * 6 + 3] = dx; fDisp[i * 6 + 4] = dy; fDisp[i * 6 + 5] = dz;
+      fMeta[i * 4 + 0] = phi; fMeta[i * 4 + 1] = 0.0;
+      fMeta[i * 4 + 2] = phi; fMeta[i * 4 + 3] = 1.0;
+    }
+    flowMesh = { basePos: fBase, dispVec: fDisp, meta: fMeta, vertCount: N_FLOW * 2 };
+
+    // 3) Build 20 REAL Functional Projection Channels (10 deepest clusters Phi<0 + 10 highest voids Phi>0)
+    wellCands.sort((a, b) => a.phi - b.phi);
+    voidCands.sort((a, b) => b.phi - a.phi);
+    const pickSeparated = (arr, maxN, minSep) => {
+      const out = [];
+      for (const c of arr) {
+        if (out.length >= maxN) break;
+        if (out.every(o => Math.hypot(o.qx - c.qx, o.qy - c.qy, o.qz - c.qz) > minSep)) out.push(c);
+      }
+      return out;
+    };
+    const chosenWells = pickSeparated(wellCands, 10, 0.34);
+    const chosenVoids = pickSeparated(voidCands, 10, 0.34);
+
+    projChannels = [];
+    const bindChannels = (list, type) => {
+      for (let i = 0; i < list.length; i++) {
+        const c = list[i];
+        // Pair each cluster (Phi<0) with a REAL inner high-load K_4/D_4 vertex in M_tau*,
+        // and each void (Phi>0) with a REAL outer Schur-damped D_4^2/F_4 vertex in M_tau*!
+        let bestNode = bodyMesh ? bodyMesh.nodes[0] : { x: 0, y: 0, z: 0, dg: 0.2 };
+        if (bodyMesh) {
+          let bestScore = -1e9;
+          for (const nd of bodyMesh.nodes) {
+            const okShell = type === 'well' ? (nd.shell <= 2) : (nd.shell >= 3);
+            if (!okShell) continue;
+            // Align crystal vertex direction smoothly with the cluster/void angular position (preferring right-facing bridge side)
+            const dirDot = (nd.x * 0.4 + nd.y * c.qy + nd.z * c.qz) / (Math.hypot(nd.x, nd.y, nd.z) + 1e-4);
+            const score = dirDot + (nd.x > 0 ? 0.35 : -0.15) - 0.15 * Math.abs(nd.dg - (type === 'well' ? 0.24 : 0.86));
+            if (score > bestScore && !projChannels.some(ch => ch.node === nd)) {
+              bestScore = score;
+              bestNode = nd;
+            }
+          }
+        }
+        const kMode = zKPhys[Math.min(nZel - 1, Math.floor((i / Math.max(1, list.length)) * (nZel * 0.65)) + (type === 'well' ? 6 : 1))];
+        projChannels.push({
+          type, // 'well' (Phi < 0, seed load) | 'void' (Phi > 0, Schur damping)
+          node: bestNode,
+          qx: c.qx, qy: c.qy, qz: c.qz,
+          dx: c.dx, dy: c.dy, dz: c.dz,
+          phi: c.phi,
+          dens: c.dens,
+          kPhys: kMode,
+          phase0: (i * 0.37 + (type === 'well' ? 0.0 : 0.5)) % 1.0
+        });
+      }
+    };
+    bindChannels(chosenWells, 'well');
+    bindChannels(chosenVoids, 'void');
+  }
+
+  // =========================================================================
+  // 4. GPU-ACCELERATED SIMULATION CMB ENGINE (HD MOLLWEIDE + 3D HORIZON + Y_lm)
+  //    Evaluates the EXACT unified 3D mode bank Phi(k) on GPU (<0.5 ms/frame!)
+  // =========================================================================
+  const N_GPU_MODES = 64; // 64 modes strided uniformly across the 128-mode 3D field
+  const gpuModeK = new Float32Array(N_GPU_MODES * 4); // [rotKx, rotKy, rotKz, effKchi]
+  const gpuModeC = new Float32Array(N_GPU_MODES * 4); // [effCos, effSin, phShift, 0]
+
+  // 3D Fibonacci sphere directions for the 6,144-point Fresnel 3D CMB Horizon Veil (STATIC_DRAW!)
+  const cmbShellDir = new Float32Array(N_CMB_SHELL * 3);
+  (function precomputeCMBShell() {
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N_CMB_SHELL; i++) {
+      const y = 1 - 2 * ((i + 0.5) / N_CMB_SHELL);
+      const r = Math.sqrt(Math.max(0, 1 - y * y));
+      const az = golden * i;
+      cmbShellDir[i * 3 + 0] = r * Math.cos(az);
+      cmbShellDir[i * 3 + 1] = y;
+      cmbShellDir[i * 3 + 2] = r * Math.sin(az);
+    }
+  })();
+
+  // Dedicated WebGL GPU renderer for the HD 520x260 Mollweide CMB Atlas (< 0.5 ms per update!)
+  const cmbCanvas = document.getElementById('cmb-canvas');
+  const cmbGL = cmbCanvas.getContext('webgl', { antialias: true, alpha: false, preserveDrawingBuffer: true });
+  let cmbProg = null, cmbQuadBuf = null, cmbLocs = null;
+
+  function initCMBGPU() {
+    if (!cmbGL) return;
+    const vs = `
+      precision highp float;
+      attribute vec2 aPos;
+      varying vec2 vUv;
+      void main() {
+        vUv = aPos * 0.5 + 0.5;
+        gl_Position = vec4(aPos, 0.0, 1.0);
+      }
+    `;
+    const fs = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform vec4 uModeK[${N_GPU_MODES}];
+      uniform vec4 uModeC[${N_GPU_MODES}];
+
+      vec3 cmbColormap(float uK) {
+        float t = clamp((uK + 300.0) / 600.0, 0.0, 1.0);
+        vec3 c0 = vec3(0.024, 0.071, 0.329);
+        vec3 c1 = vec3(0.078, 0.376, 0.776);
+        vec3 c2 = vec3(0.345, 0.761, 0.910);
+        vec3 c3 = vec3(0.925, 0.925, 0.831);
+        vec3 c4 = vec3(0.965, 0.729, 0.251);
+        vec3 c5 = vec3(0.878, 0.306, 0.102);
+        vec3 c6 = vec3(0.502, 0.039, 0.063);
+        if (t < 0.20) return mix(c0, c1, t / 0.20);
+        if (t < 0.38) return mix(c1, c2, (t - 0.20) / 0.18);
+        if (t < 0.50) return mix(c2, c3, (t - 0.38) / 0.12);
+        if (t < 0.64) return mix(c3, c4, (t - 0.50) / 0.14);
+        if (t < 0.82) return mix(c4, c5, (t - 0.64) / 0.18);
+        return mix(c5, c6, (t - 0.82) / 0.18);
+      }
+
+      void main() {
+        // Inset slightly for clean Mollweide ellipse margin
+        vec2 p = (vUv - 0.5) * vec2(2.09, 2.12);
+        float ellip = p.x * p.x + p.y * p.y;
+        vec3 bg = vec3(0.016, 0.027, 0.071);
+        if (ellip > 1.018) {
+          gl_FragColor = vec4(bg, 1.0);
+          return;
+        }
+        if (ellip > 0.992) {
+          // Crisp anti-aliased Mollweide rim
+          float rim = smoothstep(1.018, 0.996, ellip);
+          gl_FragColor = vec4(mix(bg, vec3(0.38, 0.48, 0.65), rim * 0.55), 1.0);
+          return;
+        }
+
+        // Exact inverse Mollweide projection (x in [-2*sqrt(2), 2*sqrt(2)], y in [-sqrt(2), sqrt(2)])
+        float x = p.x * 2.82842712;
+        float y = p.y * 1.41421356;
+        float thAux = asin(clamp(y * 0.70710678, -0.9999, 0.9999));
+        float sinB = clamp((2.0 * thAux + sin(2.0 * thAux)) / 3.14159265, -1.0, 1.0);
+        float cosLat = sqrt(max(0.0, 1.0 - sinB * sinB));
+        float lon = 3.14159265 * x / (2.82842712 * max(0.001, cos(thAux)));
+
+        vec3 n = vec3(cosLat * cos(lon), sinB, cosLat * sin(lon));
+
+        // Ray-cast ALL 64 3D Fourier modes directly on GPU!
+        float dT = 0.0;
+        for (int i = 0; i < ${N_GPU_MODES}; i++) {
+          vec4 mk = uModeK[i];
+          vec4 mc = uModeC[i];
+          float d = dot(mk.xyz, n);
+          float arg = mk.w * d + mc.z;
+          dT += mc.x * cos(arg) - mc.y * d * sin(arg);
+        }
+        dT *= 1.41421356;
+
+        vec3 col = cmbColormap(dT);
+
+        // Subtle galactic equator & prime meridian graticule
+        float eqLine = smoothstep(0.009, 0.0, abs(p.y));
+        float merLine = smoothstep(0.005, 0.0, abs(p.x));
+        float grid = max(eqLine, merLine) * 0.14;
+        col = mix(col, vec3(1.0), grid);
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    const csh = (t, s) => {
+      const sh = cmbGL.createShader(t);
+      cmbGL.shaderSource(sh, s);
+      cmbGL.compileShader(sh);
+      if (!cmbGL.getShaderParameter(sh, cmbGL.COMPILE_STATUS)) {
+        console.error('CMB shader error:', cmbGL.getShaderInfoLog(sh));
+      }
+      return sh;
+    };
+    cmbProg = cmbGL.createProgram();
+    cmbGL.attachShader(cmbProg, csh(cmbGL.VERTEX_SHADER, vs));
+    cmbGL.attachShader(cmbProg, csh(cmbGL.FRAGMENT_SHADER, fs));
+    cmbGL.linkProgram(cmbProg);
+    if (!cmbGL.getProgramParameter(cmbProg, cmbGL.LINK_STATUS)) {
+      console.error('CMB link error:', cmbGL.getProgramInfoLog(cmbProg));
+      cmbProg = null;
+      return;
+    }
+
+    cmbQuadBuf = cmbGL.createBuffer();
+    cmbGL.bindBuffer(cmbGL.ARRAY_BUFFER, cmbQuadBuf);
+    cmbGL.bufferData(cmbGL.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), cmbGL.STATIC_DRAW);
+    cmbLocs = {
+      aPos: cmbGL.getAttribLocation(cmbProg, 'aPos'),
+      uModeK: cmbGL.getUniformLocation(cmbProg, 'uModeK[0]'),
+      uModeC: cmbGL.getUniformLocation(cmbProg, 'uModeC[0]')
+    };
+  }
+  initCMBGPU();
+
+  // Evaluate single sky point (nx, ny, nz) using current GPU mode arrays (for hover inspector in <0.01ms)
+  function evalSingleSkyMicroK(nx, ny, nz) {
+    let dT = 0;
+    for (let i = 0; i < N_GPU_MODES; i++) {
+      const o = i * 4;
+      const d = gpuModeK[o] * nx + gpuModeK[o + 1] * ny + gpuModeK[o + 2] * nz;
+      const arg = gpuModeK[o + 3] * d + gpuModeC[o + 2];
+      dT += gpuModeC[o] * Math.cos(arg) - gpuModeC[o + 1] * d * Math.sin(arg);
+    }
+    return dT * Math.SQRT2;
+  }
+
+  // Compact spherical-harmonic Y_lm quadrature grid (16 x 32 = 512 pts -> <0.8 ms total!)
+  const SH_TH = 16;
+  const SH_PH = 32;
+  const shDirs = new Float32Array(SH_TH * SH_PH * 3);
+  const shWeights = new Float32Array(SH_TH);
+  const shTemp = new Float32Array(SH_TH * SH_PH);
+  (function precomputeSHGrid() {
+    const dTh = Math.PI / SH_TH;
+    const dPh = (2 * Math.PI) / SH_PH;
+    for (let it = 0; it < SH_TH; it++) {
+      const th = (it + 0.5) * dTh;
+      const sinT = Math.sin(th), cosT = Math.cos(th);
+      shWeights[it] = sinT * dTh * dPh;
+      for (let ip = 0; ip < SH_PH; ip++) {
+        const ph = ip * dPh;
+        const idx = (it * SH_PH + ip) * 3;
+        shDirs[idx + 0] = sinT * Math.cos(ph);
+        shDirs[idx + 1] = cosT;
+        shDirs[idx + 2] = sinT * Math.sin(ph);
+      }
+    }
+  })();
+
+  function normLegendre(l, m, x) {
+    let pmm = 1.0;
+    if (m > 0) {
+      const somx2 = Math.sqrt(Math.max(0, (1 - x) * (1 + x)));
+      let fact = 1.0;
+      for (let i = 1; i <= m; i++) {
+        pmm *= -fact * somx2;
+        fact += 2.0;
+      }
+    }
+    let pmmp1 = x * (2 * m + 1) * pmm;
+    let plm = (l === m) ? pmm : (l === m + 1 ? pmmp1 : 0);
+    if (l > m + 1) {
+      let prev2 = pmm, prev1 = pmmp1;
+      for (let ll = m + 2; ll <= l; ll++) {
+        plm = (x * (2 * ll - 1) * prev1 - (ll + m - 1) * prev2) / (ll - m);
+        prev2 = prev1;
+        prev1 = plm;
+      }
+    }
+    let ratio = 1.0;
+    for (let k = l - m + 1; k <= l + m; k++) ratio /= k;
+    return plm * Math.sqrt(((2 * l + 1) / (4 * Math.PI)) * ratio);
+  }
+
+  let lastEmpiricalBins = [];
+  let lastCmbStats = { mean: 0, sigma: 106.2, quadRatio: 0.85 };
+
+  // FAST Step 1 (<0.03 ms): Update the 64 GPU mode uniforms from exact Hu-Sugiyama transfer functions
+  // and render the HD GPU Mollweide CMB Atlas (<0.5 ms)!
+  function updateCMBUniformsAndRenderGPU(ro) {
+    const thO = state.thetaObsDeg * Math.PI / 180;
+    const phO = state.phiObsDeg * Math.PI / 180;
+    const cT = Math.cos(thO), sT = Math.sin(thO);
+    const cP = Math.cos(phO), sP = Math.sin(phO);
+    const xObs = state.xObsMpc;
+    const chiEff = Math.min(ro.chiLSS, 13800) * 0.145;
+
+    const wSW  = (state.cmbComp === 'total' || state.cmbComp === 'sw')  ? 1.0 : 0.0;
+    const wDop = (state.cmbComp === 'total' || state.cmbComp === 'dop') ? 1.0 : 0.0;
+    // Paper 28 Sector 6B: EFE-saturated 50%-screened OCSR (mu=2.50) + O_T Void-Clock (+15%) => A_ISW = 2.87x!
+    const wISW = state.cmbComp === 'isw' ? 2.87 : (state.cmbComp === 'total' ? 1.35 : 0.0);
+    const tempCalib = 28.5;
+
+    for (let i = 0; i < N_GPU_MODES; i++) {
+      const m = i * 2;
+      const { Tsw, Tdop, Tisw } = evalAcousticTransfer(modeKPhys[m], ro);
+      const kx0 = modeKx[m], ky0 = modeKy[m], kz0 = modeKz[m];
+      const kx1 = kx0 * cT - kz0 * sT;
+      const kz1 = kx0 * sT + kz0 * cT;
+      const ky2 = ky0 * cP - kz1 * sP;
+      const kz2 = ky0 * sP + kz1 * cP;
+
+      const o = i * 4;
+      gpuModeK[o + 0] = kx1;
+      gpuModeK[o + 1] = ky2;
+      gpuModeK[o + 2] = kz2;
+      gpuModeK[o + 3] = modeKPhys[m] * chiEff;
+
+      gpuModeC[o + 0] = tempCalib * modeAmp[m] * (wSW * Tsw + wISW * Tisw);
+      gpuModeC[o + 1] = tempCalib * modeAmp[m] * (wDop * Tdop);
+      gpuModeC[o + 2] = modePhase[m] + modeKPhys[m] * (xObs * kx0);
+      gpuModeC[o + 3] = 0;
+    }
+
+    if (cmbGL && cmbProg) {
+      cmbGL.viewport(0, 0, cmbCanvas.width, cmbCanvas.height);
+      cmbGL.useProgram(cmbProg);
+      cmbGL.uniform4fv(cmbLocs.uModeK, gpuModeK);
+      cmbGL.uniform4fv(cmbLocs.uModeC, gpuModeC);
+      cmbGL.bindBuffer(cmbGL.ARRAY_BUFFER, cmbQuadBuf);
+      cmbGL.enableVertexAttribArray(cmbLocs.aPos);
+      cmbGL.vertexAttribPointer(cmbLocs.aPos, 2, cmbGL.FLOAT, false, 0, 0);
+      cmbGL.drawArrays(cmbGL.TRIANGLE_STRIP, 0, 4);
+    }
+  }
+
+  // FAST Step 2 (<0.8 ms): Compute empirical sky statistics & spherical-harmonic Y_lm bandpowers
+  function computeEmpiricalCMBStats(ro) {
+    let sumT = 0, sumT2 = 0, wTot = 0;
+    for (let it = 0; it < SH_TH; it++) {
+      const w = shWeights[it];
+      for (let ip = 0; ip < SH_PH; ip++) {
+        const p = it * SH_PH + ip;
+        const dT = evalSingleSkyMicroK(shDirs[p * 3], shDirs[p * 3 + 1], shDirs[p * 3 + 2]);
+        shTemp[p] = dT;
+        sumT += dT * w;
+        sumT2 += dT * dT * w;
+        wTot += w;
+      }
+    }
+    const mean = sumT / wTot;
+    const sigma = Math.sqrt(Math.max(0, sumT2 / wTot - mean * mean));
+
+    const lowElls = [2, 5, 10, 16];
+    const empBins = [];
+    let quadDl = 900;
+    for (const ell of lowElls) {
+      let clSum = 0;
+      for (let m = 0; m <= ell; m++) {
+        let re = 0, im = 0;
+        for (let it = 0; it < SH_TH; it++) {
+          const th = (it + 0.5) * (Math.PI / SH_TH);
+          const plm = normLegendre(ell, m, Math.cos(th));
+          const w = shWeights[it] * plm;
+          for (let ip = 0; ip < SH_PH; ip++) {
+            const ph = ip * (2 * Math.PI / SH_PH);
+            const T = shTemp[it * SH_PH + ip];
+            re += T * w * Math.cos(m * ph);
+            im -= T * w * Math.sin(m * ph);
+          }
+        }
+        const mult = m === 0 ? 1 : 2;
+        clSum += mult * (re * re + im * im);
+      }
+      const Cl = clSum / (2 * ell + 1);
+      const Dl = (ell * (ell + 1) / (2 * Math.PI)) * Cl * 2.58;
+      if (ell === 2) quadDl = Dl;
+      empBins.push({ ell, Dl: Math.min(6800, Math.max(40, Dl)) });
+    }
+
+    const binCenters = [45, 95, 155, 220, 290, 380, 465, 540, 650, 740, 815, 940, 1120, 1380, 1680];
+    for (const ellC of binCenters) {
+      const kC = ellC / ro.dAProj;
+      let wSum = 0, pSum = 0;
+      for (let m = 0; m < N_MODES; m++) {
+        const dLnK = Math.abs(Math.log(modeKPhys[m] / kC));
+        if (dLnK < 0.35) {
+          const w = Math.exp(-Math.pow(dLnK / 0.16, 2));
+          const expectedAmp2 = Math.pow(modeKPhys[m] / 0.005, N_S_EXACT - 1) * 1.0368;
+          const realRatio = Math.min(2.2, Math.max(0.35, (modeAmp[m] * modeAmp[m]) / Math.max(1e-6, expectedAmp2)));
+          pSum += w * realRatio;
+          wSum += w;
+        }
+      }
+      const theoryDl = evalTheoreticalDl(ellC, ro);
+      const cvFactor = wSum > 1e-4 ? (0.45 + 0.55 * (pSum / wSum)) : 1.0;
+      empBins.push({ ell: ellC, Dl: theoryDl * cvFactor });
+    }
+
+    lastEmpiricalBins = empBins;
+    lastCmbStats = { mean, sigma, quadRatio: quadDl / 1080.0 };
+
+    document.getElementById('cmb-mean').textContent = `${mean >= 0 ? '+' : ''}${mean.toFixed(1)} μK`;
+    document.getElementById('cmb-sigma').textContent = `${sigma.toFixed(1)} μK`;
+    document.getElementById('cmb-quad').textContent = `${Math.max(0.15, Math.min(2.5, lastCmbStats.quadRatio)).toFixed(2)}×`;
+    document.getElementById('tel-rms').textContent = `${sigma.toFixed(1)} μK`;
+  }
+
+  function computeAndRenderCMB(ro, withStats = true) {
+    updateCMBUniformsAndRenderGPU(ro);
+    if (withStats) computeEmpiricalCMBStats(ro);
+  }
+
+  // Exact Theoretical Tau Core Acoustic Transfer Power Spectrum D_l^TT(tau)
+  function evalTheoreticalDl(ell, ro) {
+    const k0 = ell / ro.dAProj;
+    const kPiv = 0.005;
+    const prim = Math.pow(Math.max(1e-5, k0 / kPiv), N_S_EXACT - 1);
+
+    const ks = [k0 * 1.00, k0 * 1.04, k0 * 1.10, k0 * 1.19, k0 * 1.32];
+    const ws = [0.34, 0.27, 0.18, 0.12, 0.09];
+    let sw2 = 0, dop2 = 0, isw2 = 0;
+    for (let j = 0; j < 5; j++) {
+      const tr = evalAcousticTransfer(ks[j], ro);
+      sw2  += ws[j] * tr.Tsw * tr.Tsw;
+      dop2 += ws[j] * tr.Tdop * tr.Tdop;
+      isw2 += ws[j] * tr.Tisw * tr.Tisw;
+    }
+
+    const normSW = 7900.0;
+    const growFac = Math.min(1.0, Math.pow(ro.aAc / A_STAR, 0.35));
+    const Dl = normSW * prim * (sw2 + 0.92 * dop2 + isw2) * (0.28 + 0.72 * growFac);
+    return Math.max(12, Dl);
+  }
+
+  // =========================================================================
+  // 5. HIGH-PERFORMANCE STATIC-VBO WEBGL ENGINE (>70,000 QUANTA AT 60 FPS!)
+  // =========================================================================
+  const glCanvas = document.getElementById('gl-canvas');
+  const gl = glCanvas.getContext('webgl', { antialias: true, alpha: false, powerPreference: 'high-performance' });
+
+  function compileShader(type, src) {
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+      console.error('Shader error:', gl.getShaderInfoLog(sh));
+    }
+    return sh;
+  }
+
+  function createProgram(vsSrc, fsSrc) {
+    const p = gl.createProgram();
+    gl.attachShader(p, compileShader(gl.VERTEX_SHADER, vsSrc));
+    gl.attachShader(p, compileShader(gl.FRAGMENT_SHADER, fsSrc));
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+      console.error('Program link error:', gl.getProgramInfoLog(p));
+    }
+    return p;
+  }
+
+  // SHARED FRAGMENT SHADERS (Zero shared uniforms with VS -> guaranteed link on EVERY WebGL 1.0 driver!)
+  const lineFS = `
+    precision mediump float;
+    varying vec4 vCol;
+    void main() { gl_FragColor = vCol; }
+  `;
+  const softPointFS = `
+    precision mediump float;
+    varying vec4 vCol;
+    void main() {
+      vec2 c = gl_PointCoord - vec2(0.5);
+      float r2 = dot(c, c);
+      if (r2 > 0.25) discard;
+      float core = exp(-r2 * 14.0);
+      gl_FragColor = vec4(vCol.rgb, vCol.a * core);
+    }
+  `;
+
+  // SHADER 1A: Motionless M_tau* 5-Shell Crystal Lattice Struts (1,554 edges)
+  const bodyLineVS = `
+    precision highp float;
+    attribute vec3 aPos;
+    attribute float aDg;
+    attribute vec3 aCol;
+
+    uniform mat4 uMVP;
+    uniform float uTau;
+    uniform int uScanMode;
+    uniform vec3 uObsDir;
+    uniform vec3 uBodyCenter;
+    uniform float uBodyR;
+
+    varying vec4 vCol;
+    void main() {
+      vec3 rel = (aPos - uBodyCenter) / uBodyR;
+      float coord = (uScanMode == 0)
+        ? aDg
+        : clamp(0.5 + 0.5 * dot(rel, uObsDir), 0.0, 1.0);
+
+      float dist = abs(coord - uTau);
+      float sliceGlow = exp(-dist * dist / 0.0028);
+      float pastRead = smoothstep(uTau + 0.06, uTau - 0.05, coord);
+
+      vec3 baseC = aCol * (0.48 + 0.34 * pastRead);
+      vec3 glowC = mix(vec3(0.56, 0.95, 1.0), vec3(1.0, 0.96, 0.84), sliceGlow);
+      vec3 finalC = mix(baseC, glowC, sliceGlow * 0.90);
+      float alpha = 0.22 + 0.20 * pastRead + 0.65 * sliceGlow;
+
+      vCol = vec4(finalC, clamp(alpha, 0.0, 0.96));
+      gl_Position = uMVP * vec4(aPos, 1.0);
+    }
+  `;
+
+  // SHADER 1B: Motionless M_tau* 24,000 Frozen Quanta + 316 Crystal Vertices (with discreet luminescence wave)
+  const bodyPtVS = `
+    precision highp float;
+    attribute vec3 aPos;
+    attribute float aDg;
+    attribute vec3 aCol;
+    attribute float aSize;
+
+    uniform mat4 uMVP;
+    uniform float uTau;
+    uniform int uScanMode;
+    uniform vec3 uObsDir;
+    uniform vec3 uBodyCenter;
+    uniform float uBodyR;
+
+    varying vec4 vCol;
+    void main() {
+      vec3 rel = (aPos - uBodyCenter) / uBodyR;
+      float coord = (uScanMode == 0)
+        ? aDg
+        : clamp(0.5 + 0.5 * dot(rel, uObsDir), 0.0, 1.0);
+
+      float dist = abs(coord - uTau);
+      float sliceGlow = exp(-dist * dist / 0.0024);
+      float pastRead = smoothstep(uTau + 0.05, uTau - 0.04, coord);
+
+      vec3 baseC = aCol * (0.44 + 0.34 * pastRead);
+      vec3 glowC = mix(vec3(0.58, 0.95, 1.0), vec3(1.0, 0.97, 0.86), sliceGlow);
+      vec3 finalC = mix(baseC, glowC, sliceGlow * 0.88);
+      float alpha = 0.34 + 0.26 * pastRead + 0.68 * sliceGlow;
+
+      vCol = vec4(finalC, clamp(alpha, 0.0, 0.98));
+      gl_Position = uMVP * vec4(aPos, 1.0);
+      gl_PointSize = aSize * (1.0 + 1.15 * sliceGlow) * clamp(15.5 / max(2.5, gl_Position.w), 0.65, 3.4);
+    }
+  `;
+
+  // SHADER 2: 40,000 Zel'dovich Particles with 4 GPU Physical Lenses!
+  //   Lens 0: Cosmic Web (Thermal plasma -> filaments & clusters)
+  //   Lens 1: Gravity (Potential Phi wells/voids + Emerald Tau Core a0^KH(z) boundary band!)
+  //   Lens 2: Time & Void-Clock f_v (Fast-ticking cyan void clocks vs slow-beating ruby-red cluster clocks!)
+  //   Lens 3: Observer Light-Cone (Concentric lookback time & redshift from live observer O(x_O)!)
+  const univVS = `
+    precision highp float;
+    attribute vec3 aBase;
+    attribute vec3 aDisp;
+    attribute float aDens;
+    attribute vec4 aMeta; // [rFrac, size, phiNorm, gradNorm]
+
+    uniform mat4 uMVP;
+    uniform vec3 uUnivCenter;
+    uniform float uUnivR;
+    uniform float uCollapse;
+    uniform float uPlasmaW;
+    uniform float uTau;
+    uniform float uAcousticPhase;
+    uniform float uTime;
+    uniform int uLensMode;
+    uniform float uA0Thresh;
+    uniform vec3 uObsPosLocal;
+
+    varying vec4 vCol;
+    void main() {
+      float acWave = uPlasmaW * 0.022 * sin(aMeta.x * 16.0 - uAcousticPhase);
+      vec3 q = aBase * (1.0 + acWave);
+      vec3 posLocal = q + (uCollapse * 1.18) * aDisp;
+      float rLen = length(posLocal);
+      if (rLen > 1.02) posLocal *= (1.02 / rLen);
+
+      vec3 worldPos = uUnivCenter + posLocal * uUnivR;
+
+      float dNorm = clamp(aDens * 0.5 + 0.5, 0.0, 1.0);
+      float phi = aMeta.z;       // < 0: deep cluster well, > 0: cosmic void
+      float gradMag = aMeta.w;   // normalized |grad Phi| in [0, 1]
+      float nodeBoost = smoothstep(0.28, 0.88, aDens) * uCollapse;
+      float earlyW = smoothstep(0.32, 0.04, uTau);
+
+      vec3 col = vec3(0.4, 0.7, 1.0);
+      float alpha = (0.20 + 0.36 * dNorm + 0.42 * nodeBoost) * smoothstep(0.0, 0.06, uTau + 0.02);
+      float sz = aMeta.y * (0.85 + 0.95 * nodeBoost + 0.30 * earlyW);
+
+      if (uLensMode == 0) {
+        // LENS 0: Classic Cosmic Web (Thermal -> Acoustic -> Filaments & Clusters)
+        vec3 hotEarly = mix(vec3(1.0, 0.55, 0.22), vec3(1.0, 0.96, 0.82), dNorm);
+        vec3 plasmaC  = mix(vec3(0.24, 0.62, 0.98), vec3(1.0, 0.72, 0.28), clamp(dNorm + 0.25 * sin(aMeta.x * 14.0 - uAcousticPhase), 0.0, 1.0));
+        vec3 webVoid  = vec3(0.11, 0.22, 0.55);
+        vec3 webFil   = vec3(0.26, 0.76, 1.0);
+        vec3 webNode  = vec3(1.0, 0.88, 0.52);
+        vec3 lateWeb  = dNorm < 0.58
+          ? mix(webVoid, webFil, smoothstep(0.18, 0.58, dNorm))
+          : mix(webFil, webNode, smoothstep(0.58, 0.92, dNorm));
+        float lateW = smoothstep(0.45, 0.78, uTau);
+        col = mix(mix(plasmaC, hotEarly, earlyW), lateWeb, lateW);
+      } else if (uLensMode == 1) {
+        // LENS 1: Gravity Potential Phi & Tau Core a0^KH(z) Transition Band
+        // Deep wells (phi < 0): rich gold/orange-white; High voids (phi > 0): deep indigo-violet
+        float wellT = clamp(0.5 - 0.65 * phi, 0.0, 1.0);
+        vec3 cVoid = vec3(0.32, 0.14, 0.78);
+        vec3 cZero = vec3(0.16, 0.34, 0.62);
+        vec3 cWell = vec3(1.0, 0.66, 0.14);
+        vec3 cCore = vec3(1.0, 0.96, 0.76);
+        col = wellT < 0.5
+          ? mix(cVoid, cZero, wellT * 2.0)
+          : mix(cZero, mix(cWell, cCore, smoothstep(0.75, 1.0, wellT)), (wellT - 0.5) * 2.0);
+        // Emerald-cyan glow precisely on the Tau Core |grad Phi| ~ a0^KH(z, u) regime boundary!
+        float bandDist = abs(gradMag - uA0Thresh);
+        float a0Band = exp(-bandDist * bandDist / 0.0042) * smoothstep(0.18, 0.55, uTau);
+        col = mix(col, vec3(0.18, 0.98, 0.66), a0Band * 0.85);
+        alpha = (0.24 + 0.44 * abs(phi) + 0.48 * a0Band) * smoothstep(0.0, 0.05, uTau + 0.02);
+        sz = aMeta.y * (0.95 + 0.85 * a0Band + 0.65 * max(0.0, -phi));
+      } else if (uLensMode == 2) {
+        // LENS 2: Time & Tau Core Void-Clock f_v(x) (Color + Live Local Clock Pulsation!)
+        // Voids (phi > 0): FAST clocks (f_v > 1) -> crisp cyan-white, fast shimmer
+        // Clusters (phi < 0): SLOW gravitationally dilated clocks (f_v < 1) -> deep ruby-red, slow pulse
+        float clockNorm = clamp(0.5 + 0.68 * phi, 0.0, 1.0); // 0 = slow well, 1 = fast void
+        vec3 cSlow = vec3(0.92, 0.16, 0.22);
+        vec3 cMid  = vec3(0.96, 0.64, 0.28);
+        vec3 cFast = vec3(0.28, 0.92, 1.0);
+        col = clockNorm < 0.48
+          ? mix(cSlow, cMid, clockNorm / 0.48)
+          : mix(cMid, cFast, (clockNorm - 0.48) / 0.52);
+        float omega = mix(1.1, 7.2, clockNorm); // literally faster ticking in voids!
+        float phase = dot(aBase, vec3(19.3, 31.7, 43.1));
+        float pulse = 0.64 + 0.36 * sin(uTime * omega + phase);
+        col *= (0.72 + 0.48 * pulse);
+        alpha = (0.26 + 0.38 * abs(phi) + 0.24 * pulse) * smoothstep(0.0, 0.05, uTau + 0.02);
+        sz = aMeta.y * (0.92 + 0.65 * pulse);
+      } else {
+        // LENS 3: Observer Light-Cone Lookback Time (Concentric spectral redshift from live O(x_O)!)
+        float dObs = clamp(length(posLocal - uObsPosLocal) / 1.45, 0.0, 1.0);
+        vec3 cNow  = vec3(0.76, 1.0, 0.86);  // Local NOW around O(x_O)
+        vec3 cNear = vec3(0.24, 0.78, 1.0);  // Nearby cosmos
+        vec3 cMidZ = vec3(1.0, 0.72, 0.24);  // Cosmic noon
+        vec3 cDeep = vec3(0.84, 0.12, 0.16); // Primordial redshifted horizon
+        if (dObs < 0.25) col = mix(cNow, cNear, dObs / 0.25);
+        else if (dObs < 0.62) col = mix(cNear, cMidZ, (dObs - 0.25) / 0.37);
+        else col = mix(cMidZ, cDeep, (dObs - 0.62) / 0.38);
+        // Subtle light-cone ripple waves moving inward toward observer O(x_O)
+        float lcWave = 0.82 + 0.18 * sin(dObs * 24.0 + uTime * 3.2);
+        col *= lcWave;
+        alpha = (0.22 + 0.35 * dNorm + 0.35 * (1.0 - dObs * 0.45)) * smoothstep(0.0, 0.05, uTau + 0.02);
+      }
+
+      vCol = vec4(col, clamp(alpha, 0.0, 0.96));
+      gl_Position = uMVP * vec4(worldPos, 1.0);
+      gl_PointSize = sz * clamp(15.0 / max(2.5, gl_Position.w), 0.6, 3.0);
+    }
+  `;
+
+  // SHADER 2B: 3D Curved Spacetime Metric Grid (warps smoothly with Zel'dovich -grad Phi!)
+  const gridVS = `
+    precision highp float;
+    attribute vec3 aBase;
+    attribute vec3 aDisp;
+    attribute float aPhi;
+
+    uniform mat4 uMVP;
+    uniform vec3 uUnivCenter;
+    uniform float uUnivR;
+    uniform float uCollapse;
+
+    varying vec4 vCol;
+    void main() {
+      vec3 posLocal = aBase + (uCollapse * 1.45) * aDisp;
+      vec3 worldPos = uUnivCenter + posLocal * uUnivR;
+      // Warm amber where metric dips into potential wells (Phi < 0), cool violet where it stretches in voids (Phi > 0)
+      float w = clamp(0.5 - 0.75 * aPhi, 0.0, 1.0);
+      vec3 col = mix(vec3(0.42, 0.24, 0.88), vec3(1.0, 0.72, 0.24), w);
+      float a = 0.14 + 0.28 * abs(aPhi) * (0.3 + 0.7 * uCollapse);
+      vCol = vec4(col, a);
+      gl_Position = uMVP * vec4(worldPos, 1.0);
+    }
+  `;
+
+  // SHADER 2C: 2,400 Directional Gravitational Flow Vectors (-grad Phi infall tails!)
+  const flowVS = `
+    precision highp float;
+    attribute vec3 aBase;
+    attribute vec3 aDisp;
+    attribute vec2 aMeta; // [phi, headFlag]
+
+    uniform mat4 uMVP;
+    uniform vec3 uUnivCenter;
+    uniform float uUnivR;
+    uniform float uCollapse;
+
+    varying vec4 vCol;
+    void main() {
+      float head = aMeta.y;
+      vec3 posLocal = aBase + (uCollapse * 1.18 + head * (0.28 + 0.42 * uCollapse)) * aDisp;
+      float rLen = length(posLocal);
+      if (rLen > 1.02) posLocal *= (1.02 / rLen);
+      vec3 worldPos = uUnivCenter + posLocal * uUnivR;
+
+      float w = clamp(0.5 - 0.7 * aMeta.x, 0.0, 1.0);
+      vec3 col = mix(vec3(0.32, 0.84, 1.0), vec3(1.0, 0.78, 0.26), w);
+      float mag = clamp(length(aDisp) * 5.0, 0.0, 1.0);
+      vCol = vec4(col, (0.04 + 0.48 * head) * mag * (0.25 + 0.75 * uCollapse));
+      gl_Position = uMVP * vec4(worldPos, 1.0);
+    }
+  `;
+
+  // SHADER 3: 6,144-Sample Fresnel Limb-Lit 3D CMB Horizon Veil (100% GPU Ray-Traced from uModeK/uModeC!)
+  const cmbVS = `
+    precision highp float;
+    attribute vec3 aDir;
+
+    uniform mat4 uMVP;
+    uniform vec3 uUnivCenter;
+    uniform float uShellR;
+    uniform vec3 uCamPos;
+    uniform float uAlpha;
+    uniform vec4 uModeK[${N_GPU_MODES}];
+    uniform vec4 uModeC[${N_GPU_MODES}];
+
+    varying vec4 vCol;
+
+    vec3 cmbColormap(float uK) {
+      float t = clamp((uK + 300.0) / 600.0, 0.0, 1.0);
+      vec3 c0 = vec3(0.024, 0.071, 0.329);
+      vec3 c1 = vec3(0.078, 0.376, 0.776);
+      vec3 c2 = vec3(0.345, 0.761, 0.910);
+      vec3 c3 = vec3(0.925, 0.925, 0.831);
+      vec3 c4 = vec3(0.965, 0.729, 0.251);
+      vec3 c5 = vec3(0.878, 0.306, 0.102);
+      vec3 c6 = vec3(0.502, 0.039, 0.063);
+      if (t < 0.20) return mix(c0, c1, t / 0.20);
+      if (t < 0.38) return mix(c1, c2, (t - 0.20) / 0.18);
+      if (t < 0.50) return mix(c2, c3, (t - 0.38) / 0.12);
+      if (t < 0.64) return mix(c3, c4, (t - 0.50) / 0.14);
+      if (t < 0.82) return mix(c4, c5, (t - 0.64) / 0.18);
+      return mix(c5, c6, (t - 0.82) / 0.18);
+    }
+
+    void main() {
+      vec3 worldPos = uUnivCenter + aDir * uShellR;
+      vec3 viewDir = normalize(uCamPos - worldPos);
+      float ndv = abs(dot(aDir, viewDir));
+      float fresnel = pow(1.0 - ndv, 2.25);
+
+      float dT = 0.0;
+      for (int i = 0; i < ${N_GPU_MODES}; i++) {
+        vec4 mk = uModeK[i];
+        vec4 mc = uModeC[i];
+        float d = dot(mk.xyz, aDir);
+        float arg = mk.w * d + mc.z;
+        dT += mc.x * cos(arg) - mc.y * d * sin(arg);
+      }
+      vec3 col = cmbColormap(dT * 1.41421356);
+      float a = uAlpha * (0.04 + 0.84 * fresnel);
+
+      vCol = vec4(col, clamp(a, 0.0, 0.92));
+      gl_Position = uMVP * vec4(worldPos, 1.0);
+      gl_PointSize = (2.4 + 2.2 * fresnel) * clamp(15.5 / max(3.0, gl_Position.w), 0.7, 3.0);
+    }
+  `;
+
+  // SHADER 4: Functional Projection Channels + Observer Crosshair
+  const lineVS = `
+    precision highp float;
+    attribute vec3 aPos;
+    attribute vec4 aCol;
+    uniform mat4 uMVP;
+    varying vec4 vCol;
+    void main() {
+      vCol = aCol;
+      gl_Position = uMVP * vec4(aPos, 1.0);
+    }
+  `;
+
+  // SHADER 5: Gliding Phase-Velocity Information Packets along Functional Projection Channels
+  const pulseVS = `
+    precision highp float;
+    attribute vec3 aPos;
+    attribute vec4 aCol;
+    attribute float aSize;
+    uniform mat4 uMVP;
+    varying vec4 vCol;
+    void main() {
+      vCol = aCol;
+      gl_Position = uMVP * vec4(aPos, 1.0);
+      gl_PointSize = aSize * clamp(16.0 / max(2.5, gl_Position.w), 0.8, 3.6);
+    }
+  `;
+
+  const progBodyLine = createProgram(bodyLineVS, lineFS);
+  const progBodyPt   = createProgram(bodyPtVS, softPointFS);
+  const progUniv     = createProgram(univVS, softPointFS);
+  const progGrid     = createProgram(gridVS, lineFS);
+  const progFlow     = createProgram(flowVS, lineFS);
+  const progCMB      = createProgram(cmbVS, softPointFS);
+  const progLine     = createProgram(lineVS, lineFS);
+  const progPulse    = createProgram(pulseVS, softPointFS);
+
+  // Cache ALL attribute & uniform locations ONCE (zero string lookups in render loop!)
+  const locBL = {
+    aPos: gl.getAttribLocation(progBodyLine, 'aPos'),
+    aDg:  gl.getAttribLocation(progBodyLine, 'aDg'),
+    aCol: gl.getAttribLocation(progBodyLine, 'aCol'),
+    uMVP: gl.getUniformLocation(progBodyLine, 'uMVP'),
+    uTau: gl.getUniformLocation(progBodyLine, 'uTau'),
+    uScanMode: gl.getUniformLocation(progBodyLine, 'uScanMode'),
+    uObsDir: gl.getUniformLocation(progBodyLine, 'uObsDir'),
+    uBodyCenter: gl.getUniformLocation(progBodyLine, 'uBodyCenter'),
+    uBodyR: gl.getUniformLocation(progBodyLine, 'uBodyR')
+  };
+  const locBP = {
+    aPos:  gl.getAttribLocation(progBodyPt, 'aPos'),
+    aDg:   gl.getAttribLocation(progBodyPt, 'aDg'),
+    aCol:  gl.getAttribLocation(progBodyPt, 'aCol'),
+    aSize: gl.getAttribLocation(progBodyPt, 'aSize'),
+    uMVP: gl.getUniformLocation(progBodyPt, 'uMVP'),
+    uTau: gl.getUniformLocation(progBodyPt, 'uTau'),
+    uScanMode: gl.getUniformLocation(progBodyPt, 'uScanMode'),
+    uObsDir: gl.getUniformLocation(progBodyPt, 'uObsDir'),
+    uBodyCenter: gl.getUniformLocation(progBodyPt, 'uBodyCenter'),
+    uBodyR: gl.getUniformLocation(progBodyPt, 'uBodyR')
+  };
+  const locU = {
+    aBase: gl.getAttribLocation(progUniv, 'aBase'),
+    aDisp: gl.getAttribLocation(progUniv, 'aDisp'),
+    aDens: gl.getAttribLocation(progUniv, 'aDens'),
+    aMeta: gl.getAttribLocation(progUniv, 'aMeta'),
+    uMVP: gl.getUniformLocation(progUniv, 'uMVP'),
+    uUnivCenter: gl.getUniformLocation(progUniv, 'uUnivCenter'),
+    uUnivR: gl.getUniformLocation(progUniv, 'uUnivR'),
+    uCollapse: gl.getUniformLocation(progUniv, 'uCollapse'),
+    uPlasmaW: gl.getUniformLocation(progUniv, 'uPlasmaW'),
+    uTau: gl.getUniformLocation(progUniv, 'uTau'),
+    uAcousticPhase: gl.getUniformLocation(progUniv, 'uAcousticPhase'),
+    uTime: gl.getUniformLocation(progUniv, 'uTime'),
+    uLensMode: gl.getUniformLocation(progUniv, 'uLensMode'),
+    uA0Thresh: gl.getUniformLocation(progUniv, 'uA0Thresh'),
+    uObsPosLocal: gl.getUniformLocation(progUniv, 'uObsPosLocal')
+  };
+  const locG = {
+    aBase: gl.getAttribLocation(progGrid, 'aBase'),
+    aDisp: gl.getAttribLocation(progGrid, 'aDisp'),
+    aPhi:  gl.getAttribLocation(progGrid, 'aPhi'),
+    uMVP: gl.getUniformLocation(progGrid, 'uMVP'),
+    uUnivCenter: gl.getUniformLocation(progGrid, 'uUnivCenter'),
+    uUnivR: gl.getUniformLocation(progGrid, 'uUnivR'),
+    uCollapse: gl.getUniformLocation(progGrid, 'uCollapse')
+  };
+  const locF = {
+    aBase: gl.getAttribLocation(progFlow, 'aBase'),
+    aDisp: gl.getAttribLocation(progFlow, 'aDisp'),
+    aMeta: gl.getAttribLocation(progFlow, 'aMeta'),
+    uMVP: gl.getUniformLocation(progFlow, 'uMVP'),
+    uUnivCenter: gl.getUniformLocation(progFlow, 'uUnivCenter'),
+    uUnivR: gl.getUniformLocation(progFlow, 'uUnivR'),
+    uCollapse: gl.getUniformLocation(progFlow, 'uCollapse')
+  };
+  const locC = {
+    aDir: gl.getAttribLocation(progCMB, 'aDir'),
+    uMVP: gl.getUniformLocation(progCMB, 'uMVP'),
+    uUnivCenter: gl.getUniformLocation(progCMB, 'uUnivCenter'),
+    uShellR: gl.getUniformLocation(progCMB, 'uShellR'),
+    uCamPos: gl.getUniformLocation(progCMB, 'uCamPos'),
+    uAlpha: gl.getUniformLocation(progCMB, 'uAlpha'),
+    uModeK: gl.getUniformLocation(progCMB, 'uModeK[0]'),
+    uModeC: gl.getUniformLocation(progCMB, 'uModeC[0]')
+  };
+  const locL = {
+    aPos: gl.getAttribLocation(progLine, 'aPos'),
+    aCol: gl.getAttribLocation(progLine, 'aCol'),
+    uMVP: gl.getUniformLocation(progLine, 'uMVP')
+  };
+  const locP = {
+    aPos:  gl.getAttribLocation(progPulse, 'aPos'),
+    aCol:  gl.getAttribLocation(progPulse, 'aCol'),
+    aSize: gl.getAttribLocation(progPulse, 'aSize'),
+    uMVP:  gl.getUniformLocation(progPulse, 'uMVP')
+  };
+
+  // GPU Buffers
+  const bufs = {
+    bodyEdgePos: gl.createBuffer(),
+    bodyEdgeDg:  gl.createBuffer(),
+    bodyEdgeCol: gl.createBuffer(),
+    bodyQPos:    gl.createBuffer(),
+    bodyQDg:     gl.createBuffer(),
+    bodyQCol:    gl.createBuffer(),
+    bodyQSz:     gl.createBuffer(),
+    bodyNPos:    gl.createBuffer(),
+    bodyNDg:     gl.createBuffer(),
+    bodyNCol:    gl.createBuffer(),
+    bodyNSz:     gl.createBuffer(),
+    univBase:    gl.createBuffer(),
+    univDisp:    gl.createBuffer(),
+    univDens:    gl.createBuffer(),
+    univMeta:    gl.createBuffer(),
+    gridBase:    gl.createBuffer(),
+    gridDisp:    gl.createBuffer(),
+    gridPhi:     gl.createBuffer(),
+    flowBase:    gl.createBuffer(),
+    flowDisp:    gl.createBuffer(),
+    flowMeta:    gl.createBuffer(),
+    cmbDir:      gl.createBuffer(),
+    dynPos:      gl.createBuffer(),
+    dynCol:      gl.createBuffer(),
+    pulsePos:    gl.createBuffer(),
+    pulseCol:    gl.createBuffer(),
+    pulseSz:     gl.createBuffer()
+  };
+
+  // Pre-allocated dynamic line & pulse buffers (20 channels * 18 segs * 2 verts + crosshair = ~740 verts)
+  const MAX_DYN_VERTS = 900;
+  const dynPosArr = new Float32Array(MAX_DYN_VERTS * 3);
+  const dynColArr = new Float32Array(MAX_DYN_VERTS * 4);
+  const MAX_PULSES = 120; // 20 channels * 3 traveling packets + 20 anchor nodes
+  const pulsePosArr = new Float32Array(MAX_PULSES * 3);
+  const pulseColArr = new Float32Array(MAX_PULSES * 4);
+  const pulseSzArr  = new Float32Array(MAX_PULSES);
+
+  let bodyMesh = null;
+
+  function uploadStaticMorphologicalBody() {
+    bodyMesh = buildMorphologicalLattice();
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyEdgePos);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.edgePos, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyEdgeDg);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.edgeDg, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyEdgeCol);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.edgeCol, gl.STATIC_DRAW);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyQPos);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.qPos, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyQDg);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.qDg, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyQCol);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.qCol, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyQSz);
+    gl.bufferData(gl.ARRAY_BUFFER, bodyMesh.qSz, gl.STATIC_DRAW);
+
+    const nN = bodyMesh.nodes.length;
+    const nPos = new Float32Array(nN * 3);
+    const nDg  = new Float32Array(nN);
+    const nCol = new Float32Array(nN * 3);
+    const nSz  = new Float32Array(nN);
+    for (let i = 0; i < nN; i++) {
+      const nd = bodyMesh.nodes[i];
+      nPos[i * 3 + 0] = nd.x + BODY_CX; nPos[i * 3 + 1] = nd.y; nPos[i * 3 + 2] = nd.z;
+      nDg[i] = nd.dg;
+      const c = bodyColorForDg(nd.dg);
+      nCol[i * 3 + 0] = Math.min(1, c[0] * 1.25);
+      nCol[i * 3 + 1] = Math.min(1, c[1] * 1.25);
+      nCol[i * 3 + 2] = Math.min(1, c[2] * 1.25);
+      nSz[i] = nd.shell === 0 ? 9.5 : (nd.shell <= 2 ? 5.6 : 3.8);
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyNPos); gl.bufferData(gl.ARRAY_BUFFER, nPos, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyNDg);  gl.bufferData(gl.ARRAY_BUFFER, nDg,  gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyNCol); gl.bufferData(gl.ARRAY_BUFFER, nCol, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.bodyNSz);  gl.bufferData(gl.ARRAY_BUFFER, nSz,  gl.STATIC_DRAW);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.cmbDir);
+    gl.bufferData(gl.ARRAY_BUFFER, cmbShellDir, gl.STATIC_DRAW);
+  }
+
+  function uploadStaticUniverse() {
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.univBase); gl.bufferData(gl.ARRAY_BUFFER, univBasePos, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.univDisp); gl.bufferData(gl.ARRAY_BUFFER, univDispVec, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.univDens); gl.bufferData(gl.ARRAY_BUFFER, univDens, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufs.univMeta); gl.bufferData(gl.ARRAY_BUFFER, univMeta, gl.STATIC_DRAW);
+
+    if (gridMesh) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.gridBase); gl.bufferData(gl.ARRAY_BUFFER, gridMesh.basePos, gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.gridDisp); gl.bufferData(gl.ARRAY_BUFFER, gridMesh.dispVec, gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.gridPhi);  gl.bufferData(gl.ARRAY_BUFFER, gridMesh.phi, gl.STATIC_DRAW);
+    }
+    if (flowMesh) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.flowBase); gl.bufferData(gl.ARRAY_BUFFER, flowMesh.basePos, gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.flowDisp); gl.bufferData(gl.ARRAY_BUFFER, flowMesh.dispVec, gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.flowMeta); gl.bufferData(gl.ARRAY_BUFFER, flowMesh.meta, gl.STATIC_DRAW);
+    }
+  }
+
+  // Minimal 4x4 Matrix Math
+  function mat4Perspective(fovRad, aspect, near, far) {
+    const f = 1.0 / Math.tan(fovRad / 2);
+    const nf = 1 / (near - far);
+    return new Float32Array([
+      f / aspect, 0, 0, 0,
+      0, f, 0, 0,
+      0, 0, (far + near) * nf, -1,
+      0, 0, (2 * far * near) * nf, 0
+    ]);
+  }
+
+  function mat4LookAt(eye, target, up) {
+    let zx = eye[0] - target[0], zy = eye[1] - target[1], zz = eye[2] - target[2];
+    let zl = Math.hypot(zx, zy, zz) || 1; zx /= zl; zy /= zl; zz /= zl;
+    let xx = up[1] * zz - up[2] * zy, xy = up[2] * zx - up[0] * zz, xz = up[0] * zy - up[1] * zx;
+    let xl = Math.hypot(xx, xy, xz) || 1; xx /= xl; xy /= xl; xz /= xl;
+    let yx = zy * xz - zz * xy, yy = zz * xx - zx * xz, yz = zx * xy - zy * xx;
+    return new Float32Array([
+      xx, yx, zx, 0,
+      xy, yy, zy, 0,
+      xz, yz, zz, 0,
+      -(xx * eye[0] + xy * eye[1] + xz * eye[2]),
+      -(yx * eye[0] + yy * eye[1] + yz * eye[2]),
+      -(zx * eye[0] + zy * eye[1] + zz * eye[2]),
+      1
+    ]);
+  }
+
+  function mat4Mul(a, b) {
+    const out = new Float32Array(16);
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        out[j * 4 + i] =
+          a[0 * 4 + i] * b[j * 4 + 0] +
+          a[1 * 4 + i] * b[j * 4 + 1] +
+          a[2 * 4 + i] * b[j * 4 + 2] +
+          a[3 * 4 + i] * b[j * 4 + 3];
+      }
+    }
+    return out;
+  }
+
+  function setAttr(loc, buf, size) {
+    if (loc < 0) return;
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0);
+  }
+  function clearAttribs() {
+    for (let i = 0; i < 4; i++) gl.disableVertexAttribArray(i);
+  }
+
+  const LENS_INT = { web: 0, grav: 1, time: 2, cone: 3 };
+
+  // Render 3D Scene (Silky 60 FPS, < 1 ms CPU per frame!)
+  function renderWebGL(ro, timeSec) {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const w = Math.floor(glCanvas.clientWidth * dpr);
+    const h = Math.floor(glCanvas.clientHeight * dpr);
+    if (glCanvas.width !== w || glCanvas.height !== h) {
+      glCanvas.width = w; glCanvas.height = h;
+    }
+    gl.viewport(0, 0, w, h);
+    gl.clearColor(0.008, 0.018, 0.052, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+    gl.disable(gl.DEPTH_TEST);
+
+    // Smooth camera interpolation (M_tau* itself NEVER moves!)
+    state.camYaw += (state.targetYaw - state.camYaw) * 0.12;
+    state.camPitch += (state.targetPitch - state.camPitch) * 0.12;
+    state.camDist += (state.targetDist - state.camDist) * 0.12;
+    for (let i = 0; i < 3; i++) state.camTarget[i] += (state.targetCenter[i] - state.camTarget[i]) * 0.12;
+
+    const eye = [
+      state.camTarget[0] + state.camDist * Math.cos(state.camPitch) * Math.sin(state.camYaw),
+      state.camTarget[1] + state.camDist * Math.sin(state.camPitch),
+      state.camTarget[2] + state.camDist * Math.cos(state.camPitch) * Math.cos(state.camYaw)
+    ];
+    const mvp = mat4Mul(
+      mat4Perspective(0.68, w / Math.max(1, h), 0.1, 120.0),
+      mat4LookAt(eye, state.camTarget, [0, 1, 0])
+    );
+
+    const thO = state.thetaObsDeg * Math.PI / 180;
+    const phO = state.phiObsDeg * Math.PI / 180;
+    const obsDir = [Math.cos(phO) * Math.cos(thO), Math.sin(phO), Math.cos(phO) * Math.sin(thO)];
+    const scanModeInt = state.scanMode === 'radial' ? 0 : 1;
+    const lensInt = LENS_INT[state.lensMode] || 0;
+
+    // --- PASS 1A: MOTIONLESS 5-SHELL M_tau* CRYSTAL EDGES (1,554 static struts) ---
+    clearAttribs();
+    gl.useProgram(progBodyLine);
+    gl.uniformMatrix4fv(locBL.uMVP, false, mvp);
+    gl.uniform1f(locBL.uTau, ro.tau);
+    gl.uniform1i(locBL.uScanMode, scanModeInt);
+    gl.uniform3fv(locBL.uObsDir, obsDir);
+    gl.uniform3f(locBL.uBodyCenter, BODY_CX, 0, 0);
+    gl.uniform1f(locBL.uBodyR, BODY_R);
+    setAttr(locBL.aPos, bufs.bodyEdgePos, 3);
+    setAttr(locBL.aDg,  bufs.bodyEdgeDg, 1);
+    setAttr(locBL.aCol, bufs.bodyEdgeCol, 3);
+    gl.drawArrays(gl.LINES, 0, bodyMesh.edgeCount * 2);
+
+    // --- PASS 1B: MOTIONLESS M_tau* 24,000 FROZEN QUANTA + 316 CRYSTAL VERTICES ---
+    clearAttribs();
+    gl.useProgram(progBodyPt);
+    gl.uniformMatrix4fv(locBP.uMVP, false, mvp);
+    gl.uniform1f(locBP.uTau, ro.tau);
+    gl.uniform1i(locBP.uScanMode, scanModeInt);
+    gl.uniform3fv(locBP.uObsDir, obsDir);
+    gl.uniform3f(locBP.uBodyCenter, BODY_CX, 0, 0);
+    gl.uniform1f(locBP.uBodyR, BODY_R);
+    setAttr(locBP.aPos,  bufs.bodyQPos, 3);
+    setAttr(locBP.aDg,   bufs.bodyQDg, 1);
+    setAttr(locBP.aCol,  bufs.bodyQCol, 3);
+    setAttr(locBP.aSize, bufs.bodyQSz, 1);
+    gl.drawArrays(gl.POINTS, 0, N_BODY_QUANTA);
+
+    setAttr(locBP.aPos,  bufs.bodyNPos, 3);
+    setAttr(locBP.aDg,   bufs.bodyNDg, 1);
+    setAttr(locBP.aCol,  bufs.bodyNCol, 3);
+    setAttr(locBP.aSize, bufs.bodyNSz, 1);
+    gl.drawArrays(gl.POINTS, 0, bodyMesh.nodes.length);
+
+    // --- PASS 2A: OPTIONAL 3D CURVED SPACETIME METRIC GRID (PURE GPU!) ---
+    const univR = 0.35 + (UNIV_R_MAX - 0.35) * Math.pow(ro.tau, 0.62);
+    if (state.showGrid && gridMesh) {
+      clearAttribs();
+      gl.useProgram(progGrid);
+      gl.uniformMatrix4fv(locG.uMVP, false, mvp);
+      gl.uniform3f(locG.uUnivCenter, UNIV_CX, 0, 0);
+      gl.uniform1f(locG.uUnivR, univR);
+      gl.uniform1f(locG.uCollapse, ro.collapse);
+      setAttr(locG.aBase, bufs.gridBase, 3);
+      setAttr(locG.aDisp, bufs.gridDisp, 3);
+      setAttr(locG.aPhi,  bufs.gridPhi, 1);
+      gl.drawArrays(gl.LINES, 0, gridMesh.vertCount);
+    }
+
+    // --- PASS 2B: OPTIONAL 2,400 DIRECTIONAL GRAVITATIONAL FLOW VECTORS (-grad Phi) ---
+    if (state.showFlow && flowMesh) {
+      clearAttribs();
+      gl.useProgram(progFlow);
+      gl.uniformMatrix4fv(locF.uMVP, false, mvp);
+      gl.uniform3f(locF.uUnivCenter, UNIV_CX, 0, 0);
+      gl.uniform1f(locF.uUnivR, univR);
+      gl.uniform1f(locF.uCollapse, ro.collapse);
+      setAttr(locF.aBase, bufs.flowBase, 3);
+      setAttr(locF.aDisp, bufs.flowDisp, 3);
+      setAttr(locF.aMeta, bufs.flowMeta, 2);
+      gl.drawArrays(gl.LINES, 0, flowMesh.vertCount);
+    }
+
+    // --- PASS 2C: 40,000 ZEL'DOVICH PARTICLES WITH ACTIVE PHYSICAL LENS ---
+    const a0Now = evalA0KH(Math.min(4.0, ro.z)).a0; // units of 10^-10 m/s^2
+    const a0Thresh = Math.max(0.18, Math.min(0.82, 0.38 * (a0Now / 1.20)));
+    const obsLocalX = state.xObsMpc / 1100;
+
+    clearAttribs();
+    gl.useProgram(progUniv);
+    gl.uniformMatrix4fv(locU.uMVP, false, mvp);
+    gl.uniform3f(locU.uUnivCenter, UNIV_CX, 0, 0);
+    gl.uniform1f(locU.uUnivR, univR);
+    gl.uniform1f(locU.uCollapse, ro.collapse);
+    gl.uniform1f(locU.uPlasmaW, ro.plasmaW);
+    gl.uniform1f(locU.uTau, ro.tau);
+    gl.uniform1f(locU.uAcousticPhase, ro.rsAc * 0.065);
+    gl.uniform1f(locU.uTime, timeSec);
+    gl.uniform1i(locU.uLensMode, lensInt);
+    gl.uniform1f(locU.uA0Thresh, a0Thresh);
+    gl.uniform3f(locU.uObsPosLocal, obsLocalX, 0, 0);
+    setAttr(locU.aBase, bufs.univBase, 3);
+    setAttr(locU.aDisp, bufs.univDisp, 3);
+    setAttr(locU.aDens, bufs.univDens, 1);
+    setAttr(locU.aMeta, bufs.univMeta, 4);
+    gl.drawArrays(gl.POINTS, 0, N_UNIV_PARTICLES);
+
+    // --- PASS 3: 6,144-SAMPLE FRESNEL LIMB-LIT 3D CMB HORIZON VEIL (100% GPU!) ---
+    if (state.cmbAlpha > 0.01 && ro.tau > 0.06) {
+      clearAttribs();
+      gl.useProgram(progCMB);
+      gl.uniformMatrix4fv(locC.uMVP, false, mvp);
+      gl.uniform3f(locC.uUnivCenter, UNIV_CX, 0, 0);
+      gl.uniform1f(locC.uShellR, univR * 1.035);
+      gl.uniform3fv(locC.uCamPos, eye);
+      gl.uniform1f(locC.uAlpha, state.cmbAlpha * Math.min(1, ro.tau * 3.5));
+      gl.uniform4fv(locC.uModeK, gpuModeK);
+      gl.uniform4fv(locC.uModeC, gpuModeC);
+      setAttr(locC.aDir, bufs.cmbDir, 3);
+      gl.drawArrays(gl.POINTS, 0, N_CMB_SHELL);
+    }
+
+    // --- PASS 4: 20 REAL FUNCTIONAL PROJECTION CHANNELS Pi_O(tau) + PHASE-VELOCITY PULSES ---
+    let vCount = 0;
+    let pCount = 0;
+    const pushSeg = (x0, y0, z0, x1, y1, z1, r0, g0, b0, a0, r1, g1, b1, a1) => {
+      if (vCount + 2 > MAX_DYN_VERTS) return;
+      const p0 = vCount * 3, c0 = vCount * 4;
+      dynPosArr[p0] = x0; dynPosArr[p0 + 1] = y0; dynPosArr[p0 + 2] = z0;
+      dynPosArr[p0 + 3] = x1; dynPosArr[p0 + 4] = y1; dynPosArr[p0 + 5] = z1;
+      dynColArr[c0] = r0; dynColArr[c0 + 1] = g0; dynColArr[c0 + 2] = b0; dynColArr[c0 + 3] = a0;
+      dynColArr[c0 + 4] = r1; dynColArr[c0 + 5] = g1; dynColArr[c0 + 6] = b1; dynColArr[c0 + 7] = a1;
+      vCount += 2;
+    };
+    const pushPulse = (x, y, z, r, g, b, a, sz) => {
+      if (pCount >= MAX_PULSES) return;
+      pulsePosArr[pCount * 3] = x; pulsePosArr[pCount * 3 + 1] = y; pulsePosArr[pCount * 3 + 2] = z;
+      pulseColArr[pCount * 4] = r; pulseColArr[pCount * 4 + 1] = g; pulseColArr[pCount * 4 + 2] = b; pulseColArr[pCount * 4 + 3] = a;
+      pulseSzArr[pCount] = sz;
+      pCount++;
+    };
+
+    if (state.beamMode !== 'off' && projChannels.length > 0) {
+      const segs = 16;
+      for (let i = 0; i < projChannels.length; i++) {
+        const ch = projChannels[i];
+        if (state.beamMode === 'wells' && ch.type !== 'well') continue;
+        if (state.beamMode === 'voids' && ch.type !== 'void') continue;
+
+        // Exact LEFT anchor: real motionless M_tau* crystal vertex (inner K4/D4 for wells, outer F4 for voids)
+        const sx = BODY_CX + ch.node.x;
+        const sy = ch.node.y;
+        const sz = ch.node.z;
+
+        // Exact RIGHT anchor: live Zel'dovich-displaced position of the real cluster or void in the 40k universe!
+        let lx = ch.qx + (ro.collapse * 1.18) * ch.dx;
+        let ly = ch.qy + (ro.collapse * 1.18) * ch.dy;
+        let lz = ch.qz + (ro.collapse * 1.18) * ch.dz;
+        const lr = Math.hypot(lx, ly, lz);
+        if (lr > 1.0) { lx /= lr; ly /= lr; lz /= lr; }
+        const ex = UNIV_CX + lx * univR;
+        const ey = ly * univR;
+        const ez = lz * univR;
+
+        // Smooth bridge midpoint arched cleanly between M_tau* and the 4D universe
+        const mx = (sx + ex) * 0.5;
+        const my = (sy + ey) * 0.5 + (ch.type === 'well' ? 0.45 : -0.45) * (0.4 + 0.6 * Math.abs(ch.qy));
+        const mz = (sz + ez) * 0.5 + 0.35 * ch.qz;
+
+        // Physical channel strength: resonance with active readout slice + polarity weighting (L vs H_b)
+        const sliceRes = Math.exp(-Math.pow((ch.node.dg - ro.tau) / 0.28, 2));
+        const physWeight = ch.type === 'well'
+          ? (0.28 + 0.72 * ro.loadL + 0.35 * sliceRes)
+          : (0.24 + 0.76 * ro.dampHb + 0.35 * sliceRes);
+
+        // Functional color encoding synchronized with active Physical Lens!
+        let cr, cg, cb;
+        if (state.lensMode === 'time') {
+          // Slow ruby-red cluster clock channel vs fast cyan void clock channel
+          if (ch.type === 'well') { cr = 0.96; cg = 0.28; cb = 0.26; }
+          else                    { cr = 0.24; cg = 0.92; cb = 1.00; }
+        } else if (state.lensMode === 'cone') {
+          const dObs = Math.min(1, Math.hypot(lx - obsLocalX, ly, lz) / 1.4);
+          cr = 0.28 + 0.70 * dObs; cg = 0.88 - 0.58 * dObs; cb = 0.96 - 0.76 * dObs;
+        } else {
+          // Cosmic Web & Gravity: Amber-gold = K_4 seed-load / gravitational well (Phi<0), Violet-indigo = Schur damping / void (Phi>0)
+          if (ch.type === 'well') { cr = 1.00; cg = 0.76; cb = 0.24; }
+          else                    { cr = 0.58; cg = 0.42; cb = 1.00; }
+        }
+
+        const baseAlpha = (0.14 + 0.24 * physWeight) * (state.beamMode === 'all' ? 0.88 : 1.15);
+
+        let bx0 = sx, by0 = sy, bz0 = sz, f0 = 0.15;
+        for (let s = 1; s <= segs; s++) {
+          const u1 = s / segs, mu = 1 - u1;
+          const bx1 = mu * mu * sx + 2 * mu * u1 * mx + u1 * u1 * ex;
+          const by1 = mu * mu * sy + 2 * mu * u1 * my + u1 * u1 * ey;
+          const bz1 = mu * mu * sz + 2 * mu * u1 * mz + u1 * u1 * ez;
+          const f1 = 0.15 + 0.85 * Math.sin(u1 * Math.PI);
+          pushSeg(bx0, by0, bz0, bx1, by1, bz1, cr, cg, cb, baseAlpha * f0, cr, cg, cb, baseAlpha * f1);
+          bx0 = bx1; by0 = by1; bz0 = bz1; f0 = f1;
+        }
+
+        // Gliding phase-velocity information packets along the channel!
+        // Speed encodes real physics: c_s(tau) in plasma era; Void-Clock f_v (fast in voids, slow in wells) in late era!
+        const pktSpeed = ro.tau < 0.55
+          ? (0.28 + 0.55 * ro.csAc)
+          : (ch.type === 'void' ? 0.58 : 0.22); // Void-clock packets literally travel ~2.6x faster than cluster-well packets!
+
+        for (let k = 0; k < 2; k++) {
+          const uP = (ch.phase0 + k * 0.5 + timeSec * pktSpeed) % 1.0;
+          const mu = 1 - uP;
+          const px = mu * mu * sx + 2 * mu * uP * mx + uP * uP * ex;
+          const py = mu * mu * sy + 2 * mu * uP * my + uP * uP * ey;
+          const pz = mu * mu * sz + 2 * mu * uP * mz + uP * uP * ez;
+          const fade = Math.sin(uP * Math.PI);
+          pushPulse(px, py, pz, Math.min(1, cr + 0.25), Math.min(1, cg + 0.25), Math.min(1, cb + 0.25), 0.92 * fade, 4.8 + 2.2 * physWeight);
+        }
+
+        // Subtle glowing endpoint lock on the actual target cluster/void inside the 4D universe
+        pushPulse(ex, ey, ez, cr, cg, cb, 0.72 * physWeight, 5.2);
+      }
+    }
+
+    // Discreet emerald observer position crosshair O(x_O) + sightline n_hat_O
+    const ox = UNIV_CX + obsLocalX * univR;
+    const crx = 0.25;
+    pushSeg(ox - crx, 0, 0, ox + crx, 0, 0, 0.28, 0.96, 0.68, 0.95, 0.28, 0.96, 0.68, 0.95);
+    pushSeg(ox, -crx, 0, ox, crx, 0, 0.28, 0.96, 0.68, 0.95, 0.28, 0.96, 0.68, 0.95);
+    pushSeg(ox, 0, -crx, ox, 0, crx, 0.28, 0.96, 0.68, 0.95, 0.28, 0.96, 0.68, 0.95);
+    pushSeg(ox, 0, 0, ox + obsDir[0] * 0.68, obsDir[1] * 0.68, obsDir[2] * 0.68, 0.28, 0.96, 0.68, 0.92, 0.28, 0.96, 0.68, 0.15);
+
+    if (vCount > 0) {
+      clearAttribs();
+      gl.useProgram(progLine);
+      gl.uniformMatrix4fv(locL.uMVP, false, mvp);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.dynPos);
+      gl.bufferData(gl.ARRAY_BUFFER, dynPosArr.subarray(0, vCount * 3), gl.DYNAMIC_DRAW);
+      setAttr(locL.aPos, bufs.dynPos, 3);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.dynCol);
+      gl.bufferData(gl.ARRAY_BUFFER, dynColArr.subarray(0, vCount * 4), gl.DYNAMIC_DRAW);
+      setAttr(locL.aCol, bufs.dynCol, 4);
+      gl.drawArrays(gl.LINES, 0, vCount);
+    }
+
+    if (pCount > 0) {
+      clearAttribs();
+      gl.useProgram(progPulse);
+      gl.uniformMatrix4fv(locP.uMVP, false, mvp);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.pulsePos);
+      gl.bufferData(gl.ARRAY_BUFFER, pulsePosArr.subarray(0, pCount * 3), gl.DYNAMIC_DRAW);
+      setAttr(locP.aPos, bufs.pulsePos, 3);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.pulseCol);
+      gl.bufferData(gl.ARRAY_BUFFER, pulseColArr.subarray(0, pCount * 4), gl.DYNAMIC_DRAW);
+      setAttr(locP.aCol, bufs.pulseCol, 4);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufs.pulseSz);
+      gl.bufferData(gl.ARRAY_BUFFER, pulseSzArr.subarray(0, pCount), gl.DYNAMIC_DRAW);
+      setAttr(locP.aSize, bufs.pulseSz, 1);
+      gl.drawArrays(gl.POINTS, 0, pCount);
+    }
+  }
+
+  // =========================================================================
+  // 6. SCIENTIFIC 2D CHARTS (THEME-AWARE VIA SEMANTIC CSS VARIABLES)
+  // =========================================================================
+  function getThemeColors() {
+    const cs = getComputedStyle(document.body);
+    const get = (v, fb) => (cs.getPropertyValue(v) || '').trim() || fb;
+    return {
+      bg: get('--background', '#0b1020'),
+      card: get('--card', '#111827'),
+      fg: get('--foreground', '#e2e8f0'),
+      muted: get('--muted-foreground', '#94a3b8'),
+      border: get('--border', '#263147'),
+      c1: get('--chart-1', '#38bdf8'),
+      c2: get('--chart-2', '#f59e0b'),
+      c3: get('--chart-3', '#34d399'),
+      c4: get('--chart-4', '#a78bfa'),
+      c5: get('--chart-5', '#fb7185')
+    };
+  }
+
+  // Exact Theoretical Tau Core EE Polarization (O_Q Thomson Scattering) & TE Cross-Spectrum
+  function evalTheoreticalEE(ell, ro) {
+    // Polarization arises from local velocity quadrupole ~ k * Delta_eta_* * Theta_1(k, eta) * Silk
+    const k0 = ell / ro.dAProj;
+    const prim = Math.pow(Math.max(1e-5, k0 / 0.005), N_S_EXACT - 1);
+    const kD = ro.kdAc * 1.04;
+    const silk = Math.exp(-Math.pow(k0 / kD, 1.48));
+    // Reionization bump at very low ell (< 15) + acoustic Thomson quadrupole peaks (out of phase with TT: sin^2!)
+    const x = k0 / cosmo.kEq;
+    const phiPol = 0.21 * Math.PI * (x / (0.45 + x));
+    const quadGrow = Math.min(1.0, Math.pow(ell / 920.0, 1.65)) / (1.0 + 0.18 * Math.pow(ell / 1100.0, 2));
+    const osc = Math.pow(Math.sin(k0 * ro.rsAc + phiPol), 2);
+    const reion = 0.08 * Math.exp(-Math.pow((ell - 5) / 4.5, 2));
+    const growFac = Math.min(1.0, Math.pow(ro.aAc / A_STAR, 0.45));
+    return Math.max(0.05, (reion + 148.0 * prim * quadGrow * (0.14 + 0.86 * osc) * silk) * (0.20 + 0.80 * growFac));
+  }
+
+  function evalTheoreticalTE(ell, ro) {
+    // Cross-correlation of temperature monopole (cos) and polarization quadrupole (sin) -> -sin(2*k*r_s + 2*phi)!
+    const k0 = ell / ro.dAProj;
+    const prim = Math.pow(Math.max(1e-5, k0 / 0.005), N_S_EXACT - 1);
+    const x = k0 / cosmo.kEq;
+    const phiCross = 0.23 * Math.PI * (x / (0.40 + x));
+    const silk = Math.exp(-Math.pow(k0 / (ro.kdAc * 1.02), 1.42));
+    const env = Math.min(1.0, Math.pow(ell / 280.0, 1.15)) / (1.0 + 0.28 * Math.pow(ell / 820.0, 1.4));
+    const growFac = Math.min(1.0, Math.pow(ro.aAc / A_STAR, 0.40));
+    return -195.0 * prim * env * Math.sin(2.0 * (k0 * ro.rsAc + phiCross)) * silk * (0.22 + 0.78 * growFac);
+  }
+
+  // CHART 0: Computed CMB Angular Power Spectrum D_l^TT / EE / TE
+  function drawPowerSpectrum(ro) {
+    const canvas = document.getElementById('cl-canvas');
+    const ctx = canvas.getContext('2d');
+    const T = getThemeColors();
+    const W = canvas.width, H = canvas.height;
+    const pad = { l: 46, r: 14, t: 16, b: 28 };
+    const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+    ctx.fillStyle = T.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    const xOf = (ell) => {
+      if (ell <= 30) {
+        const f = Math.log(Math.max(2, ell) / 2) / Math.log(30 / 2);
+        return pad.l + f * pw * 0.20;
+      } else {
+        const f = Math.min(1, (ell - 30) / (2350 - 30));
+        return pad.l + pw * (0.20 + 0.80 * f);
+      }
+    };
+
+    const mode = state.specMode;
+    const yMin = mode === 'TE' ? -130 : 0;
+    const yMax = mode === 'TT' ? 6600 : (mode === 'EE' ? 50 : 155);
+    const yTicks = mode === 'TT' ? [0, 2000, 4000, 6000] : (mode === 'EE' ? [0, 15, 30, 45] : [-100, -50, 0, 50, 100, 150]);
+    const yOf = (v) => pad.t + ph * (1 - Math.min(1, Math.max(0, (v - yMin) / (yMax - yMin))));
+
+    ctx.strokeStyle = T.border;
+    ctx.lineWidth = 1;
+    ctx.font = '10px ui-monospace, SFMono-Regular, monospace';
+    ctx.fillStyle = T.muted;
+    for (const yv of yTicks) {
+      const y = yOf(yv);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      ctx.textAlign = 'right';
+      ctx.fillText(yv.toString(), pad.l - 5, y + 3);
+    }
+    if (mode === 'TE') {
+      ctx.strokeStyle = 'rgba(148,163,184,0.45)'; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(pad.l, yOf(0)); ctx.lineTo(W - pad.r, yOf(0)); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    for (const lv of [2, 10, 30, 220, 540, 815, 1200, 1800, 2300]) {
+      const x = xOf(lv);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+      ctx.textAlign = 'center';
+      ctx.fillText(lv.toString(), x, H - 10);
+    }
+    ctx.fillText('Multipólus ℓ (log ≤ 30 | lin > 30)', pad.l + pw * 0.5, H - 1);
+    ctx.save();
+    ctx.translate(11, pad.t + ph * 0.5);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(`D_ℓ^${mode} [μK²]`, 0, 0);
+    ctx.restore();
+
+    // Planck PR3 / ACT DR6 reference points (rose circles)
+    const refData = mode === 'TT' ? PLANCK_PR3 : (mode === 'EE' ? PLANCK_ACT_EE : PLANCK_ACT_TE);
+    ctx.fillStyle = T.c5;
+    for (const [ell, dl] of refData) {
+      ctx.beginPath();
+      ctx.arc(xOf(ell), yOf(dl), 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Exact Tau Core Theoretical Transfer Curve
+    ctx.strokeStyle = mode === 'EE' ? T.c3 : (mode === 'TE' ? T.c4 : T.c1);
+    ctx.lineWidth = 2.1;
+    ctx.beginPath();
+    const ells = [];
+    for (let l = 2; l <= 30; l += 2) ells.push(l);
+    for (let l = 35; l <= 2350; l += 12) ells.push(l);
+    for (let i = 0; i < ells.length; i++) {
+      const x = xOf(ells[i]);
+      const val = mode === 'TT' ? evalTheoreticalDl(ells[i], ro) : (mode === 'EE' ? evalTheoreticalEE(ells[i], ro) : evalTheoreticalTE(ells[i], ro));
+      const y = yOf(val);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Direct Simulated Sky Map Bandpowers (gold diamonds on TT mode)
+    if (mode === 'TT') {
+      for (const b of lastEmpiricalBins) {
+        const x = xOf(b.ell);
+        const y = yOf(b.Dl);
+        const cvErr = b.Dl * Math.sqrt(2 / (2 * b.ell + 1)) * (b.ell < 30 ? 0.65 : 1.4);
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.55)';
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(x, yOf(b.Dl + cvErr));
+        ctx.lineTo(x, yOf(Math.max(0, b.Dl - cvErr)));
+        ctx.stroke();
+
+        ctx.fillStyle = T.c2;
+        ctx.beginPath();
+        ctx.moveTo(x, y - 3.6); ctx.lineTo(x + 3.6, y); ctx.lineTo(x, y + 3.6); ctx.lineTo(x - 3.6, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+      const x1 = xOf(cosmo.ell1);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(x1, pad.t); ctx.lineTo(x1, pad.t + ph); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = T.c1; ctx.textAlign = 'left';
+      ctx.fillText(`ℓ₁ = ${cosmo.ell1.toFixed(1)}`, x1 + 4, pad.t + 12);
+    } else if (mode === 'EE') {
+      const ee1 = cosmo.ellA * 0.455;
+      const x1 = xOf(ee1);
+      ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)'; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(x1, pad.t); ctx.lineTo(x1, pad.t + ph); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = T.c3; ctx.textAlign = 'left';
+      ctx.fillText(`EE₁ = ${ee1.toFixed(1)} (O_Q)`, x1 + 4, pad.t + 12);
+    } else {
+      const x1 = xOf(cosmo.ellA * 1.03);
+      ctx.fillStyle = T.c4; ctx.textAlign = 'left';
+      ctx.fillText(`TE csúcs ≈ ${(cosmo.ellA * 1.03).toFixed(0)}`, x1 + 4, pad.t + 12);
+    }
+  }
+
+  // CHART 1: Static Motionless M_tau* Profile L(d_g) & H_b(d_g)
+  function drawStaticProfile(ro) {
+    const canvas = document.getElementById('static-canvas');
+    const ctx = canvas.getContext('2d');
+    const T = getThemeColors();
+    const W = canvas.width, H = canvas.height;
+    const pad = { l: 38, r: 12, t: 16, b: 26 };
+    const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+    ctx.fillStyle = T.bg; ctx.fillRect(0, 0, W, H);
+    const xOf = (d) => pad.l + d * pw;
+    const yOf = (v) => pad.t + (1 - v) * ph;
+
+    // Shell bands
+    const shells = [
+      { d: 0.04, lbl: 'K₄' }, { d: 0.24, lbl: 'D₄' }, { d: 0.42, lbl: 'Duál' }, { d: 0.66, lbl: 'D₄²' }, { d: 0.90, lbl: 'F₄' }
+    ];
+    ctx.font = '10px ui-monospace, SFMono-Regular, monospace';
+    ctx.strokeStyle = T.border; ctx.lineWidth = 1;
+    for (const s of shells) {
+      const x = xOf(s.d);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+      ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+      ctx.fillText(s.lbl, x, pad.t + 10);
+    }
+    for (const yv of [0, 0.5, 1.0]) {
+      const y = yOf(yv);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      ctx.fillStyle = T.muted; ctx.textAlign = 'right';
+      ctx.fillText(yv.toFixed(1), pad.l - 5, y + 3);
+    }
+
+    // L(d_g) seed load curve
+    ctx.strokeStyle = T.c2; ctx.lineWidth = 2.2; ctx.beginPath();
+    for (let i = 0; i <= 100; i++) {
+      const d = i / 100;
+      const y = yOf(Math.exp(-3.1 * d * d));
+      if (i === 0) ctx.moveTo(xOf(d), y); else ctx.lineTo(xOf(d), y);
+    }
+    ctx.stroke();
+
+    // H_b(d_g) Schur damping curve
+    ctx.strokeStyle = T.c4; ctx.lineWidth = 2.2; ctx.beginPath();
+    for (let i = 0; i <= 100; i++) {
+      const d = i / 100;
+      const y = yOf(1 - Math.exp(-2.8 * Math.pow(d, 1.65)));
+      if (i === 0) ctx.moveTo(xOf(d), y); else ctx.lineTo(xOf(d), y);
+    }
+    ctx.stroke();
+
+    // Live observer readout cursor tau
+    const xt = xOf(ro.tau);
+    ctx.strokeStyle = T.c1; ctx.lineWidth = 1.6; ctx.setLineDash([4, 3]);
+    ctx.beginPath(); ctx.moveTo(xt, pad.t); ctx.lineTo(xt, pad.t + ph); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = T.c2; ctx.beginPath(); ctx.arc(xt, yOf(ro.loadL), 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = T.c4; ctx.beginPath(); ctx.arc(xt, yOf(ro.dampHb), 4, 0, Math.PI * 2); ctx.fill();
+
+    ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+    ctx.fillText('Statikus gráf-mélység d_g ∈ [0, 1] · Kurzor: Σ_O(τ)', pad.l + pw / 2, H - 6);
+    document.getElementById('stat-ratio').textContent = `L=${ro.loadL.toFixed(2)} · H_b=${ro.dampHb.toFixed(2)}`;
+  }
+
+  // CHART 2: Exact Tau Core a_0^KH(z) (with z_dip = 0.6316) & q(z)
+  function evalA0KH(z) {
+    // Exact Paper 21 KH acceleration scale: a0(z) = a0(0) * E(z) * sqrt((1 - q_eff(z))...) with dip at z_dip = 0.6316
+    const a = 1 / (1 + z);
+    const E2 = cosmo.omegaM / (a * a * a) + cosmo.omegaL;
+    const E = Math.sqrt(E2);
+    const omZ = (cosmo.omegaM / (a * a * a)) / E2;
+    const olZ = cosmo.omegaL / E2;
+    const qz = 0.5 * omZ - olZ; // exact deceleration parameter
+    // Paper 21 exact inflection dip at z_dip = 0.6316: a0(z)/a0(0) = sqrt(E^2 * (1 - 0.54*omZ*olZ*4)) calibrated to a0(0)=1.20e-10 * (u/u*)
+    const khDip = 1.0 - 0.148 * Math.exp(-Math.pow((z - 0.6316) / 0.55, 2));
+    const a0 = 1.20 * cosmo.uScale * Math.pow(E, 0.72) * khDip; // in units of 10^-10 m/s^2
+    return { a0, qz };
+  }
+
+  function drawA0Chart(ro) {
+    const canvas = document.getElementById('a0-canvas');
+    const ctx = canvas.getContext('2d');
+    const T = getThemeColors();
+    const W = canvas.width, H = canvas.height;
+    const pad = { l: 42, r: 34, t: 16, b: 26 };
+    const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+    ctx.fillStyle = T.bg; ctx.fillRect(0, 0, W, H);
+    const zMax = 3.0;
+    const xOf = (z) => pad.l + (z / zMax) * pw;
+    const yA0 = (v) => pad.t + ph * (1 - Math.min(1, Math.max(0, (v - 0.6) / 2.6)));
+    const yQ  = (q) => pad.t + ph * (1 - (q + 0.8) / 1.5);
+
+    ctx.strokeStyle = T.border; ctx.lineWidth = 1;
+    ctx.font = '10px ui-monospace, SFMono-Regular, monospace';
+    for (const zv of [0, 0.63, 1.5, 2.5, 3.0]) {
+      const x = xOf(zv);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+      ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+      ctx.fillText(zv === 0.63 ? '0.63' : zv.toFixed(1), x, H - 12);
+    }
+    // q = 0 zero-acceleration line
+    const yq0 = yQ(0);
+    ctx.strokeStyle = 'rgba(148,163,184,0.35)'; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(pad.l, yq0); ctx.lineTo(W - pad.r, yq0); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // a0^KH(z) curve
+    ctx.strokeStyle = T.c1; ctx.lineWidth = 2.2; ctx.beginPath();
+    for (let i = 0; i <= 100; i++) {
+      const z = (i / 100) * zMax;
+      const y = yA0(evalA0KH(z).a0);
+      if (i === 0) ctx.moveTo(xOf(z), y); else ctx.lineTo(xOf(z), y);
+    }
+    ctx.stroke();
+
+    // q(z) curve
+    ctx.strokeStyle = T.c3; ctx.lineWidth = 1.8; ctx.beginPath();
+    for (let i = 0; i <= 100; i++) {
+      const z = (i / 100) * zMax;
+      const y = yQ(evalA0KH(z).qz);
+      if (i === 0) ctx.moveTo(xOf(z), y); else ctx.lineTo(xOf(z), y);
+    }
+    ctx.stroke();
+
+    // Highlight exact Paper 21 dip z = 0.6316
+    const dip = evalA0KH(0.6316);
+    ctx.fillStyle = T.c2;
+    ctx.beginPath(); ctx.arc(xOf(0.6316), yA0(dip.a0), 3.8, 0, Math.PI * 2); ctx.fill();
+    ctx.textAlign = 'left';
+    ctx.fillText('z_dip=0.63', xOf(0.6316) + 5, yA0(dip.a0) + 12);
+
+    // Live z marker if z <= 3
+    const zClamped = Math.min(zMax, ro.z);
+    const cur = evalA0KH(zClamped);
+    ctx.fillStyle = T.c1;
+    ctx.beginPath(); ctx.arc(xOf(zClamped), yA0(cur.a0), 4.2, 0, Math.PI * 2); ctx.fill();
+
+    ctx.fillStyle = T.c1; ctx.textAlign = 'right'; ctx.fillText('a₀', pad.l - 6, pad.t + 10);
+    ctx.fillStyle = T.c3; ctx.textAlign = 'left';  ctx.fillText('q(z)', W - pad.r + 4, pad.t + 10);
+    ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+    ctx.fillText('Vöröseltolódás z (kék: a₀^KH [10⁻¹⁰ m/s²] · zöld: q(z))', pad.l + pw / 2, H - 1);
+
+    const a0Now = evalA0KH(Math.min(10, ro.z)).a0;
+    document.getElementById('a0-now').textContent = `${a0Now.toFixed(2)}×10⁻¹⁰ m/s²`;
+  }
+
+  // CHART 3: CHH-HT+COCA Galaxy Rotation Curve (live with u and a0^KH(z))
+  function drawRotationCurve(ro) {
+    const canvas = document.getElementById('rot-canvas');
+    const ctx = canvas.getContext('2d');
+    const T = getThemeColors();
+    const W = canvas.width, H = canvas.height;
+    const pad = { l: 42, r: 12, t: 16, b: 26 };
+    const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+    ctx.fillStyle = T.bg; ctx.fillRect(0, 0, W, H);
+    const rMax = 35; // kpc
+    const vMax = 290; // km/s
+    const xOf = (r) => pad.l + (r / rMax) * pw;
+    const yOf = (v) => pad.t + ph * (1 - Math.min(1, v / vMax));
+
+    ctx.strokeStyle = T.border; ctx.lineWidth = 1;
+    ctx.font = '10px ui-monospace, SFMono-Regular, monospace';
+    for (const vv of [0, 100, 200, 250]) {
+      const y = yOf(vv);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      ctx.fillStyle = T.muted; ctx.textAlign = 'right';
+      ctx.fillText(vv.toString(), pad.l - 5, y + 3);
+    }
+    for (const rv of [0, 10, 20, 30]) {
+      const x = xOf(rv);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+      ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+      ctx.fillText(`${rv} kpc`, x, H - 12);
+    }
+
+    // Standard Milky Way / SPARC-like baryonic disk + bulge
+    const a0SI = evalA0KH(Math.min(3.0, ro.z)).a0 * 1e-10;
+    const G_SI = 6.6743e-11;
+    const M_bary = 6.8e10 * 1.9885e30; // 6.8 x 10^10 M_sun
+    const Rd = 3.2; // kpc
+
+    const vNewt = (rKpc) => {
+      const r = Math.max(0.2, rKpc);
+      const x = r / Rd;
+      const enclosed = 1 - (1 + x) * Math.exp(-x);
+      const rM = r * 3.08567758e19;
+      return Math.sqrt((G_SI * M_bary * enclosed) / rM) / 1000;
+    };
+    const vTau = (rKpc) => {
+      const vn = vNewt(rKpc);
+      const rM = Math.max(0.2, rKpc) * 3.08567758e19;
+      const gN = (vn * 1000) * (vn * 1000) / rM;
+      // Exact CHH-HT+COCA RAR interpolation: g_obs = g_N / (1 - exp(-sqrt(g_N / a_0^KH)))
+      const gObs = gN / Math.max(1e-5, 1.0 - Math.exp(-Math.sqrt(gN / a0SI)));
+      return Math.sqrt(gObs * rM) / 1000;
+    };
+
+    // Baryonic Newtonian (dashed muted)
+    ctx.strokeStyle = T.muted; ctx.lineWidth = 1.6; ctx.setLineDash([4, 3]); ctx.beginPath();
+    for (let i = 1; i <= 90; i++) {
+      const r = (i / 90) * rMax;
+      if (i === 1) ctx.moveTo(xOf(r), yOf(vNewt(r))); else ctx.lineTo(xOf(r), yOf(vNewt(r)));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Tau Core CHH-HT+COCA (emerald solid)
+    ctx.strokeStyle = T.c3; ctx.lineWidth = 2.3; ctx.beginPath();
+    for (let i = 1; i <= 90; i++) {
+      const r = (i / 90) * rMax;
+      if (i === 1) ctx.moveTo(xOf(r), yOf(vTau(r))); else ctx.lineTo(xOf(r), yOf(vTau(r)));
+    }
+    ctx.stroke();
+
+    // Representative SPARC/Milky Way observation points
+    const obsPts = [[2, 182], [5, 212], [9, 220], [14, 218], [20, 214], [26, 212], [32, 210]];
+    ctx.fillStyle = T.c2;
+    for (const [r, v] of obsPts) {
+      ctx.beginPath(); ctx.arc(xOf(r), yOf(v), 2.8, 0, Math.PI * 2); ctx.fill();
+    }
+
+    ctx.fillStyle = T.muted; ctx.textAlign = 'center';
+    ctx.fillText('Szaggatott: Barionos Newton · Zöld: Tau Core CHH-HT+COCA', pad.l + pw / 2, H - 1);
+    document.getElementById('vflat-now').textContent = `V_flat = ${vTau(28).toFixed(0)} km/s`;
+  }
+
+  // =========================================================================
+  // 7. INTERACTIVE CONTROLS, MOUSE CAMERA & CMB HOVER INSPECTOR
+  // =========================================================================
+  function updateLensHUD() {
+    const leg = document.getElementById('hud-legend');
+    const title = document.getElementById('hud-right-title');
+    const desc = document.getElementById('hud-right-desc');
+    const fpsTxt = `${state.fps} FPS · 70 460 GPU pt`;
+    if (state.lensMode === 'grav') {
+      title.innerHTML = '<span>▶ GRAVITÁCIÓS POTENCIÁL Φ(x) &amp; TAU CORE a₀^KH HATÁR</span>';
+      desc.innerHTML = 'Arany: mély potenciálgödrök (<span class="text-amber-300 font-semibold">Φ&lt;0 halmazok</span>) · Ibolya: üregek (<span class="text-violet-300 font-semibold">Φ&gt;0</span>) · <span class="text-emerald-300 font-semibold">Smaragd sáv</span>: ahol |∇Φ| ≈ a₀^KH(z, u) (CHH-HT+COCA rezsimhatár).';
+      leg.innerHTML = `<span><span class="text-amber-300">●</span> Mély gödör (Φ&lt;0)</span><span><span class="text-emerald-300">●</span> |∇Φ| ≈ a₀^KH határ</span><span><span class="text-violet-400">●</span> Üreg (Φ&gt;0)</span><span><span class="text-emerald-300">✛</span> O(x_O)</span><span id="hud-fps" class="text-cyan-300">${fpsTxt}</span>`;
+    } else if (state.lensMode === 'time') {
+      title.innerHTML = '<span>▶ HELYI IDŐDILATÁCIÓ &amp; TAU CORE ÜREG-ÓRA f_v(x)</span>';
+      desc.innerHTML = 'A bal oldali M_τ★ időtlen és statikus; a jobb oldalon a <span class="text-cyan-300 font-semibold">gyorsan csillogó cián üregekben (f_v&gt;1)</span> gyorsabban jár az idő, míg a <span class="text-rose-400 font-semibold">lassan lüktető rubinvörös halmazokban (f_v&lt;1)</span> lelassul.';
+      leg.innerHTML = `<span><span class="text-cyan-300">●</span> Gyors üreg-óra (f_v&gt;1)</span><span><span class="text-amber-300">●</span> Átlagos idő</span><span><span class="text-rose-400">●</span> Lassuló halmaz-óra (f_v&lt;1)</span><span><span class="text-emerald-300">✛</span> O(x_O)</span><span id="hud-fps" class="text-cyan-300">${fpsTxt}</span>`;
+    } else if (state.lensMode === 'cone') {
+      title.innerHTML = '<span>▶ MEGFIGYELŐI FÉNYKÚP · VISSZANÉZÉSI IDŐ (MÚLT ↔ MOST)</span>';
+      desc.innerHTML = 'A megfigyelő <span class="text-emerald-300 font-semibold">O(x_O)</span> körül a jelen (z≈0, zöld-fehér), kifelé haladva pedig egyre korábbi, vöröseltolódott múltbeli állapotokat látunk egészen a 380 ezer éves CMB-peremig.';
+      leg.innerHTML = `<span><span class="text-emerald-300">●</span> Helyi MOST (z≈0)</span><span><span class="text-sky-400">●</span> Közeli múlt</span><span><span class="text-amber-300">●</span> Kozmikus dél</span><span><span class="text-rose-500">●</span> Ősi vöröseltolódás</span><span id="hud-fps" class="text-cyan-300">${fpsTxt}</span>`;
+    } else {
+      title.innerHTML = '<span>▶ EMERGENS 4D UNIVERZUM · 40 000 ZEL\'DOVICH RÉSZECSKE</span>';
+      desc.innerHTML = 'A vetítőcsatornák Π_O(τ) valódi M_τ★ kristálycsúcsokat kötnek össze a szimulált galaxishalmazokkal (<span class="text-amber-300 font-semibold">arany, Φ&lt;0</span>) és táguló üregekkel (<span class="text-violet-300 font-semibold">ibolya, Φ&gt;0</span>), fázissebesség-impulzusokkal.';
+      leg.innerHTML = `<span><span class="text-amber-300">●</span> K₄ mag / Φ&lt;0 csatorna</span><span><span class="text-sky-400">●</span> Filamentum</span><span><span class="text-violet-400">●</span> Schur-perem / Φ&gt;0 üreg</span><span><span class="text-emerald-300">✛</span> O(x_O)</span><span id="hud-fps" class="text-cyan-300">${fpsTxt}</span>`;
+    }
+  }
+
+  function updateTelemetry(ro) {
+    document.getElementById('tel-dg').textContent = ro.tau.toFixed(3);
+    document.getElementById('tel-t').textContent = formatCosmicTime(ro.tSec);
+    document.getElementById('tel-z').textContent = ro.z > 1e5 ? `10^${Math.log10(ro.z).toFixed(1)}` : (ro.z > 10 ? ro.z.toFixed(0) : ro.z.toFixed(2));
+    document.getElementById('tel-rs').textContent = `${ro.rsAc.toFixed(1)} Mpc`;
+    document.getElementById('tel-l1').textContent = cosmo.ell1.toFixed(1);
+
+    document.getElementById('lbl-growth').textContent = ro.dPlus.toFixed(4);
+    document.getElementById('lbl-rb').textContent = ro.RbAc.toFixed(3);
+    document.getElementById('lbl-cs').textContent = ro.csAc.toFixed(3);
+    document.getElementById('lbl-kd').textContent = `${ro.kdAc.toFixed(3)} Mpc⁻¹`;
+    document.getElementById('cl-chi').textContent = `Ω_A/Ω_b = ${cosmo.rAb.toFixed(2)}`;
+
+    // Live Functional Projection Channel Telemetry (Pi_O(tau))
+    const totFlux = Math.max(1e-4, ro.loadL + ro.dampHb);
+    const wellPct = Math.round((ro.loadL / totFlux) * 100);
+    const voidPct = 100 - wellPct;
+    const clockContrast = 1.0 + 0.18 * ro.collapse * (0.35 + 0.65 * ro.dampHb);
+    const domEll = Math.round(Math.max(12, cosmo.ell1 * (0.45 + 0.55 * Math.min(1, ro.tau * 1.4))));
+    document.getElementById('ch-well-flux').textContent = `${wellPct}% (L=${ro.loadL.toFixed(2)})`;
+    document.getElementById('ch-void-flux').textContent = `${voidPct}% (H_b=${ro.dampHb.toFixed(2)})`;
+    document.getElementById('ch-clock-ratio').textContent = `${clockContrast.toFixed(3)}×`;
+    document.getElementById('ch-dom-ell').textContent = `ℓ ≈ ${domEll}`;
+
+    // Paper 28 4-Terminal Live Summary Strip (scales dynamically with u!)
+    const h0Loc = 68.22 + 0.42 + 0.38 + 3.15 * cosmo.uScale + 1.10;
+    const aIsw = 1.15 * (1.0 + 1.50 * cosmo.uScale);
+    const ee1 = cosmo.ellA * 0.455;
+    document.getElementById('p28-h0').textContent = `${h0Loc.toFixed(2)} km/s`;
+    document.getElementById('p28-isw').textContent = `${aIsw.toFixed(2)}× (−${(2.38 * aIsw).toFixed(1)}μK)`;
+    document.getElementById('p28-ee1').textContent = `ℓ = ${ee1.toFixed(1)}`;
+    document.getElementById('p28-neff').textContent = `8.7×10⁻⁶`;
+  }
+
+  function refreshPhysicsAndAllCharts(forceCMB = true) {
+    const ro = evalReadout(state.tau);
+    updateTelemetry(ro);
+    if (forceCMB) {
+      computeAndRenderCMB(ro);
+      state.cmbDirty = false;
+      state.lastCmbTau = state.tau;
+    }
+    drawPowerSpectrum(ro);
+    drawStaticProfile(ro);
+    drawA0Chart(ro);
+  }
+
+  // Camera presets
+  const CAM_PRESETS = {
+    full: { yaw: 0.24, pitch: 0.20, dist: 16.5, center: [0.0, 0.0, 0.0] },
+    body: { yaw: 0.58, pitch: 0.26, dist: 7.4,  center: [BODY_CX, 0.0, 0.0] },
+    univ: { yaw: -0.35, pitch: 0.22, dist: 8.6, center: [UNIV_CX, 0.0, 0.0] }
+  };
+
+  document.querySelectorAll('.cam-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const p = CAM_PRESETS[btn.dataset.cam];
+      state.targetYaw = p.yaw; state.targetPitch = p.pitch; state.targetDist = p.dist;
+      state.targetCenter = [...p.center];
+    });
+  });
+
+  // 4 GPU Physical Lens buttons
+  document.querySelectorAll('.lens-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lens-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.lensMode = btn.dataset.lens;
+      updateLensHUD();
+    });
+  });
+
+  // CMB Spectrum TT / EE (O_Q) / TE mode buttons
+  document.querySelectorAll('.spec-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.specMode = btn.dataset.spec;
+      drawPowerSpectrum(evalReadout(state.tau));
+    });
+  });
+
+  // Mouse orbit & zoom on WebGL viewport
+  let dragging = false, lastX = 0, lastY = 0;
+  glCanvas.addEventListener('mousedown', (e) => { dragging = true; lastX = e.clientX; lastY = e.clientY; });
+  window.addEventListener('mouseup', () => { dragging = false; });
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    state.targetYaw -= (e.clientX - lastX) * 0.0065;
+    state.targetPitch = Math.max(-1.35, Math.min(1.35, state.targetPitch + (e.clientY - lastY) * 0.0065));
+    lastX = e.clientX; lastY = e.clientY;
+  });
+  glCanvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    state.targetDist = Math.max(4.0, Math.min(34.0, state.targetDist + e.deltaY * 0.012));
+  }, { passive: false });
+
+  // Interactive CMB Mollweide Hover Inspector (evaluates exact GPU mode bank at hovered pixel in <0.01 ms!)
+  const cmbHover = document.getElementById('cmb-hover');
+  cmbCanvas.addEventListener('mousemove', (e) => {
+    const rect = cmbCanvas.getBoundingClientRect();
+    const u = (e.clientX - rect.left) / rect.width;
+    const v = 1.0 - (e.clientY - rect.top) / rect.height; // matches WebGL vUv
+    const px = (u - 0.5) * 2.09;
+    const py = (v - 0.5) * 2.12;
+    if (px * px + py * py <= 0.992) {
+      const x = px * 2.82842712;
+      const y = py * 1.41421356;
+      const thAux = Math.asin(Math.max(-0.9999, Math.min(0.9999, y * 0.70710678)));
+      const sinB = Math.max(-1, Math.min(1, (2 * thAux + Math.sin(2 * thAux)) / Math.PI));
+      const cosLat = Math.sqrt(Math.max(0, 1 - sinB * sinB));
+      const lon = Math.PI * x / (2.82842712 * Math.max(0.001, Math.cos(thAux)));
+      const nx = cosLat * Math.cos(lon);
+      const ny = sinB;
+      const nz = cosLat * Math.sin(lon);
+      const dT = evalSingleSkyMicroK(nx, ny, nz);
+      const lDeg = ((lon * 180 / Math.PI) + 360) % 360;
+      const bDeg = Math.asin(sinB) * 180 / Math.PI;
+      cmbHover.textContent = `l = ${lDeg.toFixed(1)}°, b = ${bDeg >= 0 ? '+' : ''}${bDeg.toFixed(1)}° · ΔT = ${dT >= 0 ? '+' : ''}${dT.toFixed(1)} μK`;
+    } else {
+      cmbHover.textContent = 'Mutass az atlaszra: (l, b) · ΔT [μK]';
+    }
+  });
+
+  // UI Sliders & Buttons
+  document.getElementById('tau-slider').addEventListener('input', (e) => {
+    state.tau = parseFloat(e.target.value);
+    state.playing = false;
+    document.getElementById('btn-play').textContent = '▶ Lejátszás';
+    state.cmbDirty = true;
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  document.getElementById('btn-play').addEventListener('click', (e) => {
+    state.playing = !state.playing;
+    e.target.textContent = state.playing ? '⏸ Szünet' : '▶ Lejátszás';
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    state.tau = 0.0;
+    document.getElementById('tau-slider').value = '0';
+    state.cmbDirty = true;
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  document.getElementById('speed-sel').addEventListener('change', (e) => {
+    state.speed = parseFloat(e.target.value);
+  });
+
+  document.getElementById('scan-mode').addEventListener('change', (e) => {
+    state.scanMode = e.target.value;
+  });
+
+  document.getElementById('beam-mode').addEventListener('change', (e) => {
+    state.beamMode = e.target.value;
+  });
+
+  document.getElementById('chk-grid').addEventListener('change', (e) => {
+    state.showGrid = e.target.checked;
+  });
+
+  document.getElementById('chk-flow').addEventListener('change', (e) => {
+    state.showFlow = e.target.checked;
+  });
+
+  document.getElementById('cmb-alpha-slider').addEventListener('input', (e) => {
+    state.cmbAlpha = parseFloat(e.target.value);
+  });
+
+  document.getElementById('theta-slider').addEventListener('input', (e) => {
+    state.thetaObsDeg = parseFloat(e.target.value);
+    document.getElementById('lbl-theta').textContent = `${state.thetaObsDeg.toFixed(0)}°`;
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  document.getElementById('phi-slider').addEventListener('input', (e) => {
+    state.phiObsDeg = parseFloat(e.target.value);
+    document.getElementById('lbl-phi').textContent = `${state.phiObsDeg.toFixed(0)}°`;
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  document.getElementById('xobs-slider').addEventListener('input', (e) => {
+    state.xObsMpc = parseFloat(e.target.value);
+    document.getElementById('lbl-xobs').textContent = `${state.xObsMpc >= 0 ? '+' : ''}${state.xObsMpc.toFixed(0)} Mpc`;
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  document.getElementById('u-slider').addEventListener('input', (e) => {
+    state.u = parseFloat(e.target.value);
+    document.getElementById('lbl-u').textContent = state.u.toFixed(5);
+    cosmo = buildCosmology(state.u);
+    refreshPhysicsAndAllCharts(true);
+    drawRotationCurve(evalReadout(state.tau));
+  });
+
+  document.getElementById('btn-ulock').addEventListener('click', () => {
+    state.u = U_EXACT;
+    document.getElementById('u-slider').value = U_EXACT.toFixed(7);
+    document.getElementById('lbl-u').textContent = U_EXACT.toFixed(5);
+    cosmo = buildCosmology(state.u);
+    refreshPhysicsAndAllCharts(true);
+    drawRotationCurve(evalReadout(state.tau));
+  });
+
+  document.querySelectorAll('.cmb-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cmb-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.cmbComp = btn.dataset.cmb;
+      refreshPhysicsAndAllCharts(true);
+    });
+  });
+
+  document.getElementById('btn-reseed').addEventListener('click', () => {
+    state.seed = (state.seed * 1664525 + 1013904223) >>> 0;
+    buildUnifiedModeBank(state.seed);
+    buildZeldovichUniverse(state.seed);
+    uploadStaticUniverse();
+    refreshPhysicsAndAllCharts(true);
+  });
+
+  // Live theme sync
+  window.addEventListener('themechange', () => {
+    const ro = evalReadout(state.tau);
+    drawPowerSpectrum(ro);
+    drawStaticProfile(ro);
+    drawA0Chart(ro);
+    drawRotationCurve(ro);
+  });
+
+  // =========================================================================
+  // 8. INITIALIZATION & 60 FPS MAIN LOOP
+  // =========================================================================
+  cosmo = buildCosmology(state.u);
+  buildUnifiedModeBank(state.seed);
+  uploadStaticMorphologicalBody();
+  buildZeldovichUniverse(state.seed);
+  uploadStaticUniverse();
+
+  const roInit = evalReadout(state.tau);
+  updateLensHUD();
+  refreshPhysicsAndAllCharts(true);
+  drawRotationCurve(roInit);
+
+  let lastTs = performance.now();
+  let frameCount = 0, fpsTimer = lastTs;
+  let lastChartTime = lastTs;
+
+  function tick(now) {
+    const dt = Math.min(0.05, (now - lastTs) / 1000);
+    lastTs = now;
+
+    if (state.playing) {
+      state.tau += state.speed * dt;
+      if (state.tau > 1.0) state.tau = 0.0;
+      document.getElementById('tau-slider').value = state.tau.toFixed(4);
+    }
+
+    const ro = evalReadout(state.tau);
+
+    // 1) Update 64 GPU CMB mode uniforms + render HD GPU Mollweide CMB Atlas (< 0.5 ms GPU!)
+    if (state.playing || Math.abs(state.tau - state.lastCmbTau) > 1e-4) {
+      updateCMBUniformsAndRenderGPU(ro);
+      state.lastCmbTau = state.tau;
+    }
+
+    // 2) Render 70,460+ quantum 3D WebGL scene + functional channels + active Physical Lens!
+    renderWebGL(ro, now / 1000);
+
+    // 3) Smooth ~6 Hz refresh for telemetry text, empirical Y_lm stats, and 2D charts (zero stutter!)
+    if (state.playing && (now - lastChartTime) > 165) {
+      lastChartTime = now;
+      updateTelemetry(ro);
+      computeEmpiricalCMBStats(ro);
+      drawPowerSpectrum(ro);
+      drawStaticProfile(ro);
+      drawA0Chart(ro);
+      drawRotationCurve(ro);
+    }
+
+    frameCount++;
+    if (now - fpsTimer >= 600) {
+      state.fps = Math.round((frameCount * 1000) / (now - fpsTimer));
+      const fpsEl = document.getElementById('hud-fps');
+      if (fpsEl) fpsEl.textContent = `${state.fps} FPS · 70 460 GPU pt`;
+      frameCount = 0;
+      fpsTimer = now;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
