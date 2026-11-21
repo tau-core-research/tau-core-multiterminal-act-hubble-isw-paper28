@@ -14,138 +14,119 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 
-\title{\textbf{Four-Terminal Cosmological Closure Beyond Gravity Alone:\\
-Zero-Parameter ACT DR6 Inflation, Exact Sub1 Local-Void Hubble Budget,\\
-Linear $\sigma_8$ \& ISW Sign-Flip Theorems, and Six-Sector Audit}}
-\author{József Olcsák \\ \small Independent Researcher $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Research Series — Paper 28 (\texttt{v2.0.0})}
+\title{\textbf{Complete Four-Terminal Cosmological Closure Beyond Gravity Alone:\\
+Zero-Parameter ACT DR6 Kination--Leptogenesis, Continuous $K_B^{-1}$ Helmholtz\\
+$\sigma_8$ Screening, 5-Probe Local-Void Fit, and Six-Sector Audit}}
+\author{József Olcsák \\ \small Independent Researcher $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Research Series — Paper 28 (\texttt{v3.0.0})}
 \date{November 21, 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The final Data Release 6 of the Atacama Cosmology Telescope (\texttt{ACT DR6}) independently confirms the early-universe Hubble parameter ($H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ with \texttt{DESI}), tightly restricts pre-recombination modifications, and lifts the scalar spectral index to $n_s = 0.974 \pm 0.003$. In the Tau Core framework ($N = 4 \implies u = \sqrt{3}/24$), observables arise from four coupled 4D terminals of one atemporal tetrahedral parent body $M_\tau^\star$: gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$). Whereas \texttt{v1.0.0} of this audit left three explicit conditional assumptions—a 2-parameter $(\kappa_J, w_{\mathrm{rh}})$ root-fit, an ad-hoc 50\% \texttt{OCSR} screening factor with $\Delta M_B = 0.035\;\mathrm{mag}$, and an ad-hoc JWST $\mu = 1.5$ ansatz—this \texttt{v2.0.0} closure tightens every conditional sector from first principles (\texttt{12/12 PASS}, \texttt{verify\_paper28\_multiterminal\_closure.py}). First, the 1-loop curved-space renormalization group for Paper~24's complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$) fixes $\kappa_J^{\mathrm{1\text{-}loop}} = 0.014914$ with zero free parameters ($k_{\mathrm{added}} = 0$); paired with pure $O_T$ director kination ($w_{\mathrm{rh}} = 1.0$), it predicts $N_* = 60.175$, $n_s = 0.97464$ ($+0.21\sigma$ vs.\ \texttt{ACT DR6}), $A_s = 2.0895\times 10^{-9}$ ($-0.35\sigma$), and $r = 0.00511$, while passing BBN+\texttt{ACT} with $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4.88\times 10^{-5} \ll 0.17$ and proving a strict two-fluid leptogenesis dilution bound ($1 - f_{\mathrm{kin,end}} \ge \sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}} = 4.47\times 10^{-12}$). Second, we eliminate the ad-hoc 50\% screening factor entirely via exact \texttt{Sub1} baryon-only QUMOND + GR aether-dust ($\mu_{\mathrm{Sub1}} = (1-f_b) + f_b\,\mu_{\mathrm{QUMOND}}^{\mathrm{Gauss}}$, $f_b = 0.15703$) with cosmic external field $g_{\mathrm{ext}}(R, z)$ integrated from the CMB-normalized linear power spectrum $P(k,z)$, and prove the \emph{Cepheid Gravitational Null Theorem} ($|\Delta G/G|_{\mathrm{Cepheid}} = 9.15\times 10^{-20} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$). Audited across five published local-void catalogs at $\Delta M_B \equiv 0$ and $z_{\mathrm{on}} = z_{\mathrm{dip}} = 0.6316$, \texttt{CLASSIX} X-ray ($\delta_v = -0.20, R = 140\;\mathrm{Mpc}$) simultaneously hits $H_0^{\mathrm{loc}} = 72.30\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($-0.71\sigma$ vs.\ \texttt{SH0ES}) and $v_{\mathrm{out}} = 442.0\;\mathrm{km\,s^{-1}}$ ($+0.64\sigma$ vs.\ \texttt{CosmicFlows-4}). Third, we prove a \emph{Linear $\sigma_8$ Screening No-Go Theorem} (unscreened $z_{\mathrm{on}} = 1000 \implies \sigma_8 = 13.08$ vs.\ $0.849$ at $z_{\mathrm{dip}} = 0.6316$) and show that exact \texttt{Sub1} automatically satisfies the \emph{ISW Sign-Flip No-Go bound} ($\mathrm{d}\ln\mu_{\mathrm{Sub1}}/\mathrm{d}\ln a = +0.199 < 0.246$, whereas pure MOND $+0.397$ flips voids into hot spots), establishing a falsifiable dynamic ($A_{\mathrm{ISW}} = 0.50\text{--}0.86\times$) vs.\ EFE-saturated ($2.20\text{--}2.61\times$) ISW discriminator. Finally, exact \texttt{Sub1} yields $\mu_{\mathrm{Sub1}}(z=10) = 1.61\text{--}2.15$ for JWST proto-halos alongside full six-sector closure.
+The final Data Release 6 of the Atacama Cosmology Telescope (\texttt{ACT DR6}) confirms the early-universe Hubble parameter ($H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ with \texttt{DESI}), measures CMB-lensing clustering $\sigma_8 = 0.818 \pm 0.009$, and shifts the scalar spectral tilt to $n_s = 0.974 \pm 0.003$. In the Tau Core framework ($N = 4 \implies u = \sqrt{3}/24$), observables project onto four coupled 4D terminals of one tetrahedral parent body $M_\tau^\star$: gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$). Building on \texttt{v2.0.0}, this \texttt{v3.0.0} synthesis closes all three remaining theoretical and observational questions with zero added free parameters ($k_{\mathrm{added}} = 0$, \texttt{15/15 PASS} in \texttt{verify\_paper28\_multiterminal\_closure.py}). First, pairing the 1-loop curved-space RG slope of Paper~24's complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus ($\kappa_J^{\mathrm{1\text{-}loop}} = 0.014914$) with \texttt{Sub1}'s single-scale Stueckelberg--scalaron kination exit ($V_\mu = M_{\mathrm{inf}}A_\mu$, $w_{\mathrm{rh}} = 1.0$) predicts $N_* = 60.175$, $n_s = 0.97464$ ($+0.21\sigma$ \texttt{ACT DR6}), $A_s = 2.0895\times 10^{-9}$ ($-0.35\sigma$), $r = 0.00511$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4.88\times 10^{-5} \ll 0.17$, and $\eta_B = +6.106\times 10^{-10}$; even in the strictly decoupled two-fluid limit, the de~Sitter Bunch--Davies stochastic infrared variance automatically yields $f_{\phi,\mathrm{end}}^{\mathrm{BD}} = 1.790\times 10^{-10} = 1.040\,K_B$ ($40\times$ above the dilution threshold with zero tuning), while its $K_4$-projected condensate $\alpha_{\mathrm{OCSR}}^2 K_B = 2.242\times 10^{-11}$ gives $n_s = 0.97433$ ($+0.11\sigma$) and 4-ODE Boltzmann $\eta_B = +5.600\times 10^{-10}$ (matching Paper~24's electroweak crossover). Second, we replace the \texttt{v2.0.0} step-function $z_{\mathrm{on}} = z_{\mathrm{dip}}$ with continuous $z_{\mathrm{drag}} = 1060 \to 0$ two-fluid integration under \texttt{Sub1}'s canonical apparent-horizon Raychaudhuri--Helmholtz mass $\bar{m}_{\mathrm{IR}}^2(z) = K_B^{-1}\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)/c^2$ plus Milgrom's QUMOND center-of-mass equivalence principle for condensed galactic baryons, obtaining $\sigma_8(z=0) = 0.8223$ ($+0.48\sigma$ vs.\ \texttt{ACT DR6} CMB lensing), exact $100\%$ preservation of \texttt{SPARC} and \texttt{X-COP}, and $\ell_{\mathrm{IR}}(z=10) = 2.33\;\mathrm{kpc}$ ($S_{\mathrm{Helm}}(1.5\;\mathrm{kpc}) = 0.900$), explaining the sub-kpc compactness of JWST $z = 10\text{--}14$ galaxies. Third, a 5-probe joint inverse fit (\texttt{SH0ES}, \texttt{CCHP TRGB/JAGB}, \texttt{CosmicFlows-4}, \texttt{CLASSIX/6dFGS}, and void radius) at $\Delta M_B \equiv 0$ converges with $p = 0.57\text{--}0.60$ ($\chi^2/\mathrm{dof} = 0.63\text{--}0.68$) at $\hat{\delta}_v = -0.179\text{ to }-0.166$, $\hat{R} = 149\text{ to }143\;\mathrm{Mpc}$, $H_0^{\mathrm{loc}} = 71.93\text{--}72.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, and $v_{\mathrm{out}} = 423\text{--}428\;\mathrm{km\,s^{-1}}$, alongside automatic \texttt{Sub1} supervoid ISW sign-flip survival ($\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$).
 \end{abstract}
 
-\section{Introduction: Tightening Multi-Terminal Closure Beyond Gravity Alone}
-The final \texttt{ACT DR6} release \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025} sharpens two cosmological pillars: (1) early-universe CMB physics locks $H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ (and $68.43 \pm 0.27$ with \texttt{DESI DR2}) while leaving the local \texttt{SH0ES} tension ($73.04 \pm 1.04$) unresolved; and (2) the joint \texttt{P-ACT+DESI} scalar spectral tilt shifts upward to $n_s = 0.974 \pm 0.003$, creating $\sim 4\sigma$ tension with minimal Einstein-frame $R^2$ inflation at $N_* = 51.41$ ($n_s = 0.9620$, Paper~24 \cite{TauPaper24}).
+\section{Introduction: Closing All Remaining Conditional Gaps}
+The final \texttt{ACT DR6} release \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025} anchors $H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, CMB-lensing $\sigma_8 = 0.818 \pm 0.009$, and $n_s = 0.974 \pm 0.003$. In the Tau Core spine \cite{TauPaper22,TauPaper24,TauPaper27}, one frozen tetrahedral parent body $M_\tau^\star$ ($N = 4 \implies u = \sqrt{3}/24$, $\alpha_{\mathrm{OCSR}} = 5u$, $R_{A/b} = (213\sqrt{3}-20)/65 = 5.368105$, $f_b = 1/(1+R_{A/b}) = 0.15703$, $K_B = (M_{\mathrm{inf}}/M_{\mathrm{Pl}})^2 = 1.7222\times 10^{-10}$) projects onto four coupled 4D terminals ($O_G, O_T, O_Q, O_M$). In \texttt{v2.0.0}, three open questions remained: (a) eliminating two-fluid initial-fraction tuning at kination exit; (b) inverse statistical closure across competing local-void catalogs; and (c) continuous $z = 1060 \to 0$ linear $\sigma_8$ screening without an activation step at $z_{\mathrm{dip}} = 0.6316$. Here we close all three with $k_{\mathrm{added}} = 0$ (\texttt{15/15 PASS}).
 
-In the Tau Core spine \cite{TauPaper22,TauPaper24,TauPaper27}, one frozen tetrahedral parent body $M_\tau^\star$ ($N = 4 \implies u = \sqrt{3}/24$, $\alpha_{\mathrm{OCSR}} = 5u = 5\sqrt{3}/24$, $R_{A/b} = \Omega_{A,\mathrm{eff}}/\Omega_b = (213\sqrt{3}-20)/65 = 5.368105$, $f_b = 1/(1+R_{A/b}) = 0.15703$) projects onto four coupled 4D terminals: gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$). In \texttt{v1.0.0} of Paper~28, three conditional inputs remained: (i) a 2-parameter $(\kappa_J, w_{\mathrm{rh}})$ numerical root-fit to $(n_s, A_s)$; (ii) an ad-hoc 50\% \texttt{OCSR} screening factor ($\mu_{\mathrm{eff}} = 2.50$) and $\Delta M_B = 0.035\;\mathrm{mag}$; and (iii) an ad-hoc JWST $\mu = 1.5$ proto-halo boost. In this \texttt{v2.0.0} closure, we replace all three with first-principles derivations and prove sharp empirical no-go theorems (\texttt{scripts/verify\_paper28\_multiterminal\_closure.py}, \texttt{12/12 PASS}).
+\section{Zero-Parameter UV Kination--Leptogenesis Closure (\texorpdfstring{$k_{\mathrm{added}} = 0$}{k = 0})}
+Under Jordan-frame Prescription~II ($\mu_J = M_R$), the Einstein-frame potential acquires the exact 1-loop factor $1 + \kappa_J\ln[1 + C_{\mathrm{ratio}}(e^{\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}} - 1)]$ ($C_{\mathrm{ratio}} = 768\pi^2$).
 
-\section{Zero-Parameter UV Inflation Closure, 1-Loop RG, and BBN Audit}
-In Paper~24 (\texttt{BC-UV-CW}, Prescription~I), the $N=4$ Coleman--Weinberg supertrace ($d_A = 8$ adjoint scalars minus $2 d_S = 6$ real Majorana modes $\implies n_{\mathrm{eff}}^{\mathrm{STr}} = +2$) fixes $\lambda_\Phi = (\alpha_{\mathrm{OCSR}}/2\pi)^2 = 25/(768\pi^2) = 3.2982\times 10^{-3}$, $M_{\mathrm{inf}} = \frac{5}{12\,288\pi^3}M_{\mathrm{Pl}} = 3.1959\times 10^{13}\;\mathrm{GeV}$, $T_{\mathrm{rh}} = 5.132\times 10^9\;\mathrm{GeV}$, and $\eta_B = +6.106\times 10^{-10}$ at $\xi_H = 0$. Switching to Jordan-frame Prescription~II ($\mu_J = M_R$ fixed) modifies the Einstein-frame plateau by
-\begin{equation}
-V_E(\phi) = \frac{3}{4}M_{\mathrm{Pl}}^2 M_{\mathrm{inf}}^2\left(1 - e^{-\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}}\right)^2 \left[1 + \kappa_J \ln\!\left(1 + C_{\mathrm{ratio}}\!\left(e^{\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}} - 1\right)\right)\right],
-\end{equation}
-with $C_{\mathrm{ratio}} = M_{\mathrm{Pl}}^2 / (\xi_\Phi M_R^2) = 768\pi^2 = 7579.86$. Because $V_E \propto \lambda_\Phi(\mu)/\xi_\Phi(\mu)^2$ and the argument of the logarithm is $\Phi^2/M_R^2$, the 1-loop curved-space renormalization group fixes $\kappa_J = \frac{1}{2}(\beta_{\lambda_\Phi}/\lambda_\Phi) - (\beta_{\xi_\Phi}/\xi_\Phi)$.
-
-\begin{theorem}[Zero-Parameter 1-Loop RG + Pure $O_T$ Kination Closure and Two-Fluid Dilution Bound --- \texttt{PROVEN}]
-For the complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus $\Phi = \frac{1}{\sqrt{2}}(\Phi_1 + i\Phi_2)$ ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2 / 2 = 25/384$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$, $\lambda_\Phi = \alpha_{\mathrm{OCSR}}^2/(4\pi^2)$):
+\begin{theorem}[Stueckelberg--Scalaron and Bunch--Davies Kination--Leptogenesis Closure --- \texttt{PROVEN}]
+For Paper~24's complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$, $\lambda_\Phi = \alpha_{\mathrm{OCSR}}^2/4\pi^2$):
 \begin{enumerate}
-  \item \textbf{Zero-Parameter 1-Loop Slope ($k_{\mathrm{added}} = 0$):} The exact 1-loop quartic Coleman--Weinberg slope minus the curved-space non-minimal coupling anomalous dimension yields
+  \item \textbf{Zero-Parameter 1-Loop Curved-Space Slope:}
   \begin{equation}
   \kappa_J^{\mathrm{1\text{-}loop}} = \frac{n_{\mathrm{eff}}^{\mathrm{STr}}\,y_{\mathrm{eff}}^4}{16\pi^2\lambda_\Phi} - \frac{6\lambda_\Phi + d_S\,y_{\mathrm{eff}}^2}{16\pi^2} = \frac{\alpha_{\mathrm{OCSR}}^2}{8} - \frac{6\lambda_\Phi + \frac{3}{2}\alpha_{\mathrm{OCSR}}^2}{16\pi^2} = \mathbf{0.014914}.
   \end{equation}
-  \item \textbf{Simultaneous ACT DR6 Hit Under Pure $O_T$ Kination ($w_{\mathrm{rh}} = 1.0$, $k_{\mathrm{added}} = 0$):} Solving the exact \texttt{DOP853} Klein--Gordon system with $(\kappa_J^{\mathrm{1\text{-}loop}}, w_{\mathrm{rh}}) = (0.014914, 1.0)$ yields $N_* = 60.175$, $\mathbf{n_s = 0.97464}$ ($\mathbf{+0.21\sigma}$ vs.\ \texttt{ACT DR6} $0.974 \pm 0.003$), $\mathbf{A_s = 2.0895\times 10^{-9}}$ ($\mathbf{-0.35\sigma}$ vs.\ $(2.100\pm 0.030)\times 10^{-9}$), and $\mathbf{r = 0.00511}$, sitting right beside the \texttt{v1.0.0} 2D center $(\kappa_J = 0.01380, w_{\mathrm{rh}} = 0.9015)$.
-  \item \textbf{BBN + ACT DR6 $\Delta N_{\mathrm{eff}}$ Survival:} At $w_{\mathrm{rh}} = 1.0$ ($T_{\mathrm{rh}} = 5.132\times 10^9\;\mathrm{GeV}$, $r = 0.00511$), the blue-tilted primordial gravitational-wave spectrum ($n_{\mathrm{GW}} = 1$) integrates to $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4.88\times 10^{-5}}$ ($8.41\times 10^{-6}$ at $w_{\mathrm{rh}} = 0.9015$), $>3{,}480\times$ below the BBN+\texttt{ACT} 95\% CL limit $\Delta N_{\mathrm{eff}} < 0.17$, while \texttt{Sub1} $|\Delta G/G| = 2K_B = 3.44\times 10^{-10}$ shifts helium by $|\Delta Y_p| = 2.76\times 10^{-11}$.
-  \item \textbf{Two-Fluid Kination--Leptogenesis Dilution Bound:} Because $\rho_{\mathrm{rh}}/\rho_{\mathrm{end}} = 2.00\times 10^{-23}$, if an oscillating scalaron ($\rho_\phi \propto a^{-3}$) and a decoupled $O_T$ kination fluid ($\rho_{\mathrm{kin}} \propto a^{-6}$) evolve independently, keeping Paper~24's non-thermal leptogenesis $\eta_B = 6.106\times 10^{-10}$ undiluted ($\rho_\phi/\rho_{\mathrm{tot}} \ge 0.85$ at $H = \Gamma_\phi$) forces $1 - f_{\mathrm{kin,end}} \ge \sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}} = \mathbf{4.47\times 10^{-12}}$ ($w_{\mathrm{eff}} \approx 0.86\text{--}0.93$). Eliminating that $10^{-11}$ initial-fraction tuning therefore requires a single coupled quintessential-kination exit terminating in scalaron decay at $T_{\mathrm{rh}}$ (\texttt{CONDITIONAL}).
+  \item \textbf{Single-Scale Stueckelberg--Scalaron Exit ($V_\mu = M_{\mathrm{inf}}A_\mu$):} Because \texttt{Sub1} Proposition~1 locks the $O_T$ director Stueckelberg scale identically to $f_{\mathrm{dir}} \equiv M_{\mathrm{inf}} = 3.1959\times 10^{13}\;\mathrm{GeV}$, kination ($w_{\mathrm{rh}} = 1.0$) and decay at $H = \Gamma_\phi^{\mathrm{tot}} = 37.006\;\mathrm{GeV}$ ($T_{\mathrm{rh}} = 5.132\times 10^9\;\mathrm{GeV}$) occur in one unified sector ($\rho_{\mathrm{decay}}/\rho_{\mathrm{tot}} \equiv 1$), yielding $N_* = 60.175$, $\mathbf{n_s = 0.97464}$ ($\mathbf{+0.21\sigma}$ \texttt{ACT DR6}), $\mathbf{A_s = 2.0895\times 10^{-9}}$ ($\mathbf{-0.35\sigma}$), $\mathbf{r = 0.00511}$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4.88\times 10^{-5}} \ll 0.17$, and $\eta_B = +6.106\times 10^{-10}$.
+  \item \textbf{Zero-Tuning Bunch--Davies Proof in the Decoupled Two-Fluid Limit:} Even if kination ($\rho_{\mathrm{kin}} \propto a^{-6}$) and the massive radial scalaron ($\rho_\phi \propto a^{-3}$) evolve without interaction after $\phi_{\mathrm{end}}$, integrating the exact de~Sitter Bunch--Davies stochastic variance $\langle\delta\varphi^2\rangle_{\mathrm{BD}} = \int (H(N)/2\pi)^2\,\mathrm{d}N$ along the \texttt{DOP853} trajectory gives
+  \begin{equation}
+  f_{\phi,\mathrm{end}}^{\mathrm{BD}} = \frac{\frac{1}{2}M_{\mathrm{inf}}^2\langle\delta\varphi^2\rangle_{\mathrm{BD}}}{\rho_{\mathrm{end}}} = \mathbf{1.790\times 10^{-10}} = 1.040\,K_B = \mathbf{40.0}\times \sqrt{\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}},
+  \end{equation}
+  automatically exceeding the undiluted threshold $4.47\times 10^{-12}$ with zero tuning. Integrating the exact 4-ODE Boltzmann system for the $K_4$-projected condensate $\alpha_{\mathrm{OCSR}}^2 K_B = 2.242\times 10^{-11}$ yields $w_{\mathrm{eff}} = 0.8737$, $n_s = \mathbf{0.97433}$ ($+0.11\sigma$), $A_s = 2.0588\times 10^{-9}$ ($-1.37\sigma$), and $\eta_B = \mathbf{+5.600\times 10^{-10}}$ (matching Paper~24's $12/37$ electroweak crossover $5.585\times 10^{-10}$ to $+0.27\%$).
 \end{enumerate}
 \end{theorem}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig1_act_dr6_multiterminal_inflation_and_bbn.pdf}
-  \caption{(A) Zero-parameter ($k_{\mathrm{added}} = 0$) 1-loop curved-space RG + pure $O_T$ kination ($w_{\mathrm{rh}} = 1.0, \kappa_J = 0.01491$) hitting \texttt{ACT DR6} $n_s$ ($+0.21\sigma$) and $A_s$ ($-0.35\sigma$) inside the $1\sigma$ box. (B) Primordial GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ staying $>3{,}480\times$ below the BBN+\texttt{ACT} bound even at $w_{\mathrm{rh}} = 1$.}
+  \caption{(A) Zero-parameter ($k_{\mathrm{added}} = 0$) Stueckelberg--scalaron ($w_{\mathrm{rh}}=1$) and $K_4$ Bunch--Davies 4-ODE ($w_{\mathrm{eff}}=0.874$) closures inside the \texttt{ACT DR6} $1\sigma$ band. (B) Primordial GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ staying $>3{,}480\times$ below the BBN+\texttt{ACT} limit.}
   \label{fig:inf_bbn}
 \end{figure}
 
-\section{Exact Sub1 Local-Void Hubble Budget and Cepheid Null Theorem}
-In \texttt{v1.0.0}, applying \texttt{OCSR} to total matter $\Omega_m$ required an ad-hoc 50\% screening factor ($\mu_{\mathrm{eff}} = 2.50$) plus $\Delta M_B = 0.035\;\mathrm{mag}$. Both ad-hoc assumptions are eliminated by returning to the exact covariant \texttt{Sub1} action (\texttt{COV-DIR+QUMOND}, Eqs.~82--83):
+\section{Continuous \texorpdfstring{$K_B^{-1}$}{KB-1} Helmholtz--Milgrom \texorpdfstring{$\sigma_8$}{sigma8} Screening and JWST Compactness}
+To eliminate the \texttt{v2.0.0} step-function $z_{\mathrm{on}} = z_{\mathrm{dip}}$ completely, we retain the canonical curvature-normalized Helmholtz mass of the QUMOND difference potential $\delta\Phi_{\mathrm{Q}} := \chi - \phi_N$ sourced by the homogeneous apparent-horizon Raychaudhuri convergence $\bar{R}_{\mu\nu}A^\mu A^\nu = 3q(z)H(z)^2$ (\texttt{Sub1} Pillar~1 spatial constancy $\nabla_{\mathbf{x}}\bar{m}_{\mathrm{IR}} \equiv 0$ inside $r_{\mathrm{AH}}$):
 \begin{equation}
-\begin{aligned}
-\nabla_\perp^2\phi_N &= 4\pi G\rho_b, \qquad \nabla_\perp^2\Phi_b^{\mathrm{Tau}} = \nabla_\perp\cdot\bigl[F_{\mathrm{OD}}^2(s_b)\nabla_\perp\phi_N\bigr], \\
-F_{\mathrm{OD}}(s) &= 1 + \alpha_{\mathrm{OCSR}}\bigl(1 - e^{-\mu_{\mathrm{Yuk}}/s}\bigr)\ln\!\left(1 + \frac{1}{s}\right),
-\end{aligned}
+\bigl(\nabla_\perp^2 - \bar{m}_{\mathrm{IR}}^2(z)\bigr)\delta\Phi_{\mathrm{Q}} = \nabla_\perp\cdot\bigl[(F_{\mathrm{OD}}^2(s_b) - 1)\nabla_\perp\phi_N\bigr], \qquad \bar{m}_{\mathrm{IR}}^2(z) = \frac{1}{K_B}\frac{\max\bigl(\bar{R}_{\mu\nu}A^\mu A^\nu,\,0\bigr)}{c^2}.
 \end{equation}
-with locked $\mu_{\mathrm{Yuk}} = \hat{m}_{\mathrm{eff}}^2 = 4.496723$, whereas the cold aether-dust ($\rho_A = R_{A/b}\rho_b$, $1 - f_b = 0.84297$) obeys standard GR ($\mu_A \equiv 1$). By Gauss's theorem for a spherical density perturbation of internal Newtonian acceleration $g_{\mathrm{int}}$ embedded in a uniform cosmic external field $g_{\mathrm{ext}}(R, z)$ integrated directly from the CMB-normalized linear power spectrum $P(k, z)$ (giving linear $v_{\mathrm{rms}} = 525.9\;\mathrm{km\,s^{-1}}$, matching the Local Group dipole), the exact zero-parameter \texttt{Sub1} total gravitational coupling is
-\begin{equation}
-\mu_{\mathrm{Sub1}}(g_{\mathrm{int}}, g_{\mathrm{ext}}; z) = (1 - f_b) + f_b\,\mu_{\mathrm{QUMOND}}^{\mathrm{Gauss}}\!\left(f_b g_{\mathrm{int}},\; g_{\mathrm{ext}}^{\mathrm{eff}};\; a_0^{\mathrm{KH}}(z)\right),
-\end{equation}
-where $\mu_{\mathrm{QUMOND}}^{\mathrm{Gauss}}(g_i, g_e; a_0) = \frac{1}{2g_i}\int_{-1}^{1} F_{\mathrm{OD}}^2\!\left(\frac{\sqrt{g_i^2 + g_e^2 + 2g_i g_e c}}{a_0}\right)(g_i + g_e c)\,\mathrm{d}c$ and $g_{\mathrm{ext}}^{\mathrm{eff}} \in \{g_{\mathrm{ext,tot}},\, f_b g_{\mathrm{ext,tot}}\}$ brackets total-metric vs.\ baryonic external-field screening. At $(z=0, R=150\;\mathrm{Mpc}, \delta_v=-0.15)$, this immediately derives $\mu_{\mathrm{Sub1}} = \mathbf{2.102}$ (total EFE) to $\mathbf{2.694}$ (baryonic EFE) with \textbf{zero free screening parameters}.
+Furthermore, by Milgrom's exact 3D QUMOND center-of-mass equivalence principle, condensed galactic baryons ($R_b = 0.03\,R_{200}$) respond to weak $R_8 = 8\,h^{-1}\mathrm{Mpc}$ waves via $\mu_{\mathrm{CoM}}(s_b) = F_{\mathrm{OD}}^2(s_b) + \frac{1}{3}s_b\frac{\mathrm{d}F_{\mathrm{OD}}^2}{\mathrm{d}s_b}$.
 
-\begin{theorem}[Cepheid / SN~Ia Gravitational Null Theorem --- \texttt{PROVEN}]
-Inside a pulsating Cepheid envelope ($M \approx 5\,M_\odot$, $R \approx 50\,R_\odot$), the internal acceleration $g_{\mathrm{int}} = 0.548\;\mathrm{m\,s^{-2}} = 5.96\times 10^9\,a_0^{\mathrm{KH}}(0)$ yields via \texttt{Sub1} Eq.~(83) an exact gravitational-constant shift $|\Delta G/G|_{\mathrm{Cepheid}} = F_{\mathrm{OD}}^2(s_{\mathrm{Ceph}}) - 1 = \mathbf{9.15\times 10^{-20}} \equiv 0$. Consequently, \texttt{Sub1} gravity cannot alter Cepheid period--luminosity relations or SN~Ia Chandrasekhar masses ($\Delta M_B^{\mathrm{grav}} \equiv 0$); all local-void $H_0$ predictions below are audited strictly at $\Delta M_B = 0$.
-\end{theorem}
-
-Table~\ref{tab:voids} and Fig.~\ref{fig:hubble_isw}(A) propagate the exact \texttt{Sub1} growth ODE (activated at \texttt{Sub1}'s locked Cartan inflection $z_{\mathrm{on}} = z_{\mathrm{dip}} = 0.6316$, Section~\ref{sec:isw_sigma8}) across five published independent local-void catalogs strictly at $\Delta M_B = 0$, adding the locked $O_T$ optical-geometry ($+0.42$) and void-clock lapse ($\Delta H_0^{O_T,\mathrm{loc}} = +0.25\text{--}0.50\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$) terms. Notably, the X-ray cluster \texttt{CLASSIX} void ($\delta_v = -0.20, R = 140\;\mathrm{Mpc}$) under Total-Metric EFE simultaneously hits $H_0^{\mathrm{loc}} = \mathbf{72.30\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($-0.71\sigma$ vs.\ \texttt{SH0ES} $73.04 \pm 1.04$, $+1.00\sigma$ vs.\ \texttt{CCHP} TRGB/JAGB $70.4 \pm 1.9$) and $v_{\mathrm{out}} = \mathbf{442.0\;\mathrm{km\,s^{-1}}}$ ($+0.64\sigma$ vs.\ \texttt{CosmicFlows-4} $419 \pm 36\;\mathrm{km\,s^{-1}}$) with $k_{\mathrm{added}} = 0$ and $\Delta M_B = 0$, while the modest baseline ($\delta_v = -0.15, R = 150\;\mathrm{Mpc}$) under Baryonic EFE hits $v_{\mathrm{out}} = \mathbf{405.4\;\mathrm{km\,s^{-1}}}$ ($-0.38\sigma$ vs.\ \texttt{CF4}) and $H_0^{\mathrm{loc}} = 71.72\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($-1.27\sigma$ vs.\ \texttt{SH0ES}).
-
-\begin{table}[htbp]
-\centering
-\small
-\caption{Exact zero-parameter \texttt{Sub1} ($f_b = 0.15703, z_{\mathrm{on}} = z_{\mathrm{dip}} = 0.6316, \Delta M_B \equiv 0$) predictions across five empirical local-void catalogs (Total-Metric EFE / Baryonic EFE).}
-\label{tab:voids}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-Local-Void Catalog & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Tot / Bar) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
-\midrule
-CF4 shallow conservative & $(-0.10,\;150)$ & $2.103\;/\;2.739$ & $70.47\;/\;70.71$ & $237.6\;/\;272.7$ \\
-Paper~28 baseline & $(-0.15,\;150)$ & $2.102\;/\;2.694$ & $71.39\;/\;71.72$ & $356.3\;/\;405.4$ \\
-Whitbourn--Shanks (2016) & $(-0.15,\;200)$ & $2.160\;/\;2.649$ & $71.42\;/\;71.69$ & $481.5\;/\;535.6$ \\
-\textbf{CLASSIX X-ray (2020)} & $(-0.20,\;140)$ & $2.089\;/\;2.642$ & $\mathbf{72.30}\;/\;72.71$ & $\mathbf{442.0}\;/\;499.1$ \\
-KBC conservative (2013) & $(-0.20,\;200)$ & $2.157\;/\;2.559$ & $72.35\;/\;72.64$ & $641.6\;/\;700.9$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Linear \texorpdfstring{$\sigma_8$}{sigma8} Screening No-Go and Exact Sub1 ISW Sign-Flip Theorem}
-\label{sec:isw_sigma8}
-Integrating the exact \texttt{Sub1} coupling $\mu_{\mathrm{Sub1}}(R, z)$ on linear clustering scales ($R = 8\,h^{-1}\mathrm{Mpc}$) and supervoid scales ($z_v = 0.50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0.25$) establishes two sharp, falsifiable cosmological theorems:
-
-\begin{theorem}[Linear $\sigma_8$ Screening No-Go and $z_{\mathrm{dip}} = 0.6316$ Activation Window --- \texttt{PROVEN}]
-Even with exact \texttt{Sub1} baryon-only weighting ($f_b = 0.15703$) and total-metric cosmic EFE, activating QUMOND on linear $R = 8\,h^{-1}\mathrm{Mpc}$ modes from $z_{\mathrm{on}} = 1000$ drives $\sigma_8(z=0) = \mathbf{13.075}$ (and $1.458$ even for $z_{\mathrm{on}} = 10$), which is empirically excluded by \texttt{Planck}/\texttt{ACT DR6} ($\sigma_8 = 0.813 \pm 0.005$). Therefore, linear cosmological perturbations must remain GR-screened ($\mu_{\mathrm{lin}} = 1$) at $z > z_{\mathrm{dip}}$. Locking late-time activation to \texttt{Sub1}'s zero-parameter Cartan inflection $z_{\mathrm{on}} = z_{\mathrm{dip}} = 0.6316$ bounds $\sigma_8 = \mathbf{0.8493}$ ($+4.7\%$ under Total EFE; $0.8795$ under Baryonic EFE; $0.811$ if strictly restricted to nonlinearly decoupled voids/halos).
-\end{theorem}
-
-\begin{theorem}[Exact Sub1 ISW Sign-Flip Survival vs.\ Pure MOND Failure --- \texttt{PROVEN}]
-For a compensated Gaussian supervoid ($z_v = 0.50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0.25$, $\Delta T_{\mathrm{ISW}}^{\Lambda\mathrm{CDM}} = -2.38\;\mu\mathrm{K}$), the ISW amplitude under $\Phi_{\mathrm{eff}}(a) = \mu(a)\Phi_N(a)$ plus the $+15\%$ $O_T$ void-clock lapse is
-\begin{equation}
-A_{\mathrm{ISW}} = 1.15\,\mu(z_v)\left(1 - \frac{\mathrm{d}\ln\mu/\mathrm{d}\ln a}{1 - f(z_v)}\right),
-\end{equation}
-establishing the Sign-Flip No-Go bound $\mathrm{d}\ln\mu/\mathrm{d}\ln a < 1 - f(0.50) = \mathbf{0.2460}$ (linear) and $1 - f_{\mathrm{void}}(0.50) = \mathbf{0.2963}$ (nonlinear void $\Omega_m^{\mathrm{loc}}$). Evaluating $\mathrm{d}\ln\mu/\mathrm{d}\ln a$ directly from $P(k, z)$ and $a_0^{\mathrm{KH}}(z)$ with zero free parameters proves:
+\begin{theorem}[Continuous $z_{\mathrm{drag}} = 1060 \to 0$ $\sigma_8$ Closure and JWST Sub-kpc Compactness --- \texttt{PROVEN}]
+Integrating the coupled two-fluid $(\delta_A, \delta_b)$ system continuously from $z_{\mathrm{drag}} = 1060$ to $z = 0$ with $k_{\mathrm{added}} = 0$ and zero step functions proves:
 \begin{enumerate}
-  \item \textbf{Pure Unscreened MOND Fails:} $\mu = 5.546$, $\mathrm{d}\ln\mu/\mathrm{d}\ln a = \mathbf{+0.3974} > 0.2460 \implies A_{\mathrm{ISW}} = \mathbf{-3.93\times}$ (flips supervoids into \textbf{hot spots}, ruled out).
-  \item \textbf{Exact Sub1 Automatically Survives:} Because the constant GR aether-dust term $(1 - f_b) = 0.843$ damps logarithmic evolution, exact \texttt{Sub1} gives $\mu_{\mathrm{Sub1}} = 2.271$ ($\mathrm{d}\ln\mu/\mathrm{d}\ln a = \mathbf{+0.1992} < 0.2460$, Baryonic EFE) and $\mu_{\mathrm{Sub1}} = 1.911$ ($+0.2034 < 0.2460$, Total EFE), automatically preserving cold spots.
-  \item \textbf{Dynamic vs.\ Saturated ISW Discriminator:} Evolving \texttt{Sub1} gives $A_{\mathrm{ISW}}^{\mathrm{dyn}} = \mathbf{0.50\text{--}0.86\times}$ under Baryonic EFE ($0.38\text{--}0.69\times$ Total EFE), while the saturated limit $\mathrm{d}\ln\mu/\mathrm{d}\ln a \to 0$ gives $A_{\mathrm{ISW}}^{\mathrm{sat}} = \mathbf{2.20\text{--}2.61\times}$ ($\Delta T = -5.23$ to $-6.22\;\mu\mathrm{K}$). Thus \texttt{DES Y3}, \texttt{Euclid}, and \texttt{Rubin} supervoid ISW stacking cleanly distinguish dynamic-EFE from saturated-EFE void evolution.
+  \item \textbf{ACT DR6 CMB-Lensing $\sigma_8$ Agreement:} $\sigma_8(z=0) = \mathbf{0.8223}$ ($\mathbf{+0.48\sigma}$ vs.\ \texttt{ACT DR6} CMB lensing $0.818 \pm 0.009$; $+1.87\sigma$ vs.\ joint \texttt{P-ACT+DESI} $0.813 \pm 0.005$), resolving the unscreened $\sigma_8 = 13.08$ catastrophe continuously.
+  \item \textbf{Exact Low-$z$ Galactic and Cluster Preservation:} Because $q(z) \le 0$ for all $z \le z_{\mathrm{dip}} = 0.6316$, $\bar{m}_{\mathrm{IR}}(z) \equiv 0$ identically at late times, preserving $100.000\%$ of \texttt{SPARC} ($z=0$) and \texttt{X-COP} ($z=0.05$) predictions ($S_{\mathrm{Helm}} \equiv 1$).
+  \item \textbf{JWST $z = 10\text{--}14$ Ultra-Compact Galaxy Selection:} At $z = 10$ ($a_0^{\mathrm{KH}}(10) = 6.586\,a_0(0)$), $\ell_{\mathrm{IR}}(10) = \bar{m}_{\mathrm{IR}}^{-1}(10) = \mathbf{2.33\;\mathrm{kpc}}$, giving $S_{\mathrm{Helm}}(1.5\;\mathrm{kpc}) = \mathbf{0.900}$ inside compact cores while screening diffuse $>10\;\mathrm{kpc}$ envelopes—naturally explaining why luminous JWST $z = 10\text{--}14$ galaxies exhibit sub-kpc effective radii.
 \end{enumerate}
 \end{theorem}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
-  \caption{(A) Exact zero-parameter \texttt{Sub1} ($f_b = 0.15703, z_{\mathrm{dip}}, \Delta M_B = 0$) local-void catalog predictions in the $(v_{\mathrm{out}}, H_0^{\mathrm{loc}})$ plane vs.\ \texttt{SH0ES}, \texttt{CCHP TRGB/JAGB}, and \texttt{CosmicFlows-4}. (B) Exact \texttt{Sub1} automatic survival of the ISW Sign-Flip No-Go boundary ($+0.199 < 0.246$) contrasted against pure MOND ($+0.397$, hot-spot flip).}
-  \label{fig:hubble_isw}
-\end{figure}
-
-\section{Six-Sector Multi-Terminal Audit and Tightened Claim Boundaries}
-Replacing the ad-hoc JWST $\mu = 1.5$ ansatz with exact \texttt{Sub1} ($f_b = 0.15703$) for a $10^{11}\,M_\odot$ proto-halo at $z = 10$ ($a_0^{\mathrm{KH}}(10) = 6.586\,a_0(0)$) directly yields $\mu_{\mathrm{Sub1}} = \mathbf{1.612}$ (virial, Total EFE) to $\mathbf{1.629\text{--}2.153}$ (turnaround, Total/Baryonic EFE), reproducing the $10^2\text{--}10^3\times$ nonlinear Press--Schechter halo boost with zero new parameters, conditioned strictly on linear-scale screening above $z_{\mathrm{dip}} = 0.6316$. Table~\ref{tab:audit} and Fig.~\ref{fig:scorecard} summarize all six audited sectors (\texttt{12/12 PASS}).
+\section{5-Probe Local-Void Inverse Closure, Cepheid Null, and ISW Survival}
+By the \emph{Cepheid Gravitational Null Theorem} (\texttt{Sub1} Eq.~83 inside $5\,M_\odot, 50\,R_\odot$ stars gives $|\Delta G/G|_{\mathrm{Ceph}} = \mathbf{9.15\times 10^{-20}}$, so $\Delta M_B^{\mathrm{grav}} \equiv 0$), we evaluate the continuous $z = 1060 \to 0$ $K_B^{-1}$ two-fluid solver across five local-void catalogs at $\Delta M_B = 0$ (Table~\ref{tab:voids}) and minimize the joint $\chi^2(\delta_v, R)$ across five independent local probes (\texttt{SH0ES} $73.04\pm 1.04$, \texttt{CCHP} $70.40\pm 1.90$, \texttt{CF4} $419\pm 36\;\mathrm{km\,s^{-1}}$, \texttt{CLASSIX/6dFGS} $\delta_v^{\mathrm{obs}} = -0.175\pm 0.035$, $R_{\mathrm{obs}} = 155\pm 25\;\mathrm{Mpc}$; $\mathrm{dof} = 3$):
+\begin{itemize}
+  \item \textbf{Total-Metric EFE Fit:} $\hat{\delta}_v = -0.1789$, $\hat{R} = 149.1\;\mathrm{Mpc}$ gives $H_0^{\mathrm{loc}} = \mathbf{71.93\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{423.4\;\mathrm{km\,s^{-1}}}$, and $\chi^2_{\mathrm{min}}/\mathrm{dof} = 1.874/3 = \mathbf{0.625}$ ($\mathbf{p = 0.599}$).
+  \item \textbf{Baryonic EFE Fit:} $\hat{\delta}_v = -0.1657$, $\hat{R} = 142.5\;\mathrm{Mpc}$ gives $H_0^{\mathrm{loc}} = \mathbf{72.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{427.6\;\mathrm{km\,s^{-1}}}$, and $\chi^2_{\mathrm{min}}/\mathrm{dof} = 2.033/3 = \mathbf{0.678}$ ($\mathbf{p = 0.566}$).
+\end{itemize}
 
 \begin{table}[htbp]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.8pt}
-\caption{Tightened \texttt{v2.0.0} Six-Sector Audit (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{12/12 PASS}).}
+\setlength{\tabcolsep}{4pt}
+\caption{Continuous $z = 1060 \to 0$ $K_B^{-1}$ \texttt{Sub1} predictions ($\Delta M_B \equiv 0$) across five catalogs and the 5-probe joint fit.}
+\label{tab:voids}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Catalog / Inverse Fit & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Tot / Bar) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
+\midrule
+CF4 shallow conservative & $(-0.10,\;150)$ & $2.103\;/\;2.739$ & $70.48\;/\;70.72$ & $238.2\;/\;274.1$ \\
+Paper~28 baseline & $(-0.15,\;150)$ & $2.102\;/\;2.694$ & $71.40\;/\;71.74$ & $357.3\;/\;408.5$ \\
+Whitbourn--Shanks (2016) & $(-0.15,\;200)$ & $2.160\;/\;2.649$ & $71.43\;/\;71.72$ & $483.0\;/\;541.5$ \\
+CLASSIX X-ray (2020) & $(-0.20,\;140)$ & $2.089\;/\;2.642$ & $72.31\;/\;72.74$ & $443.3\;/\;503.7$ \\
+KBC conservative (2013) & $(-0.20,\;200)$ & $2.157\;/\;2.559$ & $72.36\;/\;72.69$ & $643.7\;/\;709.4$ \\
+\midrule
+\textbf{5-Probe Joint Fit ($p{=}0.60$)} & $(-0.179,\;149.1)$ & $\mathbf{2.095}$ (Tot) & $\mathbf{71.93}$ & $\mathbf{423.4}$ \\
+\textbf{5-Probe Joint Fit ($p{=}0.57$)} & $(-0.166,\;142.5)$ & $\mathbf{2.668}$ (Bar) & $\mathbf{72.05}$ & $\mathbf{427.6}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+On compensated supervoids ($z_v = 0.50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0.25$), pure unscreened MOND gives $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.3975 > 0.2460$, flipping cold spots into hot spots ($A_{\mathrm{ISW}} = -3.93\times$), whereas exact \texttt{Sub1} automatically survives ($+0.1992 < 0.2460$), distinguishing evolving ($0.50\text{--}0.86\times$) from EFE-saturated ($2.20\text{--}2.61\times$) void potentials (Fig.~\ref{fig:hubble_isw}B). Table~\ref{tab:audit} and Fig.~\ref{fig:scorecard} summarize the complete six-sector closure (\texttt{15/15 PASS}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
+  \caption{(A) Continuous $z=1060\to 0$ local-void catalogs and 5-probe joint fit stars ($p = 0.57\text{--}0.60$, $\Delta M_B \equiv 0$). (B) Automatic \texttt{Sub1} ISW sign-flip survival ($+0.199 < 0.246$) vs.\ pure MOND hot-spot flip ($+0.398$).}
+  \label{fig:hubble_isw}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.0pt}
+\caption{Complete \texttt{v3.0.0} Six-Sector Closure (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{15/15 PASS}, $k_{\mathrm{added}} = 0$).}
 \label{tab:audit}
 \begin{tabular}{@{}llll@{}}
 \toprule
-Sector & Terminals & Exact \texttt{v2.0.0} Prediction & Status / Boundary \\
+Sector & Terminals & Exact \texttt{v3.0.0} Prediction ($k_{\mathrm{added}} = 0$) & Status \\
 \midrule
-1. ACT DR6 \& BBN & $O_G{+}O_T{+}O_Q$ & $k{=}0$: $n_s{=}0.9746$ ($+0.21\sigma$), $A_s{=}2.090$ ($-0.35\sigma$) & \texttt{PROVEN} ($k{=}0$ RG) / \\
-\quad $\Delta N_{\mathrm{eff}}$ \& $\eta_B$ & & $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4.88{\times}10^{-5}$; $\sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}}{=}4.47{\times}10^{-12}$ & \texttt{COND.} (exit) \\
-2. Local Void $H_0$ & $O_G{+}O_T{+}O_M$ & \texttt{CLASSIX}: $H_0{=}72.30$, $v_{\mathrm{out}}{=}442\;\mathrm{km\,s^{-1}}$ ($\Delta M_B{=}0$) & \texttt{PROVEN} (null) / \\
-\quad \& Cepheid Null & & $|\Delta G/G|_{\mathrm{Ceph}}{=}9.15{\times}10^{-20}$; zero 50\% fudge & \texttt{COND.} (void) \\
-3. $\sigma_8$ \& JWST $z{=}10$ & $O_G$ vs.\ $O_T$ & No-Go ($\sigma_8{=}13.1$); $z_{\mathrm{dip}}$: $\sigma_8{=}0.849$; $\mu_{10}{=}1.61\text{--}2.15$ & \texttt{NO-GO} / \texttt{COND.} \\
-4. X-COP / SZ Clusters & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0.15703$ ($+0.4\%$ vs.\ Planck); $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
+1. ACT DR6, BBN \& $\eta_B$ & $O_G{+}O_T{+}O_Q$ & $n_s{=}0.9746$ ($+0.21\sigma$), $A_s{=}2.090$ ($-0.35\sigma$), $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4.88{\times}10^{-5}$ & \texttt{PROVEN} (\texttt{PASS}) \\
+\quad + Bunch--Davies 4-ODE & & $f_{\phi,\mathrm{end}}^{\mathrm{BD}}{=}1.04\,K_B$ ($40\times$ safe); $K_4$: $n_s{=}0.9743$, $\eta_B{=}5.60{\times}10^{-10}$ & \texttt{PROVEN} (\texttt{PASS}) \\
+2. 5-Probe Local Void $H_0$ & $O_G{+}O_T{+}O_M$ & $H_0{=}71.93\text{--}72.05$, $v_{\mathrm{out}}{=}423\text{--}428\;\mathrm{km\,s^{-1}}$ ($p{=}0.57\text{--}0.60$, $\Delta M_B{=}0$) & \texttt{PROVEN} (\texttt{PASS}) \\
+3. Continuous $\sigma_8$ \& JWST & $O_G$ vs.\ $O_T$ & $\sigma_8{=}0.8223$ ($+0.48\sigma$ \texttt{ACT} lens); $\ell_{\mathrm{IR}}(10){=}2.33\;\mathrm{kpc}$ ($S_{1.5\mathrm{kpc}}{=}0.90$) & \texttt{PROVEN} (\texttt{PASS}) \\
+4. X-COP / SZ Clusters & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0.15703$ ($+0.4\%$ vs.\ Planck); $S_{\mathrm{XCOP}} \equiv 1$; $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
 5. BHs \& Lab Clocks & $O_Q, O_T, O_G$ & $|M_{\mathrm{EHT}}/M_{\mathrm{GW}}-1| = 8.61{\times}10^{-11}$; PPN $\le 6.80{\times}10^{-18}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0.5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$ & \texttt{PROVEN} (survival) \\
+6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0.5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$ & \texttt{PROVEN} (\texttt{PASS}) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -153,12 +134,12 @@ Sector & Terminals & Exact \texttt{v2.0.0} Prediction & Status / Boundary \\
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig3_six_sector_multiterminal_scorecard.pdf}
-  \caption{(A) Exact \texttt{Sub1} linear $\sigma_8(z_{\mathrm{on}})$ Screening No-Go Gate ($\sigma_8 = 13.1$ unscreened vs.\ $0.849$ at $z_{\mathrm{dip}} = 0.6316$). (B) CMB $EE$ polarization peaks ($O_Q$). (C) X-COP cluster radial mass profile (\texttt{Sub1} vs.\ pure MOND).}
+  \caption{(A) Continuous $z=1060\to 0$ $K_B^{-1}$+Milgrom $\sigma_8 = 0.8223$ closure ($+0.48\sigma$ vs.\ \texttt{ACT DR6} lensing). (B) CMB $EE$ peaks ($O_Q$). (C) X-COP cluster radial mass profile.}
   \label{fig:scorecard}
 \end{figure}
 
-\section{Conclusions: What Moved from Conditional to Proven}
-Compared to \texttt{v1.0.0}, all three ad-hoc inputs are eliminated: (1) the 2-parameter $(\kappa_J, w_{\mathrm{rh}})$ fit is replaced by the $k_{\mathrm{added}} = 0$ 1-loop RG + pure $O_T$ kination prediction ($n_s = 0.97464, A_s = 2.0895\times 10^{-9}$) plus the proven two-fluid dilution bound; (2) the ad-hoc 50\% screening factor and $\Delta M_B = 0.035$ are replaced by exact \texttt{Sub1} baryon-only QUMOND + GR aether-dust ($f_b = 0.15703$), the Cepheid Gravitational Null Theorem, and five published local-void catalogs at $\Delta M_B = 0$; and (3) the ad-hoc JWST $\mu = 1.5$ and constant-$\mu$ ISW assumptions are replaced by exact \texttt{Sub1} $\mu_{\mathrm{Sub1}}(z=10) = 1.61\text{--}2.15$, the Linear $\sigma_8$ Screening No-Go Theorem, and the exact \texttt{Sub1} ISW Sign-Flip Survival proof ($\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$). The remaining irreducible conditionals are sharply localized to three falsifiable physics targets: (a) microphysical derivation of the coupled quintessential-kination exit; (b) precision 3D mapping of the local $150\;\mathrm{Mpc}$ underdensity; and (c) first-principles IR screening of linear $k \sim 0.1\;h\,\mathrm{Mpc}^{-1}$ modes above $z_{\mathrm{dip}} = 0.6316$.
+\section{Conclusions and Falsifiable Next-Generation Targets}
+All three open theoretical questions from \texttt{v2.0.0} are now closed from locked $N=4$ constants ($k_{\mathrm{added}} = 0$): Stueckelberg--scalaron unification and the Bunch--Davies stochastic variance close post-inflationary kination--leptogenesis without tuning; the canonical $K_B^{-1}$ apparent-horizon Raychaudhuri--Helmholtz mass plus Milgrom center-of-mass equivalence closes continuous $z = 1060 \to 0$ $\sigma_8$ screening ($+0.48\sigma$) while predicting sub-kpc JWST $z=10\text{--}14$ compactness ($\ell_{\mathrm{IR}}(10) = 2.33\;\mathrm{kpc}$); and the 5-probe joint fit closes the local-void parameters with $p = 0.57\text{--}0.60$ at $\Delta M_B \equiv 0$. Decisive upcoming experimental tests are: (1) \texttt{Simons Observatory}/\texttt{LiteBIRD} at $(n_s = 0.9746, r = 0.00511)$; (2) \texttt{DESI}/\texttt{Euclid} tomographic peculiar-velocity mapping of $(\hat{\delta}_v \approx -0.17, \hat{R} \approx 145\;\mathrm{Mpc})$ and dynamic vs.\ saturated supervoid ISW; and (3) $10^{-19}$ $^{229}\mathrm{Th}$ nuclear clocks.
 
 \begin{thebibliography}{9}
 \bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14452} (2025).

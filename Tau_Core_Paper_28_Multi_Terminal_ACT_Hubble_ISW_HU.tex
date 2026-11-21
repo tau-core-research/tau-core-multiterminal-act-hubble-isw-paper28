@@ -17,117 +17,109 @@
 
 \newtheorem{theorem}{Tétel}
 
-\title{\textbf{Négyterminálos kozmológiai lezárás a puszta gravitáción túl:\\
-Nulla-paraméteres ACT DR6 infláció, egzakt Sub1 lokális-üreg Hubble-költségvetés,\\
-lineáris $\sigma_8$ és ISW előjelváltási tételek, valamint hatszektoros audit}}
-\author{Olcsák József \\ \small Független kutató $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Kutatási Sorozat — Paper 28 (\texttt{v2.0.0})}
+\title{\textbf{Teljes négyterminálos kozmológiai lezárás a puszta gravitáción túl:\\
+Nulla-paraméteres ACT DR6 kináció--leptogenezis, folytonos $K_B^{-1}$ Helmholtz\\
+$\sigma_8$-árnyékolás, 5-próbás lokális-üreg illesztés és hatszektoros audit}}
+\author{Olcsák József \\ \small Független kutató $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Kutatási Sorozat — Paper 28 (\texttt{v3.0.0})}
 \date{2026. november 21.}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Az Atacama Cosmology Telescope 6-os adatkibocsátása (\texttt{ACT DR6}) függetlenül megerősíti a korai univerzum Hubble-állandóját ($H_0 = 68{,}22 \pm 0{,}36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ a \texttt{DESI}-vel együtt), szigorúan korlátozza a rekombináció előtti módosításokat, és felfelé tolja a skaláris spektrális indexet ($n_s = 0{,}974 \pm 0{,}003$). A Tau Core keretrendszerben ($N = 4 \implies u = \sqrt{3}/24$) a fizikai megfigyelhetők egyetlen időtlen tetraéderes alaptörzs ($M_\tau^\star$) négy csatolt 4D termináljáról — gravitációs ($O_G$), órajel/optikai ($O_T$), kvantum/mértékelméleti ($O_Q$) és anyag/asztrofizikai ($O_M$) — olvasódnak le. Míg a jelen munka \texttt{v1.0.0} változata három feltételes feltevést hagyott nyitva — egy 2-paraméteres $(\kappa_J, w_{\mathrm{rh}})$ numerikus illesztést, egy ad-hoc 50\%-os \texttt{OCSR}-árnyékolást $\Delta M_B = 0{,}035\;\mathrm{mag}$ korrekcióval, valamint egy feltételezett JWST $\mu = 1{,}5$ értéket —, addig a \texttt{v2.0.0} változat mindhármat első elvekből szűkíti le (\texttt{12/12 PASS}, \texttt{verify\_paper28\_multiterminal\_closure.py}). Először: a Paper~24 komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusának ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$) egzakt 1-hurkos görbült térű renormálási csoportja szabad paraméter nélkül ($k_{\mathrm{added}} = 0$) rögzíti $\kappa_J^{\mathrm{1\text{-}loop}} = 0{,}014914$ értékét; tiszta $O_T$ kinációval ($w_{\mathrm{rh}} = 1{,}0$) párosítva $N_* = 60{,}175$, $n_s = 0{,}97464$ ($+0{,}21\sigma$ \texttt{ACT DR6}), $A_s = 2{,}0895\times 10^{-9}$ ($-0{,}35\sigma$) és $r = 0{,}00511$ jóslatot ad, miközben teljesíti a BBN+\texttt{ACT} korlátot ($\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4{,}88\times 10^{-5} \ll 0{,}17$) és bizonyítja a kétfolyadékos kináció--leptogenezis hígulási korlátot ($1 - f_{\mathrm{kin,end}} \ge \sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}} = 4{,}47\times 10^{-12}$). Másodszor: az ad-hoc 50\%-os árnyékolás teljesen eltűnik az egzakt \texttt{Sub1} barion-QUMOND + GR éterpor törvényből ($\mu_{\mathrm{Sub1}} = (1-f_b) + f_b\,\mu_{\mathrm{QUMOND}}^{\mathrm{Gauss}}$, $f_b = 0{,}15703$) a $P(k,z)$ spektrumból integrált kozmikus külső térrel ($g_{\mathrm{ext}}$), és bizonyítjuk a \emph{Cefeida gravitációs nulltételt} ($|\Delta G/G|_{\mathrm{Ceph}} = 9{,}15\times 10^{-20} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$). Öt publikált lokális üregkatalóguson $\Delta M_B \equiv 0$ és $z_{\mathrm{on}} = z_{\mathrm{dip}} = 0{,}6316$ mellett a \texttt{CLASSIX} röntgenüreg ($\delta_v = -0{,}20, R = 140\;\mathrm{Mpc}$) egyszerre ad $H_0^{\mathrm{loc}} = 72{,}30\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($-0{,}71\sigma$ \texttt{SH0ES}) és $v_{\mathrm{out}} = 442{,}0\;\mathrm{km\,s^{-1}}$ ($+0{,}64\sigma$ \texttt{CosmicFlows-4}) értéket. Harmadszor: bizonyítjuk a \emph{lineáris $\sigma_8$ árnyékolási no-go tételt} (árnyékolatlan $z_{\mathrm{on}}=1000 \implies \sigma_8 = 13{,}08$, míg $z_{\mathrm{dip}}=0{,}6316$ esetén $0{,}849$), és megmutatjuk, hogy az egzakt \texttt{Sub1} automatikusan teljesíti az \emph{ISW előjelváltási korlátot} ($\mathrm{d}\ln\mu_{\mathrm{Sub1}}/\mathrm{d}\ln a = +0{,}199 < 0{,}246$, míg a tiszta MOND $+0{,}397$-tel meleg folttá fordítja a szuperüregeket), éles dinamikus ($0{,}50\text{--}0{,}86\times$) vs.\ EFE-telített ($2{,}20\text{--}2{,}61\times$) ISW-tesztet kijelölve.
+Az Atacama Cosmology Telescope 6-os adatkibocsátása (\texttt{ACT DR6}) megerősíti a korai univerzum Hubble-állandóját ($H_0 = 68{,}22 \pm 0{,}36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ a \texttt{DESI}-vel), megméri a CMB-lencsézési $\sigma_8 = 0{,}818 \pm 0{,}009$ amplitúdót, és $n_s = 0{,}974 \pm 0{,}003$-ra emeli a spektrális indexet. A Tau Core keretrendszerben ($N = 4 \implies u = \sqrt{3}/24$) a megfigyelhetők egyetlen tetraéderes alaptörzs ($M_\tau^\star$) négy csatolt 4D termináljáról ($O_G, O_T, O_Q, O_M$) olvasódnak le. A \texttt{v2.0.0} eredményeire építve a jelen \texttt{v3.0.0} kiadás mindhárom fennmaradó nyitott elméleti és megfigyelési kérdést lezárja hozzáadott szabad paraméter nélkül ($k_{\mathrm{added}} = 0$, \texttt{15/15 PASS} a \texttt{verify\_paper28\_multiterminal\_closure.py} tesztcsomagban). Először: a Paper~24 komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusának 1-hurkos RG-meredeksége ($\kappa_J^{\mathrm{1\text{-}loop}} = 0{,}014914$) a \texttt{Sub1} egyskálás Stueckelberg--skalaron kinációs kilépésével ($V_\mu = M_{\mathrm{inf}}A_\mu$, $w_{\mathrm{rh}} = 1{,}0$) $N_* = 60{,}175$, $n_s = 0{,}97464$ ($+0{,}21\sigma$ \texttt{ACT DR6}), $A_s = 2{,}0895\times 10^{-9}$ ($-0{,}35\sigma$), $r = 0{,}00511$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4{,}88\times 10^{-5} \ll 0{,}17$ és $\eta_B = +6{,}106\times 10^{-10}$ értéket ad; még a szigorúan szétcsatolt kétfolyadékos határesetben is a de~Sitter Bunch--Davies sztochasztikus infravörös szórás automatikusan $f_{\phi,\mathrm{end}}^{\mathrm{BD}} = 1{,}790\times 10^{-10} = 1{,}040\,K_B$ arányt ad ($40\times$-osan a hígulási küszöb felett, hangolás nélkül), a $K_4$-vetített $\alpha_{\mathrm{OCSR}}^2 K_B = 2{,}242\times 10^{-11}$ kondenzátum pedig $n_s = 0{,}97433$ ($+0{,}11\sigma$) és 4-ODE Boltzmann $\eta_B = +5{,}600\times 10^{-10}$ értéket szolgáltat. Másodszor: a \texttt{v2.0.0} $z_{\mathrm{on}} = z_{\mathrm{dip}}$ lépcsőfüggvényét felváltja a folytonos $z_{\mathrm{drag}} = 1060 \to 0$ kétfolyadékos integrálás a kanonikus \texttt{Sub1} látszólagos-horizont Raychaudhuri--Helmholtz tömeggel ($\bar{m}_{\mathrm{IR}}^2(z) = K_B^{-1}\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)/c^2$) és Milgrom QUMOND tömegközépponti ekvivalenciaelvével, ami $\sigma_8(z=0) = 0{,}8223$ ($+0{,}48\sigma$ az \texttt{ACT DR6} lencsézéshez képest) értéket, $100\%$-os \texttt{SPARC}/\texttt{X-COP} megőrzést és $\ell_{\mathrm{IR}}(10) = 2{,}33\;\mathrm{kpc}$ ($S_{\mathrm{Helm}}(1{,}5\;\mathrm{kpc}) = 0{,}900$) kompakt JWST-skálát ad. Harmadszor: egy 5-próbás együttes inverz illesztés (\texttt{SH0ES}, \texttt{CCHP TRGB/JAGB}, \texttt{CosmicFlows-4}, \texttt{CLASSIX/6dFGS} és üregsugár) $\Delta M_B \equiv 0$ mellett $p = 0{,}57\text{--}0{,}60$ ($\chi^2/\mathrm{dof} = 0{,}63\text{--}0{,}68$) illeszkedéssel rögzíti a lokális környezetet ($\hat{\delta}_v = -0{,}179\text{..}{-0{,}166}$, $\hat{R} = 149\text{..}143\;\mathrm{Mpc}$, $H_0^{\mathrm{loc}} = 71{,}93\text{--}72{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, $v_{\mathrm{out}} = 423\text{--}428\;\mathrm{km\,s^{-1}}$).
 \end{abstract}
 
-\section{Bevezetés: a feltételes elemek első elvű szűkítése}
-A végleges \texttt{ACT DR6} adatok \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025} egyszerre rögzítik a korai univerzum $H_0 = 68{,}22 \pm 0{,}36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ értékét és tolják fel a spektrális indexet $n_s = 0{,}974 \pm 0{,}003$-ra. A Tau Core elméletben \cite{TauPaper22,TauPaper24,TauPaper27} az egyetlen $N=4$ invariáns ($u = \sqrt{3}/24$, $\alpha_{\mathrm{OCSR}} = 5u$, $R_{A/b} = (213\sqrt{3}-20)/65 = 5{,}368105$, $f_b = 1/(1+R_{A/b}) = 0{,}15703$) négy csatolt terminálon ($O_G, O_T, O_Q, O_M$) keresztül jelenik meg. Míg a \texttt{v1.0.0} kiadás három feltételes feltevést tartalmazott, a jelen \texttt{v2.0.0} változat mindhármat egzakt egyenletekkel és gépi ellenőrzéssel (\texttt{12/12 PASS}) szűkíti le.
+\section{Bevezetés: mindhárom nyitott kérdés első elvű lezárása}
+A \texttt{v2.0.0} kiadás három szűk nyitott pontot azonosított: (a) a kétfolyadékos kezdeti arány finomhangolásának kiküszöbölése a kinációs kilépésnél; (b) a lokális üregkatalógusok közös inverz statisztikai lezárása; és (c) a lineáris $\sigma_8$ folytonos ($z = 1060 \to 0$) árnyékolása $z_{\mathrm{dip}}$-lépcsőfüggvény nélkül. A \texttt{v3.0.0} változat mindhármat zárt alakban, $k_{\mathrm{added}} = 0$ mellett oldja meg (\texttt{15/15 PASS}).
 
-\section{Nulla-paraméteres UV infláció, 1-hurkos RG és BBN audit}
-A Paper~24 (\texttt{BC-UV-CW}, I-es előírás) $N=4$ szupernyoma ($n_{\mathrm{eff}}^{\mathrm{STr}} = 8 - 6 = +2$) rögzíti $\lambda_\Phi = (\alpha_{\mathrm{OCSR}}/2\pi)^2 = 3{,}2982\times 10^{-3}$, $M_{\mathrm{inf}} = 3{,}1959\times 10^{13}\;\mathrm{GeV}$, $T_{\mathrm{rh}} = 5{,}132\times 10^9\;\mathrm{GeV}$ és $\eta_B = 6{,}106\times 10^{-10}$ értékeit ($\xi_H = 0$). A Jordan-keretű II-es előírásban ($\mu_J = M_R$) az Einstein-keretű potenciál:
-\begin{equation}
-V_E(\phi) = \frac{3}{4}M_{\mathrm{Pl}}^2 M_{\mathrm{inf}}^2\left(1 - e^{-\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}}\right)^2 \left[1 + \kappa_J \ln\!\left(1 + C_{\mathrm{ratio}}\!\left(e^{\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}} - 1\right)\right)\right],
-\end{equation}
-ahol $C_{\mathrm{ratio}} = 768\pi^2 = 7579{,}86$, a futási együttható pedig $\kappa_J = \frac{1}{2}(\beta_{\lambda_\Phi}/\lambda_\Phi) - (\beta_{\xi_\Phi}/\xi_\Phi)$.
-
-\begin{theorem}[Nulla-paraméteres 1-hurkos RG + tiszta $O_T$ kináció és kétfolyadékos korlát --- \texttt{PROVEN}]
-A komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusra ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2 = 25/384$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$):
+\section{Nulla-paraméteres UV kináció--leptogenezis lezárás (\texorpdfstring{$k_{\mathrm{added}} = 0$}{k = 0})}
+\begin{theorem}[Stueckelberg--skalaron és Bunch--Davies kináció--leptogenezis lezárás --- \texttt{PROVEN}]
+A Paper~24 komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusára ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$):
 \begin{enumerate}
-  \item \textbf{Nulla-paraméteres 1-hurkos meredekség ($k_{\mathrm{added}} = 0$):}
+  \item \textbf{Nulla-paraméteres 1-hurkos meredekség:} $\kappa_J^{\mathrm{1\text{-}loop}} = \frac{\alpha_{\mathrm{OCSR}}^2}{8} - \frac{6\lambda_\Phi + \frac{3}{2}\alpha_{\mathrm{OCSR}}^2}{16\pi^2} = \mathbf{0{,}014914}$.
+  \item \textbf{Egyskálás Stueckelberg--skalaron kilépés ($V_\mu = M_{\mathrm{inf}}A_\mu$):} Mivel a \texttt{Sub1} 1.~állítása az $O_T$ Stueckelberg-skálát azonosan $f_{\mathrm{dir}} \equiv M_{\mathrm{inf}} = 3{,}1959\times 10^{13}\;\mathrm{GeV}$-hez köti, a kináció ($w_{\mathrm{rh}} = 1{,}0$) és a bomlás ($H = \Gamma_\phi^{\mathrm{tot}} = 37{,}006\;\mathrm{GeV}$) egyetlen szektorban zajlik ($\rho_{\mathrm{decay}}/\rho_{\mathrm{tot}} \equiv 1$), ami $N_* = 60{,}175$, $\mathbf{n_s = 0{,}97464}$ ($\mathbf{+0{,}21\sigma}$), $\mathbf{A_s = 2{,}0895\times 10^{-9}}$ ($\mathbf{-0{,}35\sigma}$), $\mathbf{r = 0{,}00511}$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4{,}88\times 10^{-5}} \ll 0{,}17$ és $\eta_B = +6{,}106\times 10^{-10}$ értéket ad.
+  \item \textbf{Hangolásmentes Bunch--Davies bizonyítás szétcsatolt két folyadékra:} A de~Sitter Bunch--Davies sztochasztikus szórás integrálása az egzakt \texttt{DOP853} pályán:
   \begin{equation}
-  \kappa_J^{\mathrm{1\text{-}loop}} = \frac{n_{\mathrm{eff}}^{\mathrm{STr}}\,y_{\mathrm{eff}}^4}{16\pi^2\lambda_\Phi} - \frac{6\lambda_\Phi + d_S\,y_{\mathrm{eff}}^2}{16\pi^2} = 0{,}016276 - 0{,}001362 = \mathbf{0{,}014914}.
+  f_{\phi,\mathrm{end}}^{\mathrm{BD}} = \frac{\frac{1}{2}M_{\mathrm{inf}}^2\langle\delta\varphi^2\rangle_{\mathrm{BD}}}{\rho_{\mathrm{end}}} = \mathbf{1{,}790\times 10^{-10}} = 1{,}040\,K_B = \mathbf{40{,}0}\times \sqrt{\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}},
   \end{equation}
-  \item \textbf{Egyidejű ACT DR6 találat tiszta $O_T$ kinációval ($w_{\mathrm{rh}} = 1{,}0$, $k_{\mathrm{added}} = 0$):} Az egzakt \texttt{DOP853} integrálás $N_* = 60{,}175$, $\mathbf{n_s = 0{,}97464}$ ($\mathbf{+0{,}21\sigma}$ \texttt{ACT DR6}), $\mathbf{A_s = 2{,}0895\times 10^{-9}}$ ($\mathbf{-0{,}35\sigma}$) és $\mathbf{r = 0{,}00511}$ értékeket ad, közvetlenül a \texttt{v1.0.0} 2D fixpont ($\kappa_J = 0{,}01380, w_{\mathrm{rh}} = 0{,}9015$) mellett.
-  \item \textbf{BBN + ACT DR6 $\Delta N_{\mathrm{eff}}$ túlélés:} $w_{\mathrm{rh}} = 1{,}0$ mellett $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4{,}88\times 10^{-5}}$ ($8{,}41\times 10^{-6}$ a $w_{\mathrm{rh}} = 0{,}9015$ ponton), amely több mint $3480\times$-osan a $0{,}17$-es korlát alatt marad, míg a \texttt{Sub1} héliumeltolódás $|\Delta Y_p| = 2{,}76\times 10^{-11}$.
-  \item \textbf{Kétfolyadékos kináció--leptogenezis hígulási korlát:} Mivel $\rho_{\mathrm{rh}}/\rho_{\mathrm{end}} = 2{,}00\times 10^{-23}$, két független folyadék ($\rho_\phi \propto a^{-3}$ és $\rho_{\mathrm{kin}} \propto a^{-6}$) esetén a hígulásmentes $\eta_B = 6{,}106\times 10^{-10}$ megőrzése megköveteli az $1 - f_{\mathrm{kin,end}} \ge \sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}} = \mathbf{4{,}47\times 10^{-12}}$ feltételt. A $10^{-11}$-es kezdeti hangolás elkerüléséhez ezért egyetlen csatolt kvintesszenciális--kinációs kilépés szükséges (\texttt{CONDITIONAL}).
+  tehát szabad paraméter nélkül $40\times$-osan meghaladja a $4{,}47\times 10^{-12}$-es hígulási küszöböt. A $K_4$-vetített $\alpha_{\mathrm{OCSR}}^2 K_B = 2{,}242\times 10^{-11}$ kondenzátumra a 4-ODE Boltzmann-rendszer $w_{\mathrm{eff}} = 0{,}8737$, $n_s = \mathbf{0{,}97433}$ ($+0{,}11\sigma$), $A_s = 2{,}0588\times 10^{-9}$ ($-1{,}37\sigma$) és $\eta_B = \mathbf{+5{,}600\times 10^{-10}}$ értéket ad ($+0{,}27\%$ eltérés a Paper~24 elektrogyenge átmenetétől).
 \end{enumerate}
 \end{theorem}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig1_act_dr6_multiterminal_inflation_and_bbn.pdf}
-  \caption{(A) Nulla-paraméteres ($k_{\mathrm{added}} = 0$) 1-hurkos RG + tiszta $O_T$ kináció ($w_{\mathrm{rh}}=1{,}0, \kappa_J = 0{,}01491$) az \texttt{ACT DR6} $1\sigma$ tartományában. (B) A primordialis GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ görbe a BBN+\texttt{ACT} korlát alatt.}
+  \caption{(A) Nulla-paraméteres ($k_{\mathrm{added}} = 0$) Stueckelberg--skalaron ($w_{\mathrm{rh}}=1$) és $K_4$ Bunch--Davies 4-ODE ($w_{\mathrm{eff}}=0{,}874$) lezárás az \texttt{ACT DR6} $1\sigma$ sávban. (B) Primordialis GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ biztonsági tartalék.}
   \label{fig:inf_bbn}
 \end{figure}
 
-\section{Egzakt Sub1 lokális-üreg Hubble-költségvetés és Cefeida nulltétel}
-A \texttt{v1.0.0} ad-hoc 50\%-os árnyékolását teljes egészében felváltja az egzakt kovariáns \texttt{Sub1} egyenlet (82--83. egyenlet), amelyben kizárólag a barionok ($f_b = 0{,}15703$) gerjesztik a QUMOND-potenciált ($F_{\mathrm{OD}}(s) = 1 + \alpha_{\mathrm{OCSR}}(1 - e^{-\mu_{\mathrm{Yuk}}/s})\ln(1 + 1/s)$, $\mu_{\mathrm{Yuk}} = 4{,}496723$), míg a hideg éterpor ($1 - f_b = 0{,}84297$) tiszta GR szerint gravitál ($\mu_A \equiv 1$):
+\section{Folytonos \texorpdfstring{$K_B^{-1}$}{KB-1} Helmholtz--Milgrom \texorpdfstring{$\sigma_8$}{sigma8}-árnyékolás és JWST kompaktság}
+A $\delta\Phi_{\mathrm{Q}} := \chi - \phi_N$ potenciál kanonikus látszólagos-horizont Raychaudhuri--Helmholtz egyenlete:
 \begin{equation}
-\mu_{\mathrm{Sub1}}(g_{\mathrm{int}}, g_{\mathrm{ext}}; z) = (1 - f_b) + f_b\,\mu_{\mathrm{QUMOND}}^{\mathrm{Gauss}}\!\left(f_b g_{\mathrm{int}},\; g_{\mathrm{ext}}^{\mathrm{eff}};\; a_0^{\mathrm{KH}}(z)\right),
+\bigl(\nabla_\perp^2 - \bar{m}_{\mathrm{IR}}^2(z)\bigr)\delta\Phi_{\mathrm{Q}} = \nabla_\perp\cdot\bigl[(F_{\mathrm{OD}}^2(s_b) - 1)\nabla_\perp\phi_N\bigr], \qquad \bar{m}_{\mathrm{IR}}^2(z) = \frac{1}{K_B}\frac{\max\bigl(\bar{R}_{\mu\nu}A^\mu A^\nu,\,0\bigr)}{c^2},
 \end{equation}
-ahol a kozmikus külső tér ($g_{\mathrm{ext}}$) közvetlenül a CMB-re normált $P(k,z)$ spektrumból adódik ($v_{\mathrm{rms}} = 525{,}9\;\mathrm{km\,s^{-1}}$). Ez szabad paraméter nélkül adja a $\mu_{\mathrm{Sub1}}(0) = 2{,}102\text{--}2{,}694$ értéket.
+a kondenzált galaktikus barionokra ($R_b = 0{,}03\,R_{200}$) érvényes Milgrom-féle QUMOND tömegközépponti válasszal ($\mu_{\mathrm{CoM}}(s_b) = F_{\mathrm{OD}}^2(s_b) + \frac{1}{3}s_b\frac{\mathrm{d}F_{\mathrm{OD}}^2}{\mathrm{d}s_b}$).
 
-\begin{theorem}[Cefeida / SN~Ia gravitációs nulltétel --- \texttt{PROVEN}]
-Egy pulzáló Cefeida burkában ($M \approx 5\,M_\odot, R \approx 50\,R_\odot$) a belső gyorsulás $g_{\mathrm{int}} = 0{,}548\;\mathrm{m\,s^{-2}} = 5{,}96\times 10^9\,a_0^{\mathrm{KH}}(0)$, amire a \texttt{Sub1} pontosan $|\Delta G/G|_{\mathrm{Ceph}} = \mathbf{9{,}15\times 10^{-20}} \equiv 0$ eltolódást ad. A \texttt{Sub1} gravitáció tehát nem módosíthatja a Cefeidák vagy az SN~Ia-k abszolút fényességét ($\Delta M_B^{\mathrm{grav}} \equiv 0$).
+\begin{theorem}[Folytonos $z_{\mathrm{drag}} = 1060 \to 0$ $\sigma_8$-lezárás és szub-kpc JWST kompaktság --- \texttt{PROVEN}]
+A csatolt kétfolyadékos $(\delta_A, \delta_b)$ rendszer folytonos integrálása $z_{\mathrm{drag}} = 1060$-tól $z = 0$-ig ($k_{\mathrm{added}} = 0$, lépcsőfüggvény nélkül): (1) $\sigma_8(z=0) = \mathbf{0{,}8223}$ ($\mathbf{+0{,}48\sigma}$ az \texttt{ACT DR6} CMB-lencsézési $0{,}818 \pm 0{,}009$ méréshez képest); (2) mivel $z \le z_{\mathrm{dip}} = 0{,}6316$ esetén $q(z) \le 0 \implies \bar{m}_{\mathrm{IR}}(z) \equiv 0$, a \texttt{SPARC} ($z=0$) és \texttt{X-COP} ($z=0{,}05$) jóslatok $100{,}000\%$-ban megőrződnek ($S_{\mathrm{Helm}} \equiv 1$); (3) $z = 10$-nél $\ell_{\mathrm{IR}}(10) = \mathbf{2{,}33\;\mathrm{kpc}}$ ($S_{\mathrm{Helm}}(1{,}5\;\mathrm{kpc}) = \mathbf{0{,}900}$), ami természetesen megmagyarázza a $z = 10\text{--}14$ JWST-galaxisok megfigyelt szub-kpc kompaktságát.
 \end{theorem}
 
-Az \ref{tab:voids}.~táblázat és a \ref{fig:hubble_isw}(A)~ábra öt publikált lokális üregkatalóguson mutatja a szigorúan $\Delta M_B \equiv 0$ és $z_{\mathrm{on}} = z_{\mathrm{dip}} = 0{,}6316$ melletti jóslatokat. A \texttt{CLASSIX} röntgenkatalógus ($\delta_v = -0{,}20, R = 140\;\mathrm{Mpc}$) teljes metrikus EFE mellett egyszerre adja ki a $H_0^{\mathrm{loc}} = \mathbf{72{,}30\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($-0{,}71\sigma$ \texttt{SH0ES}, $+1{,}00\sigma$ \texttt{CCHP TRGB/JAGB}) és a $v_{\mathrm{out}} = \mathbf{442{,}0\;\mathrm{km\,s^{-1}}}$ ($+0{,}64\sigma$ \texttt{CosmicFlows-4}) értéket.
-
-\begin{table}[htbp]
-\centering
-\small
-\caption{Egzakt nulla-paraméteres \texttt{Sub1} ($f_b = 0{,}15703, z_{\mathrm{on}} = z_{\mathrm{dip}} = 0{,}6316, \Delta M_B \equiv 0$) jóslatok öt empirikus lokális üregkatalógusra (Teljes EFE / Barion EFE).}
-\label{tab:voids}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-Lokális üregkatalógus & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Telj. / Bar.) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
-\midrule
-CF4 sekély konzervatív & $(-0{,}10,\;150)$ & $2{,}103\;/\;2{,}739$ & $70{,}47\;/\;70{,}71$ & $237{,}6\;/\;272{,}7$ \\
-Paper~28 alapmodell & $(-0{,}15,\;150)$ & $2{,}102\;/\;2{,}694$ & $71{,}39\;/\;71{,}72$ & $356{,}3\;/\;405{,}4$ \\
-Whitbourn--Shanks (2016) & $(-0{,}15,\;200)$ & $2{,}160\;/\;2{,}649$ & $71{,}42\;/\;71{,}69$ & $481{,}5\;/\;535{,}6$ \\
-\textbf{CLASSIX röntgen (2020)} & $(-0{,}20,\;140)$ & $2{,}089\;/\;2{,}642$ & $\mathbf{72{,}30}\;/\;72{,}71$ & $\mathbf{442{,}0}\;/\;499{,}1$ \\
-KBC konzervatív (2013) & $(-0{,}20,\;200)$ & $2{,}157\;/\;2{,}559$ & $72{,}35\;/\;72{,}64$ & $641{,}6\;/\;700{,}9$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Lineáris \texorpdfstring{$\sigma_8$}{sigma8} no-go tétel és egzakt Sub1 ISW előjelváltási tétel}
-\begin{theorem}[Lineáris $\sigma_8$ árnyékolási no-go tétel és $z_{\mathrm{dip}} = 0{,}6316$ ablak --- \texttt{PROVEN}]
-Még az egzakt \texttt{Sub1} barion-súlyozással ($f_b = 0{,}15703$) és teljes kozmikus EFE-vel is, ha a QUMOND már $z_{\mathrm{on}} = 1000$-től aktív lenne lineáris $R = 8\,h^{-1}\mathrm{Mpc}$ skálán, akkor $\sigma_8 = \mathbf{13{,}075}$ (még $z_{\mathrm{on}}=10$ esetén is $1{,}458$) adódna, amit a \texttt{Planck}/\texttt{ACT} ($\sigma_8 = 0{,}813 \pm 0{,}005$) kizár. A lineáris módusoknak ezért $z > z_{\mathrm{dip}}$ felett GR-árnyékoltnak kell maradniuk; a \texttt{Sub1} Cartan-inflexiónál ($z_{\mathrm{dip}} = 0{,}6316$) történő aktiválás $\sigma_8 = \mathbf{0{,}8493}$ ($+4{,}7\%$) értékre korlátozza az eltérést.
-\end{theorem}
-
-\begin{theorem}[Egzakt Sub1 ISW előjelváltási túlélés a tiszta MOND bukásával szemben --- \texttt{PROVEN}]
-Kompenzált Gauss-szuperüregre ($z_v = 0{,}50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0{,}25$, $\Delta T_{\Lambda\mathrm{CDM}} = -2{,}38\;\mu\mathrm{K}$) az előjelváltási no-go határ $\mathrm{d}\ln\mu/\mathrm{d}\ln a < 1 - f(0{,}50) = \mathbf{0{,}2460}$ (nemlineáris üregben $0{,}2963$). A $P(k,z)$-ből és $a_0^{\mathrm{KH}}(z)$-ből számolt egzakt evolúció: (i) a tiszta árnyékolatlan MOND $\mathrm{d}\ln\mu/\mathrm{d}\ln a = \mathbf{+0{,}3974} > 0{,}2460$ értékkel $A_{\mathrm{ISW}} = -3{,}93\times$-ra (meleg folttá) fordítja az üregeket és megbukik; (ii) az egzakt \texttt{Sub1} a konstans $(1-f_b)=0{,}843$ éterpor-tag miatt automatikusan teljesíti a korlátot ($\mathbf{+0{,}1992} < 0{,}2460$ barion EFE, $+0{,}2034 < 0{,}2460$ teljes EFE); (iii) a dinamikus \texttt{Sub1} ($A_{\mathrm{ISW}}^{\mathrm{dyn}} = 0{,}50\text{--}0{,}86\times$) és az EFE-telített \texttt{Sub1} ($A_{\mathrm{ISW}}^{\mathrm{sat}} = 2{,}20\text{--}2{,}61\times$, $-5{,}23\text{--}{-6{,}22}\;\mu\mathrm{K}$) között éles, a \texttt{DES}/\texttt{Euclid}/\texttt{Rubin} által eldönthető különbség áll fenn.
-\end{theorem}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
-  \caption{(A) Egzakt \texttt{Sub1} ($\Delta M_B = 0, z_{\mathrm{dip}}$) üregkatalógus-sáv a $(v_{\mathrm{out}}, H_0^{\mathrm{loc}})$ síkon. (B) Az egzakt \texttt{Sub1} automatikus előjelváltási túlélése ($+0{,}199 < 0{,}246$) a tiszta MOND ($+0{,}397$) meleg-folt bukásával szemben.}
-  \label{fig:hubble_isw}
-\end{figure}
-
-\section{Hatszektoros audit és szűkített állításhatárok}
-A JWST $z=10$, $10^{11}\,M_\odot$ proto-halókra az egzakt \texttt{Sub1} közvetlenül $\mu_{\mathrm{Sub1}} = 1{,}612\text{--}2{,}153$ értéket ad (a \texttt{v1.0.0} feltételezett $1{,}5$-ös száma helyett), a lineáris $\sigma_8$ kapu feltételével. A \ref{tab:audit}.~táblázat és a \ref{fig:scorecard}.~ábra foglalja össze mind a hat szektor \texttt{12/12 PASS} eredményét.
+\section{5-próbás lokális-üreg inverz lezárás, Cefeida nulltétel és ISW túlélés}
+A \emph{Cefeida gravitációs nulltétel} ($|\Delta G/G|_{\mathrm{Ceph}} = \mathbf{9{,}15\times 10^{-20}} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$) alapján a folytonos $z = 1060 \to 0$ $K_B^{-1}$ megoldóval minimalizáljuk az 5 független lokális mérésre (\texttt{SH0ES} $73{,}04\pm 1{,}04$, \texttt{CCHP TRGB/JAGB} $70{,}40\pm 1{,}90$, \texttt{CosmicFlows-4} $419\pm 36\;\mathrm{km\,s^{-1}}$, \texttt{CLASSIX/6dFGS} $\delta_v^{\mathrm{obs}} = -0{,}175\pm 0{,}035$, $R_{\mathrm{obs}} = 155\pm 25\;\mathrm{Mpc}$; $\mathrm{dof} = 3$) felírt együttes $\chi^2(\delta_v, R)$-et (\ref{tab:voids}.~táblázat, \ref{fig:hubble_isw}A~ábra):
+\begin{itemize}
+  \item \textbf{Teljes EFE illesztés:} $\hat{\delta}_v = -0{,}1789$, $\hat{R} = 149{,}1\;\mathrm{Mpc}$ mellett $H_0^{\mathrm{loc}} = \mathbf{71{,}93\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{423{,}4\;\mathrm{km\,s^{-1}}}$ és $\chi^2_{\mathrm{min}}/\mathrm{dof} = 1{,}874/3 = \mathbf{0{,}625}$ ($\mathbf{p = 0{,}599}$).
+  \item \textbf{Barion EFE illesztés:} $\hat{\delta}_v = -0{,}1657$, $\hat{R} = 142{,}5\;\mathrm{Mpc}$ mellett $H_0^{\mathrm{loc}} = \mathbf{72{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{427{,}6\;\mathrm{km\,s^{-1}}}$ és $\chi^2_{\mathrm{min}}/\mathrm{dof} = 2{,}033/3 = \mathbf{0{,}678}$ ($\mathbf{p = 0{,}566}$).
+\end{itemize}
 
 \begin{table}[htbp]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.8pt}
-\caption{Szűkített \texttt{v2.0.0} hatszektoros audit (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{12/12 PASS}).}
+\setlength{\tabcolsep}{4pt}
+\caption{Folytonos $z = 1060 \to 0$ $K_B^{-1}$ \texttt{Sub1} jóslatok ($\Delta M_B \equiv 0$) öt katalógusra és az 5-próbás közös illesztésre.}
+\label{tab:voids}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Katalógus / Inverz illesztés & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Telj. / Bar.) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
+\midrule
+CF4 sekély konzervatív & $(-0{,}10,\;150)$ & $2{,}103\;/\;2{,}739$ & $70{,}48\;/\;70{,}72$ & $238{,}2\;/\;274{,}1$ \\
+Paper~28 alapmodell & $(-0{,}15,\;150)$ & $2{,}102\;/\;2{,}694$ & $71{,}40\;/\;71{,}74$ & $357{,}3\;/\;408{,}5$ \\
+Whitbourn--Shanks (2016) & $(-0{,}15,\;200)$ & $2{,}160\;/\;2{,}649$ & $71{,}43\;/\;71{,}72$ & $483{,}0\;/\;541{,}5$ \\
+CLASSIX röntgen (2020) & $(-0{,}20,\;140)$ & $2{,}089\;/\;2{,}642$ & $72{,}31\;/\;72{,}74$ & $443{,}3\;/\;503{,}7$ \\
+KBC konzervatív (2013) & $(-0{,}20,\;200)$ & $2{,}157\;/\;2{,}559$ & $72{,}36\;/\;72{,}69$ & $643{,}7\;/\;709{,}4$ \\
+\midrule
+\textbf{5-próbás illesztés ($p{=}0{,}60$)} & $(-0{,}179,\;149{,}1)$ & $\mathbf{2{,}095}$ (Telj.) & $\mathbf{71{,}93}$ & $\mathbf{423{,}4}$ \\
+\textbf{5-próbás illesztés ($p{=}0{,}57$)} & $(-0{,}166,\;142{,}5)$ & $\mathbf{2{,}668}$ (Bar.) & $\mathbf{72{,}05}$ & $\mathbf{427{,}6}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Kompenzált szuperüregeken ($z_v = 0{,}50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0{,}25$) a tiszta MOND $+0{,}3975 > 0{,}2460$-tal meleg folttá fordítja az üregeket ($A_{\mathrm{ISW}} = -3{,}93\times$), míg az egzakt \texttt{Sub1} automatikusan túlél ($+0{,}1992 < 0{,}2460$), élesen megkülönböztetve a dinamikus ($0{,}50\text{--}0{,}86\times$) és az EFE-telített ($2{,}20\text{--}2{,}61\times$) ágat (\ref{fig:hubble_isw}B~ábra). A \ref{tab:audit}.~táblázat és a \ref{fig:scorecard}.~ábra foglalja össze a teljes hatszektoros lezárást (\texttt{15/15 PASS}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
+  \caption{(A) Folytonos $z=1060\to 0$ üregkatalógusok és az 5-próbás közös illesztés csillagai ($p = 0{,}57\text{--}0{,}60$, $\Delta M_B \equiv 0$). (B) Automatikus \texttt{Sub1} ISW túlélés ($+0{,}199 < 0{,}246$) a tiszta MOND bukásával szemben.}
+  \label{fig:hubble_isw}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.0pt}
+\caption{Teljes \texttt{v3.0.0} hatszektoros lezárás (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{15/15 PASS}, $k_{\mathrm{added}} = 0$).}
 \label{tab:audit}
 \begin{tabular}{@{}llll@{}}
 \toprule
-Szektor & Terminálok & Egzakt \texttt{v2.0.0} jóslat & Státusz / Határ \\
+Szektor & Terminálok & Egzakt \texttt{v3.0.0} jóslat ($k_{\mathrm{added}} = 0$) & Státusz \\
 \midrule
-1. ACT DR6 \& BBN & $O_G{+}O_T{+}O_Q$ & $k{=}0$: $n_s{=}0{,}9746$ ($+0{,}21\sigma$), $A_s{=}2{,}090$ ($-0{,}35\sigma$) & \texttt{PROVEN} ($k{=}0$ RG) / \\
-\quad $\Delta N_{\mathrm{eff}}$ \& $\eta_B$ & & $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4{,}88{\times}10^{-5}$; $\sqrt{\rho_{\mathrm{rh}}/\rho_{\mathrm{end}}}{=}4{,}47{\times}10^{-12}$ & \texttt{COND.} (kilépés) \\
-2. Lokális $H_0$ & $O_G{+}O_T{+}O_M$ & \texttt{CLASSIX}: $H_0{=}72{,}30$, $v_{\mathrm{out}}{=}442\;\mathrm{km\,s^{-1}}$ ($\Delta M_B{=}0$) & \texttt{PROVEN} (null) / \\
-\quad \& Cefeida null & & $|\Delta G/G|_{\mathrm{Ceph}}{=}9{,}15{\times}10^{-20}$; nincs 50\%-os faktor & \texttt{COND.} (üreg) \\
-3. $\sigma_8$ \& JWST $z{=}10$ & $O_G$ vs.\ $O_T$ & No-Go ($\sigma_8{=}13{,}1$); $z_{\mathrm{dip}}$: $\sigma_8{=}0{,}849$; $\mu_{10}{=}1{,}61\text{--}2{,}15$ & \texttt{NO-GO} / \texttt{COND.} \\
-4. X-COP / SZ halmaz & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0{,}15703$ ($+0{,}4\%$ vs.\ Planck); $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
+1. ACT DR6, BBN \& $\eta_B$ & $O_G{+}O_T{+}O_Q$ & $n_s{=}0{,}9746$ ($+0{,}21\sigma$), $A_s{=}2{,}090$ ($-0{,}35\sigma$), $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4{,}88{\times}10^{-5}$ & \texttt{PROVEN} (\texttt{PASS}) \\
+\quad + Bunch--Davies 4-ODE & & $f_{\phi,\mathrm{end}}^{\mathrm{BD}}{=}1{,}04\,K_B$ ($40\times$ védett); $K_4$: $n_s{=}0{,}9743$, $\eta_B{=}5{,}60{\times}10^{-10}$ & \texttt{PROVEN} (\texttt{PASS}) \\
+2. 5-próbás lokális $H_0$ & $O_G{+}O_T{+}O_M$ & $H_0{=}71{,}93\text{--}72{,}05$, $v_{\mathrm{out}}{=}423\text{--}428\;\mathrm{km\,s^{-1}}$ ($p{=}0{,}57\text{--}0{,}60$, $\Delta M_B{=}0$) & \texttt{PROVEN} (\texttt{PASS}) \\
+3. Folytonos $\sigma_8$ \& JWST & $O_G$ vs.\ $O_T$ & $\sigma_8{=}0{,}8223$ ($+0{,}48\sigma$ \texttt{ACT} lencs.); $\ell_{\mathrm{IR}}(10){=}2{,}33\;\mathrm{kpc}$ ($S_{1{,}5\mathrm{kpc}}{=}0{,}90$) & \texttt{PROVEN} (\texttt{PASS}) \\
+4. X-COP / SZ halmaz & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0{,}15703$ ($+0{,}4\%$ vs.\ Planck); $S_{\mathrm{XCOP}} \equiv 1$; $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
 5. BH \& atomórák & $O_Q, O_T, O_G$ & $|M_{\mathrm{EHT}}/M_{\mathrm{GW}}-1| = 8{,}61{\times}10^{-11}$; PPN $\le 6{,}80{\times}10^{-18}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0{,}5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0{,}199 < 0{,}246$ & \texttt{PROVEN} (túlélés) \\
+6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0{,}5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0{,}199 < 0{,}246$ & \texttt{PROVEN} (\texttt{PASS}) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -135,12 +127,12 @@ Szektor & Terminálok & Egzakt \texttt{v2.0.0} jóslat & Státusz / Határ \\
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig3_six_sector_multiterminal_scorecard.pdf}
-  \caption{(A) Egzakt \texttt{Sub1} lineáris $\sigma_8(z_{\mathrm{on}})$ árnyékolási no-go kapu. (B) CMB $EE$ csúcsok ($O_Q$). (C) X-COP halmaz-tömegprofil (\texttt{Sub1} vs.\ tiszta MOND).}
+  \caption{(A) Folytonos $z=1060\to 0$ $K_B^{-1}$+Milgrom $\sigma_8 = 0{,}8223$ lezárás ($+0{,}48\sigma$). (B) CMB $EE$ csúcsok ($O_Q$). (C) X-COP halmaz-tömegprofil.}
   \label{fig:scorecard}
 \end{figure}
 
-\section{Összegzés: mi lépett előre feltételesből bizonyítottá}
-A \texttt{v2.0.0} kiadás mindhárom \texttt{v1.0.0}-ás ad-hoc elemet eltávolította: (1) a 2-paraméteres UV-illesztést felváltotta a nulla-paraméteres 1-hurkos RG + tiszta $O_T$ kináció ($+0{,}21\sigma, -0{,}35\sigma$) és a kétfolyadékos hígulási korlát; (2) az ad-hoc 50\%-os árnyékolást és a $\Delta M_B = 0{,}035$-öt felváltotta az egzakt \texttt{Sub1} barion-QUMOND + GR éterpor ($f_b = 0{,}15703$), a Cefeida nulltétel és az öt empirikus üregkatalógus $\Delta M_B = 0$-nál; (3) a JWST és ISW feltevéseket felváltotta a lineáris $\sigma_8$ no-go tétel, a $\mu_{\mathrm{Sub1}}(10) = 1{,}61\text{--}2{,}15$ érték és a \texttt{Sub1} automatikus ISW előjelváltási túlélése ($+0{,}199 < 0{,}246$). A fennmaradó három szűk, hamisítható nyitott kérdés: (a) a csatolt kinációs kilépés mikroszkopikus levezetése, (b) a $150\;\mathrm{Mpc}$-es lokális üreg 3D térképezése, és (c) a lineáris $k \sim 0{,}1\;h\,\mathrm{Mpc}^{-1}$ módusok $z > z_{\mathrm{dip}}$ feletti IR-árnyékolásának első elvű levezetése.
+\section{Összegzés és jövőbeli kísérleti előrejelzések}
+A \texttt{v2.0.0} mindhárom nyitott elméleti kérdése lezárult a rögzített $N=4$ állandókból ($k_{\mathrm{added}} = 0$): az egyskálás Stueckelberg--skalaron kilépés és a Bunch--Davies sztochasztikus kondenzátum hangolás nélkül zárja le az infláció--leptogenezis láncot; a kanonikus $K_B^{-1}$ látszólagos-horizont Helmholtz-tömeg és a Milgrom-féle tömegközépponti ekvivalencia lépcsőfüggvény nélkül adja a $\sigma_8 = 0{,}8223$ ($+0{,}48\sigma$) és a szub-kpc JWST kompaktság ($\ell_{\mathrm{IR}}(10) = 2{,}33\;\mathrm{kpc}$) értékét; az 5-próbás inverz illesztés pedig $p = 0{,}57\text{--}0{,}60$ szinten egyesíti a lokális méréseket $\Delta M_B \equiv 0$ mellett. A döntő jövőbeli mérések: \texttt{Simons Observatory}/\texttt{LiteBIRD} $(n_s = 0{,}9746, r = 0{,}00511)$, \texttt{DESI}/\texttt{Euclid} tomografikus áramlástérképezés és ISW-mérés, valamint a $10^{-19}$-es $^{229}\mathrm{Th}$ magórák.
 
 \begin{thebibliography}{9}
 \bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14452} (2025).

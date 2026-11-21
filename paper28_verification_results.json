@@ -1,144 +1,151 @@
 {
-  "paper": "Tau Core Paper 28 (v2.0.0) \u2014 Tightened Four-Terminal Cosmological Closure",
-  "part1_inflation_bbn": {
+  "paper": "Tau Core Paper 28 (v3.0.0) \u2014 Complete Four-Terminal Cosmological Closure",
+  "part1_inflation_bbn_leptogenesis": {
     "presc_I_baseline": {
-      "N_star": 51.41246069702876,
-      "n_s": 0.9619894025697563,
-      "A_s": 2.1011475963648704e-09,
-      "r": 0.004262618193157813,
+      "N_star": 51.412460697028834,
+      "n_s": 0.9619894025697634,
+      "A_s": 2.101147596364881e-09,
+      "r": 0.004262618193157748,
       "T_rh": 5132271399.481489,
       "eta_B": 6.106e-10
     },
-    "zero_param_1loop_kination": {
-      "kappa_lam": 0.016276,
-      "beta_xi_over_xi": 0.001362,
+    "stueckelberg_scalaron_single_scale_k0": {
       "kappa_J_1loop": 0.014914,
       "w_rh": 1.0,
       "N_star": 60.175,
       "n_s": 0.97464,
       "z_ns_ACT": 0.21,
-      "A_s": 2.0894811699234413e-09,
+      "A_s": 2.0894811699232845e-09,
       "z_As_Planck": -0.35,
       "r": 0.00511,
-      "Delta_Neff_GW_w1": 4.8800782335662304e-05,
-      "two_fluid_sqrt_rho_ratio": 4.469930541636973e-12
+      "eta_B": 6.106e-10,
+      "Delta_Neff_GW": 4.880078233566232e-05
     },
-    "v1_2d_fixed_point": {
-      "kappa_J": 0.013797,
-      "w_rh": 0.9015,
-      "N_star": 59.718,
-      "n_s": 0.974,
-      "A_s": 2.10000000000001e-09,
-      "r": 0.00502,
-      "Delta_Neff_GW": 8.410089653041781e-06
+    "bunch_davies_two_fluid_closure_k0": {
+      "f_phi_BD_exact": 1.790160224266123e-10,
+      "ratio_BD_to_Sub1_KB": 1.0395,
+      "ratio_BD_to_dilution_threshold": 40.0,
+      "f_phi_K4_projected": 2.2424209752910238e-11,
+      "w_eff_K4": 0.8737,
+      "N_star_K4": 59.587,
+      "n_s_K4": 0.97433,
+      "A_s_K4": 2.058849805223923e-09,
+      "eta_B_K4_4ODE": 5.600295639394708e-10
     },
     "bbn_Sub1_Delta_Yp": 2.7554868944376105e-11
   },
-  "part2_exact_sub1_and_six_sectors": {
+  "part2_continuous_closure_and_six_sectors": {
     "linear_P_k_v_rms_kms": 525.9,
     "cepheid_grav_null_dG_over_G": 9.150309985827567e-20,
-    "local_void_catalogs_dMB0_zdip": {
+    "continuous_KB_Milgrom_sigma8": {
+      "sigma8_z0_continuous": 0.8223,
+      "z_vs_ACT_DR6_lensing": 0.48,
+      "S_SPARC_z0": 1.0,
+      "S_XCOP_z005": 1.0
+    },
+    "joint_5probe_local_void_inverse_closure": {
+      "totEFE": {
+        "delta_v_hat": -0.1789,
+        "R_Mpc_hat": 149.1,
+        "H0_loc_dMB0": 71.93,
+        "v_out_kms": 423.4,
+        "f_eff": 0.6981,
+        "chi2_min": 1.874,
+        "dof": 3,
+        "p_value": 0.599
+      },
+      "barEFE": {
+        "delta_v_hat": -0.1657,
+        "R_Mpc_hat": 142.5,
+        "H0_loc_dMB0": 72.05,
+        "v_out_kms": 427.6,
+        "f_eff": 0.7961,
+        "chi2_min": 2.033,
+        "dof": 3,
+        "p_value": 0.566
+      }
+    },
+    "local_void_catalogs_continuous_dMB0": {
       "CF4_shallow": {
         "delta_v": -0.1,
         "R_Mpc": 150.0,
-        "dH0_OT_loc": 0.25,
         "totEFE": {
           "mu_Sub1_z0": 2.103,
-          "f_eff": 0.6965,
-          "dH0_OG": 1.58,
-          "H0_loc_dMB0": 70.47,
-          "v_out_kms": 237.6
+          "f_eff": 0.6985,
+          "H0_loc_dMB0": 70.48,
+          "v_out_kms": 238.2
         },
         "barEFE": {
           "mu_Sub1_z0": 2.739,
-          "f_eff": 0.7995,
-          "dH0_OG": 1.82,
-          "H0_loc_dMB0": 70.71,
-          "v_out_kms": 272.7
+          "f_eff": 0.8036,
+          "H0_loc_dMB0": 70.72,
+          "v_out_kms": 274.1
         }
       },
       "Paper28_baseline": {
         "delta_v": -0.15,
         "R_Mpc": 150.0,
-        "dH0_OT_loc": 0.375,
         "totEFE": {
           "mu_Sub1_z0": 2.102,
-          "f_eff": 0.6964,
-          "dH0_OG": 2.38,
-          "H0_loc_dMB0": 71.39,
-          "v_out_kms": 356.3
+          "f_eff": 0.6984,
+          "H0_loc_dMB0": 71.4,
+          "v_out_kms": 357.3
         },
         "barEFE": {
           "mu_Sub1_z0": 2.694,
-          "f_eff": 0.7923,
-          "dH0_OG": 2.7,
-          "H0_loc_dMB0": 71.72,
-          "v_out_kms": 405.4
+          "f_eff": 0.7984,
+          "H0_loc_dMB0": 71.74,
+          "v_out_kms": 408.5
         }
       },
       "Whitbourn_Shanks_2016": {
         "delta_v": -0.15,
         "R_Mpc": 200.0,
-        "dH0_OT_loc": 0.375,
         "totEFE": {
           "mu_Sub1_z0": 2.16,
-          "f_eff": 0.7058,
-          "dH0_OG": 2.41,
-          "H0_loc_dMB0": 71.42,
-          "v_out_kms": 481.5
+          "f_eff": 0.708,
+          "H0_loc_dMB0": 71.43,
+          "v_out_kms": 483.0
         },
         "barEFE": {
           "mu_Sub1_z0": 2.649,
-          "f_eff": 0.7851,
-          "dH0_OG": 2.68,
-          "H0_loc_dMB0": 71.69,
-          "v_out_kms": 535.6
+          "f_eff": 0.7937,
+          "H0_loc_dMB0": 71.72,
+          "v_out_kms": 541.5
         }
       },
       "CLASSIX_Xray_2020": {
         "delta_v": -0.2,
         "R_Mpc": 140.0,
-        "dH0_OT_loc": 0.5,
         "totEFE": {
           "mu_Sub1_z0": 2.089,
-          "f_eff": 0.6942,
-          "dH0_OG": 3.16,
-          "H0_loc_dMB0": 72.3,
-          "v_out_kms": 442.0
+          "f_eff": 0.6962,
+          "H0_loc_dMB0": 72.31,
+          "v_out_kms": 443.3
         },
         "barEFE": {
           "mu_Sub1_z0": 2.642,
-          "f_eff": 0.7839,
-          "dH0_OG": 3.57,
-          "H0_loc_dMB0": 72.71,
-          "v_out_kms": 499.1
+          "f_eff": 0.7911,
+          "H0_loc_dMB0": 72.74,
+          "v_out_kms": 503.7
         }
       },
       "KBC_conservative_2013": {
         "delta_v": -0.2,
         "R_Mpc": 200.0,
-        "dH0_OT_loc": 0.5,
         "totEFE": {
           "mu_Sub1_z0": 2.157,
-          "f_eff": 0.7054,
-          "dH0_OG": 3.21,
-          "H0_loc_dMB0": 72.35,
-          "v_out_kms": 641.6
+          "f_eff": 0.7077,
+          "H0_loc_dMB0": 72.36,
+          "v_out_kms": 643.7
         },
         "barEFE": {
           "mu_Sub1_z0": 2.559,
-          "f_eff": 0.7706,
-          "dH0_OG": 3.5,
-          "H0_loc_dMB0": 72.64,
-          "v_out_kms": 700.9
+          "f_eff": 0.78,
+          "H0_loc_dMB0": 72.69,
+          "v_out_kms": 709.4
         }
       }
-    },
-    "sigma8_screening_theorem": {
-      "sigma8_unscreened_z1000": 13.075,
-      "sigma8_z_on_10": 1.458,
-      "sigma8_z_on_zdip_totEFE": 0.8493,
-      "sigma8_z_on_zdip_barEFE": 0.8795
     },
     "isw_supervoid_exact_Sub1": {
       "dT_LCDM_uK": -2.38,
@@ -150,8 +157,7 @@
         "passes_sign_flip": true,
         "A_ISW_dyn_lin": 0.5,
         "A_ISW_dyn_nlvoid": 0.86,
-        "A_ISW_EFE_sat": 2.61,
-        "dT_EFE_sat_uK": -6.22
+        "A_ISW_EFE_sat": 2.61
       },
       "Sub1_totEFE": {
         "mu_z05": 1.9111,
@@ -159,25 +165,22 @@
         "passes_sign_flip": true,
         "A_ISW_dyn_lin": 0.38,
         "A_ISW_dyn_nlvoid": 0.69,
-        "A_ISW_EFE_sat": 2.2,
-        "dT_EFE_sat_uK": -5.23
+        "A_ISW_EFE_sat": 2.2
       },
       "pure_MOND": {
         "mu_z05": 5.5455,
-        "dlnmu_dlna": 0.3974,
+        "dlnmu_dlna": 0.3975,
         "passes_sign_flip": false,
         "A_ISW_dyn_lin": -3.93,
         "A_ISW_dyn_nlvoid": -2.18,
-        "A_ISW_EFE_sat": 6.38,
-        "dT_EFE_sat_uK": -15.18
+        "A_ISW_EFE_sat": 6.38
       }
     },
     "cluster_f_b_tau": 0.15703,
-    "jwst_z10_exact_Sub1": {
+    "jwst_z10_compactness_closure": {
       "a0_z10_ratio": 6.586,
-      "mu_Sub1_vir_totEFE": 1.612,
-      "mu_Sub1_ta_totEFE": 1.629,
-      "mu_Sub1_ta_barEFE": 2.153
+      "l_IR_z10_kpc": 2.33,
+      "S_Helm_core_1p5kpc": 0.8997
     },
     "bh_eht_vs_gw_frac": 8.610896545117533e-11,
     "clock_ppn_modulation": 6.7974549726309615e-18,
@@ -188,6 +191,6 @@
       990.4
     ]
   },
-  "gates_passed": "12/12",
+  "gates_passed": "15/15",
   "all_gates_passed": true
 }
