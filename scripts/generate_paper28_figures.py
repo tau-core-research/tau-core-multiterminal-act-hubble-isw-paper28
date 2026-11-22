@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate 3 publication-grade vector PDF figures (both English and Hungarian editions)
-for Tau Core Paper 28 (v4.2.0) 100% from paper28_verification_results.json (zero hardcoded
+for Tau Core Paper 28 (v4.3.0) 100% from paper28_verification_results.json (zero hardcoded
 curves, zero duplicated magic constants, and full native Hungarian decimal-comma formatting).
 """
 from __future__ import annotations
@@ -175,49 +175,57 @@ def make_figures(lang: str = "en") -> None:
     dv_arr   = np.array(vc["delta_v"])
     dchi_l   = np.array(vc["dChi2_LCDM_vs_self0"])
     dchi_h2a = np.array(vc["dChi2_H2a_vs_self0"])
-    c_h2a    = g8["H2a_2sigma_ceiling"]
+    dchi_clx = np.array(vc["dChi2_H2a_CLASSIX120_comp_ruler_vs_self0"])
+    c_h2a    = g8["H2a_2sigma_ceiling_OG"]
+    c_clx    = g8["H2a_CLASSIX_120Mpc_compensated_2sigma_ruler"]
     dchi_bg  = g8["H2a_homogeneous_dv0"]["chi2_Pantheon_1341"] - g8["LCDM_homogeneous_dv0"]["chi2_Pantheon_1341"]
     kbc_dchi = g8["LCDM_uncompensated_KBC_nogo"]["chi2_Pantheon_1341"] - g8["LCDM_homogeneous_dv0"]["chi2_Pantheon_1341"]
 
-    ax1.plot(dv_arr, dchi_l, "--", color="#64748b", lw=1.8,
-             label=("$\\Lambda$CDM + 300 Mpc void ($\\Delta\\chi^2_{\\mathrm{minta}}$)" if hu else "$\\Lambda$CDM + 300 Mpc void ($\\Delta\\chi^2_{\\mathrm{self}}$)"))
-    ax1.plot(dv_arr, dchi_h2a, "-", color="#059669", lw=2.1,
-             label=(f"Paper 23 H2a ($\\Delta\\chi^2_{{0}}{{=}}{num_s(dchi_bg, '+.2f', hu)}$) + void" if hu
-                    else f"Paper 23 H2a ($\\Delta\\chi^2_{{0}}{{=}}{dchi_bg:+.2f}$) + void"))
+    ax1.plot(dv_arr, dchi_l, "--", color="#64748b", lw=1.7,
+             label=("$\\Lambda$CDM + 300 Mpc üreg" if hu else "$\\Lambda$CDM + 300 Mpc void"))
+    ax1.plot(dv_arr, dchi_h2a, "-", color="#059669", lw=2.0,
+             label=(f"H2a ($\\Delta\\chi^2_{{0}}{{=}}{num_s(dchi_bg, '+.2f', hu)}$) + 300 Mpc üreg ($O_G$)" if hu
+                    else f"H2a ($\\Delta\\chi^2_{{0}}{{=}}{dchi_bg:+.2f}$) + 300 Mpc void ($O_G$)"))
+    ax1.plot(dv_arr, dchi_clx, "-.", color="#7c3aed", lw=1.8,
+             label=("H2a + 120 Mpc komp. CLASSIX üreg" if hu else "H2a + 120 Mpc comp. CLASSIX void"))
     ax1.axhline(0.0, color="black", ls=":", lw=0.9)
     ax1.axhline(4.0, color="#dc2626", ls="--", lw=1.1,
                 label=("$2\\sigma$ görbületi korlát ($\\Delta\\chi^2 = +4{,}0$)" if hu
                        else "$2\\sigma$ curvature limit ($\\Delta\\chi^2 = +4.0$)"))
     ax1.scatter([-0.25], [kbc_dchi],
-                s=75, c="#dc2626", marker="X", edgecolors="black", zorder=8,
-                label=(f"Kompenzálatlan KBC ($-0{{,}}25$: ${num_s(kbc_dchi, '+.2f', hu)}$, kizárt!)" if hu
-                       else f"Uncompensated KBC ($-0.25$: ${kbc_dchi:+.2f}$, NO-GO!)"))
-    ax1.scatter([c_h2a["delta_v"]], [4.0], s=115, c="#0284c7", marker="*", edgecolors="black", zorder=9,
-                label=(f"H2a $+4$ plafon ($H_0^{{\\mathrm{{loc}}}}{{=}}{num_s(c_h2a['H0_joint_dMB0'], '.2f', hu)}$, ${num_s(c_h2a['z_vs_CCHP_HST_JWST_TRGB'], '+.2f', hu)}\\sigma$ CCHP)" if hu
-                       else f"H2a $+4$ ceiling ($H_0^{{\\mathrm{{loc}}}}{{=}}{c_h2a['H0_joint_dMB0']:.2f}$, ${c_h2a['z_vs_CCHP_HST_JWST_TRGB']:+.2f}\\sigma$ CCHP)"))
-    ax1.annotate((f"H2a $+4{{,}}0$ plafon ($\\delta_v{{=}}{num_s(c_h2a['delta_v'], '.3f', hu)}$)\n$H_0^{{\\mathrm{{loc}}}} = {num_s(c_h2a['H0_joint_dMB0'], '.2f', hu)}$" if hu
-                  else f"H2a $+4.0$ ceiling ($\\delta_v{{=}}{c_h2a['delta_v']:.3f}$)\n$H_0^{{\\mathrm{{loc}}}} = {c_h2a['H0_joint_dMB0']:.2f}$"),
-                 (c_h2a["delta_v"], 4.0), xytext=(-0.038, 22.5), fontsize=7.0, ha="center",
-                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#0284c7"))
+                s=70, c="#dc2626", marker="X", edgecolors="black", zorder=8,
+                label=(f"KBC ($-0{{,}}25$: ${num_s(kbc_dchi, '+.2f', hu)}$, kizárt!)" if hu
+                       else f"KBC ($-0.25$: ${kbc_dchi:+.2f}$, NO-GO!)"))
+    ax1.scatter([c_h2a["delta_v"]], [4.0], s=105, c="#0284c7", marker="*", edgecolors="black", zorder=9,
+                label=(f"300 Mpc $O_G$ plafon ($H_0^{{(O_G)}}{{=}}{num_s(c_h2a['H0_loc_dMB0'], '.2f', hu)}$)" if hu
+                       else f"300 Mpc $O_G$ ceiling ($H_0^{{(O_G)}}{{=}}{c_h2a['H0_loc_dMB0']:.2f}$)"))
+    ax1.scatter([c_clx["delta_v"]], [4.0], s=65, c="#f59e0b", marker="D", edgecolors="black", zorder=9,
+                label=(f"CLASSIX mérce plafon ($H_0^{{\\mathrm{{loc}}}}{{=}}{num_s(c_clx['H0_loc_dMB0'], '.2f', hu)}$, ${num_s(c_clx['z_vs_CCHP_HST_JWST_TRGB'], '+.2f', hu)}\\sigma$)" if hu
+                       else f"CLASSIX ruler ceiling ($H_0^{{\\mathrm{{loc}}}}{{=}}{c_clx['H0_loc_dMB0']:.2f}$, ${c_clx['z_vs_CCHP_HST_JWST_TRGB']:+.2f}\\sigma$)"))
+    ax1.annotate((f"CLASSIX komp. ($\\delta_v{{=}}{num_s(c_clx['delta_v'], '.2f', hu)}$)\n$H_0^{{\\mathrm{{loc}}}} = {num_s(c_clx['H0_loc_dMB0'], '.2f', hu)}$" if hu
+                  else f"CLASSIX comp. ($\\delta_v{{=}}{c_clx['delta_v']:.2f}$)\n$H_0^{{\\mathrm{{loc}}}} = {c_clx['H0_loc_dMB0']:.2f}$"),
+                 (c_clx["delta_v"], 4.0), xytext=(-0.333, 17.5), fontsize=6.5, ha="left",
+                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#d97706"))
 
-    ax1.set_xlim(-0.265, 0.08)
+    ax1.set_xlim(-0.34, 0.08)
     ax1.set_ylim(-2.5, 64.0)
-    ax1.set_xlabel("Lokális $300\\;\\mathrm{Mpc}$ üregkontraszt $\\delta_v$" if hu
-                   else "Local $300\\;\\mathrm{Mpc}$ void contrast $\\delta_v$")
+    ax1.set_xlabel("Lokális üregkontraszt $\\delta_v$ ($R_{\\mathrm{void}} \\in [120, 400]\\;\\mathrm{Mpc}$)" if hu
+                   else "Local void contrast $\\delta_v$ ($R_{\\mathrm{void}} \\in [120, 400]\\;\\mathrm{Mpc}$)")
     ax1.set_ylabel("STAT+SYS $\\Delta\\chi^2(\\delta_v) = \\chi^2(\\delta_v) - \\chi^2(0)$" if hu
                    else "STAT+SYS $\\Delta\\chi^2(\\delta_v) = \\chi^2(\\delta_v) - \\chi^2(0)$")
-    ax1.set_title("(A) Hivatalos Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) audit" if hu
-                  else "(A) Official Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) Audit")
-    ax1.legend(loc="upper right", fontsize=5.8)
+    ax1.set_title("(A) Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) és CLASSIX" if hu
+                  else "(A) Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) & CLASSIX")
+    ax1.legend(loc="upper right", fontsize=5.45)
     ax1.grid(alpha=0.25)
     apply_hu_comma_ticks(ax1, hu)
 
-    # Panel B: Root-Shot Self-Consistent Supervoid ISW (|delta_b(0.50)| == 0.25) + Linear ISW vs DES Y3 Tail
+    # Panel B: Root-Shot Self-Consistent Supervoid ISW (|delta_b(0.50)| == 0.25) + Linear-MG Ceiling vs DES Y3 Tail
     g6 = DATA["part2_covariant_ir_and_isw"]["gate6_self_consistent_supervoid_isw"]
     unscr = g6["unscreened_Sub1_nogo"]
     scr   = g6["screened_Sub1_xi_Phi_sq"]
     desi_obs = g6["DESI_Legacy_linear_ISW_obs"]
     desi_err = g6["DESI_Legacy_linear_ISW_err"]
+    lin_mg_max = g6["linear_MG_spectral_overlap_ceiling"]["max_A_ISW_compensated_150Mpc"]
 
     cats_isw = (["Árnyékolatlan\n(anyag)", "Árnyékolatlan\n(galaxis)",
                  "Helmholtz\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DESI Legacy\nlineáris ISW", "DES Y3\nszupervoid"]
@@ -233,13 +241,18 @@ def make_figures(lang: str = "en") -> None:
     ax2.axhline(0.0, color="black", lw=1.0)
     ax2.axhline(1.0, color="#475569", ls=":", lw=1.1,
                 label=("$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1{,}00$)" if hu else "$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1.00$)"))
+    ax2.axhline(lin_mg_max, color="#d97706", ls="--", lw=1.2,
+                label=(f"Monoton-IR MG plafon ($\\leq {num_s(lin_mg_max, '.2f', hu)}$)" if hu
+                       else f"Monotone-IR MG ceiling ($\\leq {lin_mg_max:.2f}$)"))
     ax2.bar(range(5), vals_isw, width=0.55, color=cols_isw, edgecolor="black", lw=0.65, zorder=5)
     ax2.errorbar([3], [desi_obs], yerr=[desi_err], fmt="none", ecolor="black", elinewidth=1.2, capsize=3.5, zorder=7)
     ax2.errorbar([4], [4.1], yerr=[1.1], fmt="none", ecolor="black", elinewidth=1.3, capsize=4, zorder=7)
     for i, v in enumerate(vals_isw):
         dy = 0.28 if v >= 0 else -0.64
-        if i == 3:
-            dy = 0.48
+        if i == 2:
+            dy = 0.50
+        elif i == 3:
+            dy = 0.50
         elif i == 4:
             dy = 1.25
         lbl_v = f"{v:+.2f}".replace(".", ",") if hu else f"{v:+.2f}"
@@ -349,4 +362,4 @@ def make_figures(lang: str = "en") -> None:
 if __name__ == "__main__":
     make_figures("en")
     make_figures("hu")
-    print("Generated all 6 JSON-driven v4.2.0 vector PDF figures (EN + HU) in", FIG_DIR)
+    print("Generated all 6 JSON-driven v4.3.0 vector PDF figures (EN + HU) in", FIG_DIR)
