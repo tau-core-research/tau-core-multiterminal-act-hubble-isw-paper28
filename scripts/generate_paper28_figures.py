@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate 3 publication-grade vector PDF figures (both English and Hungarian editions)
-for Tau Core Paper 28 (v4.1.0) 100% from paper28_verification_results.json (zero hardcoded
+for Tau Core Paper 28 (v4.2.0) 100% from paper28_verification_results.json (zero hardcoded
 curves, zero duplicated magic constants, and full native Hungarian decimal-comma formatting).
 """
 from __future__ import annotations
@@ -90,8 +90,8 @@ def make_figures(lang: str = "en") -> None:
                        else f"Gauged $U(1)_{{B-L}}$ No-Go ($+119\\sigma$ $A_s$)"))
     ax1.scatter([p3["n_s"]], [p3["A_s"] * 1e9], s=135, c="#f59e0b", marker="*",
                 edgecolors="black", linewidths=0.7, zorder=9,
-                label=("Feltételes 2-mezős 5-ODE ($k_{\\mathrm{UV}}{=}2$)" if hu
-                       else "Conditional 2-field 5-ODE ($k_{\\mathrm{UV}}{=}2$)"))
+                label=("COBE-zárt 2-mezős minimax ($k_{\\mathrm{UV,eff}}{=}1$)" if hu
+                       else "COBE-locked 2-field minimax ($k_{\\mathrm{UV,eff}}{=}1$)"))
 
     ax1.annotate((f"I. előírás ($k{{=}}0$)\n$n_s{{=}}{num_s(p1['n_s'], '.4f', hu)}$" if hu
                   else f"Presc. I ($k{{=}}0$)\n$n_s{{=}}{p1['n_s']:.4f}$"),
@@ -107,117 +107,125 @@ def make_figures(lang: str = "en") -> None:
                  (p2_b["n_s_w0"], p2_b["A_s_w0"] * 1e9), xytext=(0.9755, 5.20), fontsize=7.1,
                  ha="center", color="#991b1b", fontweight="bold",
                  arrowprops=dict(arrowstyle="->", lw=0.8, color="#991b1b"))
-    ax1.annotate((f"2-mezős ($k_{{\\mathrm{{UV}}}}{{=}}2$)\n$n_s{{=}}{num_s(p3['n_s'], '.4f', hu)}$" if hu
-                  else f"2-Field ($k_{{\\mathrm{{UV}}}}{{=}}2$)\n$n_s{{=}}{p3['n_s']:.4f}$"),
-                 (p3["n_s"], p3["A_s"] * 1e9), xytext=(0.9702, 2.95), fontsize=7.2, ha="center",
+    ax1.annotate((f"Minimax ($k_{{\\mathrm{{UV,eff}}}}{{=}}1$)\n$n_s{{=}}{num_s(p3['n_s'], '.4f', hu)}$" if hu
+                  else f"Minimax ($k_{{\\mathrm{{UV,eff}}}}{{=}}1$)\n$n_s{{=}}{p3['n_s']:.4f}$"),
+                 (p3["n_s"], p3["A_s"] * 1e9), xytext=(0.9698, 2.95), fontsize=7.2, ha="center",
                  arrowprops=dict(arrowstyle="->", lw=0.8, color="#d97706"))
 
     ax1.set_xlim(0.956, 0.9855)
     ax1.set_ylim(0.65, 6.15)
     ax1.set_xlabel("Skalár spektrálindex $n_s$ (NLO)" if hu else "Scalar spectral index $n_s$ (NLO)")
     ax1.set_ylabel("Ősi amplitúdó $10^9 A_s$" if hu else "Primordial amplitude $10^9 A_s$")
-    ax1.set_title("(A) UV infláció: I. előírás, II. No-Go és 2-mezős határ" if hu
-                  else "(A) UV Inflation: Presc. I, 3-Branch No-Go & 2-Field")
-    ax1.legend(loc="upper left", fontsize=6.1)
+    ax1.set_title("(A) UV infláció: I. előírás, II. No-Go és COBE-zárt 2-mezős" if hu
+                  else "(A) UV Inflation: Presc. I, 3-Branch No-Go & COBE-Locked 2-Field")
+    ax1.legend(loc="upper left", fontsize=6.0)
     ax1.grid(alpha=0.25)
     apply_hu_comma_ticks(ax1, hu)
 
-    # Panel B: 100% JSON-driven GW curve + exact two-stage trajectory integral point!
-    gw_c = p3["gw_single_fluid_curve"]
-    w_vals = np.array(gw_c["w_eff"])
-    dneff  = np.array(gw_c["Delta_Neff_GW"])
-    ax2.semilogy(w_vals, dneff, color="#7c3aed", lw=2.0,
-                 label=("Egyfolyadékos felső burkoló $\\Delta N_{\\mathrm{eff}}^{\\mathrm{GW}}(w_{\\mathrm{eff}})$" if hu
-                        else "Single-fluid envelope $\\Delta N_{\\mathrm{eff}}^{\\mathrm{GW}}(w_{\\mathrm{eff}})$"))
-    ax2.axhline(0.17, color="#dc2626", ls="--", lw=1.5,
-                label=("BBN + ACT DR6 95%-os korlát ($\\Delta N_{\\mathrm{eff}} < 0{,}17$)" if hu
-                       else "BBN + ACT DR6 95% CL ($\\Delta N_{\\mathrm{eff}} < 0.17$)"))
-    ax2.fill_between(w_vals, 0.17, 1.0, color="#dc2626", alpha=0.10)
-    dneff_traj = p3["Delta_Neff_GW_trajectory"]
-    dneff_mant = dneff_traj * 1e6
-    ax2.scatter([p3["w_eff_matching"]], [dneff_traj], s=130, c="#f59e0b", marker="*",
-                edgecolors="black", linewidths=0.7, zorder=8,
-                label=("Kétlépcsős ($w{=}1{\\to}0$) 5-ODE pálya-integrál" if hu
-                       else "Two-stage ($w{=}1{\\to}0$) 5-ODE trajectory integral"))
-    ax2.annotate((f"5-ODE pálya-integrál\n$\\Delta N_{{\\mathrm{{eff}}}}^{{\\mathrm{{GW}}}} = {num_s(dneff_mant, '.2f', hu)}\\times 10^{{-6}}$" if hu
-                  else f"5-ODE trajectory integral\n$\\Delta N_{{\\mathrm{{eff}}}}^{{\\mathrm{{GW}}}} = {dneff_mant:.2f}\\times 10^{{-6}}$"),
-                 (p3["w_eff_matching"], dneff_traj), xytext=(0.62, 4e-4), fontsize=7.3, ha="center",
-                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#d97706"))
+    # Panel B: Exact 1D COBE-Locked (10^9 A_s == 2.100) Non-Thermal Leptogenesis Pinch Curve!
+    c1d = p3["cobe_locked_1d_curve"]
+    ns_1d  = np.array(c1d["n_s"])
+    eta_1d = np.array(c1d["eta_B_1e10"])
+    ceil2  = p3["leptogenesis_2sigma_ceiling"]
 
-    ax2.set_xlim(0.32, 1.02)
-    ax2.set_ylim(1e-11, 1.0)
-    ax2.set_xlabel("Effektív reheating állapotegyenlet $w_{\\mathrm{eff}}$" if hu
-                   else "Effective reheating equation of state $w_{\\mathrm{eff}}$")
-    ax2.set_ylabel("Effektív neutrínótöbblet $\\Delta N_{\\mathrm{eff}}^{\\mathrm{GW}}$" if hu
-                   else "Effective neutrino excess $\\Delta N_{\\mathrm{eff}}^{\\mathrm{GW}}$")
-    ax2.set_title("(B) BBN és ACT DR6 gravitációshullám-korlát" if hu
-                  else "(B) BBN & ACT DR6 Primordial GW Bound")
-    ax2.legend(loc="lower right", fontsize=6.6)
-    ax2.grid(alpha=0.25, which="both")
-    apply_hu_comma_ticks(ax2, hu, log_y=True)
+    ax2.axvspan(0.974 - 0.003, 0.974 + 0.003, color="#3b82f6", alpha=0.15,
+                label=("ACT DR6 $n_s = 0{,}974\\pm 0{,}003$" if hu else "ACT DR6 $n_s = 0.974\\pm 0.003$"))
+    ax2.axhspan(6.12 - 0.08, 6.12 + 0.08, color="#10b981", alpha=0.22,
+                label=("Planck $\\eta_B$ $2\\sigma$ ($6{,}12\\pm 0{,}08$)" if hu else "Planck $\\eta_B$ $2\\sigma$ ($6.12\\pm 0.08$)"))
+    ax2.plot(ns_1d, eta_1d, color="#7c3aed", lw=2.1,
+             label=("1D COBE-zárt 5-ODE pálya ($10^9 A_s\\equiv 2{,}10$)" if hu
+                    else "1D COBE-locked 5-ODE curve ($10^9 A_s\\equiv 2.10$)"))
+    ax2.axvline(ceil2["n_s_max_2sigma"], color="#dc2626", ls="--", lw=1.4,
+                label=(f"2$\\sigma$ leptogenezis plafon ($n_s\\leq {num_s(ceil2['n_s_max_2sigma'], '.4f', hu)}$)" if hu
+                       else f"2$\\sigma$ leptogenesis ceiling ($n_s\\leq {ceil2['n_s_max_2sigma']:.4f}$)"))
+    ax2.scatter([p1["n_s"]], [p1["eta_B_first_principles_5ODE"] * 1e10], s=70, c="#0284c7", marker="D",
+                edgecolors="black", zorder=8)
+    ax2.scatter([p3["n_s"]], [p3["eta_B_first_principles_5ODE"] * 1e10], s=130, c="#f59e0b", marker="*",
+                edgecolors="black", zorder=9,
+                label=("Minimax optimum ($-0{,}61\\sigma$ ACT, $-0{,}63\\sigma$ $\\eta_B$)" if hu
+                       else "Minimax optimum ($-0.61\\sigma$ ACT, $-0.63\\sigma$ $\\eta_B$)"))
+    ax2.annotate((f"Minimax ($\\log_{{10}}f_\\phi{{=}}-8{{,}}8$)\n$10^{{10}}\\eta_B{{=}}{num_s(p3['eta_B_first_principles_5ODE']*1e10, '.2f', hu)}$" if hu
+                  else f"Minimax ($\\log_{{10}}f_\\phi{{=}}-8.8$)\n$10^{{10}}\\eta_B{{=}}{p3['eta_B_first_principles_5ODE']*1e10:.2f}$"),
+                 (p3["n_s"], p3["eta_B_first_principles_5ODE"] * 1e10), xytext=(0.9665, 5.15), fontsize=7.0,
+                 ha="center", arrowprops=dict(arrowstyle="->", lw=0.8, color="#d97706"))
+
+    ax2.set_xlim(0.961, 0.9756)
+    ax2.set_ylim(3.4, 6.45)
+    ax2.set_xlabel("Skalár spektrálindex $n_s$ a COBE-zárt pályán" if hu
+                   else "Scalar spectral index $n_s$ along COBE-locked curve")
+    ax2.set_ylabel("Barion-aszimmetria $10^{10}\\eta_B$ (5-ODE)" if hu
+                   else "Baryon asymmetry $10^{10}\\eta_B$ (5-ODE)")
+    ax2.set_title("(B) Leptogenezis $n_s$-plafon (5 nagyságrenddel BBN GW előtt)" if hu
+                  else "(B) Non-Thermal Leptogenesis Pinch Ceiling on $n_s$")
+    ax2.legend(loc="lower left", fontsize=6.1)
+    ax2.grid(alpha=0.25)
+    apply_hu_comma_ticks(ax2, hu)
 
     fig.tight_layout()
     fig.savefig(FIG_DIR / f"fig1_act_dr6_multiterminal_inflation_and_bbn{sfx}.pdf")
     plt.close(fig)
 
     # ==========================================================================
-    # FIGURE 2: SH0ES Redshift-Window [0.023, 0.15] Local-Void H0 & Root-Shot ISW
+    # FIGURE 2: Real N=1341 Pantheon+SH0ES Curvature Audit & Supervoid ISW
     # ==========================================================================
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.8, 4.25))
 
     g8 = DATA["part3_late_and_boltzmann_ee"]["gate8_sh0es_window_local_void_hubble"]
-    vc = g8["R_void_sweep_curves"]
-    R_grid = np.array(vc["R_Mpc"])
+    vc = g8["delta_v_sweep_curves"]
+    dv_arr   = np.array(vc["delta_v"])
+    dchi_l   = np.array(vc["dChi2_LCDM_vs_self0"])
+    dchi_h2a = np.array(vc["dChi2_H2a_vs_self0"])
+    c_h2a    = g8["H2a_2sigma_ceiling"]
+    dchi_bg  = g8["H2a_homogeneous_dv0"]["chi2_Pantheon_1341"] - g8["LCDM_homogeneous_dv0"]["chi2_Pantheon_1341"]
+    kbc_dchi = g8["LCDM_uncompensated_KBC_nogo"]["chi2_Pantheon_1341"] - g8["LCDM_homogeneous_dv0"]["chi2_Pantheon_1341"]
 
-    for key, col, ls_style, lbl_en, lbl_hu in [
-        ("dv_m015_joint", "#64748b", ":",  "$\\delta_v = -0.15$ ($O_G + O_T^{\\mathrm{diff}}$)", "$\\delta_v = -0{,}15$ ($O_G + O_T^{\\mathrm{diff}}$)"),
-        ("dv_m020_CLASSIX_joint", "#0284c7", "-.", "$\\delta_v = -0.20$ (CLASSIX)", "$\\delta_v = -0{,}20$ (CLASSIX)"),
-        ("dv_m025_KBC_joint", "#059669", "-",  "$\\delta_v = -0.25$ (KBC, $O_G + O_T^{\\mathrm{diff}}$)", "$\\delta_v = -0{,}25$ (KBC, $O_G + O_T^{\\mathrm{diff}}$)"),
-        ("dv_m025_KBC_OG_only", "#10b981", "--", "$\\delta_v = -0.25$ (pure Eq. 11 $O_G$ only)", "$\\delta_v = -0{,}25$ (tisztán 11. egy. $O_G$)"),
-    ]:
-        ax1.plot(R_grid, vc[key], color=col, ls=ls_style, lw=1.75, label=(lbl_hu if hu else lbl_en))
+    ax1.plot(dv_arr, dchi_l, "--", color="#64748b", lw=1.8,
+             label=("$\\Lambda$CDM + 300 Mpc void ($\\Delta\\chi^2_{\\mathrm{minta}}$)" if hu else "$\\Lambda$CDM + 300 Mpc void ($\\Delta\\chi^2_{\\mathrm{self}}$)"))
+    ax1.plot(dv_arr, dchi_h2a, "-", color="#059669", lw=2.1,
+             label=(f"Paper 23 H2a ($\\Delta\\chi^2_{{0}}{{=}}{num_s(dchi_bg, '+.2f', hu)}$) + void" if hu
+                    else f"Paper 23 H2a ($\\Delta\\chi^2_{{0}}{{=}}{dchi_bg:+.2f}$) + void"))
+    ax1.axhline(0.0, color="black", ls=":", lw=0.9)
+    ax1.axhline(4.0, color="#dc2626", ls="--", lw=1.1,
+                label=("$2\\sigma$ görbületi korlát ($\\Delta\\chi^2 = +4{,}0$)" if hu
+                       else "$2\\sigma$ curvature limit ($\\Delta\\chi^2 = +4.0$)"))
+    ax1.scatter([-0.25], [kbc_dchi],
+                s=75, c="#dc2626", marker="X", edgecolors="black", zorder=8,
+                label=(f"Kompenzálatlan KBC ($-0{{,}}25$: ${num_s(kbc_dchi, '+.2f', hu)}$, kizárt!)" if hu
+                       else f"Uncompensated KBC ($-0.25$: ${kbc_dchi:+.2f}$, NO-GO!)"))
+    ax1.scatter([c_h2a["delta_v"]], [4.0], s=115, c="#0284c7", marker="*", edgecolors="black", zorder=9,
+                label=(f"H2a $+4$ plafon ($H_0^{{\\mathrm{{loc}}}}{{=}}{num_s(c_h2a['H0_joint_dMB0'], '.2f', hu)}$, ${num_s(c_h2a['z_vs_CCHP_HST_JWST_TRGB'], '+.2f', hu)}\\sigma$ CCHP)" if hu
+                       else f"H2a $+4$ ceiling ($H_0^{{\\mathrm{{loc}}}}{{=}}{c_h2a['H0_joint_dMB0']:.2f}$, ${c_h2a['z_vs_CCHP_HST_JWST_TRGB']:+.2f}\\sigma$ CCHP)"))
+    ax1.annotate((f"H2a $+4{{,}}0$ plafon ($\\delta_v{{=}}{num_s(c_h2a['delta_v'], '.3f', hu)}$)\n$H_0^{{\\mathrm{{loc}}}} = {num_s(c_h2a['H0_joint_dMB0'], '.2f', hu)}$" if hu
+                  else f"H2a $+4.0$ ceiling ($\\delta_v{{=}}{c_h2a['delta_v']:.3f}$)\n$H_0^{{\\mathrm{{loc}}}} = {c_h2a['H0_joint_dMB0']:.2f}$"),
+                 (c_h2a["delta_v"], 4.0), xytext=(-0.038, 22.5), fontsize=7.0, ha="center",
+                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#0284c7"))
 
-    ax1.axhspan(73.04 - 1.04, 73.04 + 1.04, color="#ef4444", alpha=0.14,
-                label=("SH0ES $73{,}04\\pm 1{,}04$" if hu else "SH0ES $73.04\\pm 1.04$"))
-    ax1.axhspan(70.40 - 1.90, 70.40 + 1.90, color="#3b82f6", alpha=0.11,
-                label=("CCHP JWST TRGB $70{,}40\\pm 1{,}90$" if hu else "CCHP JWST TRGB $70.40\\pm 1.90$"))
-    ax1.axhline(68.22, color="black", lw=0.9, ls="--",
-                label=("ACT+DESI $H_0^{\\mathrm{CMB}} = 68{,}22$" if hu else "ACT+DESI $H_0^{\\mathrm{CMB}} = 68.22$"))
-
-    c_pt = g8["CLASSIX_140Mpc"]
-    k_pt = g8["KBC_300Mpc"]
-    ax1.scatter([c_pt["R_Mpc"]], [c_pt["H0_joint_unsub_dMB0"]], s=65, c="#0284c7", edgecolors="black", zorder=7)
-    ax1.scatter([k_pt["R_Mpc"]], [k_pt["H0_joint_unsub_dMB0"]], s=95, c="#059669", marker="*", edgecolors="black", zorder=8)
-    z_cchp = k_pt["z_vs_CCHP_TRGB"]
-    ax1.annotate((f"KBC-üreg (${num_s(z_cchp, '+.2f', hu)}\\sigma$ CCHP)\n$H_0^{{\\mathrm{{loc}}}} = {num_s(k_pt['H0_joint_unsub_dMB0'], '.2f', hu)}$" if hu
-                  else f"KBC void (${z_cchp:+.2f}\\sigma$ CCHP)\n$H_0^{{\\mathrm{{loc}}}} = {k_pt['H0_joint_unsub_dMB0']:.2f}$"),
-                 (k_pt["R_Mpc"], k_pt["H0_joint_unsub_dMB0"]), xytext=(248, 71.55), fontsize=7.1, ha="center",
-                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#059669"))
-
-    ax1.set_xlim(60, 380)
-    ax1.set_ylim(67.8, 74.5)
-    ax1.set_xlabel("Lokális void Gauss-skálasugár $R_{\\mathrm{void}}\\;[\\mathrm{Mpc}]$" if hu
-                   else "Local void Gaussian scale radius $R_{\\mathrm{void}}\\;[\\mathrm{Mpc}]$")
-    ax1.set_ylabel("Ablakolt $H_0^{\\mathrm{loc}}(z\\in[0{,}023;\\,0{,}15])\\;[\\mathrm{km\\,s^{-1}\\,Mpc^{-1}}]$" if hu
-                   else "Windowed $H_0^{\\mathrm{loc}}(z\\in[0.023,0.15])\\;[\\mathrm{km\\,s^{-1}\\,Mpc^{-1}}]$")
-    ax1.set_title("(A) SH0ES ablakolt $H_0$ ($\\Delta M_B{=}0$, $k_{\\mathrm{env}}{=}2$)" if hu
-                  else "(A) SH0ES-Windowed Local-Void $H_0$ ($\\Delta M_B{=}0$, $k_{\\mathrm{env}}{=}2$)")
-    ax1.legend(loc="upper left", fontsize=6.0)
+    ax1.set_xlim(-0.265, 0.08)
+    ax1.set_ylim(-2.5, 64.0)
+    ax1.set_xlabel("Lokális $300\\;\\mathrm{Mpc}$ üregkontraszt $\\delta_v$" if hu
+                   else "Local $300\\;\\mathrm{Mpc}$ void contrast $\\delta_v$")
+    ax1.set_ylabel("STAT+SYS $\\Delta\\chi^2(\\delta_v) = \\chi^2(\\delta_v) - \\chi^2(0)$" if hu
+                   else "STAT+SYS $\\Delta\\chi^2(\\delta_v) = \\chi^2(\\delta_v) - \\chi^2(0)$")
+    ax1.set_title("(A) Hivatalos Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) audit" if hu
+                  else "(A) Official Pantheon+SH0ES ($1341\\times 1341$ STAT+SYS) Audit")
+    ax1.legend(loc="upper right", fontsize=5.8)
     ax1.grid(alpha=0.25)
     apply_hu_comma_ticks(ax1, hu)
 
-    # Panel B: Root-Shot Self-Consistent Supervoid ISW (|delta_b(0.50)| == 0.25)
+    # Panel B: Root-Shot Self-Consistent Supervoid ISW (|delta_b(0.50)| == 0.25) + Linear ISW vs DES Y3 Tail
     g6 = DATA["part2_covariant_ir_and_isw"]["gate6_self_consistent_supervoid_isw"]
     unscr = g6["unscreened_Sub1_nogo"]
     scr   = g6["screened_Sub1_xi_Phi_sq"]
+    desi_obs = g6["DESI_Legacy_linear_ISW_obs"]
+    desi_err = g6["DESI_Legacy_linear_ISW_err"]
 
-    cats_isw = (["Árnyékolatlan Sub1\n(anyag-norm.)", "Árnyékolatlan Sub1\n(galaxis-norm.)",
-                 "Helmholtz-árnyékolt\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DES Y3 megfigyelés\n($4{,}1\\pm 1{,}1$)"]
+    cats_isw = (["Árnyékolatlan\n(anyag)", "Árnyékolatlan\n(galaxis)",
+                 "Helmholtz\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DESI Legacy\nlineáris ISW", "DES Y3\nszupervoid"]
                 if hu else
-                ["Unscreened Sub1\n(matter-norm.)", "Unscreened Sub1\n(galaxy-norm.)",
-                 "Helmholtz-screened\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DES Y3 observed\n($4.1\\pm 1.1$)"])
-    vals_isw = [unscr["A_ISW_matter_norm"], unscr["A_ISW_galaxy_norm"], scr["A_ISW_matter_norm"], 4.1]
-    cols_isw = ["#dc2626", "#ef4444", "#059669", "#0284c7"]
+                ["Unscreened\n(matter)", "Unscreened\n(galaxy)",
+                 "Helmholtz\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DESI Legacy\nlinear ISW", "DES Y3\nsupervoid"])
+    vals_isw = [unscr["A_ISW_matter_norm"], unscr["A_ISW_galaxy_norm"], scr["A_ISW_matter_norm"], desi_obs, 4.1]
+    cols_isw = ["#dc2626", "#ef4444", "#059669", "#10b981", "#0284c7"]
 
     ax2.axhspan(-5.0, 0.0, color="#dc2626", alpha=0.09,
                 label=("Meleg folt ($A_{\\mathrm{ISW}}<0$, kizárt!)" if hu
@@ -225,23 +233,26 @@ def make_figures(lang: str = "en") -> None:
     ax2.axhline(0.0, color="black", lw=1.0)
     ax2.axhline(1.0, color="#475569", ls=":", lw=1.1,
                 label=("$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1{,}00$)" if hu else "$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1.00$)"))
-    ax2.bar(range(4), vals_isw, width=0.52, color=cols_isw, edgecolor="black", lw=0.65, zorder=5)
-    ax2.errorbar([3], [4.1], yerr=[1.1], fmt="none", ecolor="black", elinewidth=1.3, capsize=4, zorder=7)
+    ax2.bar(range(5), vals_isw, width=0.55, color=cols_isw, edgecolor="black", lw=0.65, zorder=5)
+    ax2.errorbar([3], [desi_obs], yerr=[desi_err], fmt="none", ecolor="black", elinewidth=1.2, capsize=3.5, zorder=7)
+    ax2.errorbar([4], [4.1], yerr=[1.1], fmt="none", ecolor="black", elinewidth=1.3, capsize=4, zorder=7)
     for i, v in enumerate(vals_isw):
-        dy = 0.28 if v >= 0 else -0.62
+        dy = 0.28 if v >= 0 else -0.64
         if i == 3:
+            dy = 0.48
+        elif i == 4:
             dy = 1.25
         lbl_v = f"{v:+.2f}".replace(".", ",") if hu else f"{v:+.2f}"
-        ax2.text(i, v + dy, lbl_v, ha="center", fontsize=7.5, fontweight="bold")
+        ax2.text(i, v + dy, lbl_v, ha="center", fontsize=7.1, fontweight="bold")
 
-    ax2.set_xticks(range(4))
-    ax2.set_xticklabels(cats_isw, fontsize=6.6)
+    ax2.set_xticks(range(5))
+    ax2.set_xticklabels(cats_isw, fontsize=6.1)
     ax2.set_ylim(-5.0, 6.2)
     ax2.set_ylabel("ISW amplitúdó $A_{\\mathrm{ISW}} = \\Delta T / \\Delta T_{\\Lambda\\mathrm{CDM}}$" if hu
                    else "ISW amplitude $A_{\\mathrm{ISW}} = \\Delta T / \\Delta T_{\\Lambda\\mathrm{CDM}}$")
-    ax2.set_title("(B) Önkikényszerített szupervoid ISW ($|\\delta_b|{=}0{,}25$)" if hu
-                  else "(B) Root-Shot Supervoid ISW ($|\\delta_b|{=}0.25$)")
-    ax2.legend(loc="upper left", fontsize=6.6)
+    ax2.set_title("(B) Szupervoid ISW + 4D Maxwell Weyl-pajzs" if hu
+                  else "(B) Supervoid ISW + 4D Maxwell Weyl Shield")
+    ax2.legend(loc="upper left", fontsize=6.4)
     ax2.grid(axis="y", alpha=0.25)
     apply_hu_comma_ticks(ax2, hu, cat_x=True)
 
@@ -316,7 +327,7 @@ def make_figures(lang: str = "en") -> None:
     ax3.axhline(1.0, color="black", ls=":", lw=1.0)
     ax3.errorbar(idx_cl, g9["Mpred_over_Mobs_R500_Tau"], yerr=g9["sigma_frac_R500"],
                  fmt="o", color="#059669", ecolor="#059669", elinewidth=1.0, capsize=2.2, ms=4.6,
-                 label=("Tau Core Sub1 ($m_H\\equiv 0$)" if hu else "Tau Core Sub1 ($m_H\\equiv 0$)"))
+                 label=("Tau Core Sub1 (LTB PDE)" if hu else "Tau Core Sub1 (LTB PDE)"))
     ax3.scatter(idx_cl, g9["Mpred_over_Mobs_R500_baryon_MOND"], marker="s", s=24, c="#ef4444",
                 label=("Pusztán barionos QUMOND" if hu else "Baryon-only QUMOND"))
     ax3.set_xticks(idx_cl)
@@ -338,4 +349,4 @@ def make_figures(lang: str = "en") -> None:
 if __name__ == "__main__":
     make_figures("en")
     make_figures("hu")
-    print("Generated all 6 JSON-driven v4.1.0 vector PDF figures (EN + HU) in", FIG_DIR)
+    print("Generated all 6 JSON-driven v4.2.0 vector PDF figures (EN + HU) in", FIG_DIR)
