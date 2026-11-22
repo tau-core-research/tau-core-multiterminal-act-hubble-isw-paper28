@@ -1,145 +1,418 @@
 \documentclass[11pt,a4paper]{article}
-\usepackage[margin=2.1cm]{geometry}
+\usepackage[margin=2.05cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{hyperref}
 \usepackage{microtype}
 \usepackage{xcolor}
 \hypersetup{colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black}
+\emergencystretch=1.5em
+
 \renewcommand{\abstractname}{Összefoglaló}
 \renewcommand{\refname}{Hivatkozások}
 \renewcommand{\figurename}{ábra}
 \renewcommand{\tablename}{táblázat}
 
 \newtheorem{theorem}{Tétel}
+\newtheorem{proposition}{Állítás}
+\newtheorem{lemma}{Lemma}
 
-\title{\textbf{Teljes négyterminálos kozmológiai lezárás a puszta gravitáción túl:\\
-Nulla-paraméteres ACT DR6 kináció--leptogenezis, folytonos $K_B^{-1}$ Helmholtz\\
-$\sigma_8$-árnyékolás, 5-próbás lokális-üreg illesztés és hatszektoros audit}}
-\author{Olcsák József \\ \small Független kutató $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Kutatási Sorozat — Paper 28 (\texttt{v3.0.0})}
-\date{2026. november 21.}
+\title{\textbf{Négyterminálos kozmológiai audit a puszta gravitáción túl:\\
+Egy-metrikás \texttt{AeST}--QUMOND Helmholtz $\sigma_8$-árnyékolás, UV II.~előírás\\
+és árnyékolatlan ISW No-Go tételek, vöröseltolódás-ablakolt lokális-üreg\\
+$H_0$-mérleg és első elvű Boltzmann CMB $EE$-lezárás}}
+\author{Olcsák József \\ \small Független kutató $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Kutatási Sorozat — Paper 28 (\texttt{v4.1.0})}
+\date{2026. november 22.}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Az Atacama Cosmology Telescope 6-os adatkibocsátása (\texttt{ACT DR6}) megerősíti a korai univerzum Hubble-állandóját ($H_0 = 68{,}22 \pm 0{,}36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ a \texttt{DESI}-vel), megméri a CMB-lencsézési $\sigma_8 = 0{,}818 \pm 0{,}009$ amplitúdót, és $n_s = 0{,}974 \pm 0{,}003$-ra emeli a spektrális indexet. A Tau Core keretrendszerben ($N = 4 \implies u = \sqrt{3}/24$) a megfigyelhetők egyetlen tetraéderes alaptörzs ($M_\tau^\star$) négy csatolt 4D termináljáról ($O_G, O_T, O_Q, O_M$) olvasódnak le. A \texttt{v2.0.0} eredményeire építve a jelen \texttt{v3.0.0} kiadás mindhárom fennmaradó nyitott elméleti és megfigyelési kérdést lezárja hozzáadott szabad paraméter nélkül ($k_{\mathrm{added}} = 0$, \texttt{15/15 PASS} a \texttt{verify\_paper28\_multiterminal\_closure.py} tesztcsomagban). Először: a Paper~24 komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusának 1-hurkos RG-meredeksége ($\kappa_J^{\mathrm{1\text{-}loop}} = 0{,}014914$) a \texttt{Sub1} egyskálás Stueckelberg--skalaron kinációs kilépésével ($V_\mu = M_{\mathrm{inf}}A_\mu$, $w_{\mathrm{rh}} = 1{,}0$) $N_* = 60{,}175$, $n_s = 0{,}97464$ ($+0{,}21\sigma$ \texttt{ACT DR6}), $A_s = 2{,}0895\times 10^{-9}$ ($-0{,}35\sigma$), $r = 0{,}00511$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4{,}88\times 10^{-5} \ll 0{,}17$ és $\eta_B = +6{,}106\times 10^{-10}$ értéket ad; még a szigorúan szétcsatolt kétfolyadékos határesetben is a de~Sitter Bunch--Davies sztochasztikus infravörös szórás automatikusan $f_{\phi,\mathrm{end}}^{\mathrm{BD}} = 1{,}790\times 10^{-10} = 1{,}040\,K_B$ arányt ad ($40\times$-osan a hígulási küszöb felett, hangolás nélkül), a $K_4$-vetített $\alpha_{\mathrm{OCSR}}^2 K_B = 2{,}242\times 10^{-11}$ kondenzátum pedig $n_s = 0{,}97433$ ($+0{,}11\sigma$) és 4-ODE Boltzmann $\eta_B = +5{,}600\times 10^{-10}$ értéket szolgáltat. Másodszor: a \texttt{v2.0.0} $z_{\mathrm{on}} = z_{\mathrm{dip}}$ lépcsőfüggvényét felváltja a folytonos $z_{\mathrm{drag}} = 1060 \to 0$ kétfolyadékos integrálás a kanonikus \texttt{Sub1} látszólagos-horizont Raychaudhuri--Helmholtz tömeggel ($\bar{m}_{\mathrm{IR}}^2(z) = K_B^{-1}\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)/c^2$) és Milgrom QUMOND tömegközépponti ekvivalenciaelvével, ami $\sigma_8(z=0) = 0{,}8223$ ($+0{,}48\sigma$ az \texttt{ACT DR6} lencsézéshez képest) értéket, $100\%$-os \texttt{SPARC}/\texttt{X-COP} megőrzést és $\ell_{\mathrm{IR}}(10) = 2{,}33\;\mathrm{kpc}$ ($S_{\mathrm{Helm}}(1{,}5\;\mathrm{kpc}) = 0{,}900$) kompakt JWST-skálát ad. Harmadszor: egy 5-próbás együttes inverz illesztés (\texttt{SH0ES}, \texttt{CCHP TRGB/JAGB}, \texttt{CosmicFlows-4}, \texttt{CLASSIX/6dFGS} és üregsugár) $\Delta M_B \equiv 0$ mellett $p = 0{,}57\text{--}0{,}60$ ($\chi^2/\mathrm{dof} = 0{,}63\text{--}0{,}68$) illeszkedéssel rögzíti a lokális környezetet ($\hat{\delta}_v = -0{,}179\text{..}{-0{,}166}$, $\hat{R} = 149\text{..}143\;\mathrm{Mpc}$, $H_0^{\mathrm{loc}} = 71{,}93\text{--}72{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, $v_{\mathrm{out}} = 423\text{--}428\;\mathrm{km\,s^{-1}}$).
+Az Atacama Cosmology Telescope 6-os adatkibocsátása ({\upshape\texttt{ACT DR6}}) a \texttt{Planck} és \texttt{DESI} BAO mérésekkel kombinálva $H_0 = 68{,}22 \pm 0{,}36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ értékre rögzíti a korai univerzum Hubble-állandóját, $\sigma_8 = 0{,}818 \pm 0{,}009$ ({\upshape\texttt{P-ACT+DESI}}: $0{,}813 \pm 0{,}005$) CMB-lencsézési klasztereződést mér, és $n_s = 0{,}974 \pm 0{,}003$-ra emeli a skalár spektrálindexet. A Tau Core keretrendszerben ($N = 4 \implies u = \sqrt{3}/24$) a megfigyelhetők egyetlen tetraéderes alaptörzs ($M_\tau^\star$) négy csatolt 4D termináljáról olvasódnak le: gravitációs ($O_G$), óra/optikai ($O_T$), kvantum/mérték ($O_Q$) és anyagi/asztrofizikai ($O_M$). Jelen munka szigorú variációs, szimbolikus (\texttt{SymPy} 4D Christoffel/Ricci) és numerikus auditot végez mind a hat kozmológiai és erős-téri szektoron (\texttt{12/12 PASS} a \texttt{verify\_paper28\_multiterminal\_closure.py} tesztcsomagban), élesen elválasztva a paramétermentes tételeket ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$) és {\upshape\texttt{NO-GO}} kizárásokat a {\upshape\texttt{CONDITIONAL}} és {\upshape\texttt{OPEN}} problémáktól:
+\begin{enumerate}
+  \item \textbf{UV inflációs alapeset és háromágú II.~előírás No-Go ({\upshape\texttt{PROVEN}}):} A Paper~24 paramétermentes I.~előírása ($w_{\mathrm{rh}} = 0$ harmonikus minimum, $\eta_{\mathrm{seesaw}} = 0{,}030709$, $M_1 = 5{,}6964\times 10^{12}\;\mathrm{GeV}$, $\Gamma_{N_1 N_1} = 0{,}4729\;\mathrm{GeV}$) $N_* = 51{,}412$, $A_s = 2{,}1011\times 10^{-9}$, $r = 0{,}00426$, első elvű 5-ODE Casas--Ibarra $\eta_B = +6{,}106\times 10^{-10}$ és $n_s = 0{,}96199$ ($-0{,}69\sigma$ \texttt{Planck 2018}, $-4{,}00\sigma$ {\upshape\texttt{ACT DR6}}) értéket ad. A Paper~24 egzakt $\mathrm{Spin}(10)$ $B-L$ normálásával ($y_N^2 = 2\alpha_{\mathrm{OCSR}}^2 = 0{,}26042$), a $\gamma_\Phi$ anomális dimenzió egzakt kiesésével és a görbült téri radiális propagátor-elnyomással ($s(\varphi) \simeq (6\xi_\Phi)^{-1}$) háromágú Coleman--Weinberg No-Go tételt bizonyítunk a II.~előírásra: (a1) a tisztán fermionos seesaw ($d_A = 0$) $\kappa_J^{(F)} = -0{,}19533$ ($N_g = 3$), ill.\ $-0{,}06513$ ($N_g = 1$) értéke $x_{\max} = 0{,}0161$, ill.\ $2{,}656 < x_* = 5{,}242$-nél hilltop-összeomlást okoz; (a2) a Paper~24 teljes $K_4$ küszöb-multiplettje ($n_{\mathrm{eff}}^{\mathrm{STr}} = d_A - 2d_S = 8 - 6 = +2$) $\kappa_J^{(\mathrm{P24})} = +0{,}06508$-at ad, amelyet az $A_s$ mérés $-25{,}05\sigma$-val kizár ($10^9 A_s = 1{,}3485$); (b) a kanonikus $(q_\Phi^{\mathrm{GUT}})^2 = 3/2$ töltésű $U(1)_{B-L} \subset \mathrm{Spin}(10)$ vektor pedig $\kappa_J^{(V+F)} = +1{,}08377$-et ad, amelyet $n_s = 0{,}98296$ ($+2{,}99\sigma$) és $A_s = 5{,}675\times 10^{-9}$ ($+119{,}2\sigma$) kétszeresen kizár. Mivel a harmonikus minimum $w_{\mathrm{rh}} = 0$-t kényszerít ki, az FLRW $A_\mu = (-1,\mathbf{0})$ nem hordoz kinációs energiát, az $M_{\mathrm{inf}} = 1{,}84\,H_* > \frac{3}{2}H_*$ szpektátor pedig a nehéz de~Sitter fősorozatban ül, az $n_s \simeq 0{,}974$ eléréséhez explicit kétmezős $(\phi,\psi_{\mathrm{kin}})$ kiterjesztés szükséges ({\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{UV}} = 2$: $\kappa_{\mathrm{eff}} = 0{,}0149$, $f_{\phi,\mathrm{end}} = 2{,}24\times 10^{-11} \implies n_s = 0{,}97432$, 5-ODE $\eta_B = +5{,}600\times 10^{-10}$, kétlépcsős pálya-integrált GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3{,}74\times 10^{-6} \ll 0{,}17$).
+  \item \textbf{Christoffel-tanúsított egy-metrikás \texttt{AeST}--QUMOND Helmholtz $\sigma_8$-árnyékolás ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} Míg a tiszta konform átskálázás ($g_{\mu\nu} = e^{-2\psi}g_{\mu\nu}^{(E)}$) ellentétes előjellel tolja el $\Psi$-t és $\Phi$-t, kioltva a lencsézést (Bekenstein--Sanders no-go), addig a Skordis--Z\l{}o\'snik \texttt{AeST} $q_\mu = h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$ vektor \cite{SkordisZlosnik2021}, a {\upshape\texttt{Sub1}} $\phi_N$ QUMOND-potenciálja és a direktor-tágulási Helmholtz-tömeg \textbf{egyetlen fizikai $g_{\mu\nu}$ metrikán} történő egyesítése konstans $(K_B = K_B^{(0)}, a_q = \frac{1}{4}K_B^{(0)}, c_q = 1 \implies K_{\mathrm{eff}} = \frac{1}{2}K_B^{(0)})$ mellett biztosítja a $c_T \equiv c_\gamma \equiv c$, $\alpha_2^{\mathrm{PPN}} \equiv 0$, $\alpha_1^{\mathrm{PPN}} = -4K_{\mathrm{eff}} = -3{,}444\times 10^{-10}$, zérus statikus paraméter-sodródás ($\partial_s K_B = \partial_\varphi^2 K_B \equiv 0$), egzakt $\Phi \equiv \Psi$ csúszásmentesség ($100\%$ QUMOND-lencsézés) és pólusmentes $\det\mathbf{H}_4 \propto k_c^4(4k_c^4 + 4k_c^2 m_H^2\mu_b + m_H^4) > 0$ ($\forall\mu_b \ge 0{,}9412 > 0$) feltételeket. Első elvű $\sigma_8^{\mathrm{GR}}$ számítással ($\sum m_\nu = 59{,}19\;\mathrm{meV}$: $0{,}8150$ I.~előírás; $0{,}8106$ 2-mezős) és 32-pontú Gauss--Legendre szögkvadratúrával a rögzített $\kappa_\theta = \xi_\Phi^2 = (256\pi^2)^2$ csatolás $\sigma_8^{\mathrm{Weyl}}(0) = 0{,}8165$ ($-0{,}16\sigma$ {\upshape\texttt{ACT DR6}}; $0{,}8122$ 2-mezős) értéket ad az árnyékolatlan $11{,}69$-cel szemben, megőrizve mind a $12$ archív {\upshape\texttt{X-COP}} halmazt ($\chi^2/24 = 1{,}142$, medián $M_{\mathrm{pred}}/M_{\mathrm{obs}} = 1{,}0005$ $R_{500}$-nál).
+  \item \textbf{Gyöklövéses szupervoid ISW, ablakolt $H_0$ és abszolút-$\mu\mathrm{K}^2$ Boltzmann $EE$:} Kezdeti gyöklövéssel ($|\delta_b(z_v = 0{,}50)| \equiv 0{,}25$) az árnyékolatlan {\upshape\texttt{Sub1}} $f_{\mathrm{eff}}(0{,}50) = 0{,}9783$-ra gyorsul és meleg foltokba fordítja a szupervoidokat ($A_{\mathrm{ISW}}^{\mathrm{mat}} = -4{,}094$, $A_{\mathrm{ISW}}^{\mathrm{gal}} = -1{,}394$, {\upshape\texttt{NO-GO}}), míg $\kappa_\theta = \xi_\Phi^2$ megőrzi a hideg foltokat ($A_{\mathrm{ISW}} = +1{,}000$; \texttt{DES Y3} $4{,}1 \pm 1{,}1$ {\upshape\texttt{OPEN}}). A $z \in [0{,}023, 0{,}15]$ ablakban ($k_{\mathrm{env}} = 2$, $|\Delta G/G|_{\mathrm{Ceph}} = 9{,}13\times 10^{-20}$) a KBC-üreg tiszta egy-metrikás $O_G$ kiáramlása $H_0^{(O_G)} = 69{,}63$ ($+0{,}61$ a \texttt{2M++} $z > 0{,}067$ tartományon túl), amely a radiálisan ablakolt \texttt{Tier-2} differenciális óraeltolódással ($+0{,}42$) $H_0^{\mathrm{loc}}(\Delta M_B = 0) = 70{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$-et ad ($-0{,}19\sigma$ \texttt{CCHP JWST TRGB}; $\Delta M_B^{\mathrm{astro}} = 0{,}091\;\mathrm{mag}$ a \texttt{SH0ES}-hoz). Végül a $1069$ módusú \texttt{RECFAST} ($z_* = 1089{,}80$) + $\ell_{\max} = 6$ nem-visszaverő Ma--Bertschinger Boltzmann-megoldó illesztett paraméter nélkül visszaadja mind a négy $EE$-csúcsot ($\ell_{1\text{--}4}^{EE} = 141$, $393$, $686$, $988$; eltérések: $+2{,}92\%$, $-1{,}50\%$, $-0{,}58\%$, $-0{,}70\%$, a $2\text{--}4$.~csúcsokon $1{,}5\%$-on belül) és a konvergált $1{,}14$, $21{,}70$, $38{,}55$, ill.\ $44{,}17\;\mu\mathrm{K}^2$ csúcsmagasságokat.
+\end{enumerate}
 \end{abstract}
 
-\section{Bevezetés: mindhárom nyitott kérdés első elvű lezárása}
-A \texttt{v2.0.0} kiadás három szűk nyitott pontot azonosított: (a) a kétfolyadékos kezdeti arány finomhangolásának kiküszöbölése a kinációs kilépésnél; (b) a lokális üregkatalógusok közös inverz statisztikai lezárása; és (c) a lineáris $\sigma_8$ folytonos ($z = 1060 \to 0$) árnyékolása $z_{\mathrm{dip}}$-lépcsőfüggvény nélkül. A \texttt{v3.0.0} változat mindhármat zárt alakban, $k_{\mathrm{added}} = 0$ mellett oldja meg (\texttt{15/15 PASS}).
+\section{Bevezetés és a zárt négyterminálos állandószótár}
+\label{sec:intro}
 
-\section{Nulla-paraméteres UV kináció--leptogenezis lezárás (\texorpdfstring{$k_{\mathrm{added}} = 0$}{k = 0})}
-\begin{theorem}[Stueckelberg--skalaron és Bunch--Davies kináció--leptogenezis lezárás --- \texttt{PROVEN}]
-A Paper~24 komplex $\mathrm{Spin}(10)$ $B-L$ seesaw radiális módusára ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$):
+Az Atacama Cosmology Telescope 6-os adatkibocsátásának ({\upshape\texttt{ACT DR6}}) precíziós mérései \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025,ACTDR6_Qu2024} a \texttt{Planck} PR3/PR4 \cite{Planck2018VI,Planck2018X} és \texttt{DESI} BAO \cite{DESI2024VI} adatokkal együtt egyidejűleg tesztelik a relativisztikus módosított gravitációs és ultraibolya (UV) elméleteket az infláció ($n_s = 0{,}974 \pm 0{,}003$, $10^9 A_s = 2{,}10 \pm 0{,}03$), az akusztikus $EE$ polarizációs csúcsok ($\ell_{1\text{--}4}^{EE}$), a lineáris CMB-lencsézési klasztereződés ($\sigma_8 = 0{,}818 \pm 0{,}009$), a szupervoid integrált Sachs--Wolfe (ISW) tomográfia \cite{Kovacs2022DESY3}, a távolságlétra-$H_0$ mérések \cite{Riess2022SH0ES,Freedman2025CCHP}, a galaktikus rotációs görbék \cite{Lelli2016SPARC} és a galaxishalmazok \cite{Eckert2019XCOP} terén.
+
+A Tau Core gerincben \cite{Olcsak2026Sub1,Olcsak2026Paper24,Olcsak2026Paper27} a makroszkopikus megfigyelhetők egyetlen diszkrét $K_4$ tetraéderes komplexum ($N = 4$) négy csatolt 4D terminálján — gravitációs ($O_G$), óra/optikai ($O_T$), kvantum/mérték ($O_Q$) és anyagi/asztrofizikai ($O_M$) — keresztül jelennek meg. A gerinc összes algebrai állandója szigorúan rögzített ($k_{\mathrm{spine}} = 0$):
+\begin{equation}
+\begin{aligned}
+  u &= \frac{\sqrt{3}}{24} \approx 0{,}0721688, \qquad r_0 = 2\sqrt{3}\,u = \frac{1}{4}, \qquad \alpha_{\mathrm{OCSR}} = 5u = \frac{5\sqrt{3}}{24} \approx 0{,}3608439, \\
+  I_{\mathrm{KH}} &= \frac{5\sqrt{3}}{96} \approx 0{,}0902110, \qquad R_{A/b} := \frac{\Omega_{A,\mathrm{eff}}}{\Omega_b} = \frac{213\sqrt{3} - 20}{65} \approx 5{,}3681050, \\
+  f_b &= \frac{1}{1 + R_{A/b}} \approx 0{,}1570326, \qquad \xi_\Phi = \frac{M_\star}{M_R} = 256\pi^2 \approx 2526{,}6187, \\
+  C_{\mathrm{ratio}} &= 3\xi_\Phi = 768\pi^2 \approx 7579{,}8562, \qquad \eta_{\mathrm{seesaw}} = \frac{(192u - 9)^2}{768} \approx 0{,}03070922, \\
+  M_R &= \frac{r_0^2 M_\star}{16\pi^2} = 5{,}5649\times 10^{14}\;\mathrm{GeV}, \qquad M_{\mathrm{inf}} = \frac{\alpha_{\mathrm{OCSR}}}{2\pi}\,M_R = 3{,}1959\times 10^{13}\;\mathrm{GeV}, \\
+  M_1 &= \frac{\eta_{\mathrm{seesaw}}}{3}\,M_R = 5{,}6964\times 10^{12}\;\mathrm{GeV}, \qquad \sum_{i=1}^3 m_{\nu_i} = (0 + 8{,}83 + 50{,}36)\;\mathrm{meV} = 59{,}19\;\mathrm{meV}, \\
+  K_B^{(0)} &= \left(\frac{M_{\mathrm{inf}}}{M_{\mathrm{Pl}}}\right)^{\!2} = 1{,}72219\times 10^{-10}, \qquad \mu := \hat{m}_{\mathrm{eff}}^2 = 4{,}496723, \qquad f_{v,0} = 0{,}723358,
+\end{aligned}
+\label{eq:locked-dictionary}
+\end{equation}
+ahol $M_{\mathrm{Pl}} = (8\pi G)^{-1/2} = 2{,}43532\times 10^{18}\;\mathrm{GeV}$ ($\hbar = c = 1$) és $M_\star = M_{\mathrm{Pl}}/\sqrt{3}$. A késői háttérkozmológiát az \texttt{ACT DR6 + Planck + DESI} alapértékek rögzítik: $H_0^{\mathrm{CMB}} = 68{,}22\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($h = 0{,}6822$), $\omega_b := \Omega_b h^2 = 0{,}02240$, $\omega_A = R_{A/b}\,\omega_b = 0{,}120246$, a tömeges neutrínósűrűség $\omega_\nu^{\mathrm{mass}} = \sum m_\nu / (93{,}14\;\mathrm{eV}) = 6{,}355\times 10^{-4}$ ($\omega_m = \omega_b + \omega_A + \omega_\nu^{\mathrm{mass}} = 0{,}143281$, $\Omega_m = 0{,}30787$, $\Omega_\Lambda = 0{,}69207$), valamint $T_0 = 2{,}7255\;\mathrm{K}$ ($\omega_\gamma = 2{,}4728\times 10^{-5}$, relativisztikus $N_{\mathrm{eff}} = 3{,}044$).
+
+Jelen \texttt{v4.1.0} audit szigorú négyszintű episztemikus mérleget ({\upshape\texttt{PROVEN}}, {\upshape\texttt{NO-GO}}, {\upshape\texttt{CONDITIONAL}}, {\upshape\texttt{OPEN}}) állít fel, amelyet szimbolikus 4D Christoffel/Ricci-tenzorokból és merev ODE-megoldókból a \path{scripts/verify_paper28_multiterminal_closure.py} szkript végponttól végpontig igazol.
+
+\section{UV infláció, a háromágú II.~előírás No-Go tétele és első elvű 5-ODE reheating}
+\label{sec:uv-inflation}
+
+\subsection{Egzakt Paper~24 portálnormálás és görbült téri egyhurkos RG-kiejtés}
+A Paper~24-ben \cite{Olcsak2026Paper24} (7.~egyenlet és 3.1.~tétel) a $\mathrm{Spin}(10)$ $B-L$ szimmetriasértő komplex szingulett $\Phi = (v_\Phi + \varphi + \mathrm{i}\eta)/\sqrt{2}$ ($v_\Phi = \sqrt{2}\,M_R$, $O(2)$ valós dublett $Q_{B-L}(\Phi) = +2$ töltéssel) $(-,+,+,+)$ előjelben az analitikus polinomiális Jordan-keretbeli Lagrange-sűrűségen keresztül csatolódik a gravitációhoz:
+\begin{equation}
+  \frac{\mathcal{L}_{\mathrm{UV},J}}{\sqrt{-g_J}} = \frac{M_{\mathrm{Pl}}^2 + \xi_\Phi\bigl(2\Phi^\dagger\Phi - v_\Phi^2\bigr)}{2}\,R_J - g_J^{\mu\nu}\partial_\mu\Phi^\dagger\partial_\nu\Phi - \frac{\lambda_\Phi}{4}\bigl(2\Phi^\dagger\Phi - v_\Phi^2\bigr)^2 - \left(\frac{y_N}{2}\Phi\overline{N_R^c}N_R + \mathrm{h.c.}\right),
+  \label{eq:paper24-lagrangian}
+\end{equation}
+ahol $\lambda_\Phi = (\alpha_{\mathrm{OCSR}}/2\pi)^2 = 3{,}2966\times 10^{-3}$, így a nagymezős radiális platón ($\varphi \gg v_\Phi$, $\eta = 0$) a nem-minimális faktor $\Omega^2(\varphi) = 1 + \xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2 > 1$ (szigorúan antigravitációs szingularitás nélkül), $V_J(\varphi) \simeq \frac{\lambda_\Phi}{4}\varphi^4$, és $M_N(\varphi) = M_R + \alpha_{\mathrm{OCSR}}\varphi$ az $N_g = 3$ jobbkezes Majorana-generációra ($M_2 = M_3 = M_R/3 = 1{,}8550\times 10^{14}\;\mathrm{GeV}$ és a seesaw-felhasított $M_1 = \eta_{\mathrm{seesaw}}M_R/3 = 5{,}6964\times 10^{12}\;\mathrm{GeV}$). Az $M_N(\varphi) = \frac{y_N}{\sqrt{2}}(v_\Phi + \varphi)$ azonosítás egyértelműen rögzíti:
+\begin{equation}
+  \frac{y_N}{\sqrt{2}} = \alpha_{\mathrm{OCSR}} \implies y_N^2 = 2\,\alpha_{\mathrm{OCSR}}^2 = \frac{25}{96} \approx 0{,}2604167.
+  \label{eq:exact-yukawa-norm}
+\end{equation}
+Jordan-keretbeli skálaválasztás alatt (II.~előírás, $\mu_J = M_R$, szemben az Einstein-keretbeli I.~előírással, $\mu_E(\phi) \propto M_{\mathrm{Pl}}\Omega(\varphi)$; lásd \cite{BezrukovShaposhnikov2008,DeSimone2009}) a kanonikus Einstein-potenciál ($x := \phi/M_{\mathrm{Pl}}$) egyhurkos $\kappa_J$ logaritmikus meredekséget kap:
+\begin{equation}
+  V_E(x) = \frac{3}{4}M_{\mathrm{Pl}}^2 M_{\mathrm{inf}}^2\bigl(1 - e^{-\sqrt{2/3}\,x}\bigr)^2\Bigl\{1 + \kappa_J\ln\bigl[1 + C_{\mathrm{ratio}}\bigl(e^{\sqrt{2/3}\,x} - 1\bigr)\bigr]\Bigr\}, \qquad
+  \kappa_J := \frac{1}{2}\left(\frac{\beta_{\lambda_\Phi}}{\lambda_\Phi} - 2\frac{\beta_{\xi_\Phi}}{\xi_\Phi}\right).
+  \label{eq:ve-presc-ii}
+\end{equation}
+
+\begin{theorem}[Háromágú II.~előírás Coleman--Weinberg és egymezős kinációs No-Go --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:uv-nogo}
+A Paper~24 rögzített $\mathrm{Spin}(10)$ $B-L$ seesaw portáljára~\eqref{eq:paper24-lagrangian}--\eqref{eq:ve-presc-ii}:
 \begin{enumerate}
-  \item \textbf{Nulla-paraméteres 1-hurkos meredekség:} $\kappa_J^{\mathrm{1\text{-}loop}} = \frac{\alpha_{\mathrm{OCSR}}^2}{8} - \frac{6\lambda_\Phi + \frac{3}{2}\alpha_{\mathrm{OCSR}}^2}{16\pi^2} = \mathbf{0{,}014914}$.
-  \item \textbf{Egyskálás Stueckelberg--skalaron kilépés ($V_\mu = M_{\mathrm{inf}}A_\mu$):} Mivel a \texttt{Sub1} 1.~állítása az $O_T$ Stueckelberg-skálát azonosan $f_{\mathrm{dir}} \equiv M_{\mathrm{inf}} = 3{,}1959\times 10^{13}\;\mathrm{GeV}$-hez köti, a kináció ($w_{\mathrm{rh}} = 1{,}0$) és a bomlás ($H = \Gamma_\phi^{\mathrm{tot}} = 37{,}006\;\mathrm{GeV}$) egyetlen szektorban zajlik ($\rho_{\mathrm{decay}}/\rho_{\mathrm{tot}} \equiv 1$), ami $N_* = 60{,}175$, $\mathbf{n_s = 0{,}97464}$ ($\mathbf{+0{,}21\sigma}$), $\mathbf{A_s = 2{,}0895\times 10^{-9}}$ ($\mathbf{-0{,}35\sigma}$), $\mathbf{r = 0{,}00511}$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4{,}88\times 10^{-5}} \ll 0{,}17$ és $\eta_B = +6{,}106\times 10^{-10}$ értéket ad.
-  \item \textbf{Hangolásmentes Bunch--Davies bizonyítás szétcsatolt két folyadékra:} A de~Sitter Bunch--Davies sztochasztikus szórás integrálása az egzakt \texttt{DOP853} pályán:
+  \item \textbf{Anomális dimenzió egzakt kiesése és görbült téri CW-meredekség:} A komplex szingulett ($N_s = 2$) egyhurkos $(\lambda_\Phi,\xi_\Phi)$ béta-függvényeiben a $\gamma_\Phi$ anomális dimenzió $\beta_{\lambda_\Phi}^{(\gamma)} = +4\gamma_\Phi\lambda_\Phi$ és $\beta_{\xi_\Phi}^{(\gamma)} = +2\gamma_\Phi\xi_\Phi$ ($\xi_\Phi \gg 1$) alakban lép fel, és azonosságként kiesik:
   \begin{equation}
-  f_{\phi,\mathrm{end}}^{\mathrm{BD}} = \frac{\frac{1}{2}M_{\mathrm{inf}}^2\langle\delta\varphi^2\rangle_{\mathrm{BD}}}{\rho_{\mathrm{end}}} = \mathbf{1{,}790\times 10^{-10}} = 1{,}040\,K_B = \mathbf{40{,}0}\times \sqrt{\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}},
+    \frac{1}{2}\frac{\beta_{\lambda_\Phi}^{(\gamma)}}{\lambda_\Phi} - \frac{\beta_{\xi_\Phi}^{(\gamma)}}{\xi_\Phi} = \frac{1}{2}(+4\gamma_\Phi) - (+2\gamma_\Phi) \equiv 0.
+    \label{eq:gamma-cancellation}
   \end{equation}
-  tehát szabad paraméter nélkül $40\times$-osan meghaladja a $4{,}47\times 10^{-12}$-es hígulási küszöböt. A $K_4$-vetített $\alpha_{\mathrm{OCSR}}^2 K_B = 2{,}242\times 10^{-11}$ kondenzátumra a 4-ODE Boltzmann-rendszer $w_{\mathrm{eff}} = 0{,}8737$, $n_s = \mathbf{0{,}97433}$ ($+0{,}11\sigma$), $A_s = 2{,}0588\times 10^{-9}$ ($-1{,}37\sigma$) és $\eta_B = \mathbf{+5{,}600\times 10^{-10}}$ értéket ad ($+0{,}27\%$ eltérés a Paper~24 elektrogyenge átmenetétől).
+  Az inflációs platón ($\xi_\Phi\varphi^2 \gg M_{\mathrm{Pl}}^2$) a graviton--inflaton kinetikus keveredés a belső radiális $\varphi$-hurkokat $s(\varphi) = \frac{1 + \xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2}{1 + (1 + 6\xi_\Phi)\xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2} \simeq (6\xi_\Phi)^{-1} \ll 1$ faktorral nyomja el \cite{DeSimone2009}, meghagyva a Goldstone $\eta$-hurkot ($16\pi^2\beta_{\lambda_\Phi}^{(s\to 0)} = 2\lambda_\Phi^2$, $16\pi^2\beta_{\xi_\Phi}^{(s\to 0)} = 2\lambda_\Phi\xi_\Phi \implies \Delta\kappa_J^{(\mathrm{sc},s\to 0)} = -\frac{\lambda_\Phi}{16\pi^2} = -2{,}09\times 10^{-5}$; sík téri $\overline{\mathrm{MS}}$ $s = 1$ mellett $16\pi^2\beta_{\lambda_\Phi}^{(s=1)} = 20\lambda_\Phi^2$ és $16\pi^2\beta_{\xi_\Phi}^{(s=1)} = 8\lambda_\Phi\xi_\Phi$ adódik $+\frac{\lambda_\Phi}{8\pi^2} = +4{,}18\times 10^{-5}$ járulékkal, ami minden alábbi ág következtetését változatlanul hagyja). Figyelembe véve $d_A$ darab $\alpha_{\mathrm{OCSR}}\varphi$ tömegű valós bozonikus küszöbmódust, $N_g$ Majorana-generációt ($-2N_g$ helicitásállapot $\alpha_{\mathrm{OCSR}}\varphi$ tömeggel) és a $\mathrm{Spin}(10)$-normált $U(1)_{B-L}$ mértékvektort ($T_{B-L}^{\mathrm{GUT}} = \sqrt{\frac{3}{8}}(B-L) \implies (q_\Phi^{\mathrm{GUT}})^2 = \frac{3}{8}\times 4 = \frac{3}{2}$, $M_{Z'}^2(\varphi) = \frac{3}{2}g_{\mathrm{GUT}}^2\varphi^2$, $+3$ polarizáció) a $16\pi^2\lambda_\Phi = 4\alpha_{\mathrm{OCSR}}^2$ azonossággal:
+  \begin{equation}
+    \kappa_J = \frac{3\bigl(\frac{3}{2}g_{\mathrm{GUT}}^2\bigr)^2 + (d_A - 2N_g)\alpha_{\mathrm{OCSR}}^4}{16\pi^2\lambda_\Phi} - \frac{\lambda_\Phi}{16\pi^2}
+    = \frac{27\,g_{\mathrm{GUT}}^4}{16\,\alpha_{\mathrm{OCSR}}^2} + \frac{d_A - 2N_g}{4}\,\alpha_{\mathrm{OCSR}}^2 - \frac{\lambda_\Phi}{16\pi^2}.
+    \label{eq:kappa-j-exact}
+  \end{equation}
+  \item \textbf{A II.~előírás és az egymezős kináció teljes háromágú kizárása:} Az egzakt Klein--Gordon differenciálegyenletet $N = \ln a$ szerint integrálva:
+  \begin{equation}
+    \frac{\mathrm{d}^2 x}{\mathrm{d}N^2} + \left[3 - \frac{1}{2}\left(\frac{\mathrm{d}x}{\mathrm{d}N}\right)^{\!2}\right]\left(\frac{\mathrm{d}x}{\mathrm{d}N} + \frac{\mathrm{d}\ln V_E(x)}{\mathrm{d}x}\right) = 0, \qquad \epsilon_1 = \frac{1}{2}\left(\frac{\mathrm{d}x}{\mathrm{d}N}\right)^{\!2}, \qquad \epsilon_2 = \frac{\mathrm{d}\ln\epsilon_1}{\mathrm{d}N},
+    \label{eq:inflaton-ode}
+  \end{equation}
+  és a Paper~24 rögzített bomlási szélességéhez ($\Gamma_\phi^{\mathrm{tot}} = \Gamma_{HH} + \Gamma_{VV} + \Gamma_{N_1 N_1} = 36{,}4992 + 0{,}0342 + 0{,}4729 = 37{,}0063\;\mathrm{GeV}$, $T_{\mathrm{rh}} = 5{,}132\times 10^9\;\mathrm{GeV}$) illesztve $k_* = 0{,}05\;\mathrm{Mpc}^{-1}$-nél:
+  \begin{equation}
+    N_* = -\ln\!\left(\frac{k_*}{a_0 H_*}\right) = -\ln k_* + \ln H_* + \frac{1}{3(1 + w_{\mathrm{rh}})}\ln\!\left(\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}\right) + \frac{1}{3}\ln\!\left(\frac{g_{*s,0}}{g_*}\right) + \ln\!\left(\frac{T_0}{T_{\mathrm{rh}}}\right):
+    \label{eq:nstar-matching}
+  \end{equation}
+  \begin{itemize}
+    \item \emph{I.~előírás alapeset ($\kappa_E \equiv 0$, $w_{\mathrm{rh}} = 0$, $k_{\mathrm{added}} = 0$):} $N_* = 51{,}412$ ($x_* = 5{,}2422$), $n_s = \mathbf{0{,}96199}$ ($-0{,}69\sigma$ \texttt{Planck 2018}, $-4{,}00\sigma$ {\upshape\texttt{ACT DR6}}), $A_s = \mathbf{2{,}1011\times 10^{-9}}$ ($+0{,}04\sigma$), $r = \mathbf{0{,}00426}$ és első elvű 5-ODE Casas--Ibarra $\eta_B = \mathbf{+6{,}106\times 10^{-10}}$.
+    \item \emph{II.~előírás A1~ág — Tisztán fermionos seesaw ($g_{\mathrm{GUT}} = 0, d_A = 0$):} $\kappa_J^{(F)} = \mathbf{-0{,}19533}$ ($N_g = 3$) és $\mathbf{-0{,}06513}$ ($N_g = 1$), amely $x_{\max} = \mathbf{0{,}0161}$ ($N_g = 3$), ill.\ $\mathbf{2{,}6564}$ ($N_g = 1$) pontban ($< x_* = 5{,}2422$) hamis-vákuum hilltop-maximumba fordítja $V_E(x)$-et.
+    \item \emph{II.~előírás A2~ág — A Paper~24 egzakt $K_4$ küszöb-multiplettje ($g_{\mathrm{GUT}} = 0, d_A - 2d_S = 8 - 6 = +2$):} $\kappa_J^{(\mathrm{P24})} = +\frac{1}{2}\alpha_{\mathrm{OCSR}}^2 - \frac{\lambda_\Phi}{16\pi^2} = \mathbf{+0{,}06508}$, amely $n_s = \mathbf{0{,}97821}$ és $10^9 A_s = \mathbf{1{,}3485}$ értéket ad (**$-25{,}05\sigma$-val kizárva $A_s$-en**).
+    \item \emph{II.~előírás B~ág — Mérték $U(1)_{B-L} \subset \mathrm{Spin}(10)$ ($g_{\mathrm{GUT}}^2 = 4\pi/40 = \pi/10$, $(q_\Phi^{\mathrm{GUT}})^2 = 3/2$, $d_A = 0, N_g = 3$):} $\kappa_J^{(V+F)} = \mathbf{+1{,}08377}$, amely $n_s = \mathbf{0{,}98296}$ ($+2{,}99\sigma$ {\upshape\texttt{ACT DR6}}) és $10^9 A_s = \mathbf{5{,}6753}$ ($+119{,}18\sigma$, $r = 0{,}02643$) értékkel kétszeresen kizárt.
+    \item \emph{Egymezős kináció és szpektátor Bunch--Davies akadály:} A $V_E(\phi) = \frac{1}{2}M_{\mathrm{inf}}^2\phi^2 + \mathcal{O}(\phi^3)$ minimum körüli oszcillációk $w_{\mathrm{rh}} \equiv 0$-t adnak; a homogén $A_\mu = (-1,\mathbf{0})$ mezőre $F_{\mu\nu} \equiv 0$ és $(\nabla_\mu A^\mu)^2 = 9H^2$ a Friedmann-egyenletbe olvad ($|\Delta G_{\mathrm{cosmo}}/G_N| = 2 K_{\mathrm{eff}} = 1{,}72\times 10^{-10}$) önálló $a^{-6}$ komponens nélkül; az $M_{\mathrm{inf}} = 1{,}84\,H_* > \frac{3}{2}H_*$ szpektátor pedig a nehéz de~Sitter fősorozatban ül ($\nu = 1{,}07\,\mathrm{i}$), kizárva a tömegtelen Bunch--Davies bolyongást. \qed
+  \end{itemize}
 \end{enumerate}
 \end{theorem}
 
+\subsection{Feltételes kétmezős első elvű 5-ODE munkapont és pálya-integrált GW-korlát (\texorpdfstring{$k_{\mathrm{UV}} = 2$}{k\_UV = 2})}
+Annak pontos meghatározására, hogy milyen minimális UV-kiterjesztés szükséges, ha a \texttt{Simons Observatory} és a \texttt{LiteBIRD} megerősíti az $n_s = 0{,}974 \pm 0{,}001$ értéket, integráljuk az energiamegmaradó 5-ODE nem-termikus reheating és Casas--Ibarra leptogenezis rendszert $N' := \ln(a/a_{\mathrm{end}})$ szerint a szétcsatolt kinációs modulusra ($\rho_\psi$, $w_\psi = +1$), a harmonikus skalaronra ($\rho_\phi$, $w_\phi = 0$, $\Gamma_\phi^{\mathrm{tot}} = 37{,}0063\;\mathrm{GeV}$, elágazási arány $\mathrm{BR}_{N_1} = \Gamma_{N_1 N_1}/\Gamma_\phi^{\mathrm{tot}} = 1{,}2778\times 10^{-2}$), a közbülső nehéz Majorana-sűrűségre ($\rho_{N_1}$, $X_{N_1} := n_{N_1}e^{3N'}/M_{\mathrm{inf}}^3$, relativisztikus $\Gamma_{D_1}^{\mathrm{NT}} = \frac{2M_1}{M_{\mathrm{inf}}}\Gamma_{D_1}$ idődilatációval), a sugárzásra ($\rho_r$) és a $B-L$ hozamra ($X_{B-L} := n_{B-L}e^{3N'}/M_{\mathrm{inf}}^3$, első elvből a Paper~24 komplex $\mathrm{SO}(2,\mathbb{C})$ $z_\tau = \theta_\tau + \mathrm{i}u \implies \varepsilon_1^{(B-L)} = +8{,}4705\times 10^{-5} > 0$ aszimmetriájával és $\Gamma_W = \Gamma_W^{\mathrm{ID}} + \Gamma_W^{\Delta L=2}$ kimosódással):
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}\rho_\psi}{\mathrm{d}N'} &= -6\rho_\psi, \qquad
+  \frac{\mathrm{d}\rho_\phi}{\mathrm{d}N'} = -\left(3 + \frac{\Gamma_\phi^{\mathrm{tot}}}{H}\right)\rho_\phi, \qquad
+  \frac{\mathrm{d}X_{N_1}}{\mathrm{d}N'} = \frac{2\,\mathrm{BR}_{N_1}\Gamma_\phi^{\mathrm{tot}}}{H}\frac{\rho_\phi e^{3N'}}{M_{\mathrm{inf}}^4} - \mathcal{D}_{N_1}, \\
+  \frac{\mathrm{d}(\rho_r e^{4N'})}{\mathrm{d}N'} &= e^{4N'}\left[(1 - \mathrm{BR}_{N_1})\frac{\Gamma_\phi^{\mathrm{tot}}}{H}\rho_\phi + \frac{M_{\mathrm{inf}}^4 e^{-3N'}}{2}\mathcal{D}_{N_1}\right], \qquad
+  \frac{\mathrm{d}X_{B-L}}{\mathrm{d}N'} = \varepsilon_1^{(B-L)}\mathcal{D}_{N_1} - \frac{\Gamma_W}{H}X_{B-L},
+\end{aligned}
+\label{eq:4ode-boltzmann}
+\end{equation}
+ahol $\mathcal{D}_{N_1} := \frac{\Gamma_{D_1}^{\mathrm{NT}}}{H}X_{N_1} - \frac{\Gamma_{D_1}\langle M_1/E\rangle}{H}X_{N_1}^{\mathrm{eq}}$ és $3M_{\mathrm{Pl}}^2 H^2 = \rho_\psi + \rho_\phi + \rho_{N_1} + \rho_r$, $(\rho_\psi,\rho_\phi,\rho_r,X_{N_1},X_{B-L})|_{N'=0} = \bigl((1-f_{\phi,\mathrm{end}})\rho_{\mathrm{end}}, f_{\phi,\mathrm{end}}\rho_{\mathrm{end}}, 0, 0, 0\bigr)$ kezdeti feltételről indítva és $\eta_B = \frac{28}{79}\frac{s_0}{n_{\gamma,0}}Y_{B-L}$ szerint kiolvasva. Mivel a kétmezős pálya a kinációból ($w = +1$) rövid skalaron-anyagdominált szakaszba ($w = 0$) lép át $\Gamma_\phi^{\mathrm{tot}} = H$ előtt, a horizontba visszalépő tenzormódusokat közvetlenül az egzakt $a(N')H(N')$ pálya mentén integráljuk \cite{FigueroaTanin2019}:
+\begin{equation}
+\begin{aligned}
+  \Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \frac{8}{7}\left(\frac{11}{4}\right)^{\!4/3}\frac{\omega_{r,0}}{\omega_{\gamma,0}}\left(\frac{g_{*s,0}}{g_*}\right)^{\!1/3}\Biggl[
+  &\frac{1}{\rho_r(N'_f)}\int_0^{N'_f}\frac{H_*^2\,\rho_{\mathrm{tot}}(N')}{12\pi^2 M_{\mathrm{Pl}}^2}\,e^{-4(N'_f - N')}\left|\frac{\mathrm{d}\ln(aH)}{\mathrm{d}N'}\right|\mathrm{d}N' \\
+  &+ \frac{H_*^2\ln(T_f/T_{\mathrm{BBN}})}{12\pi^2 M_{\mathrm{Pl}}^2}\Biggr].
+\end{aligned}
+\label{eq:dneff-gw}
+\end{equation}
+Az $(\kappa_{\mathrm{eff}} = 0{,}0149,\, f_{\phi,\mathrm{end}} = 2{,}24\times 10^{-11})$ munkaponton ({\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{UV}} = 2$) a~\eqref{eq:inflaton-ode}--\eqref{eq:dneff-gw} egyenletek $w_{\mathrm{eff}} = 0{,}8737$, $N_* = 59{,}587$, $n_s = \mathbf{0{,}97432}$ ($+0{,}11\sigma$ {\upshape\texttt{ACT DR6}}), $A_s = \mathbf{2{,}0593\times 10^{-9}}$ ($-1{,}36\sigma$), $r = \mathbf{0{,}00519}$, első elvű $\eta_B = \mathbf{+5{,}600\times 10^{-10}}$, pálya-integrált $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{3{,}74\times 10^{-6}} \ll 0{,}17$ és $|\Delta Y_p| = 0{,}08\times 2K_{\mathrm{eff}} = \mathbf{1{,}38\times 10^{-11}}$ BBN héliumeltolódást adnak (\ref{fig:uv-sector}.~ábra).
+
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{figures/fig1_act_dr6_multiterminal_inflation_and_bbn.pdf}
-  \caption{(A) Nulla-paraméteres ($k_{\mathrm{added}} = 0$) Stueckelberg--skalaron ($w_{\mathrm{rh}}=1$) és $K_4$ Bunch--Davies 4-ODE ($w_{\mathrm{eff}}=0{,}874$) lezárás az \texttt{ACT DR6} $1\sigma$ sávban. (B) Primordialis GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ biztonsági tartalék.}
-  \label{fig:inf_bbn}
+  \includegraphics[width=\textwidth]{figures/fig1_act_dr6_multiterminal_inflation_and_bbn_hu.pdf}
+  \caption{(A) Egzakt ODE-számított UV inflációs görbe az $(n_s, 10^9 A_s)$ síkon: paramétermentes I.~előírás ($k_{\mathrm{added}} = 0$, $n_s = 0{,}9620$, {\upshape\texttt{PROVEN}}), a Paper~24 $n_{\mathrm{eff}}^{\mathrm{STr}} = +2$ küszöb-multiplettje II.~előírás alatt ($10^9 A_s = 1{,}349$, $-25{,}05\sigma$), a mérték $U(1)_{B-L}$ II.~előírás ($\kappa_J = +1{,}0838$, $10^9 A_s = 5{,}675$, $+119{,}2\sigma$; a fermionos $\kappa_J < 0$ ág $x_{\max} < x_*$-nál összeomlik), és a feltételes kétmezős 5-ODE munkapont ($k_{\mathrm{UV}} = 2$, $n_s = 0{,}9743$). (B) Egyfolyadékos GW-burkoló $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{eff}})$ és az egzakt kétlépcsős ($w = 1 \to 0$) 5-ODE pálya-integrál ($\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3{,}74\times 10^{-6} \ll 0{,}17$).}
+  \label{fig:uv-sector}
 \end{figure}
 
-\section{Folytonos \texorpdfstring{$K_B^{-1}$}{KB-1} Helmholtz--Milgrom \texorpdfstring{$\sigma_8$}{sigma8}-árnyékolás és JWST kompaktság}
-A $\delta\Phi_{\mathrm{Q}} := \chi - \phi_N$ potenciál kanonikus látszólagos-horizont Raychaudhuri--Helmholtz egyenlete:
-\begin{equation}
-\bigl(\nabla_\perp^2 - \bar{m}_{\mathrm{IR}}^2(z)\bigr)\delta\Phi_{\mathrm{Q}} = \nabla_\perp\cdot\bigl[(F_{\mathrm{OD}}^2(s_b) - 1)\nabla_\perp\phi_N\bigr], \qquad \bar{m}_{\mathrm{IR}}^2(z) = \frac{1}{K_B}\frac{\max\bigl(\bar{R}_{\mu\nu}A^\mu A^\nu,\,0\bigr)}{c^2},
-\end{equation}
-a kondenzált galaktikus barionokra ($R_b = 0{,}03\,R_{200}$) érvényes Milgrom-féle QUMOND tömegközépponti válasszal ($\mu_{\mathrm{CoM}}(s_b) = F_{\mathrm{OD}}^2(s_b) + \frac{1}{3}s_b\frac{\mathrm{d}F_{\mathrm{OD}}^2}{\mathrm{d}s_b}$).
+\section{Egy-metrikás \texttt{AeST}--QUMOND Helmholtz-hatás és első elvű \texorpdfstring{$\sigma_8$}{sigma\_8}-lezárás}
+\label{sec:sigma8-closure}
 
-\begin{theorem}[Folytonos $z_{\mathrm{drag}} = 1060 \to 0$ $\sigma_8$-lezárás és szub-kpc JWST kompaktság --- \texttt{PROVEN}]
-A csatolt kétfolyadékos $(\delta_A, \delta_b)$ rendszer folytonos integrálása $z_{\mathrm{drag}} = 1060$-tól $z = 0$-ig ($k_{\mathrm{added}} = 0$, lépcsőfüggvény nélkül): (1) $\sigma_8(z=0) = \mathbf{0{,}8223}$ ($\mathbf{+0{,}48\sigma}$ az \texttt{ACT DR6} CMB-lencsézési $0{,}818 \pm 0{,}009$ méréshez képest); (2) mivel $z \le z_{\mathrm{dip}} = 0{,}6316$ esetén $q(z) \le 0 \implies \bar{m}_{\mathrm{IR}}(z) \equiv 0$, a \texttt{SPARC} ($z=0$) és \texttt{X-COP} ($z=0{,}05$) jóslatok $100{,}000\%$-ban megőrződnek ($S_{\mathrm{Helm}} \equiv 1$); (3) $z = 10$-nél $\ell_{\mathrm{IR}}(10) = \mathbf{2{,}33\;\mathrm{kpc}}$ ($S_{\mathrm{Helm}}(1{,}5\;\mathrm{kpc}) = \mathbf{0{,}900}$), ami természetesen megmagyarázza a $z = 10\text{--}14$ JWST-galaxisok megfigyelt szub-kpc kompaktságát.
+\subsection{A konform lencsézés-kioltás, a nem-analitikus rámpák és a CoM-hiba kiküszöbölése}
+A relativisztikus módosított gravitációs kozmológia három rejtett csapdáját szisztematikusan kiküszöböljük:
+\begin{enumerate}
+  \item \emph{A Bekenstein--Sanders konform lencsézési No-Go:} Bármely tiszta konform átskálázás ($g_{\mu\nu} = e^{-2\psi}g_{\mu\nu}^{(E)}$) ellentétes előjellel transzformálja a newtoni potenciálokat ($\Psi_E = \Psi + \psi$, $\Phi_E = \Phi - \psi$), így a Weyl-féle lencsézési potenciál $\Phi_{\mathrm{Weyl}} = \frac{1}{2}(\Phi + \Psi) = \frac{1}{2}(\Phi_E + \Psi_E)$ 4D-ben konform-invariáns marad, és kiolt minden QUMOND gravitációs lencsézést. Skordis és Z\l{}o\'snik (\texttt{AeST}) \cite{SkordisZlosnik2021} konstrukcióját követve ezért \textbf{egyetlen fizikai $g_{\mu\nu}$ metrikán} dolgozunk, és a $\varphi$ skalárt az $a_\mu := A^\nu\nabla_\nu A_\mu$ direktor 4-gyorsuláshoz csatoljuk a $q_\mu := h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$ kombináción keresztül, amely $\Psi$-t és $\Phi$-t \emph{azonos} előjellel tolja el ($\Phi \equiv \Psi$).
+  \item \emph{Nem-analitikus $\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)$ rámpák:} A szakaszonkénti görbületi kapcsolók megsértik a $C^\infty$ analiticitást $q(z_{\mathrm{dip}}) = 0$-nál ($z_{\mathrm{dip}} = 0{,}6316$), és vagy negyedrendű metrikaegyenletekhez, vagy $\nabla_\mu T^{\mu\nu}_{\mathrm{eff}} \neq 0$-hoz vezetnek.
+  \item \emph{Belső gyorsulású CoM-hiba:} Milgrom QUMOND tömegközépponti tétele \cite{Milgrom2010QUMOND} (35.~egyenlet) szerint egy $g_{\mathrm{int}} \gg a_0$ belső gyorsulású test külső $\mathbf{g}_{\mathrm{ext}}$ térre adott válasza $\nu(|\mathbf{g}_{\mathrm{ext}}|/a_0)$, sohasem $\nu(g_{\mathrm{int}}/a_0)$.
+\end{enumerate}
+
+\subsection{4D egy-metrikás \texttt{AeST}--QUMOND--Helmholtz hatás és Christoffel-bizonyítás}
+Egy $(-,+,+,+)$ előjelű $(\mathcal{M}_4, g_{\mu\nu})$ Lorentz-sokaságon jelölje $A_\mu$ az egységnormájú időszerű direktor 1-formát ($g^{\mu\nu}A_\mu A_\nu = -1$, térbeli projektor $h^{\mu\nu} := g^{\mu\nu} + A^\mu A^\nu$, $F_{\mu\nu} := \partial_\mu A_\nu - \partial_\nu A_\mu$, $a_\mu := A^\nu\nabla_\nu A_\mu$), $\varphi$ az \texttt{AeST} polarizációs skalárt \cite{SkordisZlosnik2021} $q_\mu := h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$ vektorral, és $\phi_N$ a {\upshape\texttt{Sub1}} QUMOND segédpotenciálját. \textbf{Szigorúan konstans}, rögzített $K_B \equiv K_B^{(0)} = 1{,}72219\times 10^{-10}$, $a_q = \frac{1}{4}K_B^{(0)}$, $c_q = 1$, $K_{\mathrm{eff}} := K_B - 2a_q c_q^2 = \frac{1}{2}K_B^{(0)} = 8{,}61095\times 10^{-11}$, $\gamma_{\mathrm{eff}} := 1 - \frac{1}{2}K_{\mathrm{eff}}$, $b_1 := \frac{a_q(2 - K_B)}{2 - K_{\mathrm{eff}}}$ és $\psi_{\mathrm{IR}} := \frac{2a_q c_q}{2 - K_{\mathrm{eff}}}\varphi$ együtthatókkal ($k_{\mathrm{added}} = 0$) a $C^\infty$ egy-metrikás hatás:
+\begin{equation}
+\begin{aligned}
+  \mathcal{S} = \int \mathrm{d}^4x\,\sqrt{-g}\,\Biggl[
+  &\frac{M_{\mathrm{Pl}}^2}{2}\,R - \frac{M_{\mathrm{Pl}}^2 K_B}{4}\,F_{\mu\nu}F^{\mu\nu} - \frac{M_{\mathrm{Pl}}^2 c_2}{2}(\nabla_\mu A^\mu)^2 + \lambda\bigl(g^{\mu\nu}A_\mu A_\nu + 1\bigr) \\
+  &- M_{\mathrm{Pl}}^2 a_q h^{\mu\nu}q_\mu q_\nu + M_{\mathrm{Pl}}^2 b_1 h^{\mu\nu}\partial_\mu\varphi\partial_\nu\varphi + \frac{M_{\mathrm{Pl}}^2\mathcal{K}_2}{2}(A^\mu\partial_\mu\varphi)^2 \\
+  &- M_{\mathrm{Pl}}^2\gamma_{\mathrm{eff}}\Bigl(2 h^{\mu\nu}\partial_\mu\psi_{\mathrm{IR}}\partial_\nu\phi_N - \frac{(a_0^{\mathrm{KH}})^2}{c^4}V_{\mathrm{QUMOND}}(y)\Bigr) \\
+  &- \frac{M_{\mathrm{Pl}}^2\gamma_{\mathrm{eff}}\kappa_\theta}{2}(\nabla_\mu A^\mu)^2\bigl(\psi_{\mathrm{IR}}^2 + \psi_{\mathrm{IR}}\phi_N\bigr)\Biggr]
+  + S_{\mathrm{cond}}\bigl[g_{\mu\nu}^{(A)}, \psi_A\bigr] + S_{\mathrm{SM}}\bigl[g_{\mu\nu}, \Psi_{\mathrm{SM}}\bigr],
+\end{aligned}
+\label{eq:master-v4-action}
+\end{equation}
+ahol $y = s^2 = \frac{c^4}{(a_0^{\mathrm{KH}})^2}h^{\mu\nu}\partial_\mu\phi_N\partial_\nu\phi_N$, $V_{\mathrm{QUMOND}}(s^2) = 2\int_0^s q\bigl[F_{\mathrm{OD}}^2(q) - 1\bigr]\mathrm{d}q$, $g_{\mu\nu}^{(A)} := g_{\mu\nu} + (1 - e^{-2\psi_{\mathrm{IR}}})A_\mu A_\nu$ a nyomásmentes hideg kondenzátum $\psi_A$ diszform direktor-metrikája ($\det g^{(A)} = e^{-2\psi_{\mathrm{IR}}}\det g < 0$, $g_{00}^{(A)} = e^{-2\psi_{\mathrm{IR}}}g_{00} \simeq -[1 + 2(\Psi - \psi_{\mathrm{IR}})]$, míg az összes Standard Modell részecske $\Psi_{\mathrm{SM}}$, a fotonok és a gravitonok \emph{tisztán minimálisan} az egyetlen $g_{\mu\nu}$ metrikához csatolódnak), a Stueckelberg--Lorenz és Helmholtz-paramétereket pedig
+\begin{equation}
+  c_2 \equiv \frac{K_{\mathrm{eff}}}{1 - 2K_{\mathrm{eff}}} = 8{,}61095\times 10^{-11}, \quad
+  \kappa_\theta \equiv \xi_\Phi^2 = (256\pi^2)^2 \approx 6{,}3838\times 10^6, \quad
+  m_H^2(z) := \frac{9}{2}\kappa_\theta\,\frac{a^2 H^2(z)}{c^2}
+  \label{eq:sl-dresser}
+\end{equation}
+rögzíti.
+
+\begin{theorem}[4D Christoffel egy-metrikás $\Phi \equiv \Psi$ csúszásmentesség, pólusmentes Hesse-mátrix, PPN-korlátok és viriális egzaktság --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:covariant-helmholtz}
+A $g_{\mu\nu}$ metrika explicit 4D $\Gamma^\lambda_{\mu\nu}$ Christoffel-szimbólumait és $R_{\mu\nu}$ Ricci-tenzorát $(-,+,+,+)$ előjelben és unitér direktor-mértékben ($A_i = 0, g^{\mu\nu}A_\mu A_\nu \equiv -1$) \texttt{SymPy}-ban kiértékelve a~\eqref{eq:master-v4-action}--\eqref{eq:sl-dresser} hatásra:
+\begin{enumerate}
+  \item \textbf{Fénysebességű tenzor/foton-kúp, Cserenkov-biztonság és egzakt PPN-megfelelés:} Az $S_{\mathrm{SM}}[g_{\mu\nu}, \Psi_{\mathrm{SM}}]$ minimális csatolás garantálja a $c_T^2 \equiv c_\gamma^2 \equiv c^2$ (\texttt{GW170817}) és $\alpha_{\mathrm{EEP}} \equiv 0$ azonosságokat. Foster--Jacobson konvencióban \cite{JacobsonMattingly2001,FosterJacobson2006,OostMukohyamaWang2018} ($c_1 = -c_3 = K_B$, $c_4 = -2a_q c_q^2 \implies c_{13} = 0, c_{14} = K_{\mathrm{eff}}$) a~\eqref{eq:sl-dresser} választás:
+  \begin{equation}
+  \begin{aligned}
+    \frac{c_T^2}{c^2} &\equiv 1, \qquad \frac{c_V^2}{c^2} = \frac{K_B}{K_{\mathrm{eff}}} = 2 > 1, \qquad \mathbf{K}_{\mathrm{dyn}} = \operatorname{diag}\!\left(3 + \frac{2}{c_2},\; \frac{\mathcal{K}_2}{2}\right) \succ \mathbf{0}, \\
+    \alpha_2^{\mathrm{PPN}} &\equiv 0, \qquad \alpha_1^{\mathrm{PPN}} = -4K_{\mathrm{eff}} = \mathbf{-3{,}444\times 10^{-10}} \quad \bigl(|\alpha_1^{\mathrm{PPN}}| \ll 4\times 10^{-5}\bigr),
+  \end{aligned}
+  \label{eq:luminal-ppn}
+  \end{equation}
+  kizárva a szubluminális UHECR gravitációs Cserenkov-veszteséget ($c_T, c_V \ge c$) \cite{ElliottMooreStoica2005} és a kitüntetett-rendszerbeli anomáliákat (FLRW-háttéren $\alpha_2^{\mathrm{PPN}} \equiv 0$, halókban pedig $c_2^{\mathrm{eff}}(x) = c_2 + \gamma_{\mathrm{eff}}\kappa_\theta(\psi_{\mathrm{IR}}^2 + \psi_{\mathrm{IR}}\phi_N) > 0$ garantálja, hogy $|\alpha_2^{\mathrm{PPN}}| \le \frac{1}{2}K_{\mathrm{eff}} = 4{,}31\times 10^{-11} \ll 10^{-7}$).
+  \item \textbf{4D Christoffel-tanúsított kvázisztatikus nyereg, teljes lencsézés és pólusmentes determináns:} Sík FLRW-háttéren ($\nabla_\mu\bar{A}^\mu = 3H(z)/c$) newtoni mértékben $\mathrm{d}s^2 = -(1 + 2\Psi)c^2\mathrm{d}t^2 + a^2(1 - 2\Phi)\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j$ a $\frac{1}{2}\sqrt{-g}\,R$ és a~\eqref{eq:master-v4-action} hatás közvetlen kifejtése $\mathbf{c} = (\Psi, \Phi, \varphi, \phi_N)^T$ szerint az egzakt Hesse-determinánst adja:
+  \begin{equation}
+    \det\mathbf{H}_4 = 2\,a_q^2 c_q^2\,(2 - K_{\mathrm{eff}})\,k_c^4\,\bigl(4 k_c^4 + 4 k_c^2 m_H^2\,\mu_b + m_H^4\bigr) > 0 \qquad \forall\, k_c > 0,\; \mu_b > 0.
+    \label{eq:h4-covariant}
+  \end{equation}
+  Szemben a $k_c^2 + m_H^2(\mu_b - 1)$ alakkal, a~\eqref{eq:h4-covariant} kifejezésben $\mu_b$ \emph{kizárólag pozitív együtthatóval} szerepel; mivel a {\upshape\texttt{Sub1}} igazolja, hogy $\mu_b(\theta) \ge \min\lambda_\parallel = 0{,}941192 > 0$ minden $s_N \in (0,\infty)$ és $\theta \in [0,\pi]$ esetén, $\det\mathbf{H}_4$ \textbf{mindenütt szigorúan pozitív és pólusmentes}, beleértve az $s_N > 1{,}4475$ ($\lambda_\parallel < 1$) átmeneti héjakat is. A $\frac{\partial\mathcal{L}^{(2)}}{\partial\mathbf{c}} = \mathbf{0}$ egyenletrendszer egzakt egy-metrikás $\Phi \equiv \Psi$ csúszásmentességet ad ($100\%$-ban megőrizve a QUMOND-lencsézést a $\Phi_{\mathrm{Weyl}} = \frac{\Phi+\Psi}{2} \equiv \Psi$ potenciálban):
+  \begin{equation}
+  \begin{aligned}
+    \Psi(\mathbf{k}_c, z) &= \Phi(\mathbf{k}_c, z) = \frac{1}{\gamma_{\mathrm{eff}}}\Bigl\{\Phi_{N,A}(\mathbf{k}_c, z) + \Phi_{N,b}(\mathbf{k}_c, z)\bigl[1 + \mathcal{K}_{\mathrm{Helm}}(k_c, m_H(z); \mu_b)\bigr]\Bigr\}, \\
+    \mathcal{K}_{\mathrm{Helm}}(k_c, m_H; \mu_b) &\equiv \frac{4 k_c^4\,(\mu_b - 1)}{4 k_c^4 + 4 k_c^2 m_H^2\,\mu_b + m_H^4}, \\
+    \phi_N(\mathbf{k}_c, z) &= \frac{2 k_c^2(2 k_c^2 + m_H^2)}{\gamma_{\mathrm{eff}}(4 k_c^4 + 4 k_c^2 m_H^2\mu_b + m_H^4)}\,\Phi_{N,b}(\mathbf{k}_c, z),
+  \end{aligned}
+  \label{eq:psi-jordan-exact}
+  \end{equation}
+  amely egyszerre teljesíti mindhárom fizikai határesetet: $\mathcal{K}_{\mathrm{Helm}}(m_H = 0) \equiv \mu_b - 1$ (egzakt QUMOND), $\mathcal{K}_{\mathrm{Helm}}(m_H \to \infty) \equiv 0$ (egzakt korai/szuper-IR GR) és $\mathcal{K}_{\mathrm{Helm}}(\mu_b = 1) \equiv 0$ (erős-téri newtoni határ). FLRW-perturbációkon ($\mu_b > 1$) $\det\mathbf{G}_{\mathrm{dyn}} > 0$ fennáll, statikus rendszerekben ($m_H = 0$) pedig a {\upshape\texttt{Sub1}} $(\phi_N,\chi)$ alakja tanúsítja a Sturm--Liouville pozitivitást.
+  \item \textbf{Egzakt stacionárius viriális megőrzés zérus sodródással:} Mivel $(K_B, c_2, a_q, c_q)$ szigorúan konstansok, $\frac{\partial K_B}{\partial s} \equiv 0$ és $\frac{\partial^2 K_B}{\partial\varphi^2} \equiv 0$ azonosságként teljesül: minden stacionárius virializált téridőben ($\nabla_\mu\bar{A}^\mu \equiv 0 \implies m_H \equiv 0$) a~\eqref{eq:master-v4-action} hatás \emph{zérus} statikus Maxwell/Hardy-sodródást kelt:
+  \begin{equation}
+    \mathcal{R}_{\mathrm{Hardy}}^{\mathrm{static}} \equiv 0, \qquad \Psi\big|_{m_H=0} = \Phi\big|_{m_H=0} = \frac{\Phi_{N,A} + \mu_b\,\Phi_{N,b}}{1 - K_{\mathrm{eff}}/2},
+    \label{eq:hardy-bound}
+  \end{equation}
+  $\mathcal{O}(K_{\mathrm{eff}}) = 4{,}3\times 10^{-11}$ pontossággal visszaadva a {\upshape\texttt{Sub1}} \texttt{SPARC} és {\upshape\texttt{X-COP}} dinamikát és lencsézést. \qed
+\end{enumerate}
 \end{theorem}
 
-\section{5-próbás lokális-üreg inverz lezárás, Cefeida nulltétel és ISW túlélés}
-A \emph{Cefeida gravitációs nulltétel} ($|\Delta G/G|_{\mathrm{Ceph}} = \mathbf{9{,}15\times 10^{-20}} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$) alapján a folytonos $z = 1060 \to 0$ $K_B^{-1}$ megoldóval minimalizáljuk az 5 független lokális mérésre (\texttt{SH0ES} $73{,}04\pm 1{,}04$, \texttt{CCHP TRGB/JAGB} $70{,}40\pm 1{,}90$, \texttt{CosmicFlows-4} $419\pm 36\;\mathrm{km\,s^{-1}}$, \texttt{CLASSIX/6dFGS} $\delta_v^{\mathrm{obs}} = -0{,}175\pm 0{,}035$, $R_{\mathrm{obs}} = 155\pm 25\;\mathrm{Mpc}$; $\mathrm{dof} = 3$) felírt együttes $\chi^2(\delta_v, R)$-et (\ref{tab:voids}.~táblázat, \ref{fig:hubble_isw}A~ábra):
+\subsection{Első elvű BAO-oszcillációs + tömeges-neutrínós Fourier-integrálás \texorpdfstring{$\sigma_8$}{sigma\_8}-ra}
+Külső $\sigma_8^{\mathrm{GR}}$ normálás helyett első elvből számítjuk a $\Delta_{m,0}^2(k_c)$ dimenziótlan spektrumot a $\frac{4}{25}(k_c c/H_0)^4\allowbreak(D_{1,0}/\Omega_m)^2 A_s(k_c/k_*)^{n_s-1}T_{\mathrm{EH+BAO}+\nu}^2(k_c)$ Poisson-összefüggésből a barion-oszcillációs Eisenstein--Hu transzferfüggvénnyel \cite{EisensteinHu1998} és a Paper~24 tömeges neutrínóinak ($\sum m_\nu = 59{,}19\;\mathrm{meV}$, $f_\nu = 4{,}44\times 10^{-3}$) elnyomásával, ami $\sigma_8^{\mathrm{GR}} = \mathbf{0{,}8150}$ (I.~előírás, $n_s = 0{,}9620$) és $\mathbf{0{,}8106}$ (2-mezős, $n_s = 0{,}9743$) értéket ad. Minden módust $z_{\mathrm{drag}} = 1060$-tól ($f_{\mathrm{drag}} = 0{,}85607 < 1$ meredekséggel) $z = 0$-ig integrálva 32-pontú Gauss--Legendre szögkvadratúrával $\langle\mathcal{K}_{\mathrm{Helm}}\rangle_\theta := \frac{1}{2}\int_{-1}^1 \mathcal{K}_{\mathrm{Helm}}(k_c, m_H; \mu(\theta))\,\mathrm{d}\cos\theta$, ahol $\mu(\theta) = \lambda_\parallel(s_e)\cos^2\theta + F_{\mathrm{OD}}^2(s_e)\sin^2\theta$ (Jensen-torzítás nélkül):
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}^2\delta_A}{\mathrm{d}(\ln a)^2} + \bigl[1 - q(z)\bigr]\frac{\mathrm{d}\delta_A}{\mathrm{d}\ln a} &= \frac{3}{2}\Omega_{cb}(z)\Bigl[(1 - f_b)\delta_A + f_b\delta_b\Bigr], \\
+  \frac{\mathrm{d}^2\delta_b}{\mathrm{d}(\ln a)^2} + \bigl[1 - q(z)\bigr]\frac{\mathrm{d}\delta_b}{\mathrm{d}\ln a} &= \frac{3}{2}\Omega_{cb}(z)\Bigl[(1 - f_b)\delta_A + f_b\bigl(1 + \langle\mathcal{K}_{\mathrm{Helm}}\rangle_\theta\bigr)\delta_b\Bigr],
+\end{aligned}
+\label{eq:2fluid-ode}
+\end{equation}
+önkonzisztens külső gyorsulással:
+\begin{equation}
+  \bar{g}_{\mathrm{ext},b}(z) = \frac{3}{2}f_b\Omega_{m,0}H_0^2(1+z)^2 D_{\Lambda\mathrm{CDM}}^{\mathrm{rad}}(z)\left[\int \frac{k_c\,P_{m,0}(k_c)}{2\pi^2}\left\langle\frac{2k_c^2(2k_c^2 + m_H^2)}{4k_c^4 + 4k_c^2 m_H^2\mu(\theta) + m_H^4}\right\rangle_{\!\theta}^{\!2}\mathrm{d}\ln k_c\right]^{1/2}:
+  \label{eq:self-consistent-barefe}
+\end{equation}
 \begin{itemize}
-  \item \textbf{Teljes EFE illesztés:} $\hat{\delta}_v = -0{,}1789$, $\hat{R} = 149{,}1\;\mathrm{Mpc}$ mellett $H_0^{\mathrm{loc}} = \mathbf{71{,}93\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{423{,}4\;\mathrm{km\,s^{-1}}}$ és $\chi^2_{\mathrm{min}}/\mathrm{dof} = 1{,}874/3 = \mathbf{0{,}625}$ ($\mathbf{p = 0{,}599}$).
-  \item \textbf{Barion EFE illesztés:} $\hat{\delta}_v = -0{,}1657$, $\hat{R} = 142{,}5\;\mathrm{Mpc}$ mellett $H_0^{\mathrm{loc}} = \mathbf{72{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{427{,}6\;\mathrm{km\,s^{-1}}}$ és $\chi^2_{\mathrm{min}}/\mathrm{dof} = 2{,}033/3 = \mathbf{0{,}678}$ ($\mathbf{p = 0{,}566}$).
+  \item \textbf{Árnyékolatlan {\upshape\texttt{Sub1}} ($\kappa_\theta = 0$, {\upshape\texttt{NO-GO}}):} $\sigma_8^{\mathrm{matter}}(0) = \mathbf{2{,}49}$ és $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{11{,}69}$ ($>1200\sigma$-val kizárt).
+  \item \textbf{Rögzített $\kappa_\theta = \xi_\Phi^2 = (256\pi^2)^2$ ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} $l_{\mathrm{IR}}(0) = \mathbf{0{,}820\;\mathrm{Mpc}}$, $\sigma_8^{\mathrm{matter}}(0) = \mathbf{0{,}8151}$ és CMB-lencsézési $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0{,}8165}$ ($\mathbf{-0{,}16\sigma}$ az {\upshape\texttt{ACT DR6}} $0{,}818 \pm 0{,}009$ méréshez képest) az I.~előíráson, ill.\ $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0{,}8122}$ ($\mathbf{-0{,}65\sigma}$) a kétmezős $n_s = 0{,}9743$ munkaponton ($\kappa_\theta = C_{\mathrm{ratio}}^2$ mellett $l_{\mathrm{IR}}(0) = 0{,}273\;\mathrm{Mpc}$ és $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0{,}8151}$, $+0{,}40\sigma$ {\upshape\texttt{P-ACT+DESI}}).
 \end{itemize}
 
-\begin{table}[htbp]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\caption{Folytonos $z = 1060 \to 0$ $K_B^{-1}$ \texttt{Sub1} jóslatok ($\Delta M_B \equiv 0$) öt katalógusra és az 5-próbás közös illesztésre.}
-\label{tab:voids}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-Katalógus / Inverz illesztés & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Telj. / Bar.) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
-\midrule
-CF4 sekély konzervatív & $(-0{,}10,\;150)$ & $2{,}103\;/\;2{,}739$ & $70{,}48\;/\;70{,}72$ & $238{,}2\;/\;274{,}1$ \\
-Paper~28 alapmodell & $(-0{,}15,\;150)$ & $2{,}102\;/\;2{,}694$ & $71{,}40\;/\;71{,}74$ & $357{,}3\;/\;408{,}5$ \\
-Whitbourn--Shanks (2016) & $(-0{,}15,\;200)$ & $2{,}160\;/\;2{,}649$ & $71{,}43\;/\;71{,}72$ & $483{,}0\;/\;541{,}5$ \\
-CLASSIX röntgen (2020) & $(-0{,}20,\;140)$ & $2{,}089\;/\;2{,}642$ & $72{,}31\;/\;72{,}74$ & $443{,}3\;/\;503{,}7$ \\
-KBC konzervatív (2013) & $(-0{,}20,\;200)$ & $2{,}157\;/\;2{,}559$ & $72{,}36\;/\;72{,}69$ & $643{,}7\;/\;709{,}4$ \\
-\midrule
-\textbf{5-próbás illesztés ($p{=}0{,}60$)} & $(-0{,}179,\;149{,}1)$ & $\mathbf{2{,}095}$ (Telj.) & $\mathbf{71{,}93}$ & $\mathbf{423{,}4}$ \\
-\textbf{5-próbás illesztés ($p{=}0{,}57$)} & $(-0{,}166,\;142{,}5)$ & $\mathbf{2{,}668}$ (Bar.) & $\mathbf{72{,}05}$ & $\mathbf{427{,}6}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\section{Gyöklövéses szupervoid ISW No-Go és árnyékolt hidegfolt-túlélés}
+\label{sec:isw-supervoid}
 
-Kompenzált szuperüregeken ($z_v = 0{,}50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0{,}25$) a tiszta MOND $+0{,}3975 > 0{,}2460$-tal meleg folttá fordítja az üregeket ($A_{\mathrm{ISW}} = -3{,}93\times$), míg az egzakt \texttt{Sub1} automatikusan túlél ($+0{,}1992 < 0{,}2460$), élesen megkülönböztetve a dinamikus ($0{,}50\text{--}0{,}86\times$) és az EFE-telített ($2{,}20\text{--}2{,}61\times$) ágat (\ref{fig:hubble_isw}B~ábra). A \ref{tab:audit}.~táblázat és a \ref{fig:scorecard}.~ábra foglalja össze a teljes hatszektoros lezárást (\texttt{15/15 PASS}).
+Egy $z_v = 0{,}50$-nél megfigyelt $R_{\mathrm{com}} = 150\;\mathrm{Mpc}$ sugarú szupervoid fizikailag konzisztens leírásához: (i) egzakt gyöklövéssel (\texttt{brentq}) kell beállítani a kezdeti amplitúdót úgy, hogy a kifejlődött üreg elérje a fizikai $|\delta_b(z_v = 0{,}50)| \equiv 0{,}25$ kontrasztot (elkerülve a $\Lambda$CDM-normálásból fakadó fizikaiatlan $|\delta_b| > 1$ kavitációt); és (ii) meg kell különböztetni a kiürülést hajtó perembeli erő-Helmholtz-magot $\mathcal{S}_{\mathrm{force}}(x) = \frac{3(1+x)e^{-x}(x\cosh x - \sinh x)}{x^3}$ a $\Delta T_{\mathrm{ISW}} \propto 2\int\dot{\Psi}\,\mathrm{d}\eta$ integrált szabó gömbi/LOS potenciál-magtól $\mathcal{S}_{\mathrm{pot}}(x) = \frac{2[1 - (1+x)e^{-x}]}{x^2}$:
+\begin{equation}
+  \frac{\mathrm{d}\ln|\Psi|}{\mathrm{d}\ln a} = -\left[1 - f_{\mathrm{eff}}(z_v) - \frac{\mathrm{d}\ln\mu_{\mathrm{eff}}}{\mathrm{d}\ln a}\right], \quad f_{\mathrm{eff}}(a) := \frac{\mathrm{d}\ln\delta_m}{\mathrm{d}\ln a}, \quad \mu_{\mathrm{eff}}(a) := \frac{(1 - f_b)\delta_A + f_b\mu_{b,\mathrm{pot}}^{\mathrm{void}}(a)\delta_b}{(1 - f_b)\delta_A + f_b\delta_b}.
+  \label{eq:isw-exact}
+\end{equation}
+
+\begin{theorem}[Gyöklövéses árnyékolatlan \textnormal{{\upshape\texttt{Sub1}}} szupervoid ISW No-Go és árnyékolt túlélés --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:isw-nogo}
+A csatolt kétcsatornás gömbi szupervoid ODE-ben ($R_{\mathrm{com}} = 150\;\mathrm{Mpc}$) kezdeti gyöklövéssel kikényszerítve a $|\delta_b(z_v = 0{,}50)| \equiv 0{,}25$ feltételt önkonzisztens külsőmező-iteráció mellett:
+\begin{enumerate}
+  \item \textbf{Árnyékolatlan {\upshape\texttt{Sub1}} ($\kappa_\theta = 0$, {\upshape\texttt{NO-GO}}):} $\mu_{\mathrm{eff}}(0{,}50) = 4{,}7091$, $\frac{\mathrm{d}\ln\mu_{\mathrm{eff}}}{\mathrm{d}\ln a} = +0{,}2361$ és felgyorsult kiürülés $f_{\mathrm{eff}}(0{,}50) = 0{,}9783$, ami megsérti az $1 - f_{\mathrm{eff}} = 0{,}0217 < 0{,}2361$ feltételt, és CMB \textbf{meleg foltokba} fordítja a szupervoidokat mind összanyagi ($A_{\mathrm{ISW}}^{\mathrm{mat}} = \mathbf{-4{,}0936} < 0$), mind galaxis/barion-normálás ($A_{\mathrm{ISW}}^{\mathrm{gal}} = \mathbf{-1{,}3936} < 0$) mellett.
+  \item \textbf{Helmholtz-árnyékolt {\upshape\texttt{Sub1}} ($\kappa_\theta = \xi_\Phi^2$, {\upshape\texttt{PROVEN}}):} Mivel $R_{\mathrm{phys}}(0{,}50) = 100\;\mathrm{Mpc} \gg l_{\mathrm{IR}}(0{,}50) = 0{,}62\;\mathrm{Mpc}$ ($\mathcal{S}_{\mathrm{force}}, \mathcal{S}_{\mathrm{pot}} \sim 10^{-4}$), a potenciál a GR-fénykúpon fejlődik ($\mu_{\mathrm{eff}}(0{,}50) = 1{,}0001$, $f_{\mathrm{eff}}(0{,}50) = 0{,}7534$), garantálva a hideg foltok túlélését ($A_{\mathrm{ISW}}^{\mathrm{mat}} = A_{\mathrm{ISW}}^{\mathrm{gal}} = \mathbf{+1{,}000}$), míg a \texttt{DES Y3} $A_{\mathrm{ISW}} = 4{,}1 \pm 1{,}1$ szupervoid-farok többlete \cite{Kovacs2022DESY3} \textbf{{\upshape\texttt{OPEN}} nemlineáris/megfigyelési probléma} marad. \qed
+\end{enumerate}
+\end{theorem}
+
+\section{Cefeida gravitációs nullitás és vöröseltolódás-ablakolt lokális-üreg \texorpdfstring{$H_0$}{H\_0}-mérleg}
+\label{sec:hubble-void}
+
+\begin{proposition}[Cefeida csillagburok gravitációs nulltétel --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{prop:cepheid-null}
+Egy $5\,M_\odot$, $50\,R_\odot$ cefeida burkában ($g_N = 0{,}548\;\mathrm{m\,s^{-2}}$, $s_{\mathrm{Ceph}} = g_N/a_0^{\mathrm{KH}}(0) = 5{,}20\times 10^9 \gg \mu$) a {\upshape\texttt{Sub1}} Yukawa-faktora az effektív gravitációs eltérést
+\begin{equation}
+  \left|\frac{\Delta G}{G_N}\right|_{\mathrm{Cepheid}} = F_{\mathrm{OD}}^2(s_{\mathrm{Ceph}}) - 1 = \mathbf{9{,}125\times 10^{-20}} \implies \Delta M_B^{\mathrm{grav}} \equiv 0
+  \label{eq:cepheid-null}
+\end{equation}
+értékre nyomja el, kizárva minden módosított gravitációs torzítást a periódus--fényesség relációból ($O_M$ nullitás). \qed
+\end{proposition}
+
+Gömb-szimmetrikus Gauss-alulsűrűséget modellezve ($\delta(r) = \delta_v\,e^{-(r/R_{\mathrm{void}})^2}$, {\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{env}} = 2$: $R_{\mathrm{void}}, \delta_v$; szigorúan szétválasztva az $\ell = 1$ \texttt{CosmicFlows-4} dipólustól \cite{Tully2023CF4}), az $r(z) = \frac{cz}{H_0^{\mathrm{CMB}}}\bigl[1 - \frac{1}{2}(1 + q_0)z\bigr]$ sugáron belüli átlagkontraszt ($x := r/R_{\mathrm{void}}$):
+\begin{equation}
+  \bar{\delta}(<r) = \frac{3}{r^3}\int_0^r \delta(r')\,r'^2\,\mathrm{d}r' = \delta_v\,\frac{3}{x^3}\left(\frac{\sqrt{\pi}}{4}\,\mathrm{erf}(x) - \frac{x}{2}\,e^{-x^2}\right),
+  \label{eq:enclosed-gaussian}
+\end{equation}
+$R_{\mathrm{void}} \gg l_{\mathrm{IR}}(0)$ felett GR lineáris $f_0 = \Omega_{m,0}^{0{,}55} = 0{,}523$ rátával. A \texttt{Pantheon+/SH0ES} $[z_{\min}, z_{\max}] = [0{,}023, 0{,}15]$ Hubble-áramlási ablakán normált egyenletes sáv-sűrűségű $w_{\mathrm{SN}}(z) = (z_{\max} - z_{\min})^{-1}$ ($\int_{z_{\min}}^{z_{\max}} w_{\mathrm{SN}}(z)\,\mathrm{d}z = 1$) súlyozással élesen szétválasztjuk: (i) a tisztán egy-metrikás~\eqref{eq:master-v4-action} hatásból adódó $O_G$ monopólus-kiáramlást $\Delta H_0^{(O_G,\mathrm{win})}$ (megadva mind a teljes levonatlan kiáramlást, mind a \texttt{2M++} sebességtér-levonáson túli $z > 0{,}067$ reziduálist); és (ii) a kiegészítő \texttt{Tier-2} durvaszemcsézett Buchert--Wiltshire kibocsátó--kalibrátor differenciális órahipotézist $\Delta H_0^{(O_T,\mathrm{diff})}$ (amely nem a~\ref{eq:master-v4-action} hatás következménye, és az $r_{\mathrm{cal}} \approx 25\;\mathrm{Mpc}$-es cefeida gazdagalaxisokhoz viszonyítva integrálódik a közös módusú óraeltolódás kiesésével, ahol $\gamma(r) = 1 + \frac{1}{2}f_v(r)$, $f_v(r) = 1 - (1 - f_{v,0})[1 + \delta(r)]$ és a kozmikus háttér $\gamma_0 = 1 + \frac{1}{2}f_{v,0}$):
+\begin{equation}
+\begin{aligned}
+  H_0^{\mathrm{loc}}(\Delta M_B = 0) &= H_0^{\mathrm{CMB}} + \underbrace{H_0^{\mathrm{CMB}}\int_{0{,}023}^{0{,}15} w_{\mathrm{SN}}(z)\,\frac{1}{3}f_0\,\bigl[-\bar{\delta}(<r(z))\bigr]\mathrm{d}z}_{\Delta H_0^{(O_G,\mathrm{win})}} \\
+  &\quad + \underbrace{H_0^{\mathrm{CMB}}\alpha_{\mathrm{OCSR}}\int_{0{,}023}^{0{,}15} w_{\mathrm{SN}}(z)\,\frac{\gamma(r_{\mathrm{cal}}) - \gamma(r(z))}{\gamma(r_{\mathrm{cal}})}\,\mathrm{d}z}_{\Delta H_0^{(O_T,\mathrm{diff})}\;(\text{\texttt{Tier-2} hipotézis})},
+\end{aligned}
+\label{eq:windowed-h0}
+\end{equation}
+az egzakt logaritmikus $\Delta M_B^{\mathrm{astro}} = 5\log_{10}(H_0^{\mathrm{SH0ES}}/H_0^{\mathrm{loc}})$ kalibrációs távolságlépcsővel (\ref{fig:h0-isw}A.~ábra):
+\begin{itemize}
+  \item \textbf{{\upshape\texttt{CLASSIX}} üreg ($R_{\mathrm{void}} = 140\;\mathrm{Mpc}$, $\delta_v = -0{,}20$) \cite{Boehringer2020CLASSIX}:} A tiszta~\eqref{eq:master-v4-action} $O_G$ tag $H_0^{(O_G)} = 68{,}61\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$-et ad ($\Delta H_0^{(O_G)} = +0{,}39$, ill.\ $+0{,}08$ $z > 0{,}067$-en); a $\Delta H_0^{(O_T,\mathrm{diff})} = +0{,}44$ differenciális taggal együtt $H_0^{\mathrm{loc}} = \mathbf{69{,}06\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($-0{,}71\sigma$ a \texttt{CCHP} \texttt{JWST} \texttt{TRGB} $70{,}40 \pm 1{,}90$ \cite{Freedman2025CCHP} méréshez képest; $\Delta M_B^{\mathrm{astro}} = 0{,}122\;\mathrm{mag}$ a \texttt{SH0ES}-hoz).
+  \item \textbf{{\upshape\texttt{KBC}} szuperüreg ($R_{\mathrm{void}} = 300\;\mathrm{Mpc}$, $\delta_v = -0{,}25$) \cite{Keenan2013KBC,Haslbauer2020KBC}:} A tiszta~\eqref{eq:master-v4-action} $O_G$ tag $H_0^{(O_G)} = \mathbf{69{,}63\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($\Delta H_0^{(O_G)} = +1{,}41$, ill.\ $+0{,}61$ a \texttt{2M++} $z > 0{,}067$ felett); a $\Delta H_0^{(O_T,\mathrm{diff})} = +0{,}42$ taggal $H_0^{\mathrm{loc}} = \mathbf{70{,}05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($\mathbf{-0{,}19\sigma}$ összhangban a \texttt{CCHP JWST TRGB/JAGB} méréssel, míg a \texttt{SH0ES} $73{,}04 \pm 1{,}04$ eléréséhez $\Delta M_B^{\mathrm{astro}} = \mathbf{0{,}091\;\mathrm{mag}}$ — ill.\ \texttt{2M++} után $0{,}116\;\mathrm{mag}$ — szükséges).
+\end{itemize}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
-  \caption{(A) Folytonos $z=1060\to 0$ üregkatalógusok és az 5-próbás közös illesztés csillagai ($p = 0{,}57\text{--}0{,}60$, $\Delta M_B \equiv 0$). (B) Automatikus \texttt{Sub1} ISW túlélés ($+0{,}199 < 0{,}246$) a tiszta MOND bukásával szemben.}
-  \label{fig:hubble_isw}
+  \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid_hu.pdf}
+  \caption{(A) Ablakolt lokális Hubble-állandó $H_0^{\mathrm{loc}}(z \in [0{,}023, 0{,}15])$ ($\Delta M_B = 0$, $k_{\mathrm{env}} = 2$), összevetve a tiszta egy-metrikás~\eqref{eq:master-v4-action} $O_G$ kiáramlást ($69{,}63$) és az együttes $O_G + O_T^{\mathrm{diff}}$ görbét ($70{,}05$, $-0{,}19\sigma$ \texttt{CCHP JWST TRGB}). (B) Gyöklövéses ($|\delta_b(0{,}50)| \equiv 0{,}25$) szupervoid ISW amplitúdó: az árnyékolatlan {\upshape\texttt{Sub1}} meleg foltba fordul ($A_{\mathrm{ISW}}^{\mathrm{mat}} = -4{,}09 < 0$, {\upshape\texttt{NO-GO}}), míg $\kappa_\theta = \xi_\Phi^2$ megőrzi a hideg foltokat ($A_{\mathrm{ISW}} = +1{,}00$).}
+  \label{fig:h0-isw}
 \end{figure}
+
+\section{Archív \texttt{X-COP} halmazok, erős-téri kapuk és Boltzmann CMB \texorpdfstring{$EE$}{EE}-lezárás}
+\label{sec:boltzmann-ee}
+
+\subsection{12 archív \texttt{X-COP} galaxishalmaz, nagy \texorpdfstring{$z$}{z}-jű JWST-átmenet, fekete lyukak és \texorpdfstring{$^{229}\mathrm{Th}$}{229Th} órák}
+\begin{enumerate}
+  \item \textbf{12 archív {\upshape\texttt{X-COP}} galaxishalmaz ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} Mind a $12$ Eckert \textit{et al.}\ \cite{Eckert2019XCOP} halmazt ($24$ hidrosztatikai/gyenge-lencsézési apertúra $R_{500}$-nál és $R_{200}$-nál a \path{data/xcop_12_eckert2019_outskirts_benchmark.csv} táblázatból) az {\upshape\texttt{ACT DR6}} alapértéken ($H_0^{\mathrm{CMB}} = 68{,}22$, stacionárius virializált potenciálban $m_H \equiv 0$) kiértékelve $\chi^2 = \mathbf{27{,}42}$ ($\chi^2/24 = \mathbf{1{,}142}$) és $R_{500}$-nál medián $M_{\mathrm{pred}}/M_{\mathrm{obs}} = \mathbf{1{,}0005}$ adódik (szemben az $R_{A/b}$ kondenzátum nélküli tisztán barionos QUMOND $0{,}5335$ értékével; \ref{fig:scorecard}C.~ábra), $f_{b,\tau} = \mathbf{0{,}15703}$ kozmikus barionaránnyal ($+0{,}16\sigma$ \texttt{Planck/ACT} $0{,}1564 \pm 0{,}004$).
+  \item \textbf{Nagy $z$-jű {\upshape\texttt{JWST}} turnaround--viriális átmenet ({\upshape\texttt{CONDITIONAL / OPEN}}):} $z = 10$-nél $a_0^{\mathrm{KH}}(10)/a_0^{\mathrm{KH}}(0) = \mathbf{6{,}605}$. Míg az izolált stacionárius virializált magokban $\nabla_\mu\bar{A}^\mu = 0$ ($m_H = 0$) \cite{McGaugh2024JWST}, a lineáris Hubble-módusokat pedig $l_{\mathrm{IR}}(10) \approx 44\;\mathrm{kpc}$ árnyékolja, addig az FLRW-be ágyazott összeomló turnaround-határon keresztüli $\nabla_\mu A^\mu \to 0$ dinamikai relaxáció bizonyítása a csatolt radiális direktor--hidrodinamikai összeomlási PDE megoldását igényli, ezért expliciten {\upshape\texttt{CONDITIONAL / OPEN}} besorolást kap.
+  \item \textbf{Feketelyuk-árnyékok és $^{229}\mathrm{Th}$ órák ({\upshape\texttt{PROVEN}}):} Az EHT fotongyűrű ($O_T$) és LIGO/Virgo ($O_G$) tömegek eltérése $\frac{1}{2}K_{\mathrm{eff}} = \mathbf{4{,}31\times 10^{-11}}$, az éves keringési óramoduláció ($O_Q$) $|\alpha_1^{\mathrm{PPN}}|(v_\oplus/c)^2 = \mathbf{3{,}40\times 10^{-18}}$ \cite{Lange2021,Tiedau2024Th229}.
+\end{enumerate}
+
+\subsection{Önálló \texttt{RECFAST} + \texorpdfstring{$\ell_{\max} = 6$}{l\_max = 6} nem-visszaverő Ma--Bertschinger Boltzmann CMB \texorpdfstring{$EE$}{EE}-megoldó}
+Az {\upshape\texttt{ACT DR6}} $EE$ polarizációs csúcsok és abszolút $\mu\mathrm{K}^2$ amplitúdók \textbf{bedrótozott $\ell_A$ vagy normálási faktor nélküli} ellenőrzéséhez integráljuk a csatolt Peebles/\texttt{RECFAST} rekombinációs rendszert \cite{Peebles1968,Seager1999RECFAST} a Saha-féle $\mathrm{He\,II}\to\mathrm{He\,I}$ rekombinációval ($Y_{\mathrm{He}} = 0{,}245$), a Compton-csatolt $T_M(z)$ anyaghőmérséklettel és Seager $F = 1{,}14$ B-esetbeli faktorával az $\alpha_B(T_M) = F\times 4{,}309\times 10^{-19}(T_M/10^4\;\mathrm{K})^{-0{,}6166}/[1 + 0{,}6703(T_M/10^4\;\mathrm{K})^{0{,}5300}]\;\mathrm{m^3\,s^{-1}}$ rekombinációs együtthatóban:
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}x_{e,\mathrm{H}}}{\mathrm{d}z} &= \frac{C_r(z)}{H(z)(1+z)}\Bigl[\alpha_B(T_M)\,n_H(z)\,x_{e,\mathrm{H}} x_e - \beta_B(T_\gamma)\,(1 - x_{e,\mathrm{H}})\,e^{-h\nu_\alpha/(k_B T_\gamma)}\Bigr], \\
+  C_r(z) &= \frac{\Lambda_{2s\to 1s} + R_{\mathrm{Ly}\alpha}(z)}{\Lambda_{2s\to 1s} + R_{\mathrm{Ly}\alpha}(z) + \beta_B(T_\gamma)},
+\end{aligned}
+\label{eq:recfast}
+\end{equation}
+$R_{\mathrm{Ly}\alpha}(z) = \bigl[K_{\mathrm{Peebles}}\,n_H(z)(1 - x_{e,\mathrm{H}})\bigr]^{-1}$ Sobolev-szökési rátával ($K_{\mathrm{Peebles}} = \lambda_{\mathrm{Ly}\alpha}^3/[8\pi H(z)]$, $\Lambda_{2s\to 1s} = 8{,}22458\;\mathrm{s}^{-1}$, $\dot{\tau} = a n_H x_e \sigma_T$), amely a Thomson-láthatósági függvény $g(\eta) = \dot{\tau}e^{-\tau}$ csúcsát $z_* = \mathbf{1089{,}80}$-nál adja (pontosan egyezve a \texttt{Planck} $1089{,}80 \pm 0{,}21$ értékével). $z \gtrsim 10^3$-nál $m_H(z)/k_c \gg 1$ elnyomja $\mathcal{K}_{\mathrm{Helm}} \lesssim 10^{-12}$-t, így a rekombináció előtti akusztika variációsan a rögzített $(\omega_b, \omega_A)$ folyadékra redukálódik.
+
+A newtoni mértékű Ma--Bertschinger \cite{MaBertschinger1995} hierarchiát $1069$ móduson ($k \in [8\times 10^{-4}, 0{,}115]\;\mathrm{Mpc}^{-1}$, $5000$ $\ln a$-lépés) integráljuk egzakt adiabatikus szuperhorizontos kezdeti feltételekről ($\Psi_{\mathrm{ini}} = -\frac{2}{3(1 + \frac{4}{15}f_\nu)}\mathcal{R}$, $\Phi_{\mathrm{ini}} = (1 + \frac{2}{5}f_\nu)\Psi_{\mathrm{ini}}$) $\ell_{\max} = 6$-ig $(\Theta_{0..6}, \Theta_{P0..6}, N_{0..6})$-ra nem-visszaverő Bessel-lezárásokkal (Ma--Bertschinger 51., 55.~egyenlet), $c_{s,b}^2$ barion-hangsebességgel és egzakt implicit Thomson-lépésekkel ($\Pi := \Theta_2 + \Theta_{P0} + \Theta_{P2}$, $\kappa_\tau := \dot{\tau}/(aH)$, $R_b := \frac{3\rho_b}{4\rho_\gamma}$):
+\begin{equation}
+\begin{aligned}
+  \Theta'_0 &= -\frac{k}{aH}\Theta_1 + \Phi', \qquad
+  v'_b = -v_b + \frac{k}{aH}\bigl(\Psi + c_{s,b}^2\delta_b\bigr) + \frac{\kappa_\tau}{R_b}(3\Theta_1 - v_b), \\
+  \Theta'_1 &= \frac{k}{3aH}(\Theta_0 - 2\Theta_2 + \Psi) - \kappa_\tau\left(\Theta_1 - \frac{v_b}{3}\right), \qquad
+  \Theta'_{P0} = -\frac{k}{aH}\Theta_{P1} - \kappa_\tau\left(\Theta_{P0} - \frac{1}{2}\Pi\right), \\
+  \Theta'_2 &= \frac{k}{5aH}(2\Theta_1 - 3\Theta_3) - \kappa_\tau\left(\Theta_2 - \frac{1}{10}\Pi\right), \\
+  \Theta'_{P\ell} &= \frac{k}{(2\ell+1)aH}\bigl[\ell\Theta_{P,\ell-1} - (\ell+1)\Theta_{P,\ell+1}\bigr] - \kappa_\tau\bigl(\Theta_{P\ell} - \frac{1}{10}\Pi\,\delta_{\ell,2}\bigr) \quad (1 \le \ell \le 5),
+\end{aligned}
+\label{eq:boltzmann-hierarchy}
+\end{equation}
+majd $z \in [460, 1650]$ felett $160$ láthatósági csomóponton visszafelé-Miller gömbi Bessel-függvényekkel \cite{SeljakZaldarriaga1996} abszolút $\mu\mathrm{K}^2$ egységekbe vetítjük ($\tau_{\mathrm{reio}} = 0{,}054$; mivel $C_\ell^{EE} = 4\pi T_0^2 e^{-2\tau_{\mathrm{reio}}}\int\mathrm{d}\ln k\,\mathcal{P}_{\mathcal{R}}|\Delta_{E\ell}|^2$, a $D_\ell^{EE} := \frac{\ell(\ell+1)}{2\pi}C_\ell^{EE}$ egzakt $2$-es szorzót hordoz):
+\begin{equation}
+\begin{aligned}
+  \Delta_{E\ell}(k) &= \sqrt{\frac{(\ell+2)!}{(\ell-2)!}}\int_0^{\eta_0} \mathrm{d}\eta\,g(\eta)\,\frac{3}{4}\Pi(k,\eta)\,\frac{j_\ell\bigl(k(\eta_0 - \eta)\bigr)}{k^2(\eta_0 - \eta)^2}, \\
+  D_\ell^{EE} &= 2\ell(\ell+1)\,T_0^2 e^{-2\tau_{\mathrm{reio}}}\int \mathrm{d}\ln k\,\mathcal{P}_{\mathcal{R}}(k)\,\bigl|\Delta_{E\ell}(k)\bigr|^2.
+\end{aligned}
+\label{eq:los-ee}
+\end{equation}
+A $D_\ell^{EE}$ közvetlen csúcskeresése (\ref{fig:scorecard}B.~ábra) $\ell_{1\text{--}4}^{EE} = \mathbf{[141,\, 393,\, 686,\, 988]}$ értékeket ad a megfigyelt \texttt{Planck/ACT DR6} $[137,\, 399,\, 690,\, 995]$ csúcsokkal szemben ($\mathbf{+2{,}92\%, -1{,}50\%, -0{,}58\%, -0{,}70\%}$: a $2\text{--}4$.~csúcsokon $1{,}5\%$-on belül, az $1$.~csúcson pedig $+4$ multipólussal eltolva a $D_\ell^{EE}$ $\ell(\ell+1)$-súlyozása miatt), konvergált lencsézésmentes $\mathbf{[1{,}14,\, 21{,}70,\, 38{,}55,\, 44{,}17]\;\mu\mathrm{K}^2}$ csúcsamplitúdókkal ($[1{,}10, 21{,}14, 37{,}81, 43{,}51]\;\mu\mathrm{K}^2$ a kétmezős munkaponton), ahol a $\sim 1\%$-os maradék eltérés az $\ell_{\max} = 6$ hierarchia-levágásból (CMB-lencsézési csúcssimítás nélkül) ered.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig3_six_sector_multiterminal_scorecard_hu.pdf}
+  \caption{(A) Egy-metrikás \texttt{AeST}--QUMOND Helmholtz $\sigma_8^{\mathrm{Weyl}}(0)$ lezárás: az árnyékolatlan {\upshape\texttt{Sub1}} felrobban ($11{,}69$), míg a rögzített $\kappa_\theta = \xi_\Phi^2$ csatolás $0{,}8165$ ($-0{,}16\sigma$ {\upshape\texttt{ACT DR6}}) értéket ad az I.~előíráson és $0{,}8122$-t a 2-mezős ágon. (B) Abszolút $\mu\mathrm{K}^2$ egységű első elvű Boltzmann $D_\ell^{EE}$ spektrum ($k_{\mathrm{added}} = 0$) a \texttt{Planck/ACT} csúcsokkal. (C) Mind a $12$ archív Eckert+ (2019) {\upshape\texttt{X-COP}} galaxishalmaz $R_{500}$-nál ($\chi^2/24 = 1{,}142$, medián $1{,}0005$, szemben a tisztán barionos QUMOND $0{,}5335$ értékével).}
+  \label{fig:scorecard}
+\end{figure}
+
+\section{Szintézis és episztemikus mérlegtábla}
+\label{sec:conclusion}
+
+Az~\ref{tab:epistemic-ledger}.~táblázat összefoglalja a tizenkét kapus auditot mind a négy terminálon ($O_G, O_T, O_Q, O_M$), amelyet a \path{scripts/verify_paper28_multiterminal_closure.py} (\texttt{12/12 PASS}, \texttt{rc = 0}) igazol.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{3.0pt}
-\caption{Teljes \texttt{v3.0.0} hatszektoros lezárás (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{15/15 PASS}, $k_{\mathrm{added}} = 0$).}
-\label{tab:audit}
-\begin{tabular}{@{}llll@{}}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.20}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll>{\raggedright\arraybackslash}p{6.0cm}ll}
 \toprule
-Szektor & Terminálok & Egzakt \texttt{v3.0.0} jóslat ($k_{\mathrm{added}} = 0$) & Státusz \\
+\textbf{Kapu / Szektor} & \textbf{Terminálok} & \textbf{Fő kvantitatív eredmény} & \textbf{$k_{\mathrm{added}}$} & \textbf{Besorolás} \\
 \midrule
-1. ACT DR6, BBN \& $\eta_B$ & $O_G{+}O_T{+}O_Q$ & $n_s{=}0{,}9746$ ($+0{,}21\sigma$), $A_s{=}2{,}090$ ($-0{,}35\sigma$), $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4{,}88{\times}10^{-5}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-\quad + Bunch--Davies 4-ODE & & $f_{\phi,\mathrm{end}}^{\mathrm{BD}}{=}1{,}04\,K_B$ ($40\times$ védett); $K_4$: $n_s{=}0{,}9743$, $\eta_B{=}5{,}60{\times}10^{-10}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-2. 5-próbás lokális $H_0$ & $O_G{+}O_T{+}O_M$ & $H_0{=}71{,}93\text{--}72{,}05$, $v_{\mathrm{out}}{=}423\text{--}428\;\mathrm{km\,s^{-1}}$ ($p{=}0{,}57\text{--}0{,}60$, $\Delta M_B{=}0$) & \texttt{PROVEN} (\texttt{PASS}) \\
-3. Folytonos $\sigma_8$ \& JWST & $O_G$ vs.\ $O_T$ & $\sigma_8{=}0{,}8223$ ($+0{,}48\sigma$ \texttt{ACT} lencs.); $\ell_{\mathrm{IR}}(10){=}2{,}33\;\mathrm{kpc}$ ($S_{1{,}5\mathrm{kpc}}{=}0{,}90$) & \texttt{PROVEN} (\texttt{PASS}) \\
-4. X-COP / SZ halmaz & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0{,}15703$ ($+0{,}4\%$ vs.\ Planck); $S_{\mathrm{XCOP}} \equiv 1$; $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
-5. BH \& atomórák & $O_Q, O_T, O_G$ & $|M_{\mathrm{EHT}}/M_{\mathrm{GW}}-1| = 8{,}61{\times}10^{-11}$; PPN $\le 6{,}80{\times}10^{-18}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0{,}5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0{,}199 < 0{,}246$ & \texttt{PROVEN} (\texttt{PASS}) \\
+G1: UV I.~előírás alapeset & $O_G + O_Q + O_M$ & $N_* = 51{,}412$, $n_s = 0{,}9620$ ($-0{,}69\sigma$ Planck; $-4{,}0\sigma$ ACT), $A_s = 2{,}101\times 10^{-9}$, $r = 0{,}00426$, 5-ODE $\eta_B = +6{,}106\times 10^{-10}$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G2: UV II.~előírás 3-ágú No-Go & $O_G + O_T + O_Q$ & Fermion $\kappa_J = -0{,}195$ hilltop ($x_{\max} = 0{,}016$); Paper~24 $n_{\mathrm{STr}} = +2 \implies 10^9 A_s = 1{,}35$ ($-25\sigma$); $B{-}L$ $(q_\Phi^{\mathrm{GUT}})^2 = \frac{3}{2} \implies 10^9 A_s = 5{,}68$ ($+119\sigma$) & $0$ & \texttt{PROVEN NO-GO} \\
+G3: 2-mezős 5-ODE \& pálya-GW & Mind a 4 terminál & $(\kappa_{\mathrm{eff}}, f_{\phi,\mathrm{end}}) = (0{,}0149, 2{,}24\times 10^{-11}) \implies n_s = 0{,}9743$, 5-ODE $\eta_B = 5{,}60\times 10^{-10}$, pálya-$\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3{,}74\times 10^{-6}$ & $2$ & {\upshape\texttt{CONDITIONAL}} \\
+G4: 4D Christoffel egy-metrikás & $O_G + O_T$ & Egyetlen $g_{\mu\nu}$: $\Phi \equiv \Psi$ ($100\%$ lencsézés), $c_T = c_\gamma = c$, $\alpha_2^{\mathrm{PPN}} \equiv 0$, $\alpha_1^{\mathrm{PPN}} = -3{,}44\times 10^{-10}$, $\det\mathbf{H}_4 \propto 4k_c^4 + 4k_c^2 m_H^2\mu_b + m_H^4 > 0$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G5: Első elvű $\sigma_8$ + $\sum m_\nu$ & $O_G + O_T + O_M$ & $\sigma_8^{\mathrm{GR}} = 0{,}8150$ ($59{,}19\;\mathrm{meV}$); árnyékolatlan $11{,}69$ ({\upshape\texttt{NO-GO}}); zárt $\kappa_\theta = \xi_\Phi^2 \implies \sigma_8^{\mathrm{Weyl}} = 0{,}8165$ ($-0{,}16\sigma$ ACT DR6) & $0$ & {\upshape\texttt{PROVEN}} \\
+G6: Gyöklövéses szupervoid ISW & $O_G + O_T$ & $|\delta_b(0{,}50)| \equiv 0{,}25$: árnyékolatlan $A_{\mathrm{ISW}}^{\mathrm{mat}} = -4{,}09 < 0$ ({\upshape\texttt{NO-GO}}); $\kappa_\theta = \xi_\Phi^2 \implies A_{\mathrm{ISW}} = +1{,}00$ (DES Y3 $4{,}1\pm 1{,}1$ {\upshape\texttt{OPEN}}) & $0$ & {\upshape\texttt{PROVEN}} / {\upshape\texttt{OPEN}} \\
+G7: Cefeida burok nullitás & $O_G + O_M$ & $|\Delta G/G|_{\mathrm{Ceph}} = 9{,}13\times 10^{-20} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G8: Ablakolt lokális-üreg $H_0$ & $O_G + O_T + O_M$ & KBC ($300\;\mathrm{Mpc}, -0{,}25$): tiszta $O_G$ $69{,}63$ ($+0{,}61$ \texttt{2M++} felett); $+O_T^{\mathrm{diff}}$ (\texttt{Tier-2}) $\implies 70{,}05$ ($-0{,}19\sigma$ CCHP; $\Delta M_B^{\mathrm{astro}} = 0{,}091\;\mathrm{mag}$) & $2$ & {\upshape\texttt{CONDITIONAL}} \\
+G9--11: 12 X-COP, JWST, BH/Órák & Mind a 4 terminál & 12 X-COP $\chi^2/24 = 1{,}142$, med.\ $1{,}0005$; $a_0^{\mathrm{KH}}(10)/a_0^{\mathrm{KH}}(0) = 6{,}605$ (radiális kollapszus {\upshape\texttt{OPEN}}); BH $4{,}3\times 10^{-11}$, $^{229}\mathrm{Th}$ $3{,}4\times 10^{-18}$ & $0$ & {\upshape\texttt{PROVEN}} / {\upshape\texttt{OPEN}} \\
+G12: Abszolút-$\mu\mathrm{K}^2$ Boltzmann $EE$ & $O_G + O_T + O_Q$ & \texttt{RECFAST} $z_* = 1089{,}80$; $\ell_{1\text{--}4}^{EE} = [141, 393, 686, 988]$ ($+2{,}92\%, -1{,}50\%, -0{,}58\%, -0{,}70\%$); $[1{,}14, 21{,}7, 38{,}6, 44{,}2]\;\mu\mathrm{K}^2$ & $0$ & {\upshape\texttt{PROVEN}} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
+\caption{A Tau Core Paper~28 teljes episztemikus mérlegtáblája (\texttt{v4.1.0}, \texttt{12/12 PASS}).}
+\label{tab:epistemic-ledger}
 \end{table}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/fig3_six_sector_multiterminal_scorecard.pdf}
-  \caption{(A) Folytonos $z=1060\to 0$ $K_B^{-1}$+Milgrom $\sigma_8 = 0{,}8223$ lezárás ($+0{,}48\sigma$). (B) CMB $EE$ csúcsok ($O_Q$). (C) X-COP halmaz-tömegprofil.}
-  \label{fig:scorecard}
-\end{figure}
-
-\section{Összegzés és jövőbeli kísérleti előrejelzések}
-A \texttt{v2.0.0} mindhárom nyitott elméleti kérdése lezárult a rögzített $N=4$ állandókból ($k_{\mathrm{added}} = 0$): az egyskálás Stueckelberg--skalaron kilépés és a Bunch--Davies sztochasztikus kondenzátum hangolás nélkül zárja le az infláció--leptogenezis láncot; a kanonikus $K_B^{-1}$ látszólagos-horizont Helmholtz-tömeg és a Milgrom-féle tömegközépponti ekvivalencia lépcsőfüggvény nélkül adja a $\sigma_8 = 0{,}8223$ ($+0{,}48\sigma$) és a szub-kpc JWST kompaktság ($\ell_{\mathrm{IR}}(10) = 2{,}33\;\mathrm{kpc}$) értékét; az 5-próbás inverz illesztés pedig $p = 0{,}57\text{--}0{,}60$ szinten egyesíti a lokális méréseket $\Delta M_B \equiv 0$ mellett. A döntő jövőbeli mérések: \texttt{Simons Observatory}/\texttt{LiteBIRD} $(n_s = 0{,}9746, r = 0{,}00511)$, \texttt{DESI}/\texttt{Euclid} tomografikus áramlástérképezés és ISW-mérés, valamint a $10^{-19}$-es $^{229}\mathrm{Th}$ magórák.
-
-\begin{thebibliography}{9}
-\bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14452} (2025).
-\bibitem{ACTDR6_Calabrese2025} E.~Calabrese \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14454} (2025).
-\bibitem{TauPaper22} J.~Olcsák, Tau Core Paper~22 (\texttt{tau-core-quantum-particle-em-unification-paper22}, 2026).
-\bibitem{TauPaper24} J.~Olcsák, Tau Core Paper~24 (\texttt{tau-core-uv-inflation-leptogenesis-cp-paper24}, v1.1.0, 2026).
-\bibitem{TauPaper27} J.~Olcsák, Tau Core Paper~27 (\texttt{tau-core-continuum-lorentz-24cell-paper27}, v1.0.0, 2026).
+\begin{thebibliography}{99}
+\bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: DR6 Power Spectra, Likelihoods and $\Lambda$CDM Parameters}, arXiv:2503.14452 (2025).
+\bibitem{ACTDR6_Calabrese2025} E.~Calabrese \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: DR6 Constraints on Extended Cosmological Models}, arXiv:2503.14454 (2025).
+\bibitem{ACTDR6_Qu2024} F.~J.~Qu \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: A Measurement of the DR6 CMB Lensing Power Spectrum and Its Implications for Structure Growth}, Astrophys.\ J.\ \textbf{962}, 112 (2024).
+\bibitem{Planck2018VI} N.~Aghanim \textit{et al.} (Planck Collaboration), \textit{Planck 2018 results. VI. Cosmological parameters}, Astron.\ Astrophys.\ \textbf{641}, A6 (2020).
+\bibitem{Planck2018X} Y.~Akrami \textit{et al.} (Planck Collaboration), \textit{Planck 2018 results. X. Constraints on inflation}, Astron.\ Astrophys.\ \textbf{641}, A10 (2020).
+\bibitem{DESI2024VI} A.~G.~Adame \textit{et al.} (DESI Collaboration), \textit{DESI 2024 VI: Cosmological Constraints from the Measurements of Baryon Acoustic Oscillations}, JCAP \textbf{02}, 021 (2025).
+\bibitem{Kovacs2022DESY3} A.~Kov\'acs \textit{et al.} (DES Collaboration), \textit{Dark Energy Survey Year 3 results: Imprints of cosmic voids and superclusters in the Planck CMB lensing map and ISW temperature}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{510}, 216 (2022).
+\bibitem{Riess2022SH0ES} A.~G.~Riess \textit{et al.}, \textit{A Comprehensive Measurement of the Local Value of the Hubble Constant with $1\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ Uncertainty from the Hubble Space Telescope and the SH0ES Team}, Astrophys.\ J.\ Lett.\ \textbf{934}, L7 (2022).
+\bibitem{Freedman2025CCHP} W.~L.~Freedman \textit{et al.}, \textit{Status Report on the Chicago-Carnegie Hubble Program (CCHP): Three Independent Astrophysical Determinations of the Hubble Constant Using the James Webb Space Telescope}, Astrophys.\ J.\ \textbf{985}, 12 (2025); arXiv:2408.06153.
+\bibitem{Lelli2016SPARC} F.~Lelli, S.~S.~McGaugh, and J.~M.~Schombert, \textit{SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves}, Astron.\ J.\ \textbf{152}, 157 (2016).
+\bibitem{Eckert2019XCOP} D.~Eckert \textit{et al.}, \textit{Non-parametric reconstruction of the hydrostatic mass profile of X-COP galaxy clusters}, Astron.\ Astrophys.\ \textbf{621}, A40 (2019).
+\bibitem{Olcsak2026Sub1} J.~Olcs\'ak, \textit{Covariant Four-Dimensional Director--QUMOND Effective Field Theory, Certified Sturm--Liouville Stability, and Zero-Parameter Galactic/Cosmological Tests} ({\upshape\texttt{Sub1}}), Tau Core Submission Archive, Zenodo \href{https://doi.org/10.5281/zenodo.24305022}{doi:10.5281/zenodo.24305022} (2026).
+\bibitem{Olcsak2026Paper24} J.~Olcs\'ak, \textit{Scale-Invariant Simplicial $R^2$ Inflation, Multi-Sector $CP$ Structure, and Zero-Parameter Non-Thermal Scalaron Leptogenesis}, Tau Core Research Series Paper~24 (2026).
+\bibitem{Olcsak2026Paper27} J.~Olcs\'ak, \textit{Continuum Limit, Lorentz Invariance, and Preferred-Frame Bounds of the $K_4$ Pregeometric Spine}, Tau Core Research Series Paper~27 (2026).
+\bibitem{BezrukovShaposhnikov2008} F.~L.~Bezrukov and M.~Shaposhnikov, \textit{The Standard Model Higgs boson as the inflaton}, Phys.\ Lett.\ B \textbf{659}, 703 (2008).
+\bibitem{DeSimone2009} A.~De~Simone, M.~P.~Hertzberg, and F.~Wilczek, \textit{Running Inflation in the Standard Model}, Phys.\ Lett.\ B \textbf{678}, 1 (2009).
+\bibitem{FigueroaTanin2019} D.~G.~Figueroa and E.~H.~Tanin, \textit{Ability of LIGO and LISA to probe the equation of state of the early Universe}, JCAP \textbf{08}, 011 (2019).
+\bibitem{Milgrom2010QUMOND} M.~Milgrom, \textit{Quasi-linear formulation of MOND}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{403}, 886 (2010).
+\bibitem{SkordisZlosnik2021} C.~Skordis and T.~Z\l{}o\'snik, \textit{New Relativistic Theory for Modified Newtonian Dynamics}, Phys.\ Rev.\ Lett.\ \textbf{127}, 161302 (2021).
+\bibitem{JacobsonMattingly2001} T.~Jacobson and D.~Mattingly, \textit{Gravity with a dynamical preferred frame}, Phys.\ Rev.\ D \textbf{64}, 024028 (2001).
+\bibitem{FosterJacobson2006} B.~Z.~Foster and T.~Jacobson, \textit{Post-Newtonian parameters and constraints on Einstein--aether theory}, Phys.\ Rev.\ D \textbf{73}, 064015 (2006).
+\bibitem{OostMukohyamaWang2018} J.~Oost, S.~Mukohyama, and A.~Wang, \textit{Constraints on Einstein--aether theory after GW170817}, Phys.\ Rev.\ D \textbf{97}, 124023 (2018).
+\bibitem{ElliottMooreStoica2005} J.~W.~Elliott, G.~D.~Moore, and H.~Stoica, \textit{Constraining the New Aether: gravitational Cherenkov radiation}, JHEP \textbf{08}, 066 (2005).
+\bibitem{EisensteinHu1998} D.~J.~Eisenstein and W.~Hu, \textit{Baryonic Features in the Matter Transfer Function}, Astrophys.\ J.\ \textbf{496}, 605 (1998).
+\bibitem{Tully2023CF4} R.~B.~Tully \textit{et al.}, \textit{Cosmicflows-4}, Astrophys.\ J.\ \textbf{944}, 94 (2023).
+\bibitem{Boehringer2020CLASSIX} H.~B\"ohringer, G.~Chon, and C.~A.~Collins, \textit{Observational evidence for a local underdensity in the Universe and its effect on the measurement of the Hubble constant}, Astron.\ Astrophys.\ \textbf{633}, A19 (2020).
+\bibitem{Keenan2013KBC} R.~C.~Keenan, A.~J.~Barger, and L.~L.~Cowie, \textit{Evidence for a $\sim 300$ Megaparsec Scale Under-density in the Local Galaxy Distribution}, Astrophys.\ J.\ \textbf{775}, 62 (2013).
+\bibitem{Haslbauer2020KBC} M.~Haslbauer, I.~Banik, and P.~Kroupa, \textit{The KBC void and Hubble tension contradict $\Lambda$CDM on a Gpc scale --- Milgromian dynamics as a possible solution}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{499}, 2845 (2020).
+\bibitem{McGaugh2024JWST} S.~S.~McGaugh, J.~M.~Schombert, F.~Lelli, and J.~Franck, \textit{Accelerated Structure Formation: The Early Emergence of Massive Galaxies and Clusters of Galaxies}, Astrophys.\ J.\ \textbf{976}, 13 (2024).
+\bibitem{Lange2021} R.~Lange \textit{et al.}, \textit{Improved Limits for Violations of Local Position Invariance from Atomic Clock Comparisons}, Phys.\ Rev.\ Lett.\ \textbf{126}, 011102 (2021).
+\bibitem{Tiedau2024Th229} J.~Tiedau \textit{et al.}, \textit{Laser Excitation of the Th-229 Nuclear Isomeric Transition in a Solid-State Host}, Phys.\ Rev.\ Lett.\ \textbf{132}, 182501 (2024).
+\bibitem{Peebles1968} P.~J.~E.~Peebles, \textit{Recombination of the Primeval Plasma}, Astrophys.\ J.\ \textbf{153}, 1 (1968).
+\bibitem{Seager1999RECFAST} S.~Seager, D.~D.~Sasselov, and D.~Scott, \textit{A New Calculation of the Recombination Epoch}, Astrophys.\ J.\ Lett.\ \textbf{523}, L1 (1999).
+\bibitem{MaBertschinger1995} C.-P.~Ma and E.~Bertschinger, \textit{Cosmological Perturbation Theory in the Synchronous and Conformal Newtonian Gauges}, Astrophys.\ J.\ \textbf{455}, 7 (1995).
+\bibitem{SeljakZaldarriaga1996} U.~Seljak and M.~Zaldarriaga, \textit{A Line-of-Sight Integration Approach to Cosmic Microwave Background Anisotropies}, Astrophys.\ J.\ \textbf{469}, 437 (1996).
 \end{thebibliography}
 
 \end{document}

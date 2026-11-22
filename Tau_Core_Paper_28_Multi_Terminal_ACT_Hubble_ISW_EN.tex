@@ -1,152 +1,412 @@
 \documentclass[11pt,a4paper]{article}
-\usepackage[margin=2.1cm]{geometry}
+\usepackage[margin=2.05cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{hyperref}
 \usepackage{microtype}
 \usepackage{xcolor}
 \hypersetup{colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black}
+\emergencystretch=1.5em
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
 
-\title{\textbf{Complete Four-Terminal Cosmological Closure Beyond Gravity Alone:\\
-Zero-Parameter ACT DR6 Kination--Leptogenesis, Continuous $K_B^{-1}$ Helmholtz\\
-$\sigma_8$ Screening, 5-Probe Local-Void Fit, and Six-Sector Audit}}
-\author{József Olcsák \\ \small Independent Researcher $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Research Series — Paper 28 (\texttt{v3.0.0})}
-\date{November 21, 2026}
+\title{\textbf{Four-Terminal Cosmological Audit Beyond Gravity Alone:\\
+Single-Metric \texttt{AeST}--QUMOND Helmholtz Screening of $\sigma_8$, UV Prescription~II\\
+\& Unscreened ISW No-Go Theorems, Redshift-Windowed Local-Void $H_0$ Budget,\\
+and First-Principles Boltzmann CMB $EE$ Closure}}
+\author{József Olcsák \\ \small Independent Researcher $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522} \\ \small Tau Core Research Series — Paper 28 (\texttt{v4.1.0})}
+\date{November 22, 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The final Data Release 6 of the Atacama Cosmology Telescope (\texttt{ACT DR6}) confirms the early-universe Hubble parameter ($H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ with \texttt{DESI}), measures CMB-lensing clustering $\sigma_8 = 0.818 \pm 0.009$, and shifts the scalar spectral tilt to $n_s = 0.974 \pm 0.003$. In the Tau Core framework ($N = 4 \implies u = \sqrt{3}/24$), observables project onto four coupled 4D terminals of one tetrahedral parent body $M_\tau^\star$: gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$). Building on \texttt{v2.0.0}, this \texttt{v3.0.0} synthesis closes all three remaining theoretical and observational questions with zero added free parameters ($k_{\mathrm{added}} = 0$, \texttt{15/15 PASS} in \texttt{verify\_paper28\_multiterminal\_closure.py}). First, pairing the 1-loop curved-space RG slope of Paper~24's complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus ($\kappa_J^{\mathrm{1\text{-}loop}} = 0.014914$) with \texttt{Sub1}'s single-scale Stueckelberg--scalaron kination exit ($V_\mu = M_{\mathrm{inf}}A_\mu$, $w_{\mathrm{rh}} = 1.0$) predicts $N_* = 60.175$, $n_s = 0.97464$ ($+0.21\sigma$ \texttt{ACT DR6}), $A_s = 2.0895\times 10^{-9}$ ($-0.35\sigma$), $r = 0.00511$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 4.88\times 10^{-5} \ll 0.17$, and $\eta_B = +6.106\times 10^{-10}$; even in the strictly decoupled two-fluid limit, the de~Sitter Bunch--Davies stochastic infrared variance automatically yields $f_{\phi,\mathrm{end}}^{\mathrm{BD}} = 1.790\times 10^{-10} = 1.040\,K_B$ ($40\times$ above the dilution threshold with zero tuning), while its $K_4$-projected condensate $\alpha_{\mathrm{OCSR}}^2 K_B = 2.242\times 10^{-11}$ gives $n_s = 0.97433$ ($+0.11\sigma$) and 4-ODE Boltzmann $\eta_B = +5.600\times 10^{-10}$ (matching Paper~24's electroweak crossover). Second, we replace the \texttt{v2.0.0} step-function $z_{\mathrm{on}} = z_{\mathrm{dip}}$ with continuous $z_{\mathrm{drag}} = 1060 \to 0$ two-fluid integration under \texttt{Sub1}'s canonical apparent-horizon Raychaudhuri--Helmholtz mass $\bar{m}_{\mathrm{IR}}^2(z) = K_B^{-1}\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)/c^2$ plus Milgrom's QUMOND center-of-mass equivalence principle for condensed galactic baryons, obtaining $\sigma_8(z=0) = 0.8223$ ($+0.48\sigma$ vs.\ \texttt{ACT DR6} CMB lensing), exact $100\%$ preservation of \texttt{SPARC} and \texttt{X-COP}, and $\ell_{\mathrm{IR}}(z=10) = 2.33\;\mathrm{kpc}$ ($S_{\mathrm{Helm}}(1.5\;\mathrm{kpc}) = 0.900$), explaining the sub-kpc compactness of JWST $z = 10\text{--}14$ galaxies. Third, a 5-probe joint inverse fit (\texttt{SH0ES}, \texttt{CCHP TRGB/JAGB}, \texttt{CosmicFlows-4}, \texttt{CLASSIX/6dFGS}, and void radius) at $\Delta M_B \equiv 0$ converges with $p = 0.57\text{--}0.60$ ($\chi^2/\mathrm{dof} = 0.63\text{--}0.68$) at $\hat{\delta}_v = -0.179\text{ to }-0.166$, $\hat{R} = 149\text{ to }143\;\mathrm{Mpc}$, $H_0^{\mathrm{loc}} = 71.93\text{--}72.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, and $v_{\mathrm{out}} = 423\text{--}428\;\mathrm{km\,s^{-1}}$, alongside automatic \texttt{Sub1} supervoid ISW sign-flip survival ($\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$).
+The Data Release~6 of the Atacama Cosmology Telescope ({\upshape\texttt{ACT DR6}}) combined with \texttt{Planck} and \texttt{DESI} BAO anchors the early-universe Hubble constant at $H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, measures CMB-lensing clustering $\sigma_8 = 0.818 \pm 0.009$ ({\upshape\texttt{P-ACT+DESI}}: $0.813 \pm 0.005$), and shifts the scalar spectral tilt to $n_s = 0.974 \pm 0.003$. In the Tau Core framework ($N = 4 \implies u = \sqrt{3}/24$), observables project onto four coupled 4D terminals of one tetrahedral parent body $M_\tau^\star$: gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$). Here we conduct a rigorous variational, symbolic (\texttt{SymPy} 4D Christoffel/Ricci), and numerical audit across all six cosmological and strong-field sectors (\texttt{12/12 PASS} in \texttt{verify\_paper28\_multiterminal\_closure.py}), strictly separating parameter-free theorems ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$) and {\upshape\texttt{NO-GO}} exclusions from {\upshape\texttt{CONDITIONAL}} and {\upshape\texttt{OPEN}} frontiers:
+\begin{enumerate}
+  \item \textbf{UV Inflation Baseline \& Three-Branch Prescription~II No-Go ({\upshape\texttt{PROVEN}}):} Paper~24's zero-parameter Prescription~I baseline ($w_{\mathrm{rh}} = 0$ quadratic minimum, $\eta_{\mathrm{seesaw}} = 0.030709$, $M_1 = 5.6964\times 10^{12}\;\mathrm{GeV}$, $\Gamma_{N_1 N_1} = 0.4729\;\mathrm{GeV}$) yields $N_* = 51.412$, $A_s = 2.1011\times 10^{-9}$, $r = 0.00426$, first-principles 5-ODE Casas--Ibarra $\eta_B = +6.106\times 10^{-10}$, and $n_s = 0.96199$ ($-0.69\sigma$ vs.\ \texttt{Planck 2018}, $-4.00\sigma$ vs.\ {\upshape\texttt{ACT DR6}}). Enforcing Paper~24's exact $\mathrm{Spin}(10)$ $B-L$ radial normalization ($y_N^2 = 2\alpha_{\mathrm{OCSR}}^2 = 0.26042$), exact $\gamma_\Phi$ leg cancellation, and curved-space radial propagator suppression $s(\varphi) \simeq (6\xi_\Phi)^{-1}$, we prove a complete three-branch Coleman--Weinberg No-Go under Prescription~II: (a1) fermion-only seesaw ($d_A = 0$) gives $\kappa_J^{(F)} = -0.19533$ ($N_g = 3$) or $-0.06513$ ($N_g = 1$), causing hilltop collapse at $x_{\max} = 0.0161$ or $2.656 < x_* = 5.242$; (a2) Paper~24's full $K_4$ threshold multiplet ($n_{\mathrm{eff}}^{\mathrm{STr}} = d_A - 2d_S = 8 - 6 = +2$) gives $\kappa_J^{(\mathrm{P24})} = +0.06508$, excluded at $-25.05\sigma$ on $A_s$ ($10^9 A_s = 1.3485$); and (b) gauged $U(1)_{B-L} \subset \mathrm{Spin}(10)$ with exact GUT charge $(q_\Phi^{\mathrm{GUT}})^2 = 3/2$ gives $\kappa_J^{(V+F)} = +1.08377$, excluded at $+2.99\sigma$ on $n_s$ ($0.98296$) and $+119.2\sigma$ on $A_s$ ($5.675\times 10^{-9}$). Because a harmonic minimum enforces $w_{\mathrm{rh}} = 0$, $A_\mu = (-1,\mathbf{0})$ carries zero kination energy, and $M_{\mathrm{inf}} = 1.84\,H_* > \frac{3}{2}H_*$ sits in the massive de~Sitter principal series, reaching $n_s \simeq 0.974$ requires an explicit two-field $(\phi,\psi_{\mathrm{kin}})$ extension ({\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{UV}} = 2$: $\kappa_{\mathrm{eff}} = 0.0149$, $f_{\phi,\mathrm{end}} = 2.24\times 10^{-11} \implies n_s = 0.97432$, 5-ODE $\eta_B = +5.600\times 10^{-10}$, two-stage trajectory GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3.74\times 10^{-6} \ll 0.17$).
+  \item \textbf{Christoffel-Certified Single-Metric \texttt{AeST}--QUMOND Helmholtz Screening of $\sigma_8$ ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} Whereas pure conformal rescaling $g_{\mu\nu} = e^{-2\psi}g_{\mu\nu}^{(E)}$ shifts $\Psi$ and $\Phi$ with opposite signs and erases lensing (Bekenstein--Sanders no-go), coupling a Skordis--Z\l{}o\'snik \texttt{AeST} vector $q_\mu = h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$ \cite{SkordisZlosnik2021} to {\upshape\texttt{Sub1}}'s QUMOND potential $\phi_N$ and a director-expansion Helmholtz mass on \textbf{one single physical metric $g_{\mu\nu}$} with constant $(K_B = K_B^{(0)}, a_q = \frac{1}{4}K_B^{(0)}, c_q = 1 \implies K_{\mathrm{eff}} = \frac{1}{2}K_B^{(0)})$ enforces $c_T \equiv c_\gamma \equiv c$, $\alpha_2^{\mathrm{PPN}} \equiv 0$, $\alpha_1^{\mathrm{PPN}} = -4K_{\mathrm{eff}} = -3.444\times 10^{-10}$, zero static parameter drift ($\partial_s K_B = \partial_\varphi^2 K_B \equiv 0$), exact slip $\Phi \equiv \Psi$ (preserving $100\%$ of QUMOND lensing), and a pole-free constraint determinant $\det\mathbf{H}_4 \propto k_c^4(4k_c^4 + 4k_c^2 m_H^2\mu_b + m_H^4) > 0$ across all $\mu_b \ge 0.9412 > 0$. Computing $\sigma_8^{\mathrm{GR}}$ from first principles with $\sum m_\nu = 59.19\;\mathrm{meV}$ ($0.8150$ Presc.~I; $0.8106$ 2-Field) and 32-node Gauss--Legendre angular quadrature, locked $\kappa_\theta = \xi_\Phi^2 = (256\pi^2)^2$ yields CMB-lensing $\sigma_8^{\mathrm{Weyl}}(0) = 0.8165$ ($-0.16\sigma$ vs.\ {\upshape\texttt{ACT DR6}}; $0.8122$ on 2-Field) vs.\ unscreened $11.69$, while preserving all $12$ archival {\upshape\texttt{X-COP}} clusters ($\chi^2/24 = 1.142$, median $M_{\mathrm{pred}}/M_{\mathrm{obs}} = 1.0005$ at $R_{500}$).
+  \item \textbf{Root-Shot Supervoid ISW, Windowed $H_0$ \& Absolute-$\mu\mathrm{K}^2$ Boltzmann $EE$:} Root-shooting initial void amplitudes so $|\delta_b(z_v = 0.50)| \equiv 0.25$, unscreened {\upshape\texttt{Sub1}} drives $f_{\mathrm{eff}}(0.50) = 0.9783$ and flips supervoids into hot spots ($A_{\mathrm{ISW}}^{\mathrm{mat}} = -4.094$, $A_{\mathrm{ISW}}^{\mathrm{gal}} = -1.394$, {\upshape\texttt{NO-GO}}), whereas $\kappa_\theta = \xi_\Phi^2$ preserves cold spots ($A_{\mathrm{ISW}} = +1.000$; \texttt{DES Y3} $4.1 \pm 1.1$ {\upshape\texttt{OPEN}}). Across $z \in [0.023, 0.15]$ ($k_{\mathrm{env}} = 2$, $|\Delta G/G|_{\mathrm{Ceph}} = 9.13\times 10^{-20}$), a KBC underdensity gives pure single-metric $O_G$ outflow $H_0^{(O_G)} = 69.63$ ($+0.61$ beyond \texttt{2M++} $z > 0.067$) plus a radially windowed \texttt{Tier-2} differential clock shift $+0.42 \implies H_0^{\mathrm{loc}}(\Delta M_B = 0) = 70.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($-0.19\sigma$ vs.\ \texttt{CCHP JWST TRGB}; $\Delta M_B^{\mathrm{astro}} = 0.091\;\mathrm{mag}$ for \texttt{SH0ES}). Finally, a $1{,}069$-mode \texttt{RECFAST} ($z_* = 1089.80$) + $\ell_{\max} = 6$ non-reflecting Ma--Bertschinger Boltzmann solver reproduces all four $EE$ peaks $\ell_{1\text{--}4}^{EE} = [141, 393, 686, 988]$ ($+2.92\%, -1.50\%, -0.58\%, -0.70\%$; peaks $2\text{--}4$ within $1.5\%$) and absolute $\mu\mathrm{K}^2$ peak heights $[1.14, 21.70, 38.55, 44.17]\;\mu\mathrm{K}^2$ with zero fitted parameters.
+\end{enumerate}
 \end{abstract}
 
-\section{Introduction: Closing All Remaining Conditional Gaps}
-The final \texttt{ACT DR6} release \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025} anchors $H_0 = 68.22 \pm 0.36\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$, CMB-lensing $\sigma_8 = 0.818 \pm 0.009$, and $n_s = 0.974 \pm 0.003$. In the Tau Core spine \cite{TauPaper22,TauPaper24,TauPaper27}, one frozen tetrahedral parent body $M_\tau^\star$ ($N = 4 \implies u = \sqrt{3}/24$, $\alpha_{\mathrm{OCSR}} = 5u$, $R_{A/b} = (213\sqrt{3}-20)/65 = 5.368105$, $f_b = 1/(1+R_{A/b}) = 0.15703$, $K_B = (M_{\mathrm{inf}}/M_{\mathrm{Pl}})^2 = 1.7222\times 10^{-10}$) projects onto four coupled 4D terminals ($O_G, O_T, O_Q, O_M$). In \texttt{v2.0.0}, three open questions remained: (a) eliminating two-fluid initial-fraction tuning at kination exit; (b) inverse statistical closure across competing local-void catalogs; and (c) continuous $z = 1060 \to 0$ linear $\sigma_8$ screening without an activation step at $z_{\mathrm{dip}} = 0.6316$. Here we close all three with $k_{\mathrm{added}} = 0$ (\texttt{15/15 PASS}).
+\section{Introduction and Locked Four-Terminal Constant Dictionary}
+\label{sec:intro}
 
-\section{Zero-Parameter UV Kination--Leptogenesis Closure (\texorpdfstring{$k_{\mathrm{added}} = 0$}{k = 0})}
-Under Jordan-frame Prescription~II ($\mu_J = M_R$), the Einstein-frame potential acquires the exact 1-loop factor $1 + \kappa_J\ln[1 + C_{\mathrm{ratio}}(e^{\sqrt{2/3}\,\phi/M_{\mathrm{Pl}}} - 1)]$ ($C_{\mathrm{ratio}} = 768\pi^2$).
+Precision measurements from the Atacama Cosmology Telescope Data Release~6 ({\upshape\texttt{ACT DR6}}) \cite{ACTDR6_Louis2025,ACTDR6_Calabrese2025,ACTDR6_Qu2024}, combined with \texttt{Planck} PR3/PR4 \cite{Planck2018VI,Planck2018X} and \texttt{DESI} BAO \cite{DESI2024VI}, test every relativistic modified-gravity and ultraviolet (UV) framework simultaneously across inflation ($n_s = 0.974 \pm 0.003$, $10^9 A_s = 2.10 \pm 0.03$), acoustic $EE$ polarization peaks ($\ell_{1\text{--}4}^{EE}$), linear CMB-lensing clustering ($\sigma_8 = 0.818 \pm 0.009$), supervoid Integrated Sachs--Wolfe (ISW) tomography \cite{Kovacs2022DESY3}, distance-ladder $H_0$ determinations \cite{Riess2022SH0ES,Freedman2025CCHP}, galactic rotation curves \cite{Lelli2016SPARC}, and hydrostatic/weak-lensing galaxy clusters \cite{Eckert2019XCOP}.
 
-\begin{theorem}[Stueckelberg--Scalaron and Bunch--Davies Kination--Leptogenesis Closure --- \texttt{PROVEN}]
-For Paper~24's complex $\mathrm{Spin}(10)$ $B-L$ seesaw radial modulus ($y_{\mathrm{eff}}^2 = \alpha_{\mathrm{OCSR}}^2/2$, $n_{\mathrm{eff}}^{\mathrm{STr}} = 2$, $d_S = 3$, $\lambda_\Phi = \alpha_{\mathrm{OCSR}}^2/4\pi^2$):
+In the Tau Core spine \cite{Olcsak2026Sub1,Olcsak2026Paper24,Olcsak2026Paper27}, macroscopic observables descend through four coupled 4D terminals—gravitational ($O_G$), clock/optical ($O_T$), quantum/gauge ($O_Q$), and matter/astrophysical ($O_M$)—from one discrete $K_4$ tetrahedral complex ($N = 4$). Throughout this work, every algebraic constant of the spine is strictly frozen ($k_{\mathrm{spine}} = 0$):
+\begin{equation}
+\begin{aligned}
+  u &= \frac{\sqrt{3}}{24} \approx 0.0721688, \qquad r_0 = 2\sqrt{3}\,u = \frac{1}{4}, \qquad \alpha_{\mathrm{OCSR}} = 5u = \frac{5\sqrt{3}}{24} \approx 0.3608439, \\
+  I_{\mathrm{KH}} &= \frac{5\sqrt{3}}{96} \approx 0.0902110, \qquad R_{A/b} := \frac{\Omega_{A,\mathrm{eff}}}{\Omega_b} = \frac{213\sqrt{3} - 20}{65} \approx 5.3681050, \\
+  f_b &= \frac{1}{1 + R_{A/b}} \approx 0.1570326, \qquad \xi_\Phi = \frac{M_\star}{M_R} = 256\pi^2 \approx 2526.6187, \\
+  C_{\mathrm{ratio}} &= 3\xi_\Phi = 768\pi^2 \approx 7579.8562, \qquad \eta_{\mathrm{seesaw}} = \frac{(192u - 9)^2}{768} \approx 0.03070922, \\
+  M_R &= \frac{r_0^2 M_\star}{16\pi^2} = 5.5649\times 10^{14}\;\mathrm{GeV}, \qquad M_{\mathrm{inf}} = \frac{\alpha_{\mathrm{OCSR}}}{2\pi}\,M_R = 3.1959\times 10^{13}\;\mathrm{GeV}, \\
+  M_1 &= \frac{\eta_{\mathrm{seesaw}}}{3}\,M_R = 5.6964\times 10^{12}\;\mathrm{GeV}, \qquad \sum_{i=1}^3 m_{\nu_i} = (0 + 8.83 + 50.36)\;\mathrm{meV} = 59.19\;\mathrm{meV}, \\
+  K_B^{(0)} &= \left(\frac{M_{\mathrm{inf}}}{M_{\mathrm{Pl}}}\right)^{\!2} = 1.72219\times 10^{-10}, \qquad \mu := \hat{m}_{\mathrm{eff}}^2 = 4.496723, \qquad f_{v,0} = 0.723358,
+\end{aligned}
+\label{eq:locked-dictionary}
+\end{equation}
+where $M_{\mathrm{Pl}} = (8\pi G)^{-1/2} = 2.43532\times 10^{18}\;\mathrm{GeV}$ ($\hbar = c = 1$) and $M_\star = M_{\mathrm{Pl}}/\sqrt{3}$. The late-time background is anchored at the \texttt{ACT DR6 + Planck + DESI} baseline $H_0^{\mathrm{CMB}} = 68.22\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($h = 0.6822$), $\omega_b := \Omega_b h^2 = 0.02240$, $\omega_A = R_{A/b}\,\omega_b = 0.120246$, massive-neutrino density $\omega_\nu^{\mathrm{mass}} = \sum m_\nu / (93.14\;\mathrm{eV}) = 6.355\times 10^{-4}$ ($\omega_m = \omega_b + \omega_A + \omega_\nu^{\mathrm{mass}} = 0.143281$, $\Omega_m = 0.30787$, $\Omega_\Lambda = 0.69207$), and $T_0 = 2.7255\;\mathrm{K}$ ($\omega_\gamma = 2.4728\times 10^{-5}$, relativistic $N_{\mathrm{eff}} = 3.044$).
+
+This \texttt{v4.1.0} audit establishes a strict four-tier epistemic ledger ({\upshape\texttt{PROVEN}}, {\upshape\texttt{NO-GO}}, {\upshape\texttt{CONDITIONAL}}, {\upshape\texttt{OPEN}}), verified end-to-end from symbolic 4D Christoffel/Ricci tensors and stiff ODE solvers in \path{scripts/verify_paper28_multiterminal_closure.py}.
+
+\section{UV Inflation, the Three-Branch Prescription~II No-Go Theorem, and First-Principles 5-ODE Reheating}
+\label{sec:uv-inflation}
+
+\subsection{Exact Paper~24 Portal Normalization and Curved-Space One-Loop RG Cancellation}
+In Paper~24 \cite{Olcsak2026Paper24} (Eq.~7 and Theorem~3.1), the $\mathrm{Spin}(10)$ $B-L$ breaking complex singlet $\Phi = (v_\Phi + \varphi + \mathrm{i}\eta)/\sqrt{2}$ ($v_\Phi = \sqrt{2}\,M_R$, an $O(2)$ real doublet of charge $Q_{B-L}(\Phi) = +2$) couples to gravity in signature $(-,+,+,+)$ through the analytic polynomial Jordan-frame Lagrangian
+\begin{equation}
+  \frac{\mathcal{L}_{\mathrm{UV},J}}{\sqrt{-g_J}} = \frac{M_{\mathrm{Pl}}^2 + \xi_\Phi\bigl(2\Phi^\dagger\Phi - v_\Phi^2\bigr)}{2}\,R_J - g_J^{\mu\nu}\partial_\mu\Phi^\dagger\partial_\nu\Phi - \frac{\lambda_\Phi}{4}\bigl(2\Phi^\dagger\Phi - v_\Phi^2\bigr)^2 - \left(\frac{y_N}{2}\Phi\overline{N_R^c}N_R + \mathrm{h.c.}\right),
+  \label{eq:paper24-lagrangian}
+\end{equation}
+where $\lambda_\Phi = (\alpha_{\mathrm{OCSR}}/2\pi)^2 = 3.2966\times 10^{-3}$, so on the large-field radial plateau ($\varphi \gg v_\Phi$, $\eta = 0$) the non-minimal factor is $\Omega^2(\varphi) = 1 + \xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2 > 1$ (strictly free of antigravity singularities), $V_J(\varphi) \simeq \frac{\lambda_\Phi}{4}\varphi^4$, and $M_N(\varphi) = M_R + \alpha_{\mathrm{OCSR}}\varphi$ across $N_g = 3$ right-handed Majorana species ($M_2 = M_3 = M_R/3 = 1.8550\times 10^{14}\;\mathrm{GeV}$ and seesaw-split $M_1 = \eta_{\mathrm{seesaw}}M_R/3 = 5.6964\times 10^{12}\;\mathrm{GeV}$). Matching $M_N(\varphi) = \frac{y_N}{\sqrt{2}}(v_\Phi + \varphi)$ uniquely locks
+\begin{equation}
+  \frac{y_N}{\sqrt{2}} = \alpha_{\mathrm{OCSR}} \implies y_N^2 = 2\,\alpha_{\mathrm{OCSR}}^2 = \frac{25}{96} \approx 0.2604167.
+  \label{eq:exact-yukawa-norm}
+\end{equation}
+Under Jordan-frame scale setting (Prescription~II, $\mu_J = M_R$, vs.\ Einstein-frame Prescription~I, $\mu_E(\phi) \propto M_{\mathrm{Pl}}\Omega(\varphi)$; see \cite{BezrukovShaposhnikov2008,DeSimone2009}), the canonical Einstein-frame potential ($x := \phi/M_{\mathrm{Pl}}$) acquires the one-loop logarithmic slope $\kappa_J$:
+\begin{equation}
+  V_E(x) = \frac{3}{4}M_{\mathrm{Pl}}^2 M_{\mathrm{inf}}^2\bigl(1 - e^{-\sqrt{2/3}\,x}\bigr)^2\Bigl\{1 + \kappa_J\ln\bigl[1 + C_{\mathrm{ratio}}\bigl(e^{\sqrt{2/3}\,x} - 1\bigr)\bigr]\Bigr\}, \qquad
+  \kappa_J := \frac{1}{2}\left(\frac{\beta_{\lambda_\Phi}}{\lambda_\Phi} - 2\frac{\beta_{\xi_\Phi}}{\xi_\Phi}\right).
+  \label{eq:ve-presc-ii}
+\end{equation}
+
+\begin{theorem}[Three-Branch Prescription~II Coleman--Weinberg and Single-Field Kination No-Go --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:uv-nogo}
+For Paper~24's locked $\mathrm{Spin}(10)$ $B-L$ seesaw portal~\eqref{eq:paper24-lagrangian}--\eqref{eq:ve-presc-ii}:
 \begin{enumerate}
-  \item \textbf{Zero-Parameter 1-Loop Curved-Space Slope:}
+  \item \textbf{Exact Anomalous-Dimension Cancellation and Curved-Space CW Slope:} In the one-loop $(\lambda_\Phi,\xi_\Phi)$ beta functions of a complex singlet ($N_s = 2$), the leg anomalous dimension $\gamma_\Phi$ enters as $\beta_{\lambda_\Phi}^{(\gamma)} = +4\gamma_\Phi\lambda_\Phi$ and $\beta_{\xi_\Phi}^{(\gamma)} = +2\gamma_\Phi\xi_\Phi$ ($\xi_\Phi \gg 1$), canceling identically:
   \begin{equation}
-  \kappa_J^{\mathrm{1\text{-}loop}} = \frac{n_{\mathrm{eff}}^{\mathrm{STr}}\,y_{\mathrm{eff}}^4}{16\pi^2\lambda_\Phi} - \frac{6\lambda_\Phi + d_S\,y_{\mathrm{eff}}^2}{16\pi^2} = \frac{\alpha_{\mathrm{OCSR}}^2}{8} - \frac{6\lambda_\Phi + \frac{3}{2}\alpha_{\mathrm{OCSR}}^2}{16\pi^2} = \mathbf{0.014914}.
+    \frac{1}{2}\frac{\beta_{\lambda_\Phi}^{(\gamma)}}{\lambda_\Phi} - \frac{\beta_{\xi_\Phi}^{(\gamma)}}{\xi_\Phi} = \frac{1}{2}(+4\gamma_\Phi) - (+2\gamma_\Phi) \equiv 0.
+    \label{eq:gamma-cancellation}
   \end{equation}
-  \item \textbf{Single-Scale Stueckelberg--Scalaron Exit ($V_\mu = M_{\mathrm{inf}}A_\mu$):} Because \texttt{Sub1} Proposition~1 locks the $O_T$ director Stueckelberg scale identically to $f_{\mathrm{dir}} \equiv M_{\mathrm{inf}} = 3.1959\times 10^{13}\;\mathrm{GeV}$, kination ($w_{\mathrm{rh}} = 1.0$) and decay at $H = \Gamma_\phi^{\mathrm{tot}} = 37.006\;\mathrm{GeV}$ ($T_{\mathrm{rh}} = 5.132\times 10^9\;\mathrm{GeV}$) occur in one unified sector ($\rho_{\mathrm{decay}}/\rho_{\mathrm{tot}} \equiv 1$), yielding $N_* = 60.175$, $\mathbf{n_s = 0.97464}$ ($\mathbf{+0.21\sigma}$ \texttt{ACT DR6}), $\mathbf{A_s = 2.0895\times 10^{-9}}$ ($\mathbf{-0.35\sigma}$), $\mathbf{r = 0.00511}$, $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{4.88\times 10^{-5}} \ll 0.17$, and $\eta_B = +6.106\times 10^{-10}$.
-  \item \textbf{Zero-Tuning Bunch--Davies Proof in the Decoupled Two-Fluid Limit:} Even if kination ($\rho_{\mathrm{kin}} \propto a^{-6}$) and the massive radial scalaron ($\rho_\phi \propto a^{-3}$) evolve without interaction after $\phi_{\mathrm{end}}$, integrating the exact de~Sitter Bunch--Davies stochastic variance $\langle\delta\varphi^2\rangle_{\mathrm{BD}} = \int (H(N)/2\pi)^2\,\mathrm{d}N$ along the \texttt{DOP853} trajectory gives
+  On the inflationary plateau $\xi_\Phi\varphi^2 \gg M_{\mathrm{Pl}}^2$, graviton--inflaton kinetic mixing suppresses internal radial $\varphi$-loops by $s(\varphi) = \frac{1 + \xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2}{1 + (1 + 6\xi_\Phi)\xi_\Phi\varphi^2/M_{\mathrm{Pl}}^2} \simeq (6\xi_\Phi)^{-1} \ll 1$ \cite{DeSimone2009}, leaving the Goldstone $\eta$-loop ($16\pi^2\beta_{\lambda_\Phi}^{(s\to 0)} = 2\lambda_\Phi^2$, $16\pi^2\beta_{\xi_\Phi}^{(s\to 0)} = 2\lambda_\Phi\xi_\Phi \implies \Delta\kappa_J^{(\mathrm{sc},s\to 0)} = -\frac{\lambda_\Phi}{16\pi^2} = -2.09\times 10^{-5}$; in flat-space $\overline{\mathrm{MS}}$ at $s = 1$, $16\pi^2\beta_{\lambda_\Phi}^{(s=1)} = 20\lambda_\Phi^2$ and $16\pi^2\beta_{\xi_\Phi}^{(s=1)} = 8\lambda_\Phi\xi_\Phi$ give $+\frac{\lambda_\Phi}{8\pi^2} = +4.18\times 10^{-5}$, leaving every branch conclusion below unchanged). Including $d_A$ real bosonic threshold modes of mass $\alpha_{\mathrm{OCSR}}\varphi$, $N_g$ Majorana species ($-2N_g$ helicity states of mass $\alpha_{\mathrm{OCSR}}\varphi$), and a $\mathrm{Spin}(10)$-normalized $U(1)_{B-L}$ vector ($T_{B-L}^{\mathrm{GUT}} = \sqrt{\frac{3}{8}}(B-L) \implies (q_\Phi^{\mathrm{GUT}})^2 = \frac{3}{8}\times 4 = \frac{3}{2}$, $M_{Z'}^2(\varphi) = \frac{3}{2}g_{\mathrm{GUT}}^2\varphi^2$, $+3$ polarizations) with $16\pi^2\lambda_\Phi = 4\alpha_{\mathrm{OCSR}}^2$:
   \begin{equation}
-  f_{\phi,\mathrm{end}}^{\mathrm{BD}} = \frac{\frac{1}{2}M_{\mathrm{inf}}^2\langle\delta\varphi^2\rangle_{\mathrm{BD}}}{\rho_{\mathrm{end}}} = \mathbf{1.790\times 10^{-10}} = 1.040\,K_B = \mathbf{40.0}\times \sqrt{\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}},
+    \kappa_J = \frac{3\bigl(\frac{3}{2}g_{\mathrm{GUT}}^2\bigr)^2 + (d_A - 2N_g)\alpha_{\mathrm{OCSR}}^4}{16\pi^2\lambda_\Phi} - \frac{\lambda_\Phi}{16\pi^2}
+    = \frac{27\,g_{\mathrm{GUT}}^4}{16\,\alpha_{\mathrm{OCSR}}^2} + \frac{d_A - 2N_g}{4}\,\alpha_{\mathrm{OCSR}}^2 - \frac{\lambda_\Phi}{16\pi^2}.
+    \label{eq:kappa-j-exact}
   \end{equation}
-  automatically exceeding the undiluted threshold $4.47\times 10^{-12}$ with zero tuning. Integrating the exact 4-ODE Boltzmann system for the $K_4$-projected condensate $\alpha_{\mathrm{OCSR}}^2 K_B = 2.242\times 10^{-11}$ yields $w_{\mathrm{eff}} = 0.8737$, $n_s = \mathbf{0.97433}$ ($+0.11\sigma$), $A_s = 2.0588\times 10^{-9}$ ($-1.37\sigma$), and $\eta_B = \mathbf{+5.600\times 10^{-10}}$ (matching Paper~24's $12/37$ electroweak crossover $5.585\times 10^{-10}$ to $+0.27\%$).
+  \item \textbf{Complete Three-Branch Exclusion of Prescription~II and Single-Field Kination:} Integrating the exact Klein--Gordon ODE in $N = \ln a$,
+  \begin{equation}
+    \frac{\mathrm{d}^2 x}{\mathrm{d}N^2} + \left[3 - \frac{1}{2}\left(\frac{\mathrm{d}x}{\mathrm{d}N}\right)^{\!2}\right]\left(\frac{\mathrm{d}x}{\mathrm{d}N} + \frac{\mathrm{d}\ln V_E(x)}{\mathrm{d}x}\right) = 0, \qquad \epsilon_1 = \frac{1}{2}\left(\frac{\mathrm{d}x}{\mathrm{d}N}\right)^{\!2}, \qquad \epsilon_2 = \frac{\mathrm{d}\ln\epsilon_1}{\mathrm{d}N},
+    \label{eq:inflaton-ode}
+  \end{equation}
+  matched to Paper~24's locked perturbative decay width $\Gamma_\phi^{\mathrm{tot}} = \Gamma_{HH} + \Gamma_{VV} + \Gamma_{N_1 N_1} = 36.4992 + 0.0342 + 0.4729 = 37.0063\;\mathrm{GeV}$ ($T_{\mathrm{rh}} = 5.132\times 10^9\;\mathrm{GeV}$) at $k_* = 0.05\;\mathrm{Mpc}^{-1}$ via
+  \begin{equation}
+    N_* = -\ln\!\left(\frac{k_*}{a_0 H_*}\right) = -\ln k_* + \ln H_* + \frac{1}{3(1 + w_{\mathrm{rh}})}\ln\!\left(\frac{\rho_{\mathrm{rh}}}{\rho_{\mathrm{end}}}\right) + \frac{1}{3}\ln\!\left(\frac{g_{*s,0}}{g_*}\right) + \ln\!\left(\frac{T_0}{T_{\mathrm{rh}}}\right):
+    \label{eq:nstar-matching}
+  \end{equation}
+  \begin{itemize}
+    \item \emph{Prescription~I Baseline ($\kappa_E \equiv 0$, $w_{\mathrm{rh}} = 0$, $k_{\mathrm{added}} = 0$):} Yields $N_* = 51.412$ ($x_* = 5.2422$), $n_s = \mathbf{0.96199}$ ($-0.69\sigma$ \texttt{Planck 2018}, $-4.00\sigma$ {\upshape\texttt{ACT DR6}}), $A_s = \mathbf{2.1011\times 10^{-9}}$ ($+0.04\sigma$), $r = \mathbf{0.00426}$, and first-principles 5-ODE Casas--Ibarra $\eta_B = \mathbf{+6.106\times 10^{-10}}$.
+    \item \emph{Prescription~II Branch A1 — Fermion-Only Seesaw ($g_{\mathrm{GUT}} = 0, d_A = 0$):} Gives $\kappa_J^{(F)} = \mathbf{-0.19533}$ ($N_g = 3$) and $\mathbf{-0.06513}$ ($N_g = 1$), turning $V_E(x)$ over at a false-vacuum hilltop $x_{\max} = \mathbf{0.0161}$ ($N_g = 3$) or $\mathbf{2.6564}$ ($N_g = 1$) below $x_* = 5.2422$ and collapsing slow roll.
+    \item \emph{Prescription~II Branch A2 — Paper~24's Exact $K_4$ Threshold Multiplet ($g_{\mathrm{GUT}} = 0, d_A - 2d_S = 8 - 6 = +2$):} Gives $\kappa_J^{(\mathrm{P24})} = +\frac{1}{2}\alpha_{\mathrm{OCSR}}^2 - \frac{\lambda_\Phi}{16\pi^2} = \mathbf{+0.06508}$, predicting $n_s = \mathbf{0.97821}$ and $10^9 A_s = \mathbf{1.3485}$ (**excluded at $-25.05\sigma$ on $A_s$**).
+    \item \emph{Prescription~II Branch B — Gauged $U(1)_{B-L} \subset \mathrm{Spin}(10)$ ($g_{\mathrm{GUT}}^2 = 4\pi/40 = \pi/10$, $(q_\Phi^{\mathrm{GUT}})^2 = 3/2$, $d_A = 0, N_g = 3$):} Gives $\kappa_J^{(V+F)} = \mathbf{+1.08377}$, driving $n_s = \mathbf{0.98296}$ ($+2.99\sigma$ {\upshape\texttt{ACT DR6}}) and $10^9 A_s = \mathbf{5.6753}$ ($+119.18\sigma$, $r = 0.02643$), doubly excluded.
+    \item \emph{Single-Field Kination \& Spectator Bunch--Davies Obstruction:} Virialized oscillations in $V_E(\phi) = \frac{1}{2}M_{\mathrm{inf}}^2\phi^2 + \mathcal{O}(\phi^3)$ fix $w_{\mathrm{rh}} \equiv 0$; homogeneous $A_\mu = (-1,\mathbf{0})$ has $F_{\mu\nu} \equiv 0$ and $(\nabla_\mu A^\mu)^2 = 9H^2$ absorbed into Friedmann renormalization ($|\Delta G_{\mathrm{cosmo}}/G_N| = 2 K_{\mathrm{eff}} = 1.72\times 10^{-10}$) with zero $a^{-6}$ kination component; and any decoupled scalar of mass $M_{\mathrm{inf}} = 1.84\,H_* > \frac{3}{2}H_*$ sits in the massive de~Sitter principal series ($\nu = 1.07\,\mathrm{i}$), precluding a massless Bunch--Davies random walk. \qed
+  \end{itemize}
 \end{enumerate}
 \end{theorem}
+
+\subsection{Conditional Two-Field First-Principles 5-ODE Benchmark and Trajectory GW Bound (\texorpdfstring{$k_{\mathrm{UV}} = 2$}{k\_UV = 2})}
+To establish the minimal UV completion required if \texttt{Simons Observatory} and \texttt{LiteBIRD} confirm $n_s = 0.974 \pm 0.001$, we integrate the energy-conserving 5-ODE non-thermal reheating and Casas--Ibarra leptogenesis system in $N' := \ln(a/a_{\mathrm{end}})$ for a decoupled kination modulus $\rho_\psi$ ($w_\psi = +1$), harmonic scalaron $\rho_\phi$ ($w_\phi = 0$, $\Gamma_\phi^{\mathrm{tot}} = 37.0063\;\mathrm{GeV}$, branching fraction $\mathrm{BR}_{N_1} = \Gamma_{N_1 N_1}/\Gamma_\phi^{\mathrm{tot}} = 1.2778\times 10^{-2}$), intermediate heavy Majorana density $\rho_{N_1}$ ($X_{N_1} := n_{N_1}e^{3N'}/M_{\mathrm{inf}}^3$, decaying with relativistic Lorentz dilation $\Gamma_{D_1}^{\mathrm{NT}} = \frac{2M_1}{M_{\mathrm{inf}}}\Gamma_{D_1}$), radiation $\rho_r$, and $B-L$ yield $X_{B-L} := n_{B-L}e^{3N'}/M_{\mathrm{inf}}^3$ (sourced from first principles by Paper~24's complex $\mathrm{SO}(2,\mathbb{C})$ angle $z_\tau = \theta_\tau + \mathrm{i}u \implies \varepsilon_1^{(B-L)} = +8.4705\times 10^{-5} > 0$, with inverse-decay and $\Delta L = 2$ washout $\Gamma_W = \Gamma_W^{\mathrm{ID}} + \Gamma_W^{\Delta L=2}$):
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}\rho_\psi}{\mathrm{d}N'} &= -6\rho_\psi, \qquad
+  \frac{\mathrm{d}\rho_\phi}{\mathrm{d}N'} = -\left(3 + \frac{\Gamma_\phi^{\mathrm{tot}}}{H}\right)\rho_\phi, \qquad
+  \frac{\mathrm{d}X_{N_1}}{\mathrm{d}N'} = \frac{2\,\mathrm{BR}_{N_1}\Gamma_\phi^{\mathrm{tot}}}{H}\frac{\rho_\phi e^{3N'}}{M_{\mathrm{inf}}^4} - \mathcal{D}_{N_1}, \\
+  \frac{\mathrm{d}(\rho_r e^{4N'})}{\mathrm{d}N'} &= e^{4N'}\left[(1 - \mathrm{BR}_{N_1})\frac{\Gamma_\phi^{\mathrm{tot}}}{H}\rho_\phi + \frac{M_{\mathrm{inf}}^4 e^{-3N'}}{2}\mathcal{D}_{N_1}\right], \qquad
+  \frac{\mathrm{d}X_{B-L}}{\mathrm{d}N'} = \varepsilon_1^{(B-L)}\mathcal{D}_{N_1} - \frac{\Gamma_W}{H}X_{B-L},
+\end{aligned}
+\label{eq:4ode-boltzmann}
+\end{equation}
+where $\mathcal{D}_{N_1} := \frac{\Gamma_{D_1}^{\mathrm{NT}}}{H}X_{N_1} - \frac{\Gamma_{D_1}\langle M_1/E\rangle}{H}X_{N_1}^{\mathrm{eq}}$ and $3M_{\mathrm{Pl}}^2 H^2 = \rho_\psi + \rho_\phi + \rho_{N_1} + \rho_r$, initialized at $(\rho_\psi,\rho_\phi,\rho_r,X_{N_1},X_{B-L})|_{N'=0} = \bigl((1-f_{\phi,\mathrm{end}})\rho_{\mathrm{end}}, f_{\phi,\mathrm{end}}\rho_{\mathrm{end}}, 0, 0, 0\bigr)$ and converted via $\eta_B = \frac{28}{79}\frac{s_0}{n_{\gamma,0}}Y_{B-L}$. Because the two-field trajectory transitions from kination ($w = +1$) to a brief scalaron-matter shelf ($w = 0$) before $\Gamma_\phi^{\mathrm{tot}} = H$, we integrate the re-entering tensor modes directly along the exact 5-ODE trajectory $a(N')H(N')$ \cite{FigueroaTanin2019}:
+\begin{equation}
+\begin{aligned}
+  \Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \frac{8}{7}\left(\frac{11}{4}\right)^{\!4/3}\frac{\omega_{r,0}}{\omega_{\gamma,0}}\left(\frac{g_{*s,0}}{g_*}\right)^{\!1/3}\Biggl[
+  &\frac{1}{\rho_r(N'_f)}\int_0^{N'_f}\frac{H_*^2\,\rho_{\mathrm{tot}}(N')}{12\pi^2 M_{\mathrm{Pl}}^2}\,e^{-4(N'_f - N')}\left|\frac{\mathrm{d}\ln(aH)}{\mathrm{d}N'}\right|\mathrm{d}N' \\
+  &+ \frac{H_*^2\ln(T_f/T_{\mathrm{BBN}})}{12\pi^2 M_{\mathrm{Pl}}^2}\Biggr].
+\end{aligned}
+\label{eq:dneff-gw}
+\end{equation}
+At $(\kappa_{\mathrm{eff}} = 0.0149,\, f_{\phi,\mathrm{end}} = 2.24\times 10^{-11})$ ({\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{UV}} = 2$), Eqs.~\eqref{eq:inflaton-ode}--\eqref{eq:dneff-gw} yield $w_{\mathrm{eff}} = 0.8737$, $N_* = 59.587$, $n_s = \mathbf{0.97432}$ ($+0.11\sigma$ {\upshape\texttt{ACT DR6}}), $A_s = \mathbf{2.0593\times 10^{-9}}$ ($-1.36\sigma$), $r = \mathbf{0.00519}$, first-principles $\eta_B = \mathbf{+5.600\times 10^{-10}}$, trajectory-integrated $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = \mathbf{3.74\times 10^{-6}} \ll 0.17$, and BBN helium shift $|\Delta Y_p| = 0.08\times 2K_{\mathrm{eff}} = \mathbf{1.38\times 10^{-11}}$ (Figure~\ref{fig:uv-sector}).
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig1_act_dr6_multiterminal_inflation_and_bbn.pdf}
-  \caption{(A) Zero-parameter ($k_{\mathrm{added}} = 0$) Stueckelberg--scalaron ($w_{\mathrm{rh}}=1$) and $K_4$ Bunch--Davies 4-ODE ($w_{\mathrm{eff}}=0.874$) closures inside the \texttt{ACT DR6} $1\sigma$ band. (B) Primordial GW $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{rh}})$ staying $>3{,}480\times$ below the BBN+\texttt{ACT} limit.}
-  \label{fig:inf_bbn}
+  \caption{(A) Exact ODE-computed UV inflationary curve in the $(n_s, 10^9 A_s)$ plane: zero-parameter Prescription~I ($k_{\mathrm{added}} = 0$, $n_s = 0.9620$, {\upshape\texttt{PROVEN}}), Paper~24's $n_{\mathrm{eff}}^{\mathrm{STr}} = +2$ threshold multiplet under Prescription~II ($10^9 A_s = 1.349$, $-25.05\sigma$), gauged $U(1)_{B-L}$ Prescription~II ($\kappa_J = +1.0838$, $10^9 A_s = 5.675$, $+119.2\sigma$; fermion-only $\kappa_J < 0$ collapses at $x_{\max} < x_*$), and the conditional two-field 5-ODE benchmark ($k_{\mathrm{UV}} = 2$, $n_s = 0.9743$). (B) Single-fluid GW envelope $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}(w_{\mathrm{eff}})$ and exact two-stage ($w = 1 \to 0$) 5-ODE trajectory integral ($\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3.74\times 10^{-6} \ll 0.17$).}
+  \label{fig:uv-sector}
 \end{figure}
 
-\section{Continuous \texorpdfstring{$K_B^{-1}$}{KB-1} Helmholtz--Milgrom \texorpdfstring{$\sigma_8$}{sigma8} Screening and JWST Compactness}
-To eliminate the \texttt{v2.0.0} step-function $z_{\mathrm{on}} = z_{\mathrm{dip}}$ completely, we retain the canonical curvature-normalized Helmholtz mass of the QUMOND difference potential $\delta\Phi_{\mathrm{Q}} := \chi - \phi_N$ sourced by the homogeneous apparent-horizon Raychaudhuri convergence $\bar{R}_{\mu\nu}A^\mu A^\nu = 3q(z)H(z)^2$ (\texttt{Sub1} Pillar~1 spatial constancy $\nabla_{\mathbf{x}}\bar{m}_{\mathrm{IR}} \equiv 0$ inside $r_{\mathrm{AH}}$):
-\begin{equation}
-\bigl(\nabla_\perp^2 - \bar{m}_{\mathrm{IR}}^2(z)\bigr)\delta\Phi_{\mathrm{Q}} = \nabla_\perp\cdot\bigl[(F_{\mathrm{OD}}^2(s_b) - 1)\nabla_\perp\phi_N\bigr], \qquad \bar{m}_{\mathrm{IR}}^2(z) = \frac{1}{K_B}\frac{\max\bigl(\bar{R}_{\mu\nu}A^\mu A^\nu,\,0\bigr)}{c^2}.
-\end{equation}
-Furthermore, by Milgrom's exact 3D QUMOND center-of-mass equivalence principle, condensed galactic baryons ($R_b = 0.03\,R_{200}$) respond to weak $R_8 = 8\,h^{-1}\mathrm{Mpc}$ waves via $\mu_{\mathrm{CoM}}(s_b) = F_{\mathrm{OD}}^2(s_b) + \frac{1}{3}s_b\frac{\mathrm{d}F_{\mathrm{OD}}^2}{\mathrm{d}s_b}$.
+\section{Single-Metric \texttt{AeST}--QUMOND Helmholtz Action and First-Principles \texorpdfstring{$\sigma_8$}{sigma\_8} Closure}
+\label{sec:sigma8-closure}
 
-\begin{theorem}[Continuous $z_{\mathrm{drag}} = 1060 \to 0$ $\sigma_8$ Closure and JWST Sub-kpc Compactness --- \texttt{PROVEN}]
-Integrating the coupled two-fluid $(\delta_A, \delta_b)$ system continuously from $z_{\mathrm{drag}} = 1060$ to $z = 0$ with $k_{\mathrm{added}} = 0$ and zero step functions proves:
+\subsection{Eliminating Conformal Lensing Erasure, Non-Analytic Ramps, and CoM Misuse}
+Three subtle traps in relativistic modified-gravity cosmology are systematically eliminated here:
 \begin{enumerate}
-  \item \textbf{ACT DR6 CMB-Lensing $\sigma_8$ Agreement:} $\sigma_8(z=0) = \mathbf{0.8223}$ ($\mathbf{+0.48\sigma}$ vs.\ \texttt{ACT DR6} CMB lensing $0.818 \pm 0.009$; $+1.87\sigma$ vs.\ joint \texttt{P-ACT+DESI} $0.813 \pm 0.005$), resolving the unscreened $\sigma_8 = 13.08$ catastrophe continuously.
-  \item \textbf{Exact Low-$z$ Galactic and Cluster Preservation:} Because $q(z) \le 0$ for all $z \le z_{\mathrm{dip}} = 0.6316$, $\bar{m}_{\mathrm{IR}}(z) \equiv 0$ identically at late times, preserving $100.000\%$ of \texttt{SPARC} ($z=0$) and \texttt{X-COP} ($z=0.05$) predictions ($S_{\mathrm{Helm}} \equiv 1$).
-  \item \textbf{JWST $z = 10\text{--}14$ Ultra-Compact Galaxy Selection:} At $z = 10$ ($a_0^{\mathrm{KH}}(10) = 6.586\,a_0(0)$), $\ell_{\mathrm{IR}}(10) = \bar{m}_{\mathrm{IR}}^{-1}(10) = \mathbf{2.33\;\mathrm{kpc}}$, giving $S_{\mathrm{Helm}}(1.5\;\mathrm{kpc}) = \mathbf{0.900}$ inside compact cores while screening diffuse $>10\;\mathrm{kpc}$ envelopes—naturally explaining why luminous JWST $z = 10\text{--}14$ galaxies exhibit sub-kpc effective radii.
+  \item \emph{The Bekenstein--Sanders Conformal Lensing No-Go:} Under any pure conformal rescaling $g_{\mu\nu} = e^{-2\psi}g_{\mu\nu}^{(E)}$, Newtonian-gauge potentials transform with \emph{opposite} signs ($\Psi_E = \Psi + \psi$, $\Phi_E = \Phi - \psi$), so the Weyl lensing potential $\Phi_{\mathrm{Weyl}} = \frac{1}{2}(\Phi + \Psi) = \frac{1}{2}(\Phi_E + \Psi_E)$ is conformally invariant in 4D and erases all QUMOND gravitational lensing. Following Skordis and Z\l{}o\'snik (\texttt{AeST}) \cite{SkordisZlosnik2021}, we work instead on \textbf{one single physical metric $g_{\mu\nu}$} and couple the scalar $\varphi$ to the director 4-acceleration $a_\mu := A^\nu\nabla_\nu A_\mu$ via $q_\mu := h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$, which shifts \emph{both} $\Psi$ and $\Phi$ with the \emph{same} sign ($\Phi \equiv \Psi$).
+  \item \emph{Non-Analytic $\max(\bar{R}_{\mu\nu}A^\mu A^\nu, 0)$ Ramps:} Piecewise curvature switches break $C^\infty$ analyticity at $q(z_{\mathrm{dip}}) = 0$ ($z_{\mathrm{dip}} = 0.6316$) and either generate fourth-order metric equations or violate $\nabla_\mu T^{\mu\nu}_{\mathrm{eff}} = 0$.
+  \item \emph{Internal-Acceleration CoM Misuse:} Milgrom's QUMOND center-of-mass theorem \cite{Milgrom2010QUMOND} (Eq.~35) dictates that a body with $g_{\mathrm{int}} \gg a_0$ responds to a long-wavelength field $\mathbf{g}_{\mathrm{ext}}$ via $\nu(|\mathbf{g}_{\mathrm{ext}}|/a_0)$, never $\nu(g_{\mathrm{int}}/a_0)$.
+\end{enumerate}
+
+\subsection{4D Single-Metric \texttt{AeST}--QUMOND--Helmholtz Action and Christoffel Proof}
+On a 4D Lorentzian manifold $(\mathcal{M}_4, g_{\mu\nu})$ of signature $(-,+,+,+)$, let $A_\mu$ be the unit-norm timelike director 1-form ($g^{\mu\nu}A_\mu A_\nu = -1$, spatial projector $h^{\mu\nu} := g^{\mu\nu} + A^\mu A^\nu$, $F_{\mu\nu} := \partial_\mu A_\nu - \partial_\nu A_\mu$, $a_\mu := A^\nu\nabla_\nu A_\mu$), $\varphi$ the \texttt{AeST} polarization scalar \cite{SkordisZlosnik2021} with $q_\mu := h_\mu^\nu(c_q a_\nu - \partial_\nu\varphi)$, and $\phi_N$ {\upshape\texttt{Sub1}}'s QUMOND auxiliary potential. With \textbf{strictly constant} locked parameters $K_B \equiv K_B^{(0)} = 1.72219\times 10^{-10}$, $a_q = \frac{1}{4}K_B^{(0)}$, $c_q = 1$, $K_{\mathrm{eff}} := K_B - 2a_q c_q^2 = \frac{1}{2}K_B^{(0)} = 8.61095\times 10^{-11}$, $\gamma_{\mathrm{eff}} := 1 - \frac{1}{2}K_{\mathrm{eff}}$, $b_1 := \frac{a_q(2 - K_B)}{2 - K_{\mathrm{eff}}}$, and $\psi_{\mathrm{IR}} := \frac{2a_q c_q}{2 - K_{\mathrm{eff}}}\varphi$ ($k_{\mathrm{added}} = 0$), the $C^\infty$ single-metric action is
+\begin{equation}
+\begin{aligned}
+  \mathcal{S} = \int \mathrm{d}^4x\,\sqrt{-g}\,\Biggl[
+  &\frac{M_{\mathrm{Pl}}^2}{2}\,R - \frac{M_{\mathrm{Pl}}^2 K_B}{4}\,F_{\mu\nu}F^{\mu\nu} - \frac{M_{\mathrm{Pl}}^2 c_2}{2}(\nabla_\mu A^\mu)^2 + \lambda\bigl(g^{\mu\nu}A_\mu A_\nu + 1\bigr) \\
+  &- M_{\mathrm{Pl}}^2 a_q h^{\mu\nu}q_\mu q_\nu + M_{\mathrm{Pl}}^2 b_1 h^{\mu\nu}\partial_\mu\varphi\partial_\nu\varphi + \frac{M_{\mathrm{Pl}}^2\mathcal{K}_2}{2}(A^\mu\partial_\mu\varphi)^2 \\
+  &- M_{\mathrm{Pl}}^2\gamma_{\mathrm{eff}}\Bigl(2 h^{\mu\nu}\partial_\mu\psi_{\mathrm{IR}}\partial_\nu\phi_N - \frac{(a_0^{\mathrm{KH}})^2}{c^4}V_{\mathrm{QUMOND}}(y)\Bigr) \\
+  &- \frac{M_{\mathrm{Pl}}^2\gamma_{\mathrm{eff}}\kappa_\theta}{2}(\nabla_\mu A^\mu)^2\bigl(\psi_{\mathrm{IR}}^2 + \psi_{\mathrm{IR}}\phi_N\bigr)\Biggr]
+  + S_{\mathrm{cond}}\bigl[g_{\mu\nu}^{(A)}, \psi_A\bigr] + S_{\mathrm{SM}}\bigl[g_{\mu\nu}, \Psi_{\mathrm{SM}}\bigr],
+\end{aligned}
+\label{eq:master-v4-action}
+\end{equation}
+where $y = s^2 = \frac{c^4}{(a_0^{\mathrm{KH}})^2}h^{\mu\nu}\partial_\mu\phi_N\partial_\nu\phi_N$, $V_{\mathrm{QUMOND}}(s^2) = 2\int_0^s q\bigl[F_{\mathrm{OD}}^2(q) - 1\bigr]\mathrm{d}q$, $g_{\mu\nu}^{(A)} := g_{\mu\nu} + (1 - e^{-2\psi_{\mathrm{IR}}})A_\mu A_\nu$ is the disformal director metric of the pressureless cold condensate $\psi_A$ ($\det g^{(A)} = e^{-2\psi_{\mathrm{IR}}}\det g < 0$, $g_{00}^{(A)} = e^{-2\psi_{\mathrm{IR}}}g_{00} \simeq -[1 + 2(\Psi - \psi_{\mathrm{IR}})]$, while all Standard Model species $\Psi_{\mathrm{SM}}$, photons, and gravitons couple \emph{purely minimally} to the single metric $g_{\mu\nu}$), and the Stueckelberg--Lorenz and Helmholtz parameters are locked to
+\begin{equation}
+  c_2 \equiv \frac{K_{\mathrm{eff}}}{1 - 2K_{\mathrm{eff}}} = 8.61095\times 10^{-11}, \quad
+  \kappa_\theta \equiv \xi_\Phi^2 = (256\pi^2)^2 \approx 6.3838\times 10^6, \quad
+  m_H^2(z) := \frac{9}{2}\kappa_\theta\,\frac{a^2 H^2(z)}{c^2}.
+  \label{eq:sl-dresser}
+\end{equation}
+
+\begin{theorem}[4D Christoffel Single-Metric Slip $\Phi \equiv \Psi$, Pole-Free Constraint Hessian, PPN Bounds, and Static Virial Exactness --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:covariant-helmholtz}
+Evaluating the explicit 4D Christoffel symbols $\Gamma^\lambda_{\mu\nu}$ and Ricci tensor $R_{\mu\nu}$ of $g_{\mu\nu}$ in signature $(-,+,+,+)$ and unitary director gauge ($A_i = 0, g^{\mu\nu}A_\mu A_\nu \equiv -1$) in \texttt{SymPy} for Eqs.~\eqref{eq:master-v4-action}--\eqref{eq:sl-dresser}:
+\begin{enumerate}
+  \item \textbf{Luminal Tensor/Photon Cone, Cherenkov Safety, and Exact PPN Compliance:} Minimal coupling $S_{\mathrm{SM}}[g_{\mu\nu}, \Psi_{\mathrm{SM}}]$ guarantees $c_T^2 \equiv c_\gamma^2 \equiv c^2$ (\texttt{GW170817}) and $\alpha_{\mathrm{EEP}} \equiv 0$. In Foster--Jacobson conventions \cite{JacobsonMattingly2001,FosterJacobson2006,OostMukohyamaWang2018} ($c_1 = -c_3 = K_B$, $c_4 = -2a_q c_q^2 \implies c_{13} = 0, c_{14} = K_{\mathrm{eff}}$), Eq.~\eqref{eq:sl-dresser} gives
+  \begin{equation}
+  \begin{aligned}
+    \frac{c_T^2}{c^2} &\equiv 1, \qquad \frac{c_V^2}{c^2} = \frac{K_B}{K_{\mathrm{eff}}} = 2 > 1, \qquad \mathbf{K}_{\mathrm{dyn}} = \operatorname{diag}\!\left(3 + \frac{2}{c_2},\; \frac{\mathcal{K}_2}{2}\right) \succ \mathbf{0}, \\
+    \alpha_2^{\mathrm{PPN}} &\equiv 0, \qquad \alpha_1^{\mathrm{PPN}} = -4K_{\mathrm{eff}} = \mathbf{-3.444\times 10^{-10}} \quad \bigl(|\alpha_1^{\mathrm{PPN}}| \ll 4\times 10^{-5}\bigr),
+  \end{aligned}
+  \label{eq:luminal-ppn}
+  \end{equation}
+  free of subluminal UHECR gravitational Cherenkov losses ($c_T, c_V \ge c$) \cite{ElliottMooreStoica2005} and preferred-frame anomalies (on FLRW $\alpha_2^{\mathrm{PPN}} \equiv 0$, while inside halos $c_2^{\mathrm{eff}}(x) = c_2 + \gamma_{\mathrm{eff}}\kappa_\theta(\psi_{\mathrm{IR}}^2 + \psi_{\mathrm{IR}}\phi_N) > 0$ keeps $|\alpha_2^{\mathrm{PPN}}| \le \frac{1}{2}K_{\mathrm{eff}} = 4.31\times 10^{-11} \ll 10^{-7}$).
+  \item \textbf{4D Christoffel-Certified Quasi-Static Saddle, Full Lensing, and Pole-Free Determinant:} Around flat FLRW ($\nabla_\mu\bar{A}^\mu = 3H(z)/c$) in Newtonian gauge $\mathrm{d}s^2 = -(1 + 2\Psi)c^2\mathrm{d}t^2 + a^2(1 - 2\Phi)\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j$, direct expansion of $\frac{1}{2}\sqrt{-g}\,R$ and Eq.~\eqref{eq:master-v4-action} over $\mathbf{c} = (\Psi, \Phi, \varphi, \phi_N)^T$ yields the exact Hessian determinant
+  \begin{equation}
+    \det\mathbf{H}_4 = 2\,a_q^2 c_q^2\,(2 - K_{\mathrm{eff}})\,k_c^4\,\bigl(4 k_c^4 + 4 k_c^2 m_H^2\,\mu_b + m_H^4\bigr) > 0 \qquad \forall\, k_c > 0,\; \mu_b > 0.
+    \label{eq:h4-covariant}
+  \end{equation}
+  Crucially, unlike $k_c^2 + m_H^2(\mu_b - 1)$, Eq.~\eqref{eq:h4-covariant} contains \emph{only} $\mu_b$ with positive coefficients; since {\upshape\texttt{Sub1}} proves $\mu_b(\theta) \ge \min\lambda_\parallel = 0.941192 > 0$ across all $s_N \in (0,\infty)$ and $\theta \in [0,\pi]$, $\det\mathbf{H}_4$ is \textbf{strictly positive everywhere with zero elliptic pole} even on the $s_N > 1.4475$ transition shells ($\lambda_\parallel < 1$). Solving $\frac{\partial\mathcal{L}^{(2)}}{\partial\mathbf{c}} = \mathbf{0}$ gives exact single-metric slip $\Phi \equiv \Psi$ (preserving $100\%$ of QUMOND lensing in $\Phi_{\mathrm{Weyl}} = \frac{\Phi+\Psi}{2} \equiv \Psi$):
+  \begin{equation}
+  \begin{aligned}
+    \Psi(\mathbf{k}_c, z) &= \Phi(\mathbf{k}_c, z) = \frac{1}{\gamma_{\mathrm{eff}}}\Bigl\{\Phi_{N,A}(\mathbf{k}_c, z) + \Phi_{N,b}(\mathbf{k}_c, z)\bigl[1 + \mathcal{K}_{\mathrm{Helm}}(k_c, m_H(z); \mu_b)\bigr]\Bigr\}, \\
+    \mathcal{K}_{\mathrm{Helm}}(k_c, m_H; \mu_b) &\equiv \frac{4 k_c^4\,(\mu_b - 1)}{4 k_c^4 + 4 k_c^2 m_H^2\,\mu_b + m_H^4}, \\
+    \phi_N(\mathbf{k}_c, z) &= \frac{2 k_c^2(2 k_c^2 + m_H^2)}{\gamma_{\mathrm{eff}}(4 k_c^4 + 4 k_c^2 m_H^2\mu_b + m_H^4)}\,\Phi_{N,b}(\mathbf{k}_c, z),
+  \end{aligned}
+  \label{eq:psi-jordan-exact}
+  \end{equation}
+  which satisfies all three physical limits simultaneously: $\mathcal{K}_{\mathrm{Helm}}(m_H = 0) \equiv \mu_b - 1$ (exact QUMOND), $\mathcal{K}_{\mathrm{Helm}}(m_H \to \infty) \equiv 0$ (exact early-universe/super-IR GR), and $\mathcal{K}_{\mathrm{Helm}}(\mu_b = 1) \equiv 0$ (exact Newtonian strong-field limit). On FLRW perturbations ($\mu_b > 1$), $\det\mathbf{G}_{\mathrm{dyn}} > 0$ holds unconditionally, while inside inhomogeneous static systems ($m_H = 0$) {\upshape\texttt{Sub1}}'s off-diagonal $(\phi_N,\chi)$ Legendre form certifies Sturm--Liouville positivity.
+  \item \textbf{Exact Static Virial Preservation with Zero Parameter Drift:} Because $(K_B, c_2, a_q, c_q)$ are strictly constant, $\frac{\partial K_B}{\partial s} \equiv 0$ and $\frac{\partial^2 K_B}{\partial\varphi^2} \equiv 0$ identically: in any stationary virialized spacetime ($\nabla_\mu\bar{A}^\mu \equiv 0 \implies m_H \equiv 0$), Eq.~\eqref{eq:master-v4-action} generates \emph{zero} static Maxwell/Hardy drift:
+  \begin{equation}
+    \mathcal{R}_{\mathrm{Hardy}}^{\mathrm{static}} \equiv 0, \qquad \Psi\big|_{m_H=0} = \Phi\big|_{m_H=0} = \frac{\Phi_{N,A} + \mu_b\,\Phi_{N,b}}{1 - K_{\mathrm{eff}}/2},
+    \label{eq:hardy-bound}
+  \end{equation}
+  reproducing {\upshape\texttt{Sub1}} \texttt{SPARC} and {\upshape\texttt{X-COP}} dynamics and lensing to $\mathcal{O}(K_{\mathrm{eff}}) = 4.3\times 10^{-11}$. \qed
 \end{enumerate}
 \end{theorem}
 
-\section{5-Probe Local-Void Inverse Closure, Cepheid Null, and ISW Survival}
-By the \emph{Cepheid Gravitational Null Theorem} (\texttt{Sub1} Eq.~83 inside $5\,M_\odot, 50\,R_\odot$ stars gives $|\Delta G/G|_{\mathrm{Ceph}} = \mathbf{9.15\times 10^{-20}}$, so $\Delta M_B^{\mathrm{grav}} \equiv 0$), we evaluate the continuous $z = 1060 \to 0$ $K_B^{-1}$ two-fluid solver across five local-void catalogs at $\Delta M_B = 0$ (Table~\ref{tab:voids}) and minimize the joint $\chi^2(\delta_v, R)$ across five independent local probes (\texttt{SH0ES} $73.04\pm 1.04$, \texttt{CCHP} $70.40\pm 1.90$, \texttt{CF4} $419\pm 36\;\mathrm{km\,s^{-1}}$, \texttt{CLASSIX/6dFGS} $\delta_v^{\mathrm{obs}} = -0.175\pm 0.035$, $R_{\mathrm{obs}} = 155\pm 25\;\mathrm{Mpc}$; $\mathrm{dof} = 3$):
+\subsection{First-Principles BAO-Wiggle + Massive-Neutrino Fourier Integration for \texorpdfstring{$\sigma_8$}{sigma\_8}}
+Rather than normalizing $P_{m,0}(k_c)$ to an external $\sigma_8^{\mathrm{GR}}$, we compute $\Delta_{m,0}^2(k_c) = \frac{4}{25}(k_c c/H_0)^4\allowbreak(D_{1,0}/\Omega_m)^2 A_s(k_c/k_*)^{n_s-1}T_{\mathrm{EH+BAO}+\nu}^2(k_c)$ from first principles using the full baryon-oscillation Eisenstein--Hu transfer function \cite{EisensteinHu1998} and Paper~24's free-streaming massive-neutrino suppression ($\sum m_\nu = 59.19\;\mathrm{meV}$, $f_\nu = 4.44\times 10^{-3}$), yielding $\sigma_8^{\mathrm{GR}} = \mathbf{0.8150}$ for Prescription~I ($n_s = 0.9620$) and $\mathbf{0.8106}$ for the two-field benchmark ($n_s = 0.9743$). Evolving each mode from $z_{\mathrm{drag}} = 1060$ (with radiation-inclusive initial slope $f_{\mathrm{drag}} = 0.85607 < 1$) to $z = 0$ via 32-node Gauss--Legendre angular quadrature $\langle\mathcal{K}_{\mathrm{Helm}}\rangle_\theta := \frac{1}{2}\int_{-1}^1 \mathcal{K}_{\mathrm{Helm}}(k_c, m_H; \mu(\theta))\,\mathrm{d}\cos\theta$ where $\mu(\theta) = \lambda_\parallel(s_e)\cos^2\theta + F_{\mathrm{OD}}^2(s_e)\sin^2\theta$ (avoiding Jensen-inequality bias):
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}^2\delta_A}{\mathrm{d}(\ln a)^2} + \bigl[1 - q(z)\bigr]\frac{\mathrm{d}\delta_A}{\mathrm{d}\ln a} &= \frac{3}{2}\Omega_{cb}(z)\Bigl[(1 - f_b)\delta_A + f_b\delta_b\Bigr], \\
+  \frac{\mathrm{d}^2\delta_b}{\mathrm{d}(\ln a)^2} + \bigl[1 - q(z)\bigr]\frac{\mathrm{d}\delta_b}{\mathrm{d}\ln a} &= \frac{3}{2}\Omega_{cb}(z)\Bigl[(1 - f_b)\delta_A + f_b\bigl(1 + \langle\mathcal{K}_{\mathrm{Helm}}\rangle_\theta\bigr)\delta_b\Bigr],
+\end{aligned}
+\label{eq:2fluid-ode}
+\end{equation}
+with self-consistent external acceleration
+\begin{equation}
+  \bar{g}_{\mathrm{ext},b}(z) = \frac{3}{2}f_b\Omega_{m,0}H_0^2(1+z)^2 D_{\Lambda\mathrm{CDM}}^{\mathrm{rad}}(z)\left[\int \frac{k_c\,P_{m,0}(k_c)}{2\pi^2}\left\langle\frac{2k_c^2(2k_c^2 + m_H^2)}{4k_c^4 + 4k_c^2 m_H^2\mu(\theta) + m_H^4}\right\rangle_{\!\theta}^{\!2}\mathrm{d}\ln k_c\right]^{1/2}:
+  \label{eq:self-consistent-barefe}
+\end{equation}
 \begin{itemize}
-  \item \textbf{Total-Metric EFE Fit:} $\hat{\delta}_v = -0.1789$, $\hat{R} = 149.1\;\mathrm{Mpc}$ gives $H_0^{\mathrm{loc}} = \mathbf{71.93\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{423.4\;\mathrm{km\,s^{-1}}}$, and $\chi^2_{\mathrm{min}}/\mathrm{dof} = 1.874/3 = \mathbf{0.625}$ ($\mathbf{p = 0.599}$).
-  \item \textbf{Baryonic EFE Fit:} $\hat{\delta}_v = -0.1657$, $\hat{R} = 142.5\;\mathrm{Mpc}$ gives $H_0^{\mathrm{loc}} = \mathbf{72.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$, $v_{\mathrm{out}} = \mathbf{427.6\;\mathrm{km\,s^{-1}}}$, and $\chi^2_{\mathrm{min}}/\mathrm{dof} = 2.033/3 = \mathbf{0.678}$ ($\mathbf{p = 0.566}$).
+  \item \textbf{Unscreened {\upshape\texttt{Sub1}} ($\kappa_\theta = 0$, {\upshape\texttt{NO-GO}}):} Blows up to $\sigma_8^{\mathrm{matter}}(0) = \mathbf{2.49}$ and $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{11.69}$ ($>1{,}200\sigma$ excluded).
+  \item \textbf{Locked $\kappa_\theta = \xi_\Phi^2 = (256\pi^2)^2$ ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} Fixes $l_{\mathrm{IR}}(0) = \mathbf{0.820\;\mathrm{Mpc}}$, giving $\sigma_8^{\mathrm{matter}}(0) = \mathbf{0.8151}$ and CMB-lensing $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0.8165}$ ($\mathbf{-0.16\sigma}$ vs.\ {\upshape\texttt{ACT DR6}} $0.818 \pm 0.009$) on Prescription~I, and $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0.8122}$ ($\mathbf{-0.65\sigma}$) on the two-field $n_s = 0.9743$ benchmark (at $\kappa_\theta = C_{\mathrm{ratio}}^2$, $l_{\mathrm{IR}}(0) = 0.273\;\mathrm{Mpc}$ and $\sigma_8^{\mathrm{Weyl}}(0) = \mathbf{0.8151}$, $+0.40\sigma$ vs.\ {\upshape\texttt{P-ACT+DESI}}).
 \end{itemize}
 
-\begin{table}[htbp]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\caption{Continuous $z = 1060 \to 0$ $K_B^{-1}$ \texttt{Sub1} predictions ($\Delta M_B \equiv 0$) across five catalogs and the 5-probe joint fit.}
-\label{tab:voids}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-Catalog / Inverse Fit & $(\delta_v,\;R\,[\mathrm{Mpc}])$ & $\mu_{\mathrm{Sub1}}(0)$ (Tot / Bar) & $H_0^{\mathrm{loc}}(\Delta M_B{=}0)$ & $v_{\mathrm{out}}\;[\mathrm{km\,s^{-1}}]$ \\
-\midrule
-CF4 shallow conservative & $(-0.10,\;150)$ & $2.103\;/\;2.739$ & $70.48\;/\;70.72$ & $238.2\;/\;274.1$ \\
-Paper~28 baseline & $(-0.15,\;150)$ & $2.102\;/\;2.694$ & $71.40\;/\;71.74$ & $357.3\;/\;408.5$ \\
-Whitbourn--Shanks (2016) & $(-0.15,\;200)$ & $2.160\;/\;2.649$ & $71.43\;/\;71.72$ & $483.0\;/\;541.5$ \\
-CLASSIX X-ray (2020) & $(-0.20,\;140)$ & $2.089\;/\;2.642$ & $72.31\;/\;72.74$ & $443.3\;/\;503.7$ \\
-KBC conservative (2013) & $(-0.20,\;200)$ & $2.157\;/\;2.559$ & $72.36\;/\;72.69$ & $643.7\;/\;709.4$ \\
-\midrule
-\textbf{5-Probe Joint Fit ($p{=}0.60$)} & $(-0.179,\;149.1)$ & $\mathbf{2.095}$ (Tot) & $\mathbf{71.93}$ & $\mathbf{423.4}$ \\
-\textbf{5-Probe Joint Fit ($p{=}0.57$)} & $(-0.166,\;142.5)$ & $\mathbf{2.668}$ (Bar) & $\mathbf{72.05}$ & $\mathbf{427.6}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\section{Root-Shot Supervoid ISW No-Go vs.\ Screened Cold-Spot Survival}
+\label{sec:isw-supervoid}
 
-On compensated supervoids ($z_v = 0.50, R_{\mathrm{com}} = 150\;\mathrm{Mpc}, \delta_0 = -0.25$), pure unscreened MOND gives $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.3975 > 0.2460$, flipping cold spots into hot spots ($A_{\mathrm{ISW}} = -3.93\times$), whereas exact \texttt{Sub1} automatically survives ($+0.1992 < 0.2460$), distinguishing evolving ($0.50\text{--}0.86\times$) from EFE-saturated ($2.20\text{--}2.61\times$) void potentials (Fig.~\ref{fig:hubble_isw}B). Table~\ref{tab:audit} and Fig.~\ref{fig:scorecard} summarize the complete six-sector closure (\texttt{15/15 PASS}).
+For an $R_{\mathrm{com}} = 150\;\mathrm{Mpc}$ supervoid at $z_v = 0.50$, a physical calculation must: (i) determine the initial drag-epoch amplitude by exact root-shooting (\texttt{brentq}) so the evolved void reaches the physical contrast $|\delta_b(z_v = 0.50)| \equiv 0.25$ (avoiding unphysical $|\delta_b| > 1$ cavitation from $\Lambda$CDM normalization); and (ii) distinguish the boundary radial-force Helmholtz kernel $\mathcal{S}_{\mathrm{force}}(x) = \frac{3(1+x)e^{-x}(x\cosh x - \sinh x)}{x^3}$ driving dynamical evacuation from the spherical/LOS potential Helmholtz kernel $\mathcal{S}_{\mathrm{pot}}(x) = \frac{2[1 - (1+x)e^{-x}]}{x^2}$ governing $\Delta T_{\mathrm{ISW}} \propto 2\int\dot{\Psi}\,\mathrm{d}\eta$:
+\begin{equation}
+  \frac{\mathrm{d}\ln|\Psi|}{\mathrm{d}\ln a} = -\left[1 - f_{\mathrm{eff}}(z_v) - \frac{\mathrm{d}\ln\mu_{\mathrm{eff}}}{\mathrm{d}\ln a}\right], \quad f_{\mathrm{eff}}(a) := \frac{\mathrm{d}\ln\delta_m}{\mathrm{d}\ln a}, \quad \mu_{\mathrm{eff}}(a) := \frac{(1 - f_b)\delta_A + f_b\mu_{b,\mathrm{pot}}^{\mathrm{void}}(a)\delta_b}{(1 - f_b)\delta_A + f_b\delta_b}.
+  \label{eq:isw-exact}
+\end{equation}
+
+\begin{theorem}[Root-Shot Unscreened \textnormal{{\upshape\texttt{Sub1}}} Supervoid ISW Sign-Flip No-Go and Screened Survival --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{thm:isw-nogo}
+Shooting initial amplitudes in the coupled two-channel spherical supervoid ODE ($R_{\mathrm{com}} = 150\;\mathrm{Mpc}$) to enforce $|\delta_b(z_v = 0.50)| \equiv 0.25$ with self-consistent external-field iteration:
+\begin{enumerate}
+  \item \textbf{Unscreened {\upshape\texttt{Sub1}} ($\kappa_\theta = 0$, {\upshape\texttt{NO-GO}}):} Gives $\mu_{\mathrm{eff}}(0.50) = 4.7091$, $\frac{\mathrm{d}\ln\mu_{\mathrm{eff}}}{\mathrm{d}\ln a} = +0.2361$, and rapid two-fluid evacuation $f_{\mathrm{eff}}(0.50) = 0.9783$, violating the cold-spot condition $1 - f_{\mathrm{eff}} = 0.0217 < 0.2361$ and flipping supervoids into CMB \textbf{hot spots} under both total-matter normalization ($A_{\mathrm{ISW}}^{\mathrm{mat}} = \mathbf{-4.0936} < 0$) and galaxy/baryon normalization ($A_{\mathrm{ISW}}^{\mathrm{gal}} = \mathbf{-1.3936} < 0$).
+  \item \textbf{Helmholtz-Screened {\upshape\texttt{Sub1}} ($\kappa_\theta = \xi_\Phi^2$, {\upshape\texttt{PROVEN}}):} Since $R_{\mathrm{phys}}(0.50) = 100\;\mathrm{Mpc} \gg l_{\mathrm{IR}}(0.50) = 0.62\;\mathrm{Mpc}$ ($\mathcal{S}_{\mathrm{force}}, \mathcal{S}_{\mathrm{pot}} \sim 10^{-4}$), supervoid potentials evolve on the GR light cone ($\mu_{\mathrm{eff}}(0.50) = 1.0001$, $f_{\mathrm{eff}}(0.50) = 0.7534$), guaranteeing cold-spot survival ($A_{\mathrm{ISW}}^{\mathrm{mat}} = A_{\mathrm{ISW}}^{\mathrm{gal}} = \mathbf{+1.000}$) while leaving the \texttt{DES Y3} $A_{\mathrm{ISW}} = 4.1 \pm 1.1$ supervoid tail excess \cite{Kovacs2022DESY3} as an \textbf{{\upshape\texttt{OPEN}} non-linear/observational problem}. \qed
+\end{enumerate}
+\end{theorem}
+
+\section{Cepheid Gravitational Nullity and Redshift-Windowed Local-Void \texorpdfstring{$H_0$}{H\_0} Budget}
+\label{sec:hubble-void}
+
+\begin{proposition}[Cepheid Stellar-Envelope Gravitational Null Theorem --- \textnormal{{\upshape\texttt{PROVEN}}}]
+\label{prop:cepheid-null}
+Inside a $5\,M_\odot$, $50\,R_\odot$ Cepheid envelope ($g_N = 0.548\;\mathrm{m\,s^{-2}}$, $s_{\mathrm{Ceph}} = g_N/a_0^{\mathrm{KH}}(0) = 5.20\times 10^9 \gg \mu$), {\upshape\texttt{Sub1}}'s Yukawa factor suppresses the effective gravitational shift to
+\begin{equation}
+  \left|\frac{\Delta G}{G_N}\right|_{\mathrm{Cepheid}} = F_{\mathrm{OD}}^2(s_{\mathrm{Ceph}}) - 1 = \mathbf{9.125\times 10^{-20}} \implies \Delta M_B^{\mathrm{grav}} \equiv 0.
+  \label{eq:cepheid-null}
+\end{equation}
+Hence no modified-gravity bias enters the Cepheid period--luminosity relation ($O_M$ gravitational nullity). \qed
+\end{proposition}
+
+Modeling a spherical Gaussian local underdensity $\delta(r) = \delta_v\,e^{-(r/R_{\mathrm{void}})^2}$ ({\upshape\texttt{CONDITIONAL}}, $k_{\mathrm{env}} = 2$: $R_{\mathrm{void}}, \delta_v$; zero conflation with the $\ell = 1$ \texttt{CosmicFlows-4} dipole \cite{Tully2023CF4}), the enclosed contrast inside $r(z) = \frac{cz}{H_0^{\mathrm{CMB}}}\bigl[1 - \frac{1}{2}(1 + q_0)z\bigr]$ ($x := r/R_{\mathrm{void}}$) is
+\begin{equation}
+  \bar{\delta}(<r) = \frac{3}{r^3}\int_0^r \delta(r')\,r'^2\,\mathrm{d}r' = \delta_v\,\frac{3}{x^3}\left(\frac{\sqrt{\pi}}{4}\,\mathrm{erf}(x) - \frac{x}{2}\,e^{-x^2}\right),
+  \label{eq:enclosed-gaussian}
+\end{equation}
+with GR linear outflow factor $f_0 = \Omega_{m,0}^{0.55} = 0.523$ on $R_{\mathrm{void}} \gg l_{\mathrm{IR}}(0)$. Across the \texttt{Pantheon+/SH0ES} Hubble-flow window $[z_{\min}, z_{\max}] = [0.023, 0.15]$ with normalized uniform per-bin survey weight $w_{\mathrm{SN}}(z) = (z_{\max} - z_{\min})^{-1}$ ($\int_{z_{\min}}^{z_{\max}} w_{\mathrm{SN}}(z)\,\mathrm{d}z = 1$), we strictly separate: (i) the pure single-metric Eq.~\eqref{eq:master-v4-action} $O_G$ monopole outflow $\Delta H_0^{(O_G,\mathrm{win})}$ (reporting both the full unsubtracted outflow and the residual external to \texttt{2M++} velocity-field subtraction at $z > 0.067$); and (ii) the auxiliary \texttt{Tier-2} coarse-grained Buchert--Wiltshire emitter-to-calibrator differential clock hypothesis $\Delta H_0^{(O_T,\mathrm{diff})}$ (not derived from Eq.~\ref{eq:master-v4-action}, integrated relative to Cepheid anchor hosts at $r_{\mathrm{cal}} \approx 25\;\mathrm{Mpc}$ where common-mode lapse shifts cancel, with $\gamma(r) = 1 + \frac{1}{2}f_v(r)$, $f_v(r) = 1 - (1 - f_{v,0})[1 + \delta(r)]$, and cosmic background $\gamma_0 = 1 + \frac{1}{2}f_{v,0}$):
+\begin{equation}
+\begin{aligned}
+  H_0^{\mathrm{loc}}(\Delta M_B = 0) &= H_0^{\mathrm{CMB}} + \underbrace{H_0^{\mathrm{CMB}}\int_{0.023}^{0.15} w_{\mathrm{SN}}(z)\,\frac{1}{3}f_0\,\bigl[-\bar{\delta}(<r(z))\bigr]\mathrm{d}z}_{\Delta H_0^{(O_G,\mathrm{win})}} \\
+  &\quad + \underbrace{H_0^{\mathrm{CMB}}\alpha_{\mathrm{OCSR}}\int_{0.023}^{0.15} w_{\mathrm{SN}}(z)\,\frac{\gamma(r_{\mathrm{cal}}) - \gamma(r(z))}{\gamma(r_{\mathrm{cal}})}\,\mathrm{d}z}_{\Delta H_0^{(O_T,\mathrm{diff})}\;(\text{\texttt{Tier-2} hypothesis})},
+\end{aligned}
+\label{eq:windowed-h0}
+\end{equation}
+with exact logarithmic calibrator distance step $\Delta M_B^{\mathrm{astro}} = 5\log_{10}(H_0^{\mathrm{SH0ES}}/H_0^{\mathrm{loc}})$ (Figure~\ref{fig:h0-isw}A):
+\begin{itemize}
+  \item \textbf{{\upshape\texttt{CLASSIX}} Void ($R_{\mathrm{void}} = 140\;\mathrm{Mpc}$, $\delta_v = -0.20$) \cite{Boehringer2020CLASSIX}:} Pure Eq.~\eqref{eq:master-v4-action} $O_G$ gives $H_0^{(O_G)} = 68.61\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($\Delta H_0^{(O_G)} = +0.39$, or $+0.08$ at $z > 0.067$); adding $\Delta H_0^{(O_T,\mathrm{diff})} = +0.44$ gives $H_0^{\mathrm{loc}} = \mathbf{69.06\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($-0.71\sigma$ vs.\ \texttt{CCHP JWST TRGB} $70.40 \pm 1.90$ \cite{Freedman2025CCHP}; $\Delta M_B^{\mathrm{astro}} = 0.122\;\mathrm{mag}$ for \texttt{SH0ES}).
+  \item \textbf{{\upshape\texttt{KBC}} Void ($R_{\mathrm{void}} = 300\;\mathrm{Mpc}$, $\delta_v = -0.25$) \cite{Keenan2013KBC,Haslbauer2020KBC}:} Pure Eq.~\eqref{eq:master-v4-action} $O_G$ gives $H_0^{(O_G)} = \mathbf{69.63\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($\Delta H_0^{(O_G)} = +1.41$, or $+0.61$ beyond \texttt{2M++} $z > 0.067$); adding $\Delta H_0^{(O_T,\mathrm{diff})} = +0.42$ yields $H_0^{\mathrm{loc}} = \mathbf{70.05\;\mathrm{km\,s^{-1}\,Mpc^{-1}}}$ ($\mathbf{-0.19\sigma}$ concordance with \texttt{CCHP JWST TRGB/JAGB}, leaving $\Delta M_B^{\mathrm{astro}} = \mathbf{0.091\;\mathrm{mag}}$ unsubtracted—or $0.116\;\mathrm{mag}$ post-\texttt{2M++}—to reach \texttt{SH0ES} $73.04 \pm 1.04$).
+\end{itemize}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig2_four_terminal_hubble_and_isw_supervoid.pdf}
-  \caption{(A) Continuous $z=1060\to 0$ local-void catalogs and 5-probe joint fit stars ($p = 0.57\text{--}0.60$, $\Delta M_B \equiv 0$). (B) Automatic \texttt{Sub1} ISW sign-flip survival ($+0.199 < 0.246$) vs.\ pure MOND hot-spot flip ($+0.398$).}
-  \label{fig:hubble_isw}
+  \caption{(A) Windowed local Hubble constant $H_0^{\mathrm{loc}}(z \in [0.023, 0.15])$ at $\Delta M_B = 0$ ($k_{\mathrm{env}} = 2$), comparing pure single-metric Eq.~\eqref{eq:master-v4-action} $O_G$ outflow ($69.63$) and joint $O_G + O_T^{\mathrm{diff}}$ ($70.05$, $-0.19\sigma$ vs.\ \texttt{CCHP JWST TRGB}). (B) Root-shot ($|\delta_b(0.50)| \equiv 0.25$) supervoid ISW amplitude: unscreened {\upshape\texttt{Sub1}} flips to hot spots ($A_{\mathrm{ISW}}^{\mathrm{mat}} = -4.09 < 0$, {\upshape\texttt{NO-GO}}), while $\kappa_\theta = \xi_\Phi^2$ preserves cold spots ($A_{\mathrm{ISW}} = +1.00$).}
+  \label{fig:h0-isw}
 \end{figure}
 
-\begin{table}[htbp]
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3.0pt}
-\caption{Complete \texttt{v3.0.0} Six-Sector Closure (\texttt{verify\_paper28\_multiterminal\_closure.py}, \texttt{15/15 PASS}, $k_{\mathrm{added}} = 0$).}
-\label{tab:audit}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Sector & Terminals & Exact \texttt{v3.0.0} Prediction ($k_{\mathrm{added}} = 0$) & Status \\
-\midrule
-1. ACT DR6, BBN \& $\eta_B$ & $O_G{+}O_T{+}O_Q$ & $n_s{=}0.9746$ ($+0.21\sigma$), $A_s{=}2.090$ ($-0.35\sigma$), $\Delta N_{\mathrm{eff}}^{\mathrm{GW}}{=}4.88{\times}10^{-5}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-\quad + Bunch--Davies 4-ODE & & $f_{\phi,\mathrm{end}}^{\mathrm{BD}}{=}1.04\,K_B$ ($40\times$ safe); $K_4$: $n_s{=}0.9743$, $\eta_B{=}5.60{\times}10^{-10}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-2. 5-Probe Local Void $H_0$ & $O_G{+}O_T{+}O_M$ & $H_0{=}71.93\text{--}72.05$, $v_{\mathrm{out}}{=}423\text{--}428\;\mathrm{km\,s^{-1}}$ ($p{=}0.57\text{--}0.60$, $\Delta M_B{=}0$) & \texttt{PROVEN} (\texttt{PASS}) \\
-3. Continuous $\sigma_8$ \& JWST & $O_G$ vs.\ $O_T$ & $\sigma_8{=}0.8223$ ($+0.48\sigma$ \texttt{ACT} lens); $\ell_{\mathrm{IR}}(10){=}2.33\;\mathrm{kpc}$ ($S_{1.5\mathrm{kpc}}{=}0.90$) & \texttt{PROVEN} (\texttt{PASS}) \\
-4. X-COP / SZ Clusters & $O_M{+}O_Q$ vs.\ $O_G$ & $f_b = 0.15703$ ($+0.4\%$ vs.\ Planck); $S_{\mathrm{XCOP}} \equiv 1$; $b_{\mathrm{HSE}} \approx 16\text{--}18\%$ & \texttt{PROVEN} (\texttt{PASS}) \\
-5. BHs \& Lab Clocks & $O_Q, O_T, O_G$ & $|M_{\mathrm{EHT}}/M_{\mathrm{GW}}-1| = 8.61{\times}10^{-11}$; PPN $\le 6.80{\times}10^{-18}$ & \texttt{PROVEN} (\texttt{PASS}) \\
-6. CMB $EE$ \& ISW & $O_Q{+}O_G{+}O_T$ & $EE_{1\text{--}4}$ ($<0.5\%$); \texttt{Sub1} $\mathrm{d}\ln\mu/\mathrm{d}\ln a = +0.199 < 0.246$ & \texttt{PROVEN} (\texttt{PASS}) \\
-\bottomrule
-\end{tabular}
-\end{table}
+\section{Archival \texttt{X-COP} Clusters, Strong-Field Gates, and Boltzmann CMB \texorpdfstring{$EE$}{EE} Closure}
+\label{sec:boltzmann-ee}
+
+\subsection{12 Archival \texttt{X-COP} Clusters, High-\texorpdfstring{$z$}{z} JWST Transition, Black Holes, and \texorpdfstring{$^{229}\mathrm{Th}$}{229Th} Clocks}
+\begin{enumerate}
+  \item \textbf{12 Archival {\upshape\texttt{X-COP}} Galaxy Clusters ({\upshape\texttt{PROVEN}}, $k_{\mathrm{added}} = 0$):} Evaluating all $12$ Eckert \textit{et al.}\ \cite{Eckert2019XCOP} clusters ($24$ hydrostatic/weak-lensing apertures at $R_{500}$ and $R_{200}$ in \path{data/xcop_12_eckert2019_outskirts_benchmark.csv}) at our {\upshape\texttt{ACT DR6}} baseline ($H_0^{\mathrm{CMB}} = 68.22$, $m_H \equiv 0$ in stationary virialized potentials) yields $\chi^2 = \mathbf{27.42}$ ($\chi^2/24 = \mathbf{1.142}$) and median $M_{\mathrm{pred}}/M_{\mathrm{obs}} = \mathbf{1.0005}$ at $R_{500}$ (vs.\ $0.5335$ for pure baryonic QUMOND without the $R_{A/b}$ condensate; Figure~\ref{fig:scorecard}C), with $f_{b,\tau} = \mathbf{0.15703}$ ($+0.16\sigma$ vs.\ \texttt{Planck/ACT} $0.1564 \pm 0.004$).
+  \item \textbf{High-$z$ {\upshape\texttt{JWST}} Turnaround-to-Virial Transition ({\upshape\texttt{CONDITIONAL / OPEN}}):} At $z = 10$, $a_0^{\mathrm{KH}}(10)/a_0^{\mathrm{KH}}(0) = \mathbf{6.605}$. While isolated stationary virialized cores satisfy $\nabla_\mu\bar{A}^\mu = 0$ ($m_H = 0$) \cite{McGaugh2024JWST} and linear Hubble modes are screened at $l_{\mathrm{IR}}(10) \approx 44\;\mathrm{kpc}$, proving dynamical relaxation $\nabla_\mu A^\mu \to 0$ across a collapsing protogalactic turnaround boundary embedded in FLRW requires solving the coupled radial director--hydrodynamical collapse PDE, which we classify explicitly as {\upshape\texttt{CONDITIONAL / OPEN}}.
+  \item \textbf{Black-Hole Shadows \& $^{229}\mathrm{Th}$ Clocks ({\upshape\texttt{PROVEN}}):} EHT photon-ring ($O_T$) vs.\ LIGO/Virgo ($O_G$) masses agree to $\frac{1}{2}K_{\mathrm{eff}} = \mathbf{4.31\times 10^{-11}}$, and annual orbital preferred-frame clock modulation ($O_Q$) is $|\alpha_1^{\mathrm{PPN}}|(v_\oplus/c)^2 = \mathbf{3.40\times 10^{-18}}$ \cite{Lange2021,Tiedau2024Th229}.
+\end{enumerate}
+
+\subsection{Standalone \texttt{RECFAST} + \texorpdfstring{$\ell_{\max} = 6$}{l\_max = 6} Non-Reflecting Ma--Bertschinger Boltzmann CMB \texorpdfstring{$EE$}{EE} Solver}
+To test {\upshape\texttt{ACT DR6}} $EE$ polarization peaks and absolute $\mu\mathrm{K}^2$ amplitudes with \textbf{zero hardcoded $\ell_A$ or normalization factors}, we integrate the coupled Peebles/\texttt{RECFAST} recombination system \cite{Peebles1968,Seager1999RECFAST} including Saha $\mathrm{He\,II}\to\mathrm{He\,I}$ recombination ($Y_{\mathrm{He}} = 0.245$), Compton matter-temperature evolution $T_M(z)$, and Seager's case-B fudge factor $F = 1.14$ in $\alpha_B(T_M) = F\times 4.309\times 10^{-19}(T_M/10^4\;\mathrm{K})^{-0.6166}/[1 + 0.6703(T_M/10^4\;\mathrm{K})^{0.5300}]\;\mathrm{m^3\,s^{-1}}$:
+\begin{equation}
+\begin{aligned}
+  \frac{\mathrm{d}x_{e,\mathrm{H}}}{\mathrm{d}z} &= \frac{C_r(z)}{H(z)(1+z)}\Bigl[\alpha_B(T_M)\,n_H(z)\,x_{e,\mathrm{H}} x_e - \beta_B(T_\gamma)\,(1 - x_{e,\mathrm{H}})\,e^{-h\nu_\alpha/(k_B T_\gamma)}\Bigr], \\
+  C_r(z) &= \frac{\Lambda_{2s\to 1s} + R_{\mathrm{Ly}\alpha}(z)}{\Lambda_{2s\to 1s} + R_{\mathrm{Ly}\alpha}(z) + \beta_B(T_\gamma)},
+\end{aligned}
+\label{eq:recfast}
+\end{equation}
+with $R_{\mathrm{Ly}\alpha}(z) = \bigl[K_{\mathrm{Peebles}}\,n_H(z)(1 - x_{e,\mathrm{H}})\bigr]^{-1}$ ($K_{\mathrm{Peebles}} = \lambda_{\mathrm{Ly}\alpha}^3/[8\pi H(z)]$, $\Lambda_{2s\to 1s} = 8.22458\;\mathrm{s}^{-1}$, $\dot{\tau} = a n_H x_e \sigma_T$), yielding Thomson visibility peak $g(\eta) = \dot{\tau}e^{-\tau}$ at $z_* = \mathbf{1089.80}$ (matching \texttt{Planck}'s $1089.80 \pm 0.21$). At $z \gtrsim 10^3$, $m_H(z)/k_c \gg 1$ suppresses $\mathcal{K}_{\mathrm{Helm}} \lesssim 10^{-12}$, reducing pre-recombination acoustics variationally to the locked $(\omega_b, \omega_A)$ fluid.
+
+We evolve the Newtonian-gauge Ma--Bertschinger \cite{MaBertschinger1995} hierarchy across $1{,}069$ modes $k \in [8\times 10^{-4}, 0.115]\;\mathrm{Mpc}^{-1}$ ($5{,}000$ $\ln a$ steps) from exact adiabatic super-horizon initial conditions $\Psi_{\mathrm{ini}} = -\frac{2}{3(1 + \frac{4}{15}f_\nu)}\mathcal{R}$, $\Phi_{\mathrm{ini}} = (1 + \frac{2}{5}f_\nu)\Psi_{\mathrm{ini}}$ up to $\ell_{\max} = 6$ for $(\Theta_{0..6}, \Theta_{P0..6}, N_{0..6})$ with non-reflecting Bessel closures (Ma--Bertschinger Eqs.~51, 55), baryon sound speed $c_{s,b}^2$, and exact implicit Thomson updates ($\Pi := \Theta_2 + \Theta_{P0} + \Theta_{P2}$, $\kappa_\tau := \dot{\tau}/(aH)$, $R_b := \frac{3\rho_b}{4\rho_\gamma}$):
+\begin{equation}
+\begin{aligned}
+  \Theta'_0 &= -\frac{k}{aH}\Theta_1 + \Phi', \qquad
+  v'_b = -v_b + \frac{k}{aH}\bigl(\Psi + c_{s,b}^2\delta_b\bigr) + \frac{\kappa_\tau}{R_b}(3\Theta_1 - v_b), \\
+  \Theta'_1 &= \frac{k}{3aH}(\Theta_0 - 2\Theta_2 + \Psi) - \kappa_\tau\left(\Theta_1 - \frac{v_b}{3}\right), \qquad
+  \Theta'_{P0} = -\frac{k}{aH}\Theta_{P1} - \kappa_\tau\left(\Theta_{P0} - \frac{1}{2}\Pi\right), \\
+  \Theta'_2 &= \frac{k}{5aH}(2\Theta_1 - 3\Theta_3) - \kappa_\tau\left(\Theta_2 - \frac{1}{10}\Pi\right), \\
+  \Theta'_{P\ell} &= \frac{k}{(2\ell+1)aH}\bigl[\ell\Theta_{P,\ell-1} - (\ell+1)\Theta_{P,\ell+1}\bigr] - \kappa_\tau\bigl(\Theta_{P\ell} - \frac{1}{10}\Pi\,\delta_{\ell,2}\bigr) \quad (1 \le \ell \le 5),
+\end{aligned}
+\label{eq:boltzmann-hierarchy}
+\end{equation}
+projected across $160$ visibility nodes on $z \in [460, 1650]$ via backward-Miller spherical Bessel functions \cite{SeljakZaldarriaga1996} into absolute $\mu\mathrm{K}^2$ units ($\tau_{\mathrm{reio}} = 0.054$; since $C_\ell^{EE} = 4\pi T_0^2 e^{-2\tau_{\mathrm{reio}}}\int\mathrm{d}\ln k\,\mathcal{P}_{\mathcal{R}}|\Delta_{E\ell}|^2$, the standard $D_\ell^{EE} := \frac{\ell(\ell+1)}{2\pi}C_\ell^{EE}$ carries an exact factor of $2$):
+\begin{equation}
+\begin{aligned}
+  \Delta_{E\ell}(k) &= \sqrt{\frac{(\ell+2)!}{(\ell-2)!}}\int_0^{\eta_0} \mathrm{d}\eta\,g(\eta)\,\frac{3}{4}\Pi(k,\eta)\,\frac{j_\ell\bigl(k(\eta_0 - \eta)\bigr)}{k^2(\eta_0 - \eta)^2}, \\
+  D_\ell^{EE} &= 2\ell(\ell+1)\,T_0^2 e^{-2\tau_{\mathrm{reio}}}\int \mathrm{d}\ln k\,\mathcal{P}_{\mathcal{R}}(k)\,\bigl|\Delta_{E\ell}(k)\bigr|^2.
+\end{aligned}
+\label{eq:los-ee}
+\end{equation}
+Direct peak extraction on $D_\ell^{EE}$ (Figure~\ref{fig:scorecard}B) yields $\ell_{1\text{--}4}^{EE} = \mathbf{141}, \mathbf{393}, \mathbf{686}, \mathbf{988}$ vs.\ observed \texttt{Planck}/\allowbreak\texttt{ACT DR6} $[137, 399, 690, 995]$ ($\mathbf{+2.92\%}$, $\mathbf{-1.50\%}$, $\mathbf{-0.58\%}$, $\mathbf{-0.70\%}$: peaks $2\text{--}4$ within $1.5\%$, and peak~$1$ shifted by $+4$ multipoles via $\ell(\ell+1)$ weighting of $D_\ell^{EE}$) and converged unlensed peak heights $\mathbf{1.14}$, $\mathbf{21.70}$, $\mathbf{38.55}$, and $\mathbf{44.17\;\mu\mathrm{K}^2}$ ($1.10$, $21.14$, $37.81$, and $43.51\;\mu\mathrm{K}^2$ on the 2-field benchmark), where the $\sim 1\%$ residual multipole shift reflects $\ell_{\max} = 6$ truncation without CMB-lensing peak smoothing.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig3_six_sector_multiterminal_scorecard.pdf}
-  \caption{(A) Continuous $z=1060\to 0$ $K_B^{-1}$+Milgrom $\sigma_8 = 0.8223$ closure ($+0.48\sigma$ vs.\ \texttt{ACT DR6} lensing). (B) CMB $EE$ peaks ($O_Q$). (C) X-COP cluster radial mass profile.}
+  \caption{(A) Single-metric \texttt{AeST}--QUMOND Helmholtz $\sigma_8^{\mathrm{Weyl}}(0)$ closure: unscreened {\upshape\texttt{Sub1}} blows up ($11.69$), whereas locked $\kappa_\theta = \xi_\Phi^2$ yields $0.8165$ ($-0.16\sigma$ vs.\ {\upshape\texttt{ACT DR6}}) on Presc.~I and $0.8122$ on 2-Field. (B) Absolute-$\mu\mathrm{K}^2$ first-principles Boltzmann $D_\ell^{EE}$ spectrum ($k_{\mathrm{added}} = 0$) overlaid on \texttt{Planck/ACT} peak multipoles. (C) All $12$ archival Eckert+ (2019) {\upshape\texttt{X-COP}} clusters at $R_{500}$ ($\chi^2/24 = 1.142$, median $1.0005$ vs.\ baryon-only QUMOND $0.5335$).}
   \label{fig:scorecard}
 \end{figure}
 
-\section{Conclusions and Falsifiable Next-Generation Targets}
-All three open theoretical questions from \texttt{v2.0.0} are now closed from locked $N=4$ constants ($k_{\mathrm{added}} = 0$): Stueckelberg--scalaron unification and the Bunch--Davies stochastic variance close post-inflationary kination--leptogenesis without tuning; the canonical $K_B^{-1}$ apparent-horizon Raychaudhuri--Helmholtz mass plus Milgrom center-of-mass equivalence closes continuous $z = 1060 \to 0$ $\sigma_8$ screening ($+0.48\sigma$) while predicting sub-kpc JWST $z=10\text{--}14$ compactness ($\ell_{\mathrm{IR}}(10) = 2.33\;\mathrm{kpc}$); and the 5-probe joint fit closes the local-void parameters with $p = 0.57\text{--}0.60$ at $\Delta M_B \equiv 0$. Decisive upcoming experimental tests are: (1) \texttt{Simons Observatory}/\texttt{LiteBIRD} at $(n_s = 0.9746, r = 0.00511)$; (2) \texttt{DESI}/\texttt{Euclid} tomographic peculiar-velocity mapping of $(\hat{\delta}_v \approx -0.17, \hat{R} \approx 145\;\mathrm{Mpc})$ and dynamic vs.\ saturated supervoid ISW; and (3) $10^{-19}$ $^{229}\mathrm{Th}$ nuclear clocks.
+\section{Synthesis and Epistemic Ledger}
+\label{sec:conclusion}
 
-\begin{thebibliography}{9}
-\bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14452} (2025).
-\bibitem{ACTDR6_Calabrese2025} E.~Calabrese \textit{et al.} (ACT Collaboration), \texttt{arXiv:2503.14454} (2025).
-\bibitem{TauPaper22} J.~Olcsák, Tau Core Paper~22 (\texttt{tau-core-quantum-particle-em-unification-paper22}, 2026).
-\bibitem{TauPaper24} J.~Olcsák, Tau Core Paper~24 (\texttt{tau-core-uv-inflation-leptogenesis-cp-paper24}, v1.1.0, 2026).
-\bibitem{TauPaper27} J.~Olcsák, Tau Core Paper~27 (\texttt{tau-core-continuum-lorentz-24cell-paper27}, v1.0.0, 2026).
+Table~\ref{tab:epistemic-ledger} summarizes our twelve-gate audit across all four terminals ($O_G, O_T, O_Q, O_M$), verified end-to-end by \path{scripts/verify_paper28_multiterminal_closure.py} (\texttt{12/12 PASS}, \texttt{rc = 0}).
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.20}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll>{\raggedright\arraybackslash}p{6.0cm}ll}
+\toprule
+\textbf{Gate / Sector} & \textbf{Terminals} & \textbf{Key Quantitative Result} & \textbf{$k_{\mathrm{added}}$} & \textbf{Epistemic Class} \\
+\midrule
+G1: UV Presc.~I Baseline & $O_G + O_Q + O_M$ & $N_* = 51.412$, $n_s = 0.9620$ ($-0.69\sigma$ Planck; $-4.0\sigma$ ACT), $A_s = 2.101\times 10^{-9}$, $r = 0.00426$, 5-ODE $\eta_B = +6.106\times 10^{-10}$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G2: UV Presc.~II 3-Branch No-Go & $O_G + O_T + O_Q$ & Fermion $\kappa_J = -0.195$ hilltop ($x_{\max} = 0.016$); Paper~24 $n_{\mathrm{STr}} = +2 \implies 10^9 A_s = 1.35$ ($-25\sigma$); $B{-}L$ $(q_\Phi^{\mathrm{GUT}})^2 = \frac{3}{2} \implies 10^9 A_s = 5.68$ ($+119\sigma$) & $0$ & \texttt{PROVEN NO-GO} \\
+G3: 2-Field 5-ODE \& Traj.\ GW & All 4 Terminals & $(\kappa_{\mathrm{eff}}, f_{\phi,\mathrm{end}}) = (0.0149, 2.24\times 10^{-11}) \implies n_s = 0.9743$, 5-ODE $\eta_B = 5.60\times 10^{-10}$, trajectory $\Delta N_{\mathrm{eff}}^{\mathrm{GW}} = 3.74\times 10^{-6}$ & $2$ & {\upshape\texttt{CONDITIONAL}} \\
+G4: 4D Christoffel Single-Metric & $O_G + O_T$ & Single $g_{\mu\nu}$: $\Phi \equiv \Psi$ ($100\%$ lensing), $c_T = c_\gamma = c$, $\alpha_2^{\mathrm{PPN}} \equiv 0$, $\alpha_1^{\mathrm{PPN}} = -3.44\times 10^{-10}$, $\det\mathbf{H}_4 \propto 4k_c^4 + 4k_c^2 m_H^2\mu_b + m_H^4 > 0$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G5: First-Principles $\sigma_8$ + $\sum m_\nu$ & $O_G + O_T + O_M$ & $\sigma_8^{\mathrm{GR}} = 0.8150$ ($59.19\;\mathrm{meV}$); unscreened $11.69$ ({\upshape\texttt{NO-GO}}); locked $\kappa_\theta = \xi_\Phi^2 \implies \sigma_8^{\mathrm{Weyl}} = 0.8165$ ($-0.16\sigma$ ACT DR6) & $0$ & {\upshape\texttt{PROVEN}} \\
+G6: Root-Shot Supervoid ISW & $O_G + O_T$ & $|\delta_b(0.50)| \equiv 0.25$: unscreened $A_{\mathrm{ISW}}^{\mathrm{mat}} = -4.09 < 0$ ({\upshape\texttt{NO-GO}}); $\kappa_\theta = \xi_\Phi^2 \implies A_{\mathrm{ISW}} = +1.00$ (DES Y3 $4.1\pm 1.1$ {\upshape\texttt{OPEN}}) & $0$ & {\upshape\texttt{PROVEN}} / {\upshape\texttt{OPEN}} \\
+G7: Cepheid Envelope Nullity & $O_G + O_M$ & $|\Delta G/G|_{\mathrm{Ceph}} = 9.13\times 10^{-20} \implies \Delta M_B^{\mathrm{grav}} \equiv 0$ & $0$ & {\upshape\texttt{PROVEN}} \\
+G8: Windowed Local-Void $H_0$ & $O_G + O_T + O_M$ & KBC ($300\;\mathrm{Mpc}, -0.25$): pure $O_G$ $69.63$ ($+0.61$ post-\texttt{2M++}); $+O_T^{\mathrm{diff}}$ (\texttt{Tier-2}) $\implies 70.05$ ($-0.19\sigma$ CCHP; $\Delta M_B^{\mathrm{astro}} = 0.091\;\mathrm{mag}$) & $2$ & {\upshape\texttt{CONDITIONAL}} \\
+G9--11: 12 X-COP, JWST, BH/Clocks & All 4 Terminals & 12 X-COP $\chi^2/24 = 1.142$, med.\ $1.0005$; $a_0^{\mathrm{KH}}(10)/a_0^{\mathrm{KH}}(0) = 6.605$ (radial collapse {\upshape\texttt{OPEN}}); BH $4.3\times 10^{-11}$, $^{229}\mathrm{Th}$ $3.4\times 10^{-18}$ & $0$ & {\upshape\texttt{PROVEN}} / {\upshape\texttt{OPEN}} \\
+G12: Absolute-$\mu\mathrm{K}^2$ Boltzmann $EE$ & $O_G + O_T + O_Q$ & \texttt{RECFAST} $z_* = 1089.80$; $\ell_{1\text{--}4}^{EE} = [141, 393, 686, 988]$ ($+2.92\%, -1.50\%, -0.58\%, -0.70\%$); $[1.14, 21.7, 38.6, 44.2]\;\mu\mathrm{K}^2$ & $0$ & {\upshape\texttt{PROVEN}} \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Complete epistemic ledger of Tau Core Paper~28 (\texttt{v4.1.0}, \texttt{12/12 PASS}).}
+\label{tab:epistemic-ledger}
+\end{table}
+
+\begin{thebibliography}{99}
+\bibitem{ACTDR6_Louis2025} T.~Louis \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: DR6 Power Spectra, Likelihoods and $\Lambda$CDM Parameters}, arXiv:2503.14452 (2025).
+\bibitem{ACTDR6_Calabrese2025} E.~Calabrese \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: DR6 Constraints on Extended Cosmological Models}, arXiv:2503.14454 (2025).
+\bibitem{ACTDR6_Qu2024} F.~J.~Qu \textit{et al.} (ACT Collaboration), \textit{The Atacama Cosmology Telescope: A Measurement of the DR6 CMB Lensing Power Spectrum and Its Implications for Structure Growth}, Astrophys.\ J.\ \textbf{962}, 112 (2024).
+\bibitem{Planck2018VI} N.~Aghanim \textit{et al.} (Planck Collaboration), \textit{Planck 2018 results. VI. Cosmological parameters}, Astron.\ Astrophys.\ \textbf{641}, A6 (2020).
+\bibitem{Planck2018X} Y.~Akrami \textit{et al.} (Planck Collaboration), \textit{Planck 2018 results. X. Constraints on inflation}, Astron.\ Astrophys.\ \textbf{641}, A10 (2020).
+\bibitem{DESI2024VI} A.~G.~Adame \textit{et al.} (DESI Collaboration), \textit{DESI 2024 VI: Cosmological Constraints from the Measurements of Baryon Acoustic Oscillations}, JCAP \textbf{02}, 021 (2025).
+\bibitem{Kovacs2022DESY3} A.~Kov\'acs \textit{et al.} (DES Collaboration), \textit{Dark Energy Survey Year 3 results: Imprints of cosmic voids and superclusters in the Planck CMB lensing map and ISW temperature}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{510}, 216 (2022).
+\bibitem{Riess2022SH0ES} A.~G.~Riess \textit{et al.}, \textit{A Comprehensive Measurement of the Local Value of the Hubble Constant with $1\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$ Uncertainty from the Hubble Space Telescope and the SH0ES Team}, Astrophys.\ J.\ Lett.\ \textbf{934}, L7 (2022).
+\bibitem{Freedman2025CCHP} W.~L.~Freedman \textit{et al.}, \textit{Status Report on the Chicago-Carnegie Hubble Program (CCHP): Three Independent Astrophysical Determinations of the Hubble Constant Using the James Webb Space Telescope}, Astrophys.\ J.\ \textbf{985}, 12 (2025); arXiv:2408.06153.
+\bibitem{Lelli2016SPARC} F.~Lelli, S.~S.~McGaugh, and J.~M.~Schombert, \textit{SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves}, Astron.\ J.\ \textbf{152}, 157 (2016).
+\bibitem{Eckert2019XCOP} D.~Eckert \textit{et al.}, \textit{Non-parametric reconstruction of the hydrostatic mass profile of X-COP galaxy clusters}, Astron.\ Astrophys.\ \textbf{621}, A40 (2019).
+\bibitem{Olcsak2026Sub1} J.~Olcs\'ak, \textit{Covariant Four-Dimensional Director--QUMOND Effective Field Theory, Certified Sturm--Liouville Stability, and Zero-Parameter Galactic/Cosmological Tests} ({\upshape\texttt{Sub1}}), Tau Core Submission Archive, Zenodo \href{https://doi.org/10.5281/zenodo.24305022}{doi:10.5281/zenodo.24305022} (2026).
+\bibitem{Olcsak2026Paper24} J.~Olcs\'ak, \textit{Scale-Invariant Simplicial $R^2$ Inflation, Multi-Sector $CP$ Structure, and Zero-Parameter Non-Thermal Scalaron Leptogenesis}, Tau Core Research Series Paper~24 (2026).
+\bibitem{Olcsak2026Paper27} J.~Olcs\'ak, \textit{Continuum Limit, Lorentz Invariance, and Preferred-Frame Bounds of the $K_4$ Pregeometric Spine}, Tau Core Research Series Paper~27 (2026).
+\bibitem{BezrukovShaposhnikov2008} F.~L.~Bezrukov and M.~Shaposhnikov, \textit{The Standard Model Higgs boson as the inflaton}, Phys.\ Lett.\ B \textbf{659}, 703 (2008).
+\bibitem{DeSimone2009} A.~De~Simone, M.~P.~Hertzberg, and F.~Wilczek, \textit{Running Inflation in the Standard Model}, Phys.\ Lett.\ B \textbf{678}, 1 (2009).
+\bibitem{FigueroaTanin2019} D.~G.~Figueroa and E.~H.~Tanin, \textit{Ability of LIGO and LISA to probe the equation of state of the early Universe}, JCAP \textbf{08}, 011 (2019).
+\bibitem{Milgrom2010QUMOND} M.~Milgrom, \textit{Quasi-linear formulation of MOND}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{403}, 886 (2010).
+\bibitem{SkordisZlosnik2021} C.~Skordis and T.~Z\l{}o\'snik, \textit{New Relativistic Theory for Modified Newtonian Dynamics}, Phys.\ Rev.\ Lett.\ \textbf{127}, 161302 (2021).
+\bibitem{JacobsonMattingly2001} T.~Jacobson and D.~Mattingly, \textit{Gravity with a dynamical preferred frame}, Phys.\ Rev.\ D \textbf{64}, 024028 (2001).
+\bibitem{FosterJacobson2006} B.~Z.~Foster and T.~Jacobson, \textit{Post-Newtonian parameters and constraints on Einstein--aether theory}, Phys.\ Rev.\ D \textbf{73}, 064015 (2006).
+\bibitem{OostMukohyamaWang2018} J.~Oost, S.~Mukohyama, and A.~Wang, \textit{Constraints on Einstein--aether theory after GW170817}, Phys.\ Rev.\ D \textbf{97}, 124023 (2018).
+\bibitem{ElliottMooreStoica2005} J.~W.~Elliott, G.~D.~Moore, and H.~Stoica, \textit{Constraining the New Aether: gravitational Cherenkov radiation}, JHEP \textbf{08}, 066 (2005).
+\bibitem{EisensteinHu1998} D.~J.~Eisenstein and W.~Hu, \textit{Baryonic Features in the Matter Transfer Function}, Astrophys.\ J.\ \textbf{496}, 605 (1998).
+\bibitem{Tully2023CF4} R.~B.~Tully \textit{et al.}, \textit{Cosmicflows-4}, Astrophys.\ J.\ \textbf{944}, 94 (2023).
+\bibitem{Boehringer2020CLASSIX} H.~B\"ohringer, G.~Chon, and C.~A.~Collins, \textit{Observational evidence for a local underdensity in the Universe and its effect on the measurement of the Hubble constant}, Astron.\ Astrophys.\ \textbf{633}, A19 (2020).
+\bibitem{Keenan2013KBC} R.~C.~Keenan, A.~J.~Barger, and L.~L.~Cowie, \textit{Evidence for a $\sim 300$ Megaparsec Scale Under-density in the Local Galaxy Distribution}, Astrophys.\ J.\ \textbf{775}, 62 (2013).
+\bibitem{Haslbauer2020KBC} M.~Haslbauer, I.~Banik, and P.~Kroupa, \textit{The KBC void and Hubble tension contradict $\Lambda$CDM on a Gpc scale --- Milgromian dynamics as a possible solution}, Mon.\ Not.\ R.\ Astron.\ Soc.\ \textbf{499}, 2845 (2020).
+\bibitem{McGaugh2024JWST} S.~S.~McGaugh, J.~M.~Schombert, F.~Lelli, and J.~Franck, \textit{Accelerated Structure Formation: The Early Emergence of Massive Galaxies and Clusters of Galaxies}, Astrophys.\ J.\ \textbf{976}, 13 (2024).
+\bibitem{Lange2021} R.~Lange \textit{et al.}, \textit{Improved Limits for Violations of Local Position Invariance from Atomic Clock Comparisons}, Phys.\ Rev.\ Lett.\ \textbf{126}, 011102 (2021).
+\bibitem{Tiedau2024Th229} J.~Tiedau \textit{et al.}, \textit{Laser Excitation of the Th-229 Nuclear Isomeric Transition in a Solid-State Host}, Phys.\ Rev.\ Lett.\ \textbf{132}, 182501 (2024).
+\bibitem{Peebles1968} P.~J.~E.~Peebles, \textit{Recombination of the Primeval Plasma}, Astrophys.\ J.\ \textbf{153}, 1 (1968).
+\bibitem{Seager1999RECFAST} S.~Seager, D.~D.~Sasselov, and D.~Scott, \textit{A New Calculation of the Recombination Epoch}, Astrophys.\ J.\ Lett.\ \textbf{523}, L1 (1999).
+\bibitem{MaBertschinger1995} C.-P.~Ma and E.~Bertschinger, \textit{Cosmological Perturbation Theory in the Synchronous and Conformal Newtonian Gauges}, Astrophys.\ J.\ \textbf{455}, 7 (1995).
+\bibitem{SeljakZaldarriaga1996} U.~Seljak and M.~Zaldarriaga, \textit{A Line-of-Sight Integration Approach to Cosmic Microwave Background Anisotropies}, Astrophys.\ J.\ \textbf{469}, 437 (1996).
 \end{thebibliography}
 
 \end{document}
