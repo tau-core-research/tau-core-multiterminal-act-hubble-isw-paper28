@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Four-Terminal Cosmological Audit Beyond Gravity Alone: Single-Metric AeST-QUMOND Helmholtz Screening of sigma_8, UV & ISW No-Go Theorems, Pantheon+SH0ES Curvature Audit, LTB Director Expulsion, and Boltzmann CMB EE Closure"
+version: "v4.2.0"
+date-released: "2026-11-22"
+authors:
+  - family-names: "Olcsák"
+    given-names: "József"
+    orcid: "https://orcid.org/0009-0003-7311-6522"
+repository-code: "https://github.com/tau-core-research/tau-core-multiterminal-act-hubble-isw-paper28"
+license: "MIT"
