@@ -1,5 +1,5 @@
 {
-  "paper": "Tau Core Paper 28 (v4.3.0) \u2014 Referee-Proof Four-Terminal Cosmological Audit",
+  "paper": "Tau Core Paper 28 (v4.4.0) \u2014 Referee-Proof Four-Terminal Cosmological Audit",
   "part1_uv_sector": {
     "locked_uv_scales": {
       "eta_seesaw_exact": 0.03070922,
@@ -50,6 +50,17 @@
       "pure_kination_kappa0_nogo": {
         "n_s_at_BBN_GW_ceiling": 0.96847,
         "As_1e9_at_BBN_GW_ceiling": 3.0322
+      },
+      "zero_parameter_kination_origin_nogo": {
+        "H_end_GeV": 7722556018864.009,
+        "rho_end_quarter_GeV": 5707411036363282.0,
+        "bounce_kination_dilution_exp_minus_6Nstar": 1.074266688986009e-134,
+        "ford_parker_grav_modulus_frac_per_Nmod": 1.0612994588922909e-14,
+        "required_kination_over_inflaton_minimax": 630957343.4801942,
+        "ford_parker_shortfall_factor_minimax_times_Nmod": 5.9451395946130295e+22,
+        "ford_parker_shortfall_factor_2s_ceil_times_Nmod": 3.8206872125501207e+23,
+        "weyl_scheme_non_mixability_Tdef_subleading_quartic_ratio": 0.1328,
+        "strictly_requires_k_UV_eff_ge_1": true
       },
       "branch_B_gauged_BL_Spin10_qGUT2_3_over_2": {
         "q_Phi_GUT_sq": 1.5,
@@ -289,7 +300,7 @@
       "flrw_k0_minisuperspace_ghost_and_caustic_free": true,
       "flrw_k0_exact_psibar_solution": 0.0,
       "flrw_k0_exact_phiN_bar_solution": 0.0,
-      "flrw_leaf_mean_ir_rel_corr_max": 3.0512921118106264e-06,
+      "flrw_leaf_mean_ir_rel_corr_max": 2.6107742957266066e-07,
       "explicit_4d_christoffel_and_ricci_verified": true,
       "unit_norm_in_physical_metric_exact": true,
       "gravitational_slip_Phi_minus_Psi": 0.0,
@@ -309,9 +320,59 @@
       "alpha2_PPN_exact": 0.0,
       "alpha1_PPN_exact": 0.0,
       "static_dKB_ds_and_d2KB_dvp2_exact": 0.0,
+      "s_crit_Sub1_exact": 1.447141,
+      "s_crit_McGaugh_RAR_exact": 2.539638,
+      "s_worst_Sub1_exact": 2.960937,
       "min_lambda_parallel_Sub1": 0.941192,
       "min_helmholtz_poly_ratio_all_s": 1.0,
-      "det_H4_symbolic": "K_u**2*k_c**4*(k_c**8*l_nu**4 + 4*k_c**6*l_nu**2*mu_b + 2*k_c**4*l_nu**2*m_H**2 + 4*k_c**4 + 4*k_c**2*m_H**2*mu_b + m_H**4)"
+      "det_H4_symbolic": "K_u**2*k_c**4*(k_c**8*l_nu**4 + 4*k_c**6*l_nu**2*mu_b + 2*k_c**4*l_nu**2*m_H**2 + 4*k_c**4 + 4*k_c**2*m_H**2*mu_b + m_H**4)",
+      "single_scalar_shift_charge_rolle_kl_obstruction": {
+        "Ku_and_eta_u_cancel_identically_at_KQ0": true,
+        "eta_u_eq_1_arbitrary_KQ_ge_0_tachyon_verified": true,
+        "KQ_gt_0_eta_u_ne_1_two_mode_speed_product_verified": true,
+        "min_abs_alpha1_PPN_to_flip_mu_b_bracket": 0.49986,
+        "single_scalar_F_Y_Q_on_s_gt_scrit_status": "PROVEN NO-GO (Universal Solar-System Phantom-Force IVT/Rolle + Full (eta_u, K_Q >= 0) Single-Scalar F(Y, Q) Obstruction)"
+      },
+      "dual_stueckelberg_lorenz_all_sN_closure": {
+        "c_2_u_exact": 1.722179e-10,
+        "c_T_c_V_c_S_over_c": 1.0,
+        "uhecr_cherenkov_loss_exact": 0.0,
+        "alpha2_PPN_exact": 0.0,
+        "alpha1_PPN_exact": -6.888717236094026e-10,
+        "Mb_crit_point_mass_Msun": 327282016321915.4,
+        "rindler_flrw_sturm_liouville_baryon_shells": {
+          "Earth_1_Mearth": {
+            "eps_rel_max": 3.66539939448907e-15,
+            "K_aa_min": 1.7221793091718017e-10,
+            "abs_det_H4_SL_min": 15.999999998622256
+          },
+          "Sun_1_Msun": {
+            "eps_rel_max": 2.115162010353715e-12,
+            "K_aa_min": 1.7221793091717965e-10,
+            "abs_det_H4_SL_min": 15.999999998622256
+          },
+          "SPARC_disk_1e11_Msun": {
+            "eps_rel_max": 6.688729572978392e-07,
+            "K_aa_min": 1.721653102911662e-10,
+            "abs_det_H4_SL_min": 15.999999998624785
+          },
+          "XCOP_core_3e13_Msun": {
+            "eps_rel_max": 1.1585219458487055e-05,
+            "K_aa_min": 1.5643174311262809e-10,
+            "abs_det_H4_SL_min": 15.999999999381167
+          },
+          "XCOP_median_8e13_Msun": {
+            "eps_rel_max": 1.8918584154304085e-05,
+            "K_aa_min": 1.301214301033911e-10,
+            "abs_det_H4_SL_min": 16.00000000064602
+          },
+          "Extreme_cluster_2e14_Msun": {
+            "eps_rel_max": 2.991290801658565e-05,
+            "K_aa_min": 6.69766788728067e-11,
+            "abs_det_H4_SL_min": 16.000000003681663
+          }
+        }
+      }
     },
     "gate5_fourier_sigma8_barEFE": {
       "sigma8_GR_first_principles_PrescI": 0.815,
@@ -344,6 +405,7 @@
     "gate6_self_consistent_supervoid_isw": {
       "unscreened_Sub1_nogo": {
         "delta_b_z05_exact": 0.25,
+        "s_ext_z05": 0.001327,
         "mu_eff_z05": 4.7091,
         "f_eff_z05": 0.9783,
         "one_minus_f_eff": 0.0217,
@@ -354,6 +416,7 @@
       },
       "screened_Sub1_xi_Phi_sq": {
         "delta_b_z05_exact": 0.25,
+        "s_ext_z05": 0.0,
         "mu_eff_z05": 1.0001,
         "f_eff_z05": 0.7534,
         "one_minus_f_eff": 0.2466,
@@ -371,10 +434,47 @@
         "max_A_ISW_compensated_150Mpc": 1.4078,
         "max_A_ISW_uncompensated_150Mpc": 1.4117,
         "nonmonotone_bandpass_k0_00153_benchmark_comp": 2.0968,
+        "sigma8_unconstrained_gz1_choquet_monotone_comp": 1.41421,
+        "sigma8_unconstrained_gz1_choquet_monotone_tophat": 1.41421,
+        "sigma8_unconstrained_gz1_global_gaussian_bandpass_max": 2.2,
+        "sigma8_unconstrained_gz1_gaussian_bandpass_best_k0_Mpc_inv": 0.01323,
+        "sigma8_unconstrained_gz1_gaussian_bandpass_best_sigma_lnk": 0.005,
+        "time_varying_gz_OmegaL_DESY3_choquet_max": 1.5093,
+        "time_varying_gz_DESY3_box_choquet_max": 1.6536,
+        "time_varying_gz_DESY3_localized_spike_stack_choquet_max": 2.0709,
         "DES_Y3_residual_sigma_vs_compensated_ceiling": 2.45,
-        "DES_Y3_residual_sigma_vs_uncompensated_ceiling": 2.44
+        "DES_Y3_residual_sigma_vs_s8free_gz1_choquet_ceiling": 2.44,
+        "DES_Y3_residual_sigma_vs_2d_DESY3_box_ceiling": 2.22,
+        "DES_Y3_residual_sigma_vs_2d_localized_spike_stack_ceiling": 1.84,
+        "DES_Y3_residual_sigma_vs_s8free_bandpass_ceiling": 1.73
       },
-      "DES_Y3_excess_status": "PROVEN MONOTONE-IR LINEAR-MG NO-GO (A_ISW <= 1.4078 compensated / 1.4117 top-hat across redshift-independent monotone IR Weyl-scaling kernels; non-monotone bandpass <= 2.10 or late dln(mu_WL)/dlna < 0 caveats explicit) + OPEN 2D PHOTO-Z EXTREME-TAIL STACKING ANOMALY"
+      "supervoid_nonlinear_director_phase_boundary_and_bvp": {
+        "planck_free_kappa_theta_times_c2_exact": 0.00109940520445245,
+        "order_parameter_prefactor_1024_pi2_over_25": 404.259,
+        "Lambda_exp_z05_db025": 0.22239,
+        "Lambda_crit_z05": 1.1244,
+        "Lambda_crit_z00": 1.1083,
+        "delta_b_crit_z05": 0.5621,
+        "delta_b_crit_z00_exceeds_cavitation": 1.0879,
+        "l_IR_phys_z05_Mpc": 0.6231,
+        "bvp_650_shell_compensated_db025": {
+          "bvp_relative_residual": 9.993792570248508e-13,
+          "max_abs_phi_N": 2.3975658548267692e-09,
+          "max_abs_psi_IR": 3.204729247396116e-11,
+          "min_theta_A_over_3H": 0.99712209,
+          "max_theta_A_over_3H": 1.00001172,
+          "max_abs_1_minus_theta_A_over_3H": 0.0028779143380357475
+        },
+        "bvp_650_shell_uncompensated_db025": {
+          "bvp_relative_residual": 8.929675467669864e-13,
+          "max_abs_phi_N": 2.4182266571640272e-09,
+          "max_abs_psi_IR": 1.928281462788983e-11,
+          "min_theta_A_over_3H": 0.99826075,
+          "max_theta_A_over_3H": 1.00001032,
+          "max_abs_1_minus_theta_A_over_3H": 0.001739249105134122
+        }
+      },
+      "DES_Y3_excess_status": "PROVEN LINEAR-GAUSSIAN & NONLINEAR-DIRECTOR NO-GO (A_ISW <= 1.4078 z-indep / <= 1.4142 = sqrt(2) sigma_8-free g(z)=1 / <= 1.509 Omega_Lambda(z), <= 1.654 DES-Y3 box, <= 2.071 localized z-spike stack across ALL monotone-k kernels, and < 2.200 across Gaussian bumps; 650-shell BVP proves theta_A/(3H) in [0.99712, 1.00001]) + OPEN OBSERVATIONAL 2D PHOTO-Z EXTREME-TAIL STACKING ANOMALY"
     }
   },
   "part3_late_and_boltzmann_ee": {

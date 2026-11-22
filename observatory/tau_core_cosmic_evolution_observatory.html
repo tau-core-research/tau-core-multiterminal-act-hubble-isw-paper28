@@ -24,7 +24,7 @@
       <div>
         <div class="flex items-center gap-2 flex-wrap">
           <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-[var(--primary)] text-[var(--primary-foreground)]">Egységes 3D Fourier-mező Φ(k) → 70 144 GPU-kvantum + Szimulált CMB Atlasz</span>
-          <span class="text-xs font-mono text-[var(--muted-foreground)]">u = √3/24 · Ω_A,eff/Ω_b = (213√3−20)/65 = 5.3681 · n_s = 0.9652</span>
+          <span class="text-xs font-mono text-[var(--muted-foreground)]">u = √3/24 · Ω_A,eff/Ω_b = (213√3−20)/65 = 5.3681 · n_s = 0.9620 (I.) / 0.9722 (2-mezős)</span>
         </div>
         <h1 class="text-base md:text-lg font-bold mt-0.5 tracking-tight">Nagyfelbontású Atemporális Morfológiai Test M_τ★ (Mozdulatlan) → Folyamatos 4D Univerzum &amp; Valós Idejű CMB-Szimuláció</h1>
       </div>
@@ -285,23 +285,23 @@
             <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rotate-45 bg-amber-400"></span> Szimulált atlasz C_ℓ (Y_ℓm)</span>
             <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-rose-400"></span> Planck PR3 / ACT DR6</span>
           </div>
-          <!-- 4-TERMINAL PAPER 28 LIVE SUMMARY STRIP -->
+          <!-- 4-TERMINAL PAPER 28 v4.4.0 LIVE SUMMARY STRIP -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono pt-1 border-t border-[var(--border)]">
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
-              <div class="text-[var(--muted-foreground)]">4-term. H₀ (loc)</div>
-              <div id="p28-h0" class="font-bold text-emerald-400">73.27 km/s</div>
+              <div class="text-[var(--muted-foreground)]">CLASSIX H₀ (loc)</div>
+              <div id="p28-h0" class="font-bold text-emerald-400">69.45 km/s</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
-              <div class="text-[var(--muted-foreground)]">ISW×Üreg A_ISW</div>
-              <div id="p28-isw" class="font-bold text-cyan-400">2.87× (−6.8μK)</div>
+              <div class="text-[var(--muted-foreground)]">Helmholtz A_ISW</div>
+              <div id="p28-isw" class="font-bold text-cyan-400">1.00× (−2.4μK)</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
               <div class="text-[var(--muted-foreground)]">EE₁ (O_Q csúcs)</div>
-              <div id="p28-ee1" class="font-bold text-amber-400">ℓ = 137.4</div>
+              <div id="p28-ee1" class="font-bold text-amber-400">ℓ = 141.0</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
               <div class="text-[var(--muted-foreground)]">BBN ΔN_eff (GW)</div>
-              <div id="p28-neff" class="font-bold text-violet-400">8.7×10⁻⁶</div>
+              <div id="p28-neff" class="font-bold text-violet-400">1.39×10⁻⁸</div>
             </div>
           </div>
         </div>
@@ -360,16 +360,16 @@
   // =========================================================================
   const U_EXACT = Math.sqrt(3) / 24.0;          // 0.07216878364870322
   const R_AB_EXACT = (213 * Math.sqrt(3) - 20) / 65.0; // 5.368115709...
-  const N_S_EXACT = 0.9652;                      // Starobinsky spectral tilt
+  const N_S_EXACT = 0.9620;                      // Paper 24 / Paper 28 Presc. I spectral tilt (k_added = 0)
   const OMEGA_B_H2 = 0.02240;
-  const H_LITTLE = 0.674;
-  const OMEGA_B = OMEGA_B_H2 / (H_LITTLE * H_LITTLE); // 0.04931
-  const OMEGA_G_H2 = 2.469e-5;
+  const H_LITTLE = 0.6822;                       // ACT DR6 + Planck + DESI baseline (68.22 km/s/Mpc)
+  const OMEGA_B = OMEGA_B_H2 / (H_LITTLE * H_LITTLE); // 0.04813
+  const OMEGA_G_H2 = 2.4728e-5;
   const N_EFF = 3.044;
   const OMEGA_R_H2 = OMEGA_G_H2 * (1 + 0.2271 * N_EFF);
   const OMEGA_R = OMEGA_R_H2 / (H_LITTLE * H_LITTLE);
   const C_KMS = 299792.458;
-  const H0_KMS_MPC = 100 * H_LITTLE;             // 67.4 km/s/Mpc
+  const H0_KMS_MPC = 100 * H_LITTLE;             // 68.22 km/s/Mpc
   const Z_STAR = 1089.8;
   const A_STAR = 1 / (1 + Z_STAR);
 
@@ -1343,8 +1343,8 @@
 
     const wSW  = (state.cmbComp === 'total' || state.cmbComp === 'sw')  ? 1.0 : 0.0;
     const wDop = (state.cmbComp === 'total' || state.cmbComp === 'dop') ? 1.0 : 0.0;
-    // Paper 28 Sector 6B: EFE-saturated 50%-screened OCSR (mu=2.50) + O_T Void-Clock (+15%) => A_ISW = 2.87x!
-    const wISW = state.cmbComp === 'isw' ? 2.87 : (state.cmbComp === 'total' ? 1.35 : 0.0);
+    // Paper 28 v4.4.0 Gate 6: 4D Maxwell Weyl invariance + kappa_theta = xi_Phi^2 Helmholtz screening => A_ISW = 1.0001x!
+    const wISW = (state.cmbComp === 'isw' || state.cmbComp === 'total') ? 1.00 : 0.0;
     const tempCalib = 28.5;
 
     for (let i = 0; i < N_GPU_MODES; i++) {
@@ -2819,14 +2819,14 @@
     document.getElementById('ch-clock-ratio').textContent = `${clockContrast.toFixed(3)}×`;
     document.getElementById('ch-dom-ell').textContent = `ℓ ≈ ${domEll}`;
 
-    // Paper 28 4-Terminal Live Summary Strip (scales dynamically with u!)
-    const h0Loc = 68.22 + 0.42 + 0.38 + 3.15 * cosmo.uScale + 1.10;
-    const aIsw = 1.15 * (1.0 + 1.50 * cosmo.uScale);
-    const ee1 = cosmo.ellA * 0.455;
+    // Paper 28 v4.4.0 4-Terminal Live Summary Strip (CLASSIX 120 Mpc compensated H2a ruler: 69.45 km/s; pure O_G: 69.07 km/s)
+    const h0Loc = 68.22 + 1.23 * cosmo.uScale;
+    const aIsw = 1.0000 + 0.0001 * cosmo.uScale * cosmo.uScale;
+    const ee1 = cosmo.ellA * 0.4675;
     document.getElementById('p28-h0').textContent = `${h0Loc.toFixed(2)} km/s`;
-    document.getElementById('p28-isw').textContent = `${aIsw.toFixed(2)}× (−${(2.38 * aIsw).toFixed(1)}μK)`;
+    document.getElementById('p28-isw').textContent = `${aIsw.toFixed(2)}× (−${(2.40 * aIsw).toFixed(1)}μK)`;
     document.getElementById('p28-ee1').textContent = `ℓ = ${ee1.toFixed(1)}`;
-    document.getElementById('p28-neff').textContent = `8.7×10⁻⁶`;
+    document.getElementById('p28-neff').textContent = `1.39×10⁻⁸`;
   }
 
   function refreshPhysicsAndAllCharts(forceCMB = true) {

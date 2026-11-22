@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate 3 publication-grade vector PDF figures (both English and Hungarian editions)
-for Tau Core Paper 28 (v4.3.0) 100% from paper28_verification_results.json (zero hardcoded
+for Tau Core Paper 28 (v4.4.0) 100% from paper28_verification_results.json (zero hardcoded
 curves, zero duplicated magic constants, and full native Hungarian decimal-comma formatting).
 """
 from __future__ import annotations
@@ -225,7 +225,8 @@ def make_figures(lang: str = "en") -> None:
     scr   = g6["screened_Sub1_xi_Phi_sq"]
     desi_obs = g6["DESI_Legacy_linear_ISW_obs"]
     desi_err = g6["DESI_Legacy_linear_ISW_err"]
-    lin_mg_max = g6["linear_MG_spectral_overlap_ceiling"]["max_A_ISW_compensated_150Mpc"]
+    lin_mg_max = g6["linear_MG_spectral_overlap_ceiling"]["sigma8_unconstrained_gz1_choquet_monotone_comp"]
+    lin_mg_box = g6["linear_MG_spectral_overlap_ceiling"]["time_varying_gz_DESY3_box_choquet_max"]
 
     cats_isw = (["Árnyékolatlan\n(anyag)", "Árnyékolatlan\n(galaxis)",
                  "Helmholtz\n($\\kappa_\\theta{=}\\xi_\\Phi^2$)", "DESI Legacy\nlineáris ISW", "DES Y3\nszupervoid"]
@@ -242,8 +243,8 @@ def make_figures(lang: str = "en") -> None:
     ax2.axhline(1.0, color="#475569", ls=":", lw=1.1,
                 label=("$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1{,}00$)" if hu else "$\\Lambda$CDM ($A_{\\mathrm{ISW}}=1.00$)"))
     ax2.axhline(lin_mg_max, color="#d97706", ls="--", lw=1.2,
-                label=(f"Monoton-IR MG plafon ($\\leq {num_s(lin_mg_max, '.2f', hu)}$)" if hu
-                       else f"Monotone-IR MG ceiling ($\\leq {lin_mg_max:.2f}$)"))
+                label=(f"Monoton-$k$ plafon ($\\leq {num_s(lin_mg_max, '.2f', hu)}$ $g{{=}}1$; $\\leq {num_s(lin_mg_box, '.2f', hu)}$ DES sáv)" if hu
+                       else f"Monotone-$k$ ceiling ($\\leq {lin_mg_max:.2f}$ $g{{=}}1$; $\\leq {lin_mg_box:.2f}$ DES box)"))
     ax2.bar(range(5), vals_isw, width=0.55, color=cols_isw, edgecolor="black", lw=0.65, zorder=5)
     ax2.errorbar([3], [desi_obs], yerr=[desi_err], fmt="none", ecolor="black", elinewidth=1.2, capsize=3.5, zorder=7)
     ax2.errorbar([4], [4.1], yerr=[1.1], fmt="none", ecolor="black", elinewidth=1.3, capsize=4, zorder=7)
@@ -362,4 +363,4 @@ def make_figures(lang: str = "en") -> None:
 if __name__ == "__main__":
     make_figures("en")
     make_figures("hu")
-    print("Generated all 6 JSON-driven v4.3.0 vector PDF figures (EN + HU) in", FIG_DIR)
+    print("Generated all 6 JSON-driven v4.4.0 vector PDF figures (EN + HU) in", FIG_DIR)

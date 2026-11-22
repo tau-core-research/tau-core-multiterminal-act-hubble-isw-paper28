@@ -2,7 +2,7 @@
   "title": "Four-Terminal Cosmological Audit Beyond Gravity Alone: Single-Metric AeST-QUMOND Helmholtz Screening of sigma_8, UV & ISW No-Go Theorems, Pantheon+SH0ES Curvature Audit, LTB Director Expulsion, and Boltzmann CMB EE Closure",
   "upload_type": "publication",
   "publication_type": "article",
-  "description": "Public reproducibility and manuscript package for Tau Core Paper 28 (v4.3.0, 12/12 verification gates PASS). Conducts a rigorous variational, symbolic (SymPy 4D Christoffel/Ricci & sub-horizon 3D curl-free director uniqueness), and sparse 1D/2D finite-volume PDE/ODE audit across all six cosmological and strong-field sectors of the four-terminal Tau Core spine (O_G, O_T, O_Q, O_M), strictly separating parameter-free theorems (PROVEN, k_added = 0) and mathematical exclusions (PROVEN NO-GO) from CONDITIONAL and OPEN frontiers. Includes EN & HU manuscripts and PDFs, 6 JSON-driven vector PDF figures, archival Pantheon+SH0ES 1341x1341 STAT+SYS Cholesky covariance and X-COP cluster data, and full verification/figure scripts.",
+  "description": "Public reproducibility and manuscript package for Tau Core Paper 28 (v4.4.0, 12/12 verification gates PASS). Conducts a rigorous variational, symbolic (SymPy 4D Christoffel/Ricci, full (eta_u, K_Q >= 0) single-scalar F(Y, Q) shift-charge obstruction, dual eta_u = 0 4D Rindler-FLRW Sturm-Liouville all-s_N positivity, Planck-free supervoid phase boundary, and curved-spacetime 3+1D twist-free director uniqueness), convex functional (Choquet monotone-kernel ISW ceilings across sigma_8-unconstrained and 2D (k, z) time-varying stacks), and sparse 1D/2D finite-volume PDE/ODE audit across all six cosmological and strong-field sectors of the four-terminal Tau Core spine (O_G, O_T, O_Q, O_M), strictly separating parameter-free theorems (PROVEN, k_added = 0) and mathematical exclusions (PROVEN NO-GO) from CONDITIONAL and OPEN frontiers. Includes EN & HU manuscripts and PDFs, 6 JSON-driven vector PDF figures, archival Pantheon+SH0ES 1341x1341 STAT+SYS Cholesky covariance and X-COP cluster data, and full verification/figure scripts.",
   "creators": [
     {
       "name": "Olcsák, József",
@@ -10,7 +10,7 @@
     }
   ],
   "license": "MIT",
-  "version": "v4.3.0",
+  "version": "v4.4.0",
   "access_right": "open",
   "keywords": [
     "Tau Core",
