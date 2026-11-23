@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Generate 3 publication-grade vector PDF figures (both English and Hungarian editions)
-for Tau Core Paper 28 (v4.4.0) 100% from paper28_verification_results.json (zero hardcoded
+Generate 4 publication-grade vector PDF figures (both English and Hungarian editions, 8 PDFs total)
+for Tau Core Paper 28 (v4.5.0) 100% from paper28_verification_results.json (zero hardcoded
 curves, zero duplicated magic constants, and full native Hungarian decimal-comma formatting).
 """
 from __future__ import annotations
@@ -311,26 +311,31 @@ def make_figures(lang: str = "en") -> None:
     ax1.legend(loc="upper right", fontsize=6.6)
     ax1.grid(axis="y", alpha=0.25, which="both")
 
-    # Panel B: Absolute uK^2 First-Principles RECFAST + l_max=6 Boltzmann D_ell^EE Spectrum!
-    g12 = DATA["part3_late_and_boltzmann_ee"]["gate12_first_principles_boltzmann_ee"]
-    ells_c = np.array(g12["ells_curve"])
-    dl_uK2 = np.array(g12["Dl_EE_uK2_PrescI_curve"])
-    ax2.plot(ells_c, dl_uK2, color="#0284c7", lw=1.8,
-             label=("Boltzmann $D_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$ ($k{=}0$)" if hu
-                    else "Boltzmann $D_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$ ($k{=}0$)"))
-    for m_idx, (l_obs, l_th) in enumerate(zip(g12["ee_peaks_observed"], g12["ee_peaks_boltzmann"]), 1):
-        ax2.axvline(l_obs, color="#ef4444", ls="--", lw=1.0,
-                    label=("Planck/ACT $\\ell_{1..4}^{EE}$" if m_idx == 1 else None))
-        y_pk = float(np.interp(l_th, ells_c, dl_uK2))
-        ax2.scatter([l_th], [y_pk], s=34, c="#059669", edgecolors="black", zorder=6)
-    ax2.set_xlim(60, 1055)
-    ax2.set_ylim(0.0, float(np.max(dl_uK2)) * 1.14)
-    ax2.set_xlabel("Multipólus $\\ell$" if hu else "Multipole $\\ell$")
-    ax2.set_ylabel("Polarizációs spektrum $D_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$" if hu
-                   else "Polarization power $D_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$")
-    ax2.set_title("(B) Abszolút $\\mu\\mathrm{K}^2$ Boltzmann $EE$-spektrum" if hu
-                  else "(B) Absolute $\\mu\\mathrm{K}^2$ Boltzmann $EE$ Spectrum")
-    ax2.legend(loc="upper left", fontsize=6.4)
+    # Panel B: Untruncated Curved-Sky Lensed Boltzmann D_ell^EE Spectrum up to ell = 3000!
+    g12 = DATA["part3_late_and_boltzmann_ee"]["gate12_untruncated_boltzmann_and_curved_sky_lensing_3000"]
+    sc12 = g12["spectra_curves_3000"]
+    ab12 = g12["archival_bandpowers"]
+    th12 = g12["tau_core_screened_theta_star_locked_homogeneous"]
+    ells_c = np.array(sc12["ells"])
+    dl_ee_l = np.array(sc12["Dl_EE_lensed_theta_PrescI"])
+    dl_ee_u = np.array(sc12["Dl_EE_unlensed_theta_PrescI"])
+    ax2.plot(ells_c, dl_ee_u, "--", color="#94a3b8", lw=1.0,
+             label=("Lencsézésmentes $D_\\ell^{EE}$" if hu else "Unlensed $D_\\ell^{EE}$"))
+    ax2.plot(ells_c, dl_ee_l, color="#0284c7", lw=1.65,
+             label=("Lencsézett $\\tilde{D}_\\ell^{EE}$ ($k{=}0$)" if hu
+                    else "Lensed $\\tilde{D}_\\ell^{EE}$ ($k{=}0$)"))
+    ax2.errorbar(ab12["act_dr6_ee_ell"], ab12["act_dr6_ee_val"], yerr=ab12["act_dr6_ee_err"],
+                 fmt="o", ms=2.4, color="#ef4444", ecolor="#ef4444", elinewidth=0.7, capsize=1.5, zorder=6,
+                 label=(f"ACT DR6 ($\\chi^2/108{{=}}{num_s(th12['Presc_I_k0']['likelihoods']['act_dr6_cmbonly_108_cal_chi2_dof'], '.3f', hu)}$)" if hu
+                        else f"ACT DR6 ($\\chi^2/108{{=}}{th12['Presc_I_k0']['likelihoods']['act_dr6_cmbonly_108_cal_chi2_dof']:.3f}$)"))
+    ax2.set_xlim(40, 3000)
+    ax2.set_ylim(-1.5, 47.5)
+    ax2.set_xlabel("Multipólus $\\ell \\in [40, 3000]$" if hu else "Multipole $\\ell \\in [40, 3000]$")
+    ax2.set_ylabel("Polarizációs spektrum $\\tilde{D}_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$" if hu
+                   else "Polarization power $\\tilde{D}_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$")
+    ax2.set_title("(B) Lencsézett Boltzmann $EE$ ($\\ell \\leq 3000$)" if hu
+                  else "(B) Lensed Boltzmann $EE$ ($\\ell \\leq 3000$)")
+    ax2.legend(loc="upper right", fontsize=6.0)
     ax2.grid(alpha=0.25)
     apply_hu_comma_ticks(ax2, hu)
 
@@ -359,8 +364,134 @@ def make_figures(lang: str = "en") -> None:
     fig.savefig(FIG_DIR / f"fig3_six_sector_multiterminal_scorecard{sfx}.pdf")
     plt.close(fig)
 
+    # ==========================================================================
+    # FIGURE 4: Untruncated ell <= 3000 Lensed CMB (TT, EE, BB) & Lensing C_L^{kk}
+    # ==========================================================================
+    fig, ((axA, axB), (axC, axD)) = plt.subplots(2, 2, figsize=(11.4, 8.1))
+
+    ac12 = g12["tau_core_screened_act_desi_anchor_H0_6822"]
+    Ls_kk = np.array(sc12["Ls_kk"])
+
+    # Panel (A): Lensed D_ell^TT across ell in [2, 3000] (semi-log y resolves SW plateau, peaks 1..7 & Silk damping tail!)
+    axA.plot(ells_c, sc12["Dl_TT_unlensed_theta_PrescI"], ":", color="#94a3b8", lw=1.05,
+             label=("Lencsézésmentes $D_\\ell^{TT}$" if hu else "Unlensed $D_\\ell^{TT}$"))
+    axA.plot(ells_c, sc12["Dl_TT_lensed_6822_PrescI"], "--", color="#f59e0b", lw=1.25,
+             label=(f"Tau Core $H_0{{=}}68{{,}}22$ ($100\\theta_*{{=}}{num_s(ac12['theta_star_100'], '.4f', hu)}$)" if hu
+                    else f"Tau Core $H_0{{=}}68.22$ ($100\\theta_*{{=}}{ac12['theta_star_100']:.4f}$)"))
+    axA.plot(ells_c, sc12["Dl_TT_lensed_theta_PrescI"], "-", color="#0284c7", lw=1.65,
+             label=(f"Tau Core $\\theta_*$-zárt ($H_0^{{(\\theta_*)}}{{=}}{num_s(th12['H0_theta_star'], '.2f', hu)}$, $k{{=}}0$)" if hu
+                    else f"Tau Core $\\theta_*$-locked ($H_0^{{(\\theta_*)}}{{=}}{th12['H0_theta_star']:.2f}$, $k{{=}}0$)"))
+    axA.errorbar(ab12["planck_pr3_tt_ell"], ab12["planck_pr3_tt_val"], yerr=ab12["planck_pr3_tt_err"],
+                 fmt="s", ms=2.3, color="#475569", ecolor="#64748b", elinewidth=0.6, capsize=1.2, alpha=0.8, zorder=5,
+                 label="Planck PR3")
+    axA.errorbar(ab12["act_dr6_tt_ell"], ab12["act_dr6_tt_val"], yerr=ab12["act_dr6_tt_err"],
+                 fmt="o", ms=2.5, color="#dc2626", ecolor="#dc2626", elinewidth=0.7, capsize=1.4, zorder=6,
+                 label="ACT DR6 ($\\ell \\leq 3000$)")
+    axA.set_yscale("log")
+    axA.set_xlim(2, 3000)
+    axA.set_ylim(14.0, 8800.0)
+    axA.set_xlabel("Multipólus $\\ell$" if hu else "Multipole $\\ell$")
+    axA.set_ylabel("Hőmérsékleti spektrum $\\tilde{D}_\\ell^{TT}\\;[\\mu\\mathrm{K}^2]$" if hu
+                   else "Temperature power $\\tilde{D}_\\ell^{TT}\\;[\\mu\\mathrm{K}^2]$")
+    axA.set_title("(A) Teljes $\\ell \\in [2, 3000]$ lencsézett $\\tilde{D}_\\ell^{TT}$ és Silk-csillapítás" if hu
+                  else "(A) Full $\\ell \\in [2, 3000]$ Lensed $\\tilde{D}_\\ell^{TT}$ & Silk Damping Tail")
+    axA.legend(loc="lower left", fontsize=6.0)
+    axA.grid(alpha=0.25, which="both")
+    apply_hu_comma_ticks(axA, hu, log_y=True)
+
+    # Panel (B): Lensed D_ell^EE across ell in [30, 3000] (all 9 acoustic peaks + Planck PR3 & ACT DR6)
+    axB.plot(ells_c, sc12["Dl_EE_unlensed_theta_PrescI"], ":", color="#94a3b8", lw=1.0,
+             label=("Lencsézésmentes $D_\\ell^{EE}$" if hu else "Unlensed $D_\\ell^{EE}$"))
+    axB.plot(ells_c, sc12["Dl_EE_lensed_6822_PrescI"], "--", color="#f59e0b", lw=1.2,
+             label=("Tau Core $H_0 = 68{,}22$ ($k{=}0$)" if hu else "Tau Core $H_0 = 68.22$ ($k{=}0$)"))
+    axB.plot(ells_c, sc12["Dl_EE_lensed_theta_2Field"], "-", color="#059669", lw=1.55,
+             label=(f"Tau Core $\\theta_*$-zárt 2-mezős ($\\chi^2/108{{=}}{num_s(th12['COBE_2Field_k1']['likelihoods']['act_dr6_cmbonly_108_cal_chi2_dof'], '.3f', hu)}$)" if hu
+                    else f"Tau Core $\\theta_*$-locked 2-Field ($\\chi^2/108{{=}}{th12['COBE_2Field_k1']['likelihoods']['act_dr6_cmbonly_108_cal_chi2_dof']:.3f}$)"))
+    axB.errorbar(ab12["planck_pr3_ee_ell"], ab12["planck_pr3_ee_val"], yerr=ab12["planck_pr3_ee_err"],
+                 fmt="s", ms=2.2, color="#475569", ecolor="#64748b", elinewidth=0.6, capsize=1.2, alpha=0.78, zorder=5,
+                 label="Planck PR3 $EE$")
+    axB.errorbar(ab12["act_dr6_ee_ell"], ab12["act_dr6_ee_val"], yerr=ab12["act_dr6_ee_err"],
+                 fmt="o", ms=2.5, color="#dc2626", ecolor="#dc2626", elinewidth=0.7, capsize=1.4, zorder=6,
+                 label="ACT DR6 $EE$ ($\\ell \\leq 3000$)")
+    axB.set_xlim(30, 3000)
+    axB.set_ylim(-1.5, 47.5)
+    axB.set_xlabel("Multipólus $\\ell$" if hu else "Multipole $\\ell$")
+    axB.set_ylabel("Polarizációs spektrum $\\tilde{D}_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$" if hu
+                   else "Polarization power $\\tilde{D}_\\ell^{EE}\\;[\\mu\\mathrm{K}^2]$")
+    axB.set_title("(B) Lencsézett $\\tilde{D}_\\ell^{EE}$ (1–9. akusztikus csúcs, $\\ell \\leq 3000$)" if hu
+                  else "(B) Lensed $\\tilde{D}_\\ell^{EE}$ (Acoustic Peaks 1–9, $\\ell \\leq 3000$)")
+    axB.legend(loc="upper right", fontsize=6.0)
+    axB.grid(alpha=0.25)
+    apply_hu_comma_ticks(axB, hu)
+
+    # Panel (C): Curved-Sky Gravitational-Lensing B-Mode Spectrum D_ell^BB across ell in [2, 3000]
+    u_test = g12["camb_acc3_curved_sky_lensing_unit_test"]
+    bb_p1 = np.array(sc12["Dl_BB_lensed_theta_PrescI"])
+    idx_bb_pk = int(np.argmax(bb_p1))
+    ell_bb_pk = float(ells_c[idx_bb_pk])
+    val_bb_pk = float(bb_p1[idx_bb_pk])
+    axC.plot(ells_c, sc12["Dl_BB_lensed_Planck_LCDM"], "--", color="#64748b", lw=1.4,
+             label="Planck 2018 $\\Lambda$CDM")
+    axC.plot(ells_c, bb_p1, "-", color="#0284c7", lw=1.8,
+             label=("Tau Core I. előírás ($k{=}0$, $\\kappa_\\theta{=}\\xi_\\Phi^2$)" if hu
+                    else "Tau Core Presc. I ($k{=}0$, $\\kappa_\\theta{=}\\xi_\\Phi^2$)"))
+    axC.plot(ells_c, sc12["Dl_BB_lensed_6822_2Field"], "-.", color="#059669", lw=1.55,
+             label=("Tau Core 2-mezős ($H_0{=}68{,}22$, $k_{\\mathrm{UV,eff}}{=}1$)" if hu
+                    else "Tau Core 2-Field ($H_0{=}68.22$, $k_{\\mathrm{UV,eff}}{=}1$)"))
+    axC.annotate((f"Challinor–Lewis (2005) görbült égbolt\nCAMB acc3 med. hiba: ${num_s(u_test['med_rel_err_BB_pct'], '.2f', hu)}\\%$" if hu
+                  else f"Challinor–Lewis (2005) curved-sky Wigner-$d$\nCAMB acc3 med. error: ${u_test['med_rel_err_BB_pct']:.2f}\\%$"),
+                 (ell_bb_pk, val_bb_pk), xytext=(1520.0, val_bb_pk * 0.90),
+                 fontsize=6.5, arrowprops=dict(arrowstyle="->", lw=0.8, color="#0284c7"))
+    axC.set_xlim(2, 3000)
+    axC.set_ylim(0.0, val_bb_pk * 1.16)
+    axC.set_xlabel("Multipólus $\\ell$" if hu else "Multipole $\\ell$")
+    axC.set_ylabel("Lencsézési $B$-módus $\\tilde{D}_\\ell^{BB}\\;[\\mu\\mathrm{K}^2]$" if hu
+                   else "Lensing $B$-mode power $\\tilde{D}_\\ell^{BB}\\;[\\mu\\mathrm{K}^2]$")
+    axC.set_title("(C) Görbült égboltbeli gravitációs lencsézési $\\tilde{D}_\\ell^{BB}$ ($\\ell \\leq 3000$)" if hu
+                  else "(C) Curved-Sky Gravitational-Lensing $\\tilde{D}_\\ell^{BB}$ ($\\ell \\leq 3000$)")
+    axC.legend(loc="lower right", fontsize=6.0)
+    axC.grid(alpha=0.25)
+    apply_hu_comma_ticks(axC, hu)
+
+    # Panel (D): CMB Gravitational Lensing Convergence 10^7 C_L^{kk} vs Official ACT DR6 + Planck PR4 (22 bins)
+    c2_p1_kk = ac12["Presc_I_k0"]["likelihoods"]["act_dr6_planck_pr4_lens_22_chi2_dof"]
+    c2_2f_kk = ac12["COBE_2Field_k1"]["likelihoods"]["act_dr6_planck_pr4_lens_22_chi2_dof"]
+    un_e8 = g12["tau_core_unscreened_nogo_kappa_theta_0"]["likelihoods"]["act_dr6_planck_pr4_lens_22_chi2"] / 1.0e8
+    axD.plot(Ls_kk, sc12["Cl_kk_1e7_unscreened_nogo"], "--", color="#dc2626", lw=1.6,
+             label=(f"Árnyékolatlan $\\kappa_\\theta{{=}}0$ No-Go ($\\chi^2{{=}}{num_s(un_e8, '.2f', hu)}{{\\times}}10^8$)" if hu
+                    else f"Unscreened $\\kappa_\\theta{{=}}0$ No-Go ($\\chi^2{{=}}{un_e8:.2f}{{\\times}}10^8$)"))
+    axD.plot(Ls_kk, sc12["Cl_kk_1e7_Planck_LCDM"], ":", color="#64748b", lw=1.35,
+             label="Planck 2018 $\\Lambda$CDM (Halofit)")
+    axD.plot(Ls_kk, sc12["Cl_kk_1e7_6822_PrescI"], "-", color="#0284c7", lw=1.8,
+             label=(f"Zárt $\\kappa_\\theta{{=}}\\xi_\\Phi^2$ I. el. ($\\chi^2/22{{=}}{num_s(c2_p1_kk, '.3f', hu)}$)" if hu
+                    else f"Locked $\\kappa_\\theta{{=}}\\xi_\\Phi^2$ Presc. I ($\\chi^2/22{{=}}{c2_p1_kk:.3f}$)"))
+    axD.plot(Ls_kk, sc12["Cl_kk_1e7_6822_2Field"], "-.", color="#059669", lw=1.6,
+             label=(f"Zárt $\\kappa_\\theta{{=}}\\xi_\\Phi^2$ 2-mezős ($\\chi^2/22{{=}}{num_s(c2_2f_kk, '.3f', hu)}$)" if hu
+                    else f"Locked $\\kappa_\\theta{{=}}\\xi_\\Phi^2$ 2-Field ($\\chi^2/22{{=}}{c2_2f_kk:.3f}$)"))
+    axD.errorbar(ab12["planck_pr4_kk_L"], ab12["planck_pr4_kk_1e7"], yerr=ab12["planck_pr4_kk_err_1e7"],
+                 fmt="s", ms=3.8, color="#7c3aed", ecolor="#7c3aed", elinewidth=0.9, capsize=2.0, zorder=7,
+                 label="Planck PR4 (NPIPE)")
+    axD.errorbar(ab12["act_dr6_kk_L"], ab12["act_dr6_kk_1e7"], yerr=ab12["act_dr6_kk_err_1e7"],
+                 fmt="o", ms=3.8, color="#ea580c", ecolor="#ea580c", elinewidth=0.9, capsize=2.0, zorder=8,
+                 label="ACT DR6 v1.2 ($L \\leq 1250$)")
+    axD.set_xscale("log")
+    axD.set_yscale("log")
+    axD.set_xlim(8.0, 2000.0)
+    axD.set_ylim(0.035, 350.0)
+    axD.set_xlabel("Lencsézési multipólus $L$" if hu else "Lensing multipole $L$")
+    axD.set_ylabel("Lencsézési konvergencia $10^7 C_L^{\\kappa\\kappa}$" if hu
+                   else "Lensing convergence $10^7 C_L^{\\kappa\\kappa}$")
+    axD.set_title("(D) CMB gravitációs lencsézés: ACT DR6 + Planck PR4" if hu
+                  else "(D) CMB Gravitational Lensing: ACT DR6 + Planck PR4")
+    axD.legend(loc="upper right", fontsize=5.75)
+    axD.grid(alpha=0.25, which="both")
+
+    fig.tight_layout()
+    fig.savefig(FIG_DIR / f"fig4_boltzmann_lensed_cmb_3000_and_lensing_kk{sfx}.pdf")
+    plt.close(fig)
+
 
 if __name__ == "__main__":
     make_figures("en")
     make_figures("hu")
-    print("Generated all 6 JSON-driven v4.4.0 vector PDF figures (EN + HU) in", FIG_DIR)
+    print("Generated all 8 JSON-driven v4.5.0 vector PDF figures (EN + HU) in", FIG_DIR)

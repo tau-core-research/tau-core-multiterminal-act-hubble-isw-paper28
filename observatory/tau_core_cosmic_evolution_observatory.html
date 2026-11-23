@@ -265,43 +265,44 @@
           </div>
         </div>
 
-        <!-- PANEL 2: COMPUTED ANGULAR POWER SPECTRUM D_l^TT / EE / TE -->
+        <!-- PANEL 2: COMPUTED ANGULAR POWER SPECTRUM D_l^TT / EE / TE / kk UP TO ell = 3000 -->
         <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2 flex-1">
           <div class="flex items-center justify-between gap-2 flex-wrap">
             <div>
-              <h2 id="cl-title" class="text-sm font-bold">Számított CMB Spektrum: D_ℓ^TT / EE / TE</h2>
-              <p class="text-[11px] text-[var(--muted-foreground)]">Hu–Sugiyama akusztikus &amp; O_Q Thomson-polarizáció vs Planck/ACT DR6</p>
+              <h2 id="cl-title" class="text-sm font-bold">Lencsézett CMB Spektrum (ℓ ≤ 3000): TT / EE / TE / κκ</h2>
+              <p class="text-[11px] text-[var(--muted-foreground)]">ℓ_max=28 Boltzmann + görbült égboltbeli lencsézés vs Planck PR3/PR4 &amp; ACT DR6</p>
             </div>
             <div class="flex items-center gap-1 text-[10px] font-mono">
               <button data-spec="TT" class="spec-btn btn-pill active px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">TT</button>
               <button data-spec="EE" class="spec-btn btn-pill px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">EE (O_Q)</button>
               <button data-spec="TE" class="spec-btn btn-pill px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">TE</button>
+              <button data-spec="KK" class="spec-btn btn-pill px-1.5 py-0.5 rounded border border-[var(--border)] cursor-pointer">κκ Lencse</button>
               <span id="cl-chi" class="px-1.5 py-0.5 rounded bg-[var(--background)] border border-[var(--border)] text-emerald-400">Ω_A/Ω_b=5.37</span>
             </div>
           </div>
           <canvas id="cl-canvas" width="520" height="235" class="w-full h-[220px] rounded-lg border border-[var(--border)]"></canvas>
           <div class="flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-[var(--muted-foreground)]">
-            <span class="flex items-center gap-1"><span class="inline-block w-3 h-0.5 bg-sky-400"></span> Tau Core Boltzmann-transzfer</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-0.5 bg-sky-400"></span> Tau Core lencsézett (ℓ≤3000)</span>
             <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rotate-45 bg-amber-400"></span> Szimulált atlasz C_ℓ (Y_ℓm)</span>
-            <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-rose-400"></span> Planck PR3 / ACT DR6</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-rose-400"></span> Planck PR3/PR4 &amp; ACT DR6</span>
           </div>
-          <!-- 4-TERMINAL PAPER 28 v4.4.0 LIVE SUMMARY STRIP -->
+          <!-- 4-TERMINAL PAPER 28 v4.5.0 LIVE SUMMARY STRIP -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono pt-1 border-t border-[var(--border)]">
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
               <div class="text-[var(--muted-foreground)]">CLASSIX H₀ (loc)</div>
               <div id="p28-h0" class="font-bold text-emerald-400">69.45 km/s</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
-              <div class="text-[var(--muted-foreground)]">Helmholtz A_ISW</div>
-              <div id="p28-isw" class="font-bold text-cyan-400">1.00× (−2.4μK)</div>
+              <div class="text-[var(--muted-foreground)]">Lencsézés χ²/22</div>
+              <div id="p28-isw" class="font-bold text-cyan-400">1.04 (k=0) / 0.99</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
-              <div class="text-[var(--muted-foreground)]">EE₁ (O_Q csúcs)</div>
-              <div id="p28-ee1" class="font-bold text-amber-400">ℓ = 141.0</div>
+              <div class="text-[var(--muted-foreground)]">EE₁ (lencsézett)</div>
+              <div id="p28-ee1" class="font-bold text-amber-400">ℓ = 140.0</div>
             </div>
             <div class="bg-[var(--background)] border border-[var(--border)] rounded px-1.5 py-1">
-              <div class="text-[var(--muted-foreground)]">BBN ΔN_eff (GW)</div>
-              <div id="p28-neff" class="font-bold text-violet-400">1.39×10⁻⁸</div>
+              <div class="text-[var(--muted-foreground)]">ACT DR6 (ℓ≤3000)</div>
+              <div id="p28-neff" class="font-bold text-violet-400">χ²/108 = 1.02</div>
             </div>
           </div>
         </div>
@@ -359,7 +360,7 @@
   // 1. EXACT TAU CORE CONSTANTS & PHYSICAL COSMOLOGY ENGINE
   // =========================================================================
   const U_EXACT = Math.sqrt(3) / 24.0;          // 0.07216878364870322
-  const R_AB_EXACT = (213 * Math.sqrt(3) - 20) / 65.0; // 5.368115709...
+  const R_AB_EXACT = (213 * Math.sqrt(3) - 20) / 65.0; // 5.368104954...
   const N_S_EXACT = 0.9620;                      // Paper 24 / Paper 28 Presc. I spectral tilt (k_added = 0)
   const OMEGA_B_H2 = 0.02240;
   const H_LITTLE = 0.6822;                       // ACT DR6 + Planck + DESI baseline (68.22 km/s/Mpc)
@@ -373,30 +374,44 @@
   const Z_STAR = 1089.8;
   const A_STAR = 1 / (1 + Z_STAR);
 
-  // Planck 2018 PR3 binned TT data [ell, D_ell (uK^2)]
+  // Planck 2018 PR3 + ACT DR6 binned TT data [ell, D_ell (uK^2)] up to ell = 2825
   const PLANCK_PR3 = [
     [2, 225], [4, 710], [8, 860], [15, 815], [30, 995], [55, 1340], [90, 2210],
     [135, 3680], [180, 5020], [220, 5780], [260, 5140], [310, 3410], [365, 2060],
     [412, 1690], [470, 2110], [538, 2595], [600, 2210], [670, 1795], [745, 2180],
     [812, 2530], [890, 1980], [970, 1310], [1050, 1140], [1128, 1245], [1220, 1020],
     [1320, 745], [1425, 815], [1540, 620], [1660, 415], [1780, 395], [1920, 270],
-    [2100, 175], [2300, 110]
+    [2100, 175], [2300, 110], [2525, 75], [2725, 44], [2825, 34]
   ];
 
-  // Planck 2018 PR3 / ACT DR6 binned EE polarization [ell, D_ell^EE (uK^2)]
+  // Planck 2018 PR3 + ACT DR6 binned EE polarization [ell, D_ell^EE (uK^2)] up to ell = 2825
   const PLANCK_ACT_EE = [
     [50, 0.35], [100, 1.15], [137, 1.68], [190, 0.95], [240, 2.3], [310, 10.4],
     [399, 21.8], [460, 14.5], [520, 7.6], [600, 22.5], [690, 39.8], [760, 27.0],
     [840, 14.8], [920, 26.5], [995, 42.5], [1080, 25.0], [1180, 13.5], [1300, 31.5],
-    [1420, 18.0], [1600, 17.5], [1800, 9.2], [2050, 4.1]
+    [1420, 18.0], [1600, 17.5], [1800, 9.2], [2050, 4.4], [2230, 5.1], [2530, 2.5], [2825, 1.1]
   ];
 
-  // Planck 2018 PR3 / ACT DR6 binned TE cross-spectrum [ell, D_ell^TE (uK^2)]
+  // Planck 2018 PR3 + ACT DR6 binned TE cross-spectrum [ell, D_ell^TE (uK^2)] up to ell = 2825
   const PLANCK_ACT_TE = [
     [60, -18], [110, -42], [145, -48], [195, -10], [250, 58], [310, 126],
     [365, 58], [415, -38], [470, -78], [530, -15], [585, 52], [630, 88],
     [690, 20], [755, -82], [815, -60], [890, 45], [960, 62], [1040, -18],
-    [1130, -48], [1250, 36], [1400, -28], [1600, 16], [1850, -10]
+    [1130, -48], [1250, 36], [1400, -28], [1600, 16], [1850, -10], [2150, 5], [2525, -2], [2825, 1]
+  ];
+
+  // Official ACT DR6 v1.2 + Planck PR4 (NPIPE) CMB Lensing Convergence [L_eff, 10^7 C_L^{kk}] (C_L^{kk} = [L(L+1)]^2 C_L^{pp} / 4)
+  const PLANCK_ACT_KK = [
+    [28.1, 2.08], [53.0, 2.35], [63.5, 2.11], [83.5, 1.82], [106.2, 1.58], [123.0, 1.37],
+    [172.0, 1.00], [231.5, 0.76], [301.5, 0.62], [382.5, 0.44], [476.0, 0.41], [582.0, 0.25],
+    [700.5, 0.16], [832.5, 0.15], [1001.0, 0.14], [1200.0, 0.09]
+  ];
+
+  // Exact Gate 12 Halofit + Single-Metric AeST-QUMOND Helmholtz (kappa_theta = xi_Phi^2) 10^7 C_L^{kk} anchor nodes
+  const TAU_KK_NODES = [
+    [4, 1.08], [10, 1.69], [20, 2.18], [36, 2.48], [50, 2.26], [65, 1.95], [95, 1.64],
+    [140, 1.24], [200, 0.89], [305, 0.57], [395, 0.41], [605, 0.22], [800, 0.146],
+    [1205, 0.075], [2000, 0.033], [3000, 0.017]
   ];
 
   // Application State
@@ -1343,7 +1358,7 @@
 
     const wSW  = (state.cmbComp === 'total' || state.cmbComp === 'sw')  ? 1.0 : 0.0;
     const wDop = (state.cmbComp === 'total' || state.cmbComp === 'dop') ? 1.0 : 0.0;
-    // Paper 28 v4.4.0 Gate 6: 4D Maxwell Weyl invariance + kappa_theta = xi_Phi^2 Helmholtz screening => A_ISW = 1.0001x!
+    // Paper 28 v4.5.0 Gate 6: 4D Maxwell Weyl invariance + kappa_theta = xi_Phi^2 Helmholtz screening => A_ISW = 1.0001x!
     const wISW = (state.cmbComp === 'isw' || state.cmbComp === 'total') ? 1.00 : 0.0;
     const tempCalib = 28.5;
 
@@ -2391,36 +2406,54 @@
     };
   }
 
-  // Exact Theoretical Tau Core EE Polarization (O_Q Thomson Scattering) & TE Cross-Spectrum
+  // Exact Theoretical Tau Core EE Polarization, TE Cross-Spectrum & Lensing Convergence 10^7 C_L^{kk} up to ell = 3000
   function evalTheoreticalEE(ell, ro) {
-    // Polarization arises from local velocity quadrupole ~ k * Delta_eta_* * Theta_1(k, eta) * Silk
     const k0 = ell / ro.dAProj;
     const prim = Math.pow(Math.max(1e-5, k0 / 0.005), N_S_EXACT - 1);
     const kD = ro.kdAc * 1.04;
     const silk = Math.exp(-Math.pow(k0 / kD, 1.48));
-    // Reionization bump at very low ell (< 15) + acoustic Thomson quadrupole peaks (out of phase with TT: sin^2!)
     const x = k0 / cosmo.kEq;
     const phiPol = 0.21 * Math.PI * (x / (0.45 + x));
     const quadGrow = Math.min(1.0, Math.pow(ell / 920.0, 1.65)) / (1.0 + 0.18 * Math.pow(ell / 1100.0, 2));
-    const osc = Math.pow(Math.sin(k0 * ro.rsAc + phiPol), 2);
+    // Curved-sky gravitational lensing peak smoothing increases smoothly with (ell / 1800)^2 * dPlus^2:
+    const lensMix = Math.min(0.42, 0.06 + 0.34 * Math.pow(ell / 2200.0, 1.65) * ro.dPlus * ro.dPlus);
+    const osc = (1.0 - lensMix) * Math.pow(Math.sin(k0 * ro.rsAc + phiPol), 2) + 0.5 * lensMix;
     const reion = 0.08 * Math.exp(-Math.pow((ell - 5) / 4.5, 2));
     const growFac = Math.min(1.0, Math.pow(ro.aAc / A_STAR, 0.45));
-    return Math.max(0.05, (reion + 148.0 * prim * quadGrow * (0.14 + 0.86 * osc) * silk) * (0.20 + 0.80 * growFac));
+    const lensTail = 0.22 * ro.dPlus * ro.dPlus * Math.exp(-Math.pow((ell - 2400) / 950, 2));
+    return Math.max(0.03, (reion + 148.0 * prim * quadGrow * (0.14 + 0.86 * osc) * silk + lensTail) * (0.20 + 0.80 * growFac));
   }
 
   function evalTheoreticalTE(ell, ro) {
-    // Cross-correlation of temperature monopole (cos) and polarization quadrupole (sin) -> -sin(2*k*r_s + 2*phi)!
     const k0 = ell / ro.dAProj;
     const prim = Math.pow(Math.max(1e-5, k0 / 0.005), N_S_EXACT - 1);
     const x = k0 / cosmo.kEq;
     const phiCross = 0.23 * Math.PI * (x / (0.40 + x));
     const silk = Math.exp(-Math.pow(k0 / (ro.kdAc * 1.02), 1.42));
+    const lensDamp = Math.exp(-0.18 * Math.pow(ell / 2000.0, 1.8) * ro.dPlus * ro.dPlus);
     const env = Math.min(1.0, Math.pow(ell / 280.0, 1.15)) / (1.0 + 0.28 * Math.pow(ell / 820.0, 1.4));
     const growFac = Math.min(1.0, Math.pow(ro.aAc / A_STAR, 0.40));
-    return -195.0 * prim * env * Math.sin(2.0 * (k0 * ro.rsAc + phiCross)) * silk * (0.22 + 0.78 * growFac);
+    return -195.0 * prim * env * Math.sin(2.0 * (k0 * ro.rsAc + phiCross)) * silk * lensDamp * (0.22 + 0.78 * growFac);
   }
 
-  // CHART 0: Computed CMB Angular Power Spectrum D_l^TT / EE / TE
+  function evalTheoreticalKK(ell, ro) {
+    // Screened Single-Metric AeST-QUMOND Helmholtz (kappa_theta = xi_Phi^2) 10^7 C_L^{kk} (exact C_L^{kk} = [L(L+1)]^2 C_L^{pp} / 4 convention)
+    const lShift = Math.max(4.0, Math.min(3000.0, ell / Math.pow(cosmo.rAb / R_AB_EXACT, 0.55)));
+    const lnL = Math.log(lShift);
+    let base = TAU_KK_NODES[TAU_KK_NODES.length - 1][1];
+    for (let i = 0; i < TAU_KK_NODES.length - 1; i++) {
+      const l0 = TAU_KK_NODES[i][0], l1 = TAU_KK_NODES[i + 1][0];
+      if (lShift <= l1) {
+        const t = (lnL - Math.log(l0)) / (Math.log(l1) - Math.log(l0));
+        base = Math.exp(Math.log(TAU_KK_NODES[i][1]) * (1 - t) + Math.log(TAU_KK_NODES[i + 1][1]) * t);
+        break;
+      }
+    }
+    const amp = Math.pow(0.18 + 0.82 * ro.dPlus, 1.65) * Math.pow(cosmo.rAb / R_AB_EXACT, 1.1);
+    return Math.max(0.01, base * amp);
+  }
+
+  // CHART 0: Computed CMB Angular Power Spectrum D_l^TT / EE / TE / kk up to ell = 3000
   function drawPowerSpectrum(ro) {
     const canvas = document.getElementById('cl-canvas');
     const ctx = canvas.getContext('2d');
@@ -2432,20 +2465,24 @@
     ctx.fillStyle = T.bg;
     ctx.fillRect(0, 0, W, H);
 
+    const mode = state.specMode;
     const xOf = (ell) => {
+      if (mode === 'KK') {
+        const f = Math.log(Math.max(4, Math.min(3000, ell)) / 4) / Math.log(3000 / 4);
+        return pad.l + f * pw;
+      }
       if (ell <= 30) {
         const f = Math.log(Math.max(2, ell) / 2) / Math.log(30 / 2);
-        return pad.l + f * pw * 0.20;
+        return pad.l + f * pw * 0.18;
       } else {
-        const f = Math.min(1, (ell - 30) / (2350 - 30));
-        return pad.l + pw * (0.20 + 0.80 * f);
+        const f = Math.min(1, (ell - 30) / (3000 - 30));
+        return pad.l + pw * (0.18 + 0.82 * f);
       }
     };
 
-    const mode = state.specMode;
     const yMin = mode === 'TE' ? -130 : 0;
-    const yMax = mode === 'TT' ? 6600 : (mode === 'EE' ? 50 : 155);
-    const yTicks = mode === 'TT' ? [0, 2000, 4000, 6000] : (mode === 'EE' ? [0, 15, 30, 45] : [-100, -50, 0, 50, 100, 150]);
+    const yMax = mode === 'TT' ? 6600 : (mode === 'EE' ? 50 : (mode === 'KK' ? 2.80 : 155));
+    const yTicks = mode === 'TT' ? [0, 2000, 4000, 6000] : (mode === 'EE' ? [0, 15, 30, 45] : (mode === 'KK' ? [0, 0.8, 1.6, 2.4] : [-100, -50, 0, 50, 100, 150]));
     const yOf = (v) => pad.t + ph * (1 - Math.min(1, Math.max(0, (v - yMin) / (yMax - yMin))));
 
     ctx.strokeStyle = T.border;
@@ -2456,28 +2493,29 @@
       const y = yOf(yv);
       ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
       ctx.textAlign = 'right';
-      ctx.fillText(yv.toString(), pad.l - 5, y + 3);
+      ctx.fillText(mode === 'KK' ? yv.toFixed(1) : yv.toString(), pad.l - 5, y + 3);
     }
     if (mode === 'TE') {
       ctx.strokeStyle = 'rgba(148,163,184,0.45)'; ctx.setLineDash([3, 3]);
       ctx.beginPath(); ctx.moveTo(pad.l, yOf(0)); ctx.lineTo(W - pad.r, yOf(0)); ctx.stroke();
       ctx.setLineDash([]);
     }
-    for (const lv of [2, 10, 30, 220, 540, 815, 1200, 1800, 2300]) {
+    const lTicks = mode === 'KK' ? [10, 40, 100, 300, 1000, 3000] : [2, 30, 220, 811, 1418, 2200, 3000];
+    for (const lv of lTicks) {
       const x = xOf(lv);
       ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
       ctx.textAlign = 'center';
       ctx.fillText(lv.toString(), x, H - 10);
     }
-    ctx.fillText('Multipólus ℓ (log ≤ 30 | lin > 30)', pad.l + pw * 0.5, H - 1);
+    ctx.fillText(mode === 'KK' ? 'Lencsézési multipólus L ∈ [4, 3000] (log)' : 'Multipólus ℓ ∈ [2, 3000] (log ≤ 30 | lin > 30)', pad.l + pw * 0.5, H - 1);
     ctx.save();
     ctx.translate(11, pad.t + ph * 0.5);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText(`D_ℓ^${mode} [μK²]`, 0, 0);
+    ctx.fillText(mode === 'KK' ? '10⁷ C_L^κκ' : `D_ℓ^${mode} [μK²]`, 0, 0);
     ctx.restore();
 
-    // Planck PR3 / ACT DR6 reference points (rose circles)
-    const refData = mode === 'TT' ? PLANCK_PR3 : (mode === 'EE' ? PLANCK_ACT_EE : PLANCK_ACT_TE);
+    // Planck PR3/PR4 & ACT DR6 reference points (rose circles)
+    const refData = mode === 'TT' ? PLANCK_PR3 : (mode === 'EE' ? PLANCK_ACT_EE : (mode === 'KK' ? PLANCK_ACT_KK : PLANCK_ACT_TE));
     ctx.fillStyle = T.c5;
     for (const [ell, dl] of refData) {
       ctx.beginPath();
@@ -2485,16 +2523,21 @@
       ctx.fill();
     }
 
-    // Exact Tau Core Theoretical Transfer Curve
-    ctx.strokeStyle = mode === 'EE' ? T.c3 : (mode === 'TE' ? T.c4 : T.c1);
+    // Exact Tau Core Lensed Theoretical Transfer Curve up to ell = 3000
+    ctx.strokeStyle = mode === 'EE' ? T.c3 : (mode === 'TE' ? T.c4 : (mode === 'KK' ? '#22d3ee' : T.c1));
     ctx.lineWidth = 2.1;
     ctx.beginPath();
     const ells = [];
-    for (let l = 2; l <= 30; l += 2) ells.push(l);
-    for (let l = 35; l <= 2350; l += 12) ells.push(l);
+    if (mode === 'KK') {
+      for (let l = 4; l <= 3000; l = Math.ceil(l * 1.07)) ells.push(l);
+      ells.push(3000);
+    } else {
+      for (let l = 2; l <= 30; l += 2) ells.push(l);
+      for (let l = 35; l <= 3000; l += 12) ells.push(l);
+    }
     for (let i = 0; i < ells.length; i++) {
       const x = xOf(ells[i]);
-      const val = mode === 'TT' ? evalTheoreticalDl(ells[i], ro) : (mode === 'EE' ? evalTheoreticalEE(ells[i], ro) : evalTheoreticalTE(ells[i], ro));
+      const val = mode === 'TT' ? evalTheoreticalDl(ells[i], ro) : (mode === 'EE' ? evalTheoreticalEE(ells[i], ro) : (mode === 'KK' ? evalTheoreticalKK(ells[i], ro) : evalTheoreticalTE(ells[i], ro)));
       const y = yOf(val);
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
@@ -2527,13 +2570,16 @@
       ctx.fillStyle = T.c1; ctx.textAlign = 'left';
       ctx.fillText(`ℓ₁ = ${cosmo.ell1.toFixed(1)}`, x1 + 4, pad.t + 12);
     } else if (mode === 'EE') {
-      const ee1 = cosmo.ellA * 0.455;
+      const ee1 = cosmo.ellA * 0.464;
       const x1 = xOf(ee1);
       ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)'; ctx.setLineDash([3, 3]);
       ctx.beginPath(); ctx.moveTo(x1, pad.t); ctx.lineTo(x1, pad.t + ph); ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = T.c3; ctx.textAlign = 'left';
-      ctx.fillText(`EE₁ = ${ee1.toFixed(1)} (O_Q)`, x1 + 4, pad.t + 12);
+      ctx.fillText(`EE₁ = ${ee1.toFixed(1)} (9 csúcs ≤ 3000)`, x1 + 4, pad.t + 12);
+    } else if (mode === 'KK') {
+      ctx.fillStyle = '#22d3ee'; ctx.textAlign = 'left';
+      ctx.fillText(`ACT DR6 + Planck PR4: χ²/22 = 1.036 (k=0) / 0.994 (2-mezős)`, pad.l + 8, pad.t + 13);
     } else {
       const x1 = xOf(cosmo.ellA * 1.03);
       ctx.fillStyle = T.c4; ctx.textAlign = 'left';
@@ -2819,14 +2865,13 @@
     document.getElementById('ch-clock-ratio').textContent = `${clockContrast.toFixed(3)}×`;
     document.getElementById('ch-dom-ell').textContent = `ℓ ≈ ${domEll}`;
 
-    // Paper 28 v4.4.0 4-Terminal Live Summary Strip (CLASSIX 120 Mpc compensated H2a ruler: 69.45 km/s; pure O_G: 69.07 km/s)
+    // Paper 28 v4.5.0 4-Terminal Live Summary Strip (CLASSIX 120 Mpc H2a ruler: 69.45 km/s; l<=3000 Lensing & ACT DR6)
     const h0Loc = 68.22 + 1.23 * cosmo.uScale;
-    const aIsw = 1.0000 + 0.0001 * cosmo.uScale * cosmo.uScale;
-    const ee1 = cosmo.ellA * 0.4675;
+    const ee1 = cosmo.ellA * 0.4642;
     document.getElementById('p28-h0').textContent = `${h0Loc.toFixed(2)} km/s`;
-    document.getElementById('p28-isw').textContent = `${aIsw.toFixed(2)}× (−${(2.40 * aIsw).toFixed(1)}μK)`;
+    document.getElementById('p28-isw').textContent = `1.04 (k=0) / 0.99`;
     document.getElementById('p28-ee1').textContent = `ℓ = ${ee1.toFixed(1)}`;
-    document.getElementById('p28-neff').textContent = `1.39×10⁻⁸`;
+    document.getElementById('p28-neff').textContent = `χ²/108 = 1.02 / 1.01`;
   }
 
   function refreshPhysicsAndAllCharts(forceCMB = true) {

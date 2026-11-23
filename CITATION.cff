@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "Four-Terminal Cosmological Audit Beyond Gravity Alone: Single-Metric AeST-QUMOND Helmholtz Screening of sigma_8, UV & ISW No-Go Theorems, Pantheon+SH0ES Curvature Audit, LTB Director Expulsion, and Boltzmann CMB EE Closure"
-version: "v4.4.0"
-date-released: "2026-11-22"
+title: "Four-Terminal Cosmological Audit Beyond Gravity Alone: Single-Metric AeST-QUMOND Helmholtz Screening of sigma_8, UV & ISW No-Go Theorems, Pantheon+SH0ES Curvature Audit, LTB Director Expulsion, and Untruncated l <= 3000 Lensed CMB Closure"
+version: "v4.5.0"
+date-released: "2026-11-23"
 authors:
   - family-names: "Olcsák"
     given-names: "József"
