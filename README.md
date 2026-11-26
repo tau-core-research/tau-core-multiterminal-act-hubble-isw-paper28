@@ -34,3 +34,12 @@ python3 -W error scripts/generate_paper28_figures.py
 pdflatex -interaction=nonstopmode Tau_Core_Paper_28_Multi_Terminal_ACT_Hubble_ISW_EN.tex
 pdflatex -interaction=nonstopmode Tau_Core_Paper_28_Multi_Terminal_ACT_Hubble_ISW_HU.tex
 ```
+
+---
+
+## Downstream Frontier Closures (`2026-11-26` — Paper 29 `v3.3.0` & Paper 30 `v1.7.0`)
+
+The conditional/open homogeneous-FLRW $\theta_*$, dynamical `AeST` screening, low-$\ell$ ISW, Euclid NLA-IA, induced-gravity spin-2 measure, and 4D chiral $\mathrm{Spin}(10)$ SMG gates identified above are carried forward in **`tau-core-frontier-closures-paper29` (`v3.3.0`)** and **`tau-core-spin10-flavor-hierarchy-smg-paper30` (`v1.7.0`)** (`NATURE_LEVEL_CLOSURE = false`):
+- **Coupled Helmholtz-Screened Non-Separable `AeST` & Exact 3-Field $(|\Psi|, s, \sigma_{\mathrm{scr}})$ Modified-Poisson Schur BVP:** Resolves all three Bridge 2D Triple-Squeeze `NO-GO` theorems at $\mu_{\mathrm{SZ},0}^{-1}=1.54\;\mathrm{Mpc}$ (`< 2.5e-14` BVP residual across 4,001 shells, $|\Delta\Psi/\Psi|\le 0.22\%$, $\mathcal{J}_{\mathrm{Schur}}>0$), proving quadratic $p=2$ `PROVEN NO-GO` ($p=4$ unique), isolated void-star cold-$d_c=1.722\times 10^{-10}$ `PROVEN NO-GO` ($d_c\in[1.5\times 10^{-6},2.41\times 10^{-6}]$), a $5.5$-decade $\kappa_\sigma\in[10^3,3\times 10^8]$ window, and $K_4$ candidate $(d_{\max}=u^2=1/192,\,d_c=u^4/(4\pi)=2.159\times 10^{-6})$.
+- **7-Param `Euclid Stage-IV` NLA-IA + Cosmology Marginalization & Exact Boltzmann Late-Time ISW:** Yields **prior-free Euclid-alone `5.44σ`** (`7.36σ` +Planck 1D; `3.86σ` linear +Planck 1D) and cumulative low-$\ell$ Boltzmann ISW **$\Delta\chi^2_{\mathrm{ISW}}(\ell=2\dots 29)=0.9238<1$** on `Planck PR3 Commander`.
+- **24-Cell Vilkovisky–DeWitt Spin-2 Measure & 4D Chiral $\mathrm{Spin}(10)$ SMG:** Fixes $c_{\mathrm{DW}}=-1\implies c_{\mathrm{grav}}=-12$ ($\partial_{\omega_{\mathrm{param}}}\mathcal{L}_{\mathrm{VDW}}^{(2)}\equiv 0$; minimal-$\xi_H$ pure $\mathrm{SM}+3\nu_R+\text{graviton}$ `PROVEN NO-GO` $-7.71<0$ vs. Paper 30 Branch II Split-SUSY $+4.0>0$ at $\bar\xi_{\mathrm{sc}}=1/6$) and establishes nodeless $S^9$ Hurwitz SMG ($y_M\in[1,15]$ two-sided $y_M\to\infty$ `PROVEN NO-GO`, $L=2$ `dim=65,536` 2-component Weyl Lanczos gap $\Delta E=1.45\text{--}8.00$). Paper 28 `v4.5.0` code and PDFs remain untouched.
